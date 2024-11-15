@@ -1,0 +1,76 @@
+[gd_scene load_steps=15 format=3 uid="uid://bl4xs8835duwa"]
+
+[ext_resource type="Script" path="res://start_screen.gd" id="1_dvlgs"]
+[ext_resource type="Texture2D" uid="uid://weetn2s8jmqy" path="res://screen/title.JPG" id="1_pv4mg"]
+[ext_resource type="AudioStream" uid="uid://cnh3vntu44grh" path="res://music/Single Base.wav" id="2_f22xb"]
+[ext_resource type="Texture2D" uid="uid://bmayb6btgscc2" path="res://screen/loading/load1.PNG" id="3_74whf"]
+[ext_resource type="Texture2D" uid="uid://dffiaracpfpqj" path="res://screen/loading/load2.PNG" id="4_dfguy"]
+[ext_resource type="Texture2D" uid="uid://bma7xyio1pdud" path="res://screen/loading/load3.PNG" id="5_e8m0s"]
+[ext_resource type="Texture2D" uid="uid://dc1t2p5xdoqht" path="res://screen/loading/load4(1).PNG" id="6_yq5nt"]
+[ext_resource type="Texture2D" uid="uid://52yito3xxmea" path="res://screen/loading/load4.PNG" id="7_iq77d"]
+[ext_resource type="Texture2D" uid="uid://b3jw6cqoijv4m" path="res://screen/loading/load5.PNG" id="8_cdldb"]
+[ext_resource type="Texture2D" uid="uid://c4ffk17bupkmj" path="res://screen/loading/load6.PNG" id="9_4bw12"]
+[ext_resource type="Texture2D" uid="uid://lejoest4tbyk" path="res://screen/loading/load7.PNG" id="10_l842t"]
+[ext_resource type="Texture2D" uid="uid://eslu6xkm5e3h" path="res://screen/loading/load8.PNG" id="11_cqkcl"]
+
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_ld20p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n2kwb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_74whf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dfguy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_e8m0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yq5nt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iq77d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_cdldb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_4bw12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_l842t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cqkcl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="startScreen" type="Node2D"]
+script = ExtResource("1_dvlgs")
+
+[node name="Title" type="Sprite2D" parent="."]
+position = Vector2(528, 317)
+scale = Vector2(0.700261, 0.6)
+texture = ExtResource("1_pv4mg")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Title"]
+offset_right = 40.0
+offset_bottom = 40.0
+stream = SubResource("VideoStreamTheora_ld20p")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_f22xb")
+autoplay = true
+
+[node name="loading" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="loading"]
+position = Vector2(342, 536)
+sprite_frames = SubResource("SpriteFrames_n2kwb")
+autoplay = "default"
+frame_progress = 0.572919

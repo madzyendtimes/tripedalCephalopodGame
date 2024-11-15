@@ -1,0 +1,219 @@
+[gd_scene load_steps=35 format=3 uid="uid://cr1wl1ovvxs20"]
+
+[ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
+[ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
+[ext_resource type="Script" path="res://player.gd" id="2_dlod8"]
+[ext_resource type="Texture2D" uid="uid://b3bdpe4vkh5x0" path="res://location/home/back.PNG" id="2_fr0tk"]
+[ext_resource type="PackedScene" uid="uid://b2hkkwk1b41kv" path="res://tree.tscn" id="2_nllk3"]
+[ext_resource type="PackedScene" uid="uid://dreupjy7qiymi" path="res://npc.tscn" id="2_q0aer"]
+[ext_resource type="PackedScene" uid="uid://kbcdr5hqbmpf" path="res://interact.tscn" id="3_wwvka"]
+[ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="4_2ul28"]
+[ext_resource type="Texture2D" uid="uid://d20rivj1yrkr7" path="res://player/fight/walk1.PNG" id="4_cl57f"]
+[ext_resource type="Script" path="res://npc.gd" id="5_3jyy4"]
+[ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="5_usucn"]
+[ext_resource type="Texture2D" uid="uid://bowtiwa8luaw8" path="res://player/fight/walk3.PNG" id="6_ffkg2"]
+[ext_resource type="PackedScene" uid="uid://b27gj7e7e87hj" path="res://groundling.tscn" id="7_f4tqc"]
+[ext_resource type="Texture2D" uid="uid://dt26il247oonc" path="res://player/fight/punch1.PNG" id="7_mqtj6"]
+[ext_resource type="Script" path="res://enemyGenerator.gd" id="8_hs2bf"]
+[ext_resource type="Texture2D" uid="uid://dp8urd45vca12" path="res://player/fight/punch2.PNG" id="8_kv877"]
+[ext_resource type="Texture2D" uid="uid://cxa8x213b4fnw" path="res://player/fight/punch3.PNG" id="9_1fosa"]
+[ext_resource type="Texture2D" uid="uid://d1si5d67c28yu" path="res://player/fight/punch4.PNG" id="10_c3itr"]
+[ext_resource type="Texture2D" uid="uid://dehk8cthp1hi3" path="res://player/fight/punch5.PNG" id="11_qqygd"]
+[ext_resource type="Texture2D" uid="uid://dig26kdfto1rn" path="res://player/search/shake1.PNG" id="13_d72hm"]
+[ext_resource type="PackedScene" uid="uid://bc7psai3ypuc6" path="res://rock.tscn" id="13_tggde"]
+[ext_resource type="Texture2D" uid="uid://dvbhmkmluwfec" path="res://player/search/shake2.PNG" id="14_1ybuh"]
+[ext_resource type="Texture2D" uid="uid://dfs1jo344o6rr" path="res://player/search/shake3.PNG" id="15_tk3yi"]
+[ext_resource type="Texture2D" uid="uid://btao0ksax3aqi" path="res://location/home/front.PNG" id="17_7wont"]
+[ext_resource type="AudioStream" uid="uid://b5diaegodc4xu" path="res://sounds/die.mp3" id="18_cggrm"]
+[ext_resource type="AudioStream" uid="uid://cbglxmkk1gbwe" path="res://sounds/punch1.mp3" id="18_oxidk"]
+[ext_resource type="AudioStream" uid="uid://6dd0on15gn4i" path="res://sounds/trash.mp3.mp3" id="19_wak06"]
+[ext_resource type="AudioStream" uid="uid://cts5mr5pidjys" path="res://sounds/jump2.mp3" id="20_6cbuf"]
+[ext_resource type="AudioStream" uid="uid://yotkhxff2mfd" path="res://music/Fallen Date.wav" id="23_kcqfy"]
+[ext_resource type="PackedScene" uid="uid://ow4cwtw0wx7m" path="res://stats.tscn" id="30_mddu5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y3yxv"]
+resource_local_to_scene = true
+shader = ExtResource("2_14n0n")
+shader_parameter/lod = 0.021
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_602p8"]
+radius = 29.5
+height = 127.11
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qc2jh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2ul28")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cl57f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_usucn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ffkg2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_mqtj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kv877")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1fosa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c3itr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qqygd")
+}],
+"loop": true,
+"name": &"fight",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_d72hm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_1ybuh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_tk3yi")
+}],
+"loop": true,
+"name": &"search",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k83so"]
+size = Vector2(510, 458)
+
+[node name="Level" type="Node2D"]
+position = Vector2(-10, 4)
+script = ExtResource("1_68yp1")
+
+[node name="treeholder" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_y3yxv")
+
+[node name="treeholder2" type="Node2D" parent="."]
+
+[node name="locationback" type="Node2D" parent="."]
+
+[node name="Area2D" type="Node2D" parent="locationback"]
+z_as_relative = false
+
+[node name="Back" type="Sprite2D" parent="locationback/Area2D"]
+position = Vector2(3718, 338)
+texture = ExtResource("2_fr0tk")
+
+[node name="Sprite2D" type="Sprite2D" parent="locationback/Area2D"]
+
+[node name="interactive" type="Node2D" parent="."]
+
+[node name="interact" parent="interactive" instance=ExtResource("3_wwvka")]
+
+[node name="npcs" type="Node2D" parent="."]
+
+[node name="npc" parent="npcs" instance=ExtResource("2_q0aer")]
+script = ExtResource("5_3jyy4")
+
+[node name="player" type="CharacterBody2D" parent="."]
+position = Vector2(671, 423)
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("2_dlod8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(-68, -16)
+shape = SubResource("CapsuleShape2D_602p8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+position = Vector2(-25.5, -7)
+scale = Vector2(0.826667, 0.715)
+sprite_frames = SubResource("SpriteFrames_qc2jh")
+animation = &"search"
+autoplay = "default"
+frame_progress = 0.772094
+metadata/_edit_lock_ = true
+
+[node name="dead" type="AudioStreamPlayer2D" parent="player"]
+position = Vector2(-335.5, -211.5)
+scale = Vector2(0.5, 0.5)
+stream = ExtResource("18_cggrm")
+volume_db = 24.0
+
+[node name="punch" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("18_oxidk")
+volume_db = 24.0
+
+[node name="search" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("19_wak06")
+volume_db = 24.0
+
+[node name="jump" type="AudioStreamPlayer2D" parent="player"]
+stream = ExtResource("20_6cbuf")
+volume_db = -8.117
+
+[node name="locationfront" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="locationfront"]
+collision_layer = 64
+collision_mask = 2
+
+[node name="Front" type="Sprite2D" parent="locationfront/Area2D"]
+position = Vector2(3711, 340)
+texture = ExtResource("17_7wont")
+
+[node name="Sprite2D" type="Sprite2D" parent="locationfront/Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="locationfront/Area2D"]
+position = Vector2(3785, 363)
+shape = SubResource("RectangleShape2D_k83so")
+
+[node name="enemy" type="Node2D" parent="."]
+
+[node name="groundling" parent="enemy" instance=ExtResource("7_f4tqc")]
+show_behind_parent = true
+position = Vector2(1475, 510)
+
+[node name="rocks" type="Node2D" parent="."]
+
+[node name="rock" parent="rocks" instance=ExtResource("13_tggde")]
+position = Vector2(-886, 12)
+
+[node name="treeholder3" type="Node2D" parent="."]
+
+[node name="tree" parent="." instance=ExtResource("2_nllk3")]
+
+[node name="enemyGenerator" type="Timer" parent="."]
+wait_time = 2.878
+script = ExtResource("8_hs2bf")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_kcqfy")
+autoplay = true
+
+[node name="stats" parent="." instance=ExtResource("30_mddu5")]
+
+[connection signal="trashable" from="interactive/interact" to="player" method="_on_interact_trashable"]
+[connection signal="body_entered" from="npcs/npc" to="player" method="_on_npc_body_entered"]
+[connection signal="trashable" from="player" to="interactive/interact" method="_on_player_trashable"]
+[connection signal="body_entered" from="rocks/rock" to="." method="_on_rock_body_entered"]
+[connection signal="body_entered" from="rocks/rock" to="player" method="_on_rock_body_entered"]
+[connection signal="timeout" from="enemyGenerator" to="." method="_on_enemy_generator_timeout"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

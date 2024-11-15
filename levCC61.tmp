@@ -1,0 +1,101 @@
+[gd_scene load_steps=16 format=3 uid="uid://cr1wl1ovvxs20"]
+
+[ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
+[ext_resource type="Script" path="res://player.gd" id="2_dlod8"]
+[ext_resource type="PackedScene" uid="uid://b2hkkwk1b41kv" path="res://tree.tscn" id="2_nllk3"]
+[ext_resource type="Texture2D" uid="uid://d20rivj1yrkr7" path="res://player/fight/walk1.PNG" id="4_cl57f"]
+[ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="5_usucn"]
+[ext_resource type="Texture2D" uid="uid://bowtiwa8luaw8" path="res://player/fight/walk3.PNG" id="6_ffkg2"]
+[ext_resource type="PackedScene" uid="uid://b27gj7e7e87hj" path="res://groundling.tscn" id="7_f4tqc"]
+[ext_resource type="Texture2D" uid="uid://dt26il247oonc" path="res://player/fight/punch1.PNG" id="7_mqtj6"]
+[ext_resource type="Script" path="res://enemyGenerator.gd" id="8_hs2bf"]
+[ext_resource type="Texture2D" uid="uid://dp8urd45vca12" path="res://player/fight/punch2.PNG" id="8_kv877"]
+[ext_resource type="Texture2D" uid="uid://cxa8x213b4fnw" path="res://player/fight/punch3.PNG" id="9_1fosa"]
+[ext_resource type="Texture2D" uid="uid://d1si5d67c28yu" path="res://player/fight/punch4.PNG" id="10_c3itr"]
+[ext_resource type="Texture2D" uid="uid://dehk8cthp1hi3" path="res://player/fight/punch5.PNG" id="11_qqygd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_602p8"]
+radius = 29.5
+height = 127.11
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qc2jh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cl57f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_usucn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ffkg2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_mqtj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kv877")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1fosa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c3itr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qqygd")
+}],
+"loop": true,
+"name": &"fight",
+"speed": 5.0
+}]
+
+[node name="Level" type="Node2D"]
+position = Vector2(-10, 4)
+script = ExtResource("1_68yp1")
+
+[node name="treeholder" type="Node2D" parent="."]
+
+[node name="treeholder2" type="Node2D" parent="."]
+
+[node name="enemy" type="Node2D" parent="."]
+
+[node name="groundling" parent="enemy" instance=ExtResource("7_f4tqc")]
+show_behind_parent = true
+position = Vector2(1475, 510)
+
+[node name="player" type="CharacterBody2D" parent="."]
+position = Vector2(671, 423)
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("2_dlod8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
+position = Vector2(-42, 7.5)
+rotation = -1.55509
+shape = SubResource("CapsuleShape2D_602p8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
+position = Vector2(-25.5, -7)
+scale = Vector2(0.826667, 0.715)
+sprite_frames = SubResource("SpriteFrames_qc2jh")
+frame_progress = 0.45301
+metadata/_edit_lock_ = true
+
+[node name="interactive" type="Node" parent="."]
+
+[node name="treeholder3" type="Node2D" parent="."]
+
+[node name="tree" parent="." instance=ExtResource("2_nllk3")]
+
+[node name="enemyGenerator" type="Timer" parent="."]
+wait_time = 5.949
+script = ExtResource("8_hs2bf")
+
+[connection signal="timeout" from="enemyGenerator" to="." method="_on_enemy_generator_timeout"]
