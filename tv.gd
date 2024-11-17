@@ -14,10 +14,13 @@ func _process(delta: float) -> void:
 func _on_active_body_entered(body: Node2D) -> void:
 	
 	if Flags.hat!="that":
-		Flags.mesmerized=true
+		Flags.effect="mesmerized"
+		
 
 
 func _on_active_body_exited(body: Node2D) -> void:
 	Flags.mesmerized=false
 	Flags.hat=""
+	Flags.effect="normal"
+
 	

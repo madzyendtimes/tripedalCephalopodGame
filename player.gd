@@ -99,7 +99,9 @@ func outSearch():
 	
 
 func walkani():
-
+	if Flags.mesmerized==true:
+		$AnimatedSprite2D.animation="mesmerized"
+		return
 	if Flags.exhausted==true:
 		$AnimatedSprite2D.animation="exhausted"+Flags.hat
 	else:

@@ -88,6 +88,12 @@ func doEffect():
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
 			Flags.mesmerized=false
 			pass
+		"mesmerized":
+			Flags.mesmerized=true
+			$player.walkani()
+		"normal":
+			Flags.mesmerized=false
+			$player.walkani()
 		"recycle":
 			pass
 		"warp":
@@ -280,12 +286,7 @@ func get_bg_texture(type):
 	ts.texture = texture
 	return ts
 	
-	
-	
-	"""
-	
-	
-"""
+
 
 func _on_enemy_generator_timeout():
 	var upchoice=4
@@ -320,8 +321,8 @@ func _on_enemy_generator_timeout():
 		return
 	if chance<4:
 		var tv=tvScene.instantiate()
-		tv.position.x=(($enemy.position.x)*-1)+1400
-		$enemy.add_child(tv)
+		tv.position.x=(($interactive.position.x)*-1)+1400
+		$interactive.add_child(tv)
 		return
 	
 	if chance<5:

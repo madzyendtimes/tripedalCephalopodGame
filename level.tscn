@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cr1wl1ovvxs20"]
+[gd_scene load_steps=65 format=3 uid="uid://cr1wl1ovvxs20"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -49,6 +49,9 @@
 [ext_resource type="Texture2D" uid="uid://cmjbxbwjca6jp" path="res://player/fightthat/fightthat3.PNG" id="29_eqbb5"]
 [ext_resource type="Texture2D" uid="uid://bb4ngdr08p55w" path="res://player/fightthat/fightthat4.PNG" id="30_0v8nd"]
 [ext_resource type="PackedScene" uid="uid://ow4cwtw0wx7m" path="res://stats.tscn" id="30_mddu5"]
+[ext_resource type="Texture2D" uid="uid://wequwctjw2da" path="res://player/mesmerized/mesmerized1.PNG" id="31_v75h5"]
+[ext_resource type="Texture2D" uid="uid://cpllfmuvxgems" path="res://player/mesmerized/mesmerized2.PNG" id="32_52jr6"]
+[ext_resource type="Texture2D" uid="uid://b8wqhflwmsr1s" path="res://player/mesmerized/mesmerized3.PNG" id="33_fa4mq"]
 [ext_resource type="Texture2D" uid="uid://c87jx3a68ecyn" path="res://player/pukethat/pukethat1.PNG" id="36_mhm2f"]
 [ext_resource type="Texture2D" uid="uid://be7vmpnn3wkfp" path="res://player/pukethat/pukethat2.PNG" id="37_rfw08"]
 [ext_resource type="Texture2D" uid="uid://cqokxyh3jmx8o" path="res://player/pukethat/pukethat3.PNG" id="38_isnyl"]
@@ -179,6 +182,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("31_v75h5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_52jr6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_fa4mq")
+}],
+"loop": true,
+"name": &"mesmerized",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("20_d3fqs")
 }, {
 "duration": 1.0,
@@ -293,7 +310,7 @@ shape = SubResource("CapsuleShape2D_602p8")
 position = Vector2(-25.5, -7)
 scale = Vector2(0.826667, 0.715)
 sprite_frames = SubResource("SpriteFrames_qc2jh")
-animation = &"searchthat"
+animation = &"mesmerized"
 autoplay = "default"
 metadata/_edit_lock_ = true
 
