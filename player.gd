@@ -18,7 +18,7 @@ func _process(delta):
 		
 
 func fight():
-	$AnimatedSprite2D.animation="fight"
+	$AnimatedSprite2D.animation="fight"+Flags.hat
 	$AnimatedSprite2D.play()
 	$punch.play()
 
@@ -43,7 +43,7 @@ func hit():
 			tween.tween_callback(outhit)
 
 func puke():
-	$AnimatedSprite2D.animation="puke"	
+	$AnimatedSprite2D.animation="puke"+Flags.hat	
 
 	var tween= get_tree().create_tween()
 	tween.tween_property($animatedSprite2D,"position",Vector2(0,$AnimatedSprite2D.position.y+200),.1)
@@ -51,7 +51,7 @@ func puke():
 	
 func outpuke():
 	pass
-	#$AnimatedSprite2D.animation="default"
+	#$AnimatedSprite2D.animation="default"+Flags.hat
 func outhit():
 	var tween = get_tree().create_tween()
 	tween.tween_property($AnimatedSprite2D, "position", Vector2($AnimatedSprite2D.position.x,oldy), .1)
@@ -63,7 +63,7 @@ func outhit():
 		
 
 func kill():
-	$AnimatedSprite2D.animation="dead"
+	$AnimatedSprite2D.animation="dead"+Flags.hat
 	$dead.play()
 	Flags.playerDead=true
 	var oldmod = $AnimatedSprite2D.modulate
@@ -79,7 +79,7 @@ func restart():
 			
 
 func search():
-	$AnimatedSprite2D.animation="search"
+	$AnimatedSprite2D.animation="search"+Flags.hat
 	$AnimatedSprite2D.play()
 	#$search.play()
 	Flags.inSearch=true;
@@ -101,9 +101,9 @@ func outSearch():
 func walkani():
 
 	if Flags.exhausted==true:
-		$AnimatedSprite2D.animation="exhausted"
+		$AnimatedSprite2D.animation="exhausted"+Flags.hat
 	else:
-		$AnimatedSprite2D.animation="default"
+		$AnimatedSprite2D.animation="default"+Flags.hat
 		
 func _on_interact_trashable(body):
 	pass

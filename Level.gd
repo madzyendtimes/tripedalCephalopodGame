@@ -82,7 +82,10 @@ func doEffect():
 		"restorehp":
 		
 			Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
-		"stanimaExtend":
+		"that":
+			Flags.hat="that"
+			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
+			
 			pass
 		"recycle":
 			pass
