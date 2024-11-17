@@ -9,7 +9,18 @@ var baseStats=playerStats
 var playerSearch:=false
 var inSearch:=false
 var dir:=1
-var itemMap:=[{"type":"food","varients":[{"name":"old pizza","effect":"restorehp"},{"name":"noodles... or worms!","effect":"puke|restorehp"},{"name":"suspect sandwitch","effect":"puke"}]},{"type":"scrap","varients":[{"name":"tin foil hat","effect":"that"},{"name":"crushed soda","effect":"recyle"},{"name":"broken mirror","effect":"warp"}]},[{"type":"quest","varients":[{"name":"legs","effect":"quest"}]}]]
+var itemMap:=[
+	{"type":"food","varients":[
+		{"name":"old pizza","effect":"restorehp"},
+		{"name":"noodles... or worms!","effect":"puke|restorehp"},
+		{"name":"suspect sandwitch","effect":"puke"}
+	]},
+	{"type":"scrap","varients":
+		[{"name":"tin foil hat","effect":"that"},
+		{"name":"crushed soda","effect":"recyle"},
+		{"name":"broken mirror","effect":"warp"}
+	]},
+	{"type":"quest","varients":[{"name":"legs","effect":"quest"}]}]
 var paused:=false
 var resetOnce:=false
 var selectedItem:=-1
@@ -18,9 +29,10 @@ var pukestate=false
 var effect=""
 var warploc=2950
 var hat=""
-
+var mesmerized=false
 
 func reset():
+	mesmerized=false
 	hat=""
 	warploc=2950
 	effect=""

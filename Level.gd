@@ -6,6 +6,7 @@ var enemyScene:PackedScene=load("res://groundling.tscn")
 var rockScene:PackedScene=load("res://rock.tscn")
 var trashScene:PackedScene=load("res://interact.tscn")
 var warpScene:PackedScene=load("res://warp.tscn")
+var tvScene:PackedScene=load("res://tv.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -85,7 +86,7 @@ func doEffect():
 		"that":
 			Flags.hat="that"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
-			
+			Flags.mesmerized=false
 			pass
 		"recycle":
 			pass
@@ -166,14 +167,17 @@ func _process(delta):
 		ani=true
 	if Input.is_action_pressed("left"):
 		Flags.dir=1
-		moveDir(1,true,Flags.dir,true)
-		
-		
+		moveDir(1,true,Flags.dir,true)		
 		ani=true
+		
 	if !ani && (Flags.inFight==false && Flags.playerSearch==false):		
 		$player/AnimatedSprite2D.pause()
 	else:
 		$player/AnimatedSprite2D.play()
+
+	if Flags.mesmerized==true:
+		return
+
 		
 	if Input.is_action_just_pressed("fight")&& canJump==true:
 		canJump=false
@@ -284,13 +288,13 @@ func get_bg_texture(type):
 """
 
 func _on_enemy_generator_timeout():
-	var upchoice=3
+	var upchoice=4
 
 	if $interactive.position.x>-5000 && questDistributed==false:
-		upchoice=4
+		upchoice=5
 	
 	var chance=rng.randi_range(0,upchoice)
-	chance=0
+#	chance=0
 	if chance<1:
 		var trash=trashScene.instantiate()
 		trash.position.x=(($interactive.position.x)*-1)+1400
@@ -315,6 +319,12 @@ func _on_enemy_generator_timeout():
 		$enemy.add_child(enemy)
 		return
 	if chance<4:
+		var tv=tvScene.instantiate()
+		tv.position.x=(($enemy.position.x)*-1)+1400
+		$enemy.add_child(tv)
+		return
+	
+	if chance<5:
 		var trash=trashScene.instantiate()
 		trash.position.x=(($interactive.position.x)*-1)+1400
 		trash.questItem=true

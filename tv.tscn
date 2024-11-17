@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc0mg3sc5ufvh"]
+
+[ext_resource type="Script" path="res://tv.gd" id="1_r560u"]
+[ext_resource type="Texture2D" uid="uid://ctixitctvmitk" path="res://enemies/tv/tv1.PNG" id="2_7ye4l"]
+[ext_resource type="Texture2D" uid="uid://dcoqo5fi36kkt" path="res://enemies/tv/tv2.PNG" id="3_608pq"]
+[ext_resource type="Texture2D" uid="uid://b6pcp4e6lei7m" path="res://enemies/tv/tv3.PNG" id="4_rhagn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5rov7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7ye4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_608pq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rhagn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mbw73"]
+size = Vector2(872, 514.5)
+
+[node name="tv" type="Node2D"]
+light_mask = 128
+visibility_layer = 2
+script = ExtResource("1_r560u")
+
+[node name="active" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="active"]
+position = Vector2(2, 373)
+sprite_frames = SubResource("SpriteFrames_5rov7")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="active"]
+position = Vector2(-3, 266.25)
+shape = SubResource("RectangleShape2D_mbw73")
+
+[connection signal="body_entered" from="active" to="." method="_on_active_body_entered"]
+[connection signal="body_exited" from="active" to="." method="_on_active_body_exited"]

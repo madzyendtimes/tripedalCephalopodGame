@@ -64,7 +64,8 @@ func show_prize():
 
 	var texture = ImageTexture.create_from_image(image)
 	ts.texture = texture
-	Flags.playerInventory.append({"type":type,"item":treenum,"img":istr,"imgt":texture,"effect":Flags.itemMap[type].varients[treenum-1].effect})
+	
+	Flags.playerInventory.append({"type":type,"item":treenum,"img":istr,"imgt":texture,"effect":Flags.itemMap[type].varients[max(0,treenum-1)].effect})
 	#ts.position.x=$AnimatedSprite2D.position.x
 	#ts.position.y=$AnimatedSprite2D.position.y+400
 
