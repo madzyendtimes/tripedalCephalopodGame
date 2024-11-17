@@ -38,21 +38,20 @@ func _process(delta):
 
 
 func SelectItem(selx,sely):
-	
-	if (Flags.playerInventory.size()>0):
-		var oldSelect=Flags.selectedItem+1;
-		oldSelect-=1;
-		Flags.selectedItem+=min(selx,Flags.playerInventory.size())
-		Flags.selectedItem+=min(sely*11,Flags.playerInventory.size())
-		print(Flags.selectedItem)
-		print(Flags.playerInventory.size())
+	var sz=Flags.playerInventory.size();
+	if (sz>0):
+		var oldSelect=Flags.selectedItem;
+		if oldSelect>=sz:
+			oldSelect=0
+		Flags.selectedItem+=min(selx,sz)
+		Flags.selectedItem+=min(sely*11,sz)
 		if oldSelect>0:
 			$PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_SIZE,Flags.playerInventory[oldSelect-1].imgt,100,100,Color(1.0,1.0,1.0,1.0))
 			$PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_COLOR,Flags.playerInventory[oldSelect-1].imgt,100,100,Color(1.0,1.0,1.0,1.0))
 		if Flags.selectedItem<1:
 			Flags.selectedItem=1
-		if  Flags.selectedItem>Flags.playerInventory.size():
-			Flags.selectedItem=Flags.playerInventory.size()
+		if  Flags.selectedItem>sz:
+			Flags.selectedItem=sz
 		var texture=Flags.playerInventory[Flags.selectedItem-1].imgt
 
 		$PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_SIZE,texture,150,150,Color(1.0,1.0,0.0,1.0))
