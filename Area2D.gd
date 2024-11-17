@@ -28,7 +28,7 @@ func searched():
 		show_prize()
 		
 func do_search():
-		print(notSearched)
+		
 		if $AnimatedSprite2D.animation=="closed":
 			$trash.play()
 			notSearched=false

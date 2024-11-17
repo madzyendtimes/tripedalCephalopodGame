@@ -11,7 +11,7 @@ func _process(delta):
 	pass
 
 func foundQuest():
-	print("congrats!")
+
 	$AnimatedSprite2D.animation="leggy"
 	$AnimatedSprite2D.flip_h=true
 	$Text1.animation="questComplete"

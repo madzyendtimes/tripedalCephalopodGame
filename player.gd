@@ -30,7 +30,7 @@ func revert():
 func hit():
 	if inHit!=true:
 		inHit=true
-		print(Flags.playerStats.health)
+		
 		Flags.playerStats.health-=1
 		if Flags.playerStats.health<1:
 			kill()
@@ -44,7 +44,7 @@ func hit():
 
 func puke():
 	$AnimatedSprite2D.animation="puke"	
-	print("pukeing")
+
 	var tween= get_tree().create_tween()
 	tween.tween_property($animatedSprite2D,"position",Vector2(0,$AnimatedSprite2D.position.y+200),.1)
 	tween.tween_callback(outpuke)
@@ -74,7 +74,7 @@ func kill():
 	
 func restart():
 	if get_node("/root") != null:
-		print(get_node("/root").get_child(1).restart())
+		get_node("/root").get_child(1).restart()
 	#get_tree().restart()
 			
 
@@ -99,7 +99,7 @@ func outSearch():
 	
 
 func walkani():
-	print(Flags.exhausted)
+
 	if Flags.exhausted==true:
 		$AnimatedSprite2D.animation="exhausted"
 	else:
@@ -110,7 +110,7 @@ func _on_interact_trashable(body):
 
 
 func _on_npc_body_entered(body):
-	print("npc hit")
+
 	var count=0
 	for x in Flags.playerInventory:
 		if (x.type==2):

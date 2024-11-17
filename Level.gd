@@ -64,9 +64,25 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func doEffect():
-	if Flags.effect=="puke":
-		Flags.pukestate=true
+	#var itemMap:=[{"type":"food","varients":[{"name":"old pizza","effect":"restorehp"},{"name":"noodles... or worms!","effect":"puke|restorehp"},{"name":"suspect sandwitch","effect":"puke"}]},{"type":"scrap","varients":[{"name":"tin foil hat","effect":"stanimaExtend"},{"name":"crushed soda","effect":"recyle"},{"name":"broken mirror","effect":"warp"}]},[{"type":"quest","varients":[{"name":"legs","effect":"quest"}]}]]
+	var sEff=Flags.effect
+	var aSel = sEff.split("|")
+	if aSel.size()>1:
+		sEff=aSel[rng.randi_range(0,aSel.size()-1)]		
+	match sEff:
+		"puke":
+			Flags.pukestate=true
+		"restorehp":
 		
+			Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
+		"stanimaExtend":
+			pass
+		"recycle":
+			pass
+		"warp":
+			pass
+		"quest":
+			pass
 	Flags.effect=""	
 	
 
@@ -205,7 +221,7 @@ func moveRight(base,flip):
 		if flip:
 			$player/AnimatedSprite2D.flip_h=false
 		$player/AnimatedSprite2D.offset=Vector2(0,0)
-		#print("tree$"+str($treeholder.position.y)+" enemy :"+str($enemy.position.x))
+	
 
 
 func moveLeft(base,flip):

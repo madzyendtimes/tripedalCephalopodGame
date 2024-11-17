@@ -17,6 +17,6 @@ func setAnimation(val):
 
 
 func _on_body_entered(body):
-	print("entered")
+	
 	$"../../player".hit()
 	

@@ -26,9 +26,8 @@ func _process(delta):
 		if Input.is_action_just_pressed("down"):
 			SelectItem(0,1)
 		if Input.is_action_just_pressed("jump"):
-			print(Flags.playerInventory.size())
-			print(Flags.selectedItem)
-			if Flags.selectedItem<Flags.playerInventory.size():
+	
+			if Flags.selectedItem<=Flags.playerInventory.size():
 				Flags.effect=Flags.playerInventory[Flags.selectedItem-1].effect
 				Flags.playerInventory.remove_at(Flags.selectedItem-1)
 			else:
