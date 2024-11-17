@@ -11,6 +11,11 @@ func _ready():
 	oldmod = $AnimatedSprite2D.modulate
 	inHit=false
 
+func _process(delta):
+	if Flags.pukestate==true:
+		puke()
+		Flags.pukestate=false;
+		
 
 func fight():
 	$AnimatedSprite2D.animation="fight"
@@ -18,7 +23,8 @@ func fight():
 	$punch.play()
 
 func revert():
-	$AnimatedSprite2D.animation="default"
+	walkani()
+
 
 
 func hit():
@@ -36,8 +42,16 @@ func hit():
 			tween.tween_property($AnimatedSprite2D, "modulate", Color(1,0,0,1), .1)
 			tween.tween_callback(outhit)
 
-
-
+func puke():
+	$AnimatedSprite2D.animation="puke"	
+	print("pukeing")
+	var tween= get_tree().create_tween()
+	tween.tween_property($animatedSprite2D,"position",Vector2(0,$AnimatedSprite2D.position.y+200),.1)
+	tween.tween_callback(outpuke)
+	
+func outpuke():
+	pass
+	#$AnimatedSprite2D.animation="default"
 func outhit():
 	var tween = get_tree().create_tween()
 	tween.tween_property($AnimatedSprite2D, "position", Vector2($AnimatedSprite2D.position.x,oldy), .1)
@@ -81,9 +95,16 @@ func _on_rock_body_entered(body):
 func outSearch():
 		Flags.playerSearch=false
 		Flags.inSearch=false
+		walkani()
+	
+
+func walkani():
+	print(Flags.exhausted)
+	if Flags.exhausted==true:
+		$AnimatedSprite2D.animation="exhausted"
+	else:
 		$AnimatedSprite2D.animation="default"
-
-
+		
 func _on_interact_trashable(body):
 	pass
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cr1wl1ovvxs20"]
+[gd_scene load_steps=43 format=3 uid="uid://cr1wl1ovvxs20"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -19,22 +19,29 @@
 [ext_resource type="Texture2D" uid="uid://cxa8x213b4fnw" path="res://player/fight/punch3.PNG" id="9_1fosa"]
 [ext_resource type="Texture2D" uid="uid://d1si5d67c28yu" path="res://player/fight/punch4.PNG" id="10_c3itr"]
 [ext_resource type="Texture2D" uid="uid://dehk8cthp1hi3" path="res://player/fight/punch5.PNG" id="11_qqygd"]
+[ext_resource type="Texture2D" uid="uid://c6bveekvvs77k" path="res://player/exhausted/exhausted1.PNG" id="12_jmvq2"]
 [ext_resource type="Texture2D" uid="uid://dig26kdfto1rn" path="res://player/search/shake1.PNG" id="13_d72hm"]
 [ext_resource type="PackedScene" uid="uid://bc7psai3ypuc6" path="res://rock.tscn" id="13_tggde"]
+[ext_resource type="Texture2D" uid="uid://dv8arp8360vhf" path="res://player/exhausted/exhausted2.PNG" id="13_ywgca"]
 [ext_resource type="Texture2D" uid="uid://dvbhmkmluwfec" path="res://player/search/shake2.PNG" id="14_1ybuh"]
+[ext_resource type="Texture2D" uid="uid://bm36g6tvngpks" path="res://player/exhausted/exhausted3.PNG" id="14_ui603"]
 [ext_resource type="Texture2D" uid="uid://dfs1jo344o6rr" path="res://player/search/shake3.PNG" id="15_tk3yi"]
 [ext_resource type="Texture2D" uid="uid://btao0ksax3aqi" path="res://location/home/front.PNG" id="17_7wont"]
 [ext_resource type="AudioStream" uid="uid://b5diaegodc4xu" path="res://sounds/die.mp3" id="18_cggrm"]
 [ext_resource type="AudioStream" uid="uid://cbglxmkk1gbwe" path="res://sounds/punch1.mp3" id="18_oxidk"]
 [ext_resource type="AudioStream" uid="uid://6dd0on15gn4i" path="res://sounds/trash.mp3.mp3" id="19_wak06"]
 [ext_resource type="AudioStream" uid="uid://cts5mr5pidjys" path="res://sounds/jump2.mp3" id="20_6cbuf"]
+[ext_resource type="Texture2D" uid="uid://b6ootfv77ildd" path="res://player/puke/puke1.PNG" id="20_d3fqs"]
+[ext_resource type="Texture2D" uid="uid://chwomnyha5ggm" path="res://player/puke/puke2.PNG" id="21_m7lqc"]
+[ext_resource type="Texture2D" uid="uid://darcp6a0fme6o" path="res://player/puke/puke3.PNG" id="22_gu85y"]
 [ext_resource type="AudioStream" uid="uid://yotkhxff2mfd" path="res://music/Fallen Date.wav" id="23_kcqfy"]
+[ext_resource type="Texture2D" uid="uid://bb3qxm3k41yq7" path="res://player/puke/puke4.PNG" id="23_q1lkx"]
+[ext_resource type="Texture2D" uid="uid://c0bvasq6pqahv" path="res://player/puke/puke5.PNG" id="24_g1qg1"]
 [ext_resource type="PackedScene" uid="uid://ow4cwtw0wx7m" path="res://stats.tscn" id="30_mddu5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y3yxv"]
 resource_local_to_scene = true
 shader = ExtResource("2_14n0n")
-shader_parameter/lod = 0.021
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_602p8"]
 radius = 29.5
@@ -66,6 +73,20 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("12_jmvq2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ywgca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ui603")
+}],
+"loop": true,
+"name": &"exhausted",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("7_mqtj6")
 }, {
 "duration": 1.0,
@@ -83,6 +104,26 @@ animations = [{
 "loop": true,
 "name": &"fight",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_d3fqs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_m7lqc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_gu85y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_q1lkx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_g1qg1")
+}],
+"loop": true,
+"name": &"puke",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -146,9 +187,8 @@ shape = SubResource("CapsuleShape2D_602p8")
 position = Vector2(-25.5, -7)
 scale = Vector2(0.826667, 0.715)
 sprite_frames = SubResource("SpriteFrames_qc2jh")
-animation = &"search"
 autoplay = "default"
-frame_progress = 0.772094
+frame_progress = 0.973157
 metadata/_edit_lock_ = true
 
 [node name="dead" type="AudioStreamPlayer2D" parent="player"]

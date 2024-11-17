@@ -1,7 +1,6 @@
 extends Control
 var navDivide:=11
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	update()
@@ -14,7 +13,7 @@ func showpop():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(Flags.paused)
+
 	if Flags.paused==false:		
 		update()
 	else:
@@ -27,7 +26,11 @@ func _process(delta):
 		if Input.is_action_just_pressed("down"):
 			SelectItem(0,1)
 		if Input.is_action_just_pressed("jump"):
-			pass
+			Flags.pukestate=true
+			Flags.playerInventory.remove_at(Flags.selectedItem-1)
+			contract()
+		
+			
 		if Input.is_action_just_pressed("reset")&&Flags.resetOnce==true:
 			
 			contract()
@@ -35,10 +38,27 @@ func _process(delta):
 
 
 func SelectItem(selx,sely):
-	Flags.selectedItem+=max(min(selx,0),$PopupPanel2/VBoxContainer/inv.get_child_count())
-	Flags.selectedItem+=max(min(sely,0)*11,$PopupPanel2/VBoxContainer/inv.get_child_count())
-	print(Flags.selectedItem)
-	pass
+	
+	if (Flags.playerInventory.size()>0):
+		var oldSelect=Flags.selectedItem+1;
+		oldSelect-=1;
+		Flags.selectedItem+=min(selx,Flags.playerInventory.size())
+		Flags.selectedItem+=min(sely*11,Flags.playerInventory.size())
+		print(Flags.selectedItem)
+		print(Flags.playerInventory.size())
+		if oldSelect>0:
+			$PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_SIZE,Flags.playerInventory[oldSelect-1].imgt,100,100,Color(1.0,1.0,1.0,1.0))
+			$PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_COLOR,Flags.playerInventory[oldSelect-1].imgt,100,100,Color(1.0,1.0,1.0,1.0))
+		if Flags.selectedItem<1:
+			Flags.selectedItem=1
+		if  Flags.selectedItem>Flags.playerInventory.size():
+			Flags.selectedItem=Flags.playerInventory.size()
+		var texture=Flags.playerInventory[Flags.selectedItem-1].imgt
+
+		$PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_SIZE,texture,150,150,Color(1.0,1.0,0.0,1.0))
+		$PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_COLOR,texture,150,150,Color(1.0,0.0,0.0,1.0))
+#		
+
 	
 
 func update():
@@ -57,9 +77,10 @@ func expand():
 
 func clear():
 	$PopupPanel2/VBoxContainer/inv.clear()
+	$PopupPanel2/VBoxContainer/inv.add_text("select an item and press 'a' to use\n\n\n")
 
-func addInventory(item):
+func addInventory(item,itemnum):
 	var t=Texture.new()
 	t=load(item.img)
-	$PopupPanel2/VBoxContainer/inv.add_image(t,100,100)
+	$PopupPanel2/VBoxContainer/inv.add_image(t,100,100,Color(1,1,1,1),5,Rect2(0,0,0,0),"k"+str(itemnum))
 	
