@@ -89,19 +89,24 @@ func doEffect():
 		"warp":
 			var loc=Flags.warploc
 			Flags.warploc=-1*$interactive.position.x
-			warpS.position.x=Flags.warploc
-			warpto(loc-750)
+			warpS.position.x=Flags.warploc+550
 			var wi=warpScene.instantiate()
-			wi.position.x=loc
+			wi.position.x=loc+550
 			wi.position.y=550
 			$interactive.add_child(wi)
 			wi.setanimation("inactive")
+			var tween = get_tree().create_tween()
+			tween.tween_property($player, "modulate", Color(1,1,1,0), .5)
+			tween.tween_callback(warpCB.bind(loc))
 			pass
 		"quest":
 			pass
 	Flags.effect=""	
 	
-
+func warpCB(loc):
+	warpto(loc)
+	var tween = get_tree().create_tween()
+	tween.tween_property($player, "modulate", oldmod, .5)
 
 func _process(delta):
 	
@@ -235,25 +240,6 @@ func warpto(base):
 		$locationback.position.x=(base+0.6)*speed
 		$locationfront.position.x=(base+0.6)*speed
 		$player/AnimatedSprite2D.offset=Vector2(0,0)
-	
-
-
-func moveLeft(base,flip):
-		Flags.dir=-1
-		$treeholder.position.x+=base*speed 
-		$treeholder2.position.x+=(base+0.5)*speed 
-		$treeholder3.position.x+=(base+1.5)*speed
-		$rocks.position.x+=(base+0.60)*speed
-		$npcs.position.x+=(base+0.45)*speed
-		$interactive.position.x+=(base+0.45)*speed
-		$enemy.position.x+=(base+0.5)*speed
-		$locationback.position.x+=(base+0.6)*speed
-		$locationfront.position.x+=(base+0.6)*speed
-		if flip:
-			$player/AnimatedSprite2D.flip_h=true
-		$player/AnimatedSprite2D.offset=Vector2(-100,0)
-
-
 
 func stop_fight():
 		$player.revert()
