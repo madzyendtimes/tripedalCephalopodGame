@@ -16,10 +16,12 @@ var selectedItem:=-1
 var exhausted=false
 var pukestate=false
 var effect=""
+var warploc=2950
 
 
 
 func reset():
+	warploc=2950
 	effect=""
 	pukestate=false
 	exhausted=false

@@ -5,6 +5,7 @@ var treeScene:PackedScene=load("res://tree.tscn")
 var enemyScene:PackedScene=load("res://groundling.tscn")
 var rockScene:PackedScene=load("res://rock.tscn")
 var trashScene:PackedScene=load("res://interact.tscn")
+var warpScene:PackedScene=load("res://warp.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -17,6 +18,7 @@ var statScene
 var viewStat:=false
 var types=[{"name":"trees/tree","num":5},{"name":"trees/buildings/sky","num":4}]
 var stanimaAction:=false
+var warpS
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	viewStat=false
@@ -61,6 +63,11 @@ func _ready():
 #	add_child(statScene)
 	statScene=$stats
 	oldmod = $player.modulate
+	warpS=warpScene.instantiate()
+	warpS.position.y=570
+	warpS.position.x=Flags.warploc;
+	$interactive.add_child(warpS)
+	warpS.play()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func doEffect():
@@ -80,6 +87,15 @@ func doEffect():
 		"recycle":
 			pass
 		"warp":
+			var loc=Flags.warploc
+			Flags.warploc=-1*$interactive.position.x
+			warpS.position.x=Flags.warploc
+			warpto(loc-750)
+			var wi=warpScene.instantiate()
+			wi.position.x=loc
+			wi.position.y=550
+			$interactive.add_child(wi)
+			wi.setanimation("inactive")
 			pass
 		"quest":
 			pass
@@ -207,19 +223,17 @@ func moveDir(base,flip,dir,offS):
 				$player/AnimatedSprite2D.offset=Vector2(-100,0)
 
 
-func moveRight(base,flip):
-		Flags.dir=1
-		$treeholder.position.x-=base*speed 
-		$treeholder2.position.x-=(base+0.5)*speed 
-		$treeholder3.position.x-=(base+1.5)*speed
-		$rocks.position.x-=(base+0.60)*speed
-		$npcs.position.x-=(base+0.45)*speed
-		$interactive.position.x-=(base+0.45)*speed
-		$enemy.position.x-=(base+0.5)*speed
-		$locationback.position.x-=(base+0.6)*speed
-		$locationfront.position.x-=(base+0.6)*speed
-		if flip:
-			$player/AnimatedSprite2D.flip_h=false
+func warpto(base):
+		base*=-1
+		$treeholder.position.x=base 
+		$treeholder2.position.x=(base+0.5)*speed 
+		$treeholder3.position.x=(base+1.5)*speed
+		$rocks.position.x=(base+0.60)*speed
+		$npcs.position.x=(base+0.45)*speed
+		$interactive.position.x=(base+0.45)*speed
+		$enemy.position.x=(base+0.5)*speed
+		$locationback.position.x=(base+0.6)*speed
+		$locationfront.position.x=(base+0.6)*speed
 		$player/AnimatedSprite2D.offset=Vector2(0,0)
 	
 

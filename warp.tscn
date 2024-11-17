@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbom6s5p8gmcd"]
+
+[ext_resource type="Texture2D" uid="uid://c7lqx5jqxrvkf" path="res://effects/warp/warp1.PNG" id="1_o888i"]
+[ext_resource type="Script" path="res://warp.gd" id="1_vssc4"]
+[ext_resource type="Texture2D" uid="uid://dnwbgddbgd68m" path="res://effects/warp/warp2.PNG" id="2_yoy1b"]
+[ext_resource type="Texture2D" uid="uid://dtsyaqkierp6f" path="res://effects/warp/warp3.PNG" id="3_f750j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sgd67"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_o888i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_yoy1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_f750j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yoy1b")
+}],
+"loop": true,
+"name": &"inactive",
+"speed": 5.0
+}]
+
+[node name="warp" type="Node2D"]
+script = ExtResource("1_vssc4")
+
+[node name="warpsprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sgd67")
+autoplay = "default"
