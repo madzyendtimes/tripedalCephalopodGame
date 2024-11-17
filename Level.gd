@@ -47,11 +47,6 @@ func _ready():
 
 		if yscale<.55:
 			$treeholder.add_child(ts)
-			if nType!=1:
-				ts.material=ShaderMaterial.new()
-				var shader=load("res://level.gdshader")
-			#shader.set("shader_parameter/lod",0.5)
-				ts.material.shader=shader
 			#ts.material.shader.set("shader_parameter/lod",5.5)
 			ts.position.y-=ypos
 			
@@ -67,20 +62,40 @@ func _ready():
 	statScene=$stats
 	oldmod = $player.modulate
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+
+func doEffect():
+	if Flags.effect=="puke":
+		Flags.pukestate=true
+		
+	Flags.effect=""	
+	
+
+
 func _process(delta):
+	
+
+	
 	if Flags.paused==true:
 		Flags.resetOnce=true
 		return
+	
+	if Flags.effect!="":
+		doEffect()
 		
 	if stanimaAction==true:
 		Flags.playerStats.stanima-=Flags.playerStats.stanimaRate
 	if Flags.playerStats.stanima<1:
 		stanimaAction=false
+		Flags.exhausted=true
+		$player.walkani()
 		speed=0.5
 	if stanimaAction==false:
+		
 		Flags.playerStats.stanima=min(Flags.playerStats.stanima+Flags.playerStats.stanimaRate,Flags.playerStats.maxStanima)
-		if speed<1 && Flags.playerStats.stanima>(Flags.playerStats.stanima/2):
+		if Flags.exhausted==true && Flags.playerStats.stanima>(Flags.playerStats.maxStanima/2):
 			speed=currSpeed
+			Flags.exhausted=false
+			$player.walkani()	
 					
 	var ani:=false
 	if Flags.playerDead==true:
@@ -98,8 +113,10 @@ func _process(delta):
 			viewStat=true
 			statScene.expand()
 			statScene.clear()
+			var count:=0
 			for i in Flags.playerInventory:
-				statScene.addInventory(i)
+				count+=1
+				statScene.addInventory(i,count)
 			Flags.resetOnce=false
 	
 	
@@ -144,12 +161,14 @@ func _process(delta):
 		#.do_search()
 		$player.search()
 
-	if Input.is_action_just_pressed("run") && canJump==true:
+	if Input.is_action_just_pressed("run") && canJump==true && Flags.exhausted==false:
 		speed=4
 		stanimaAction=true
 	
 	if Input.is_action_just_released("run"):
-		speed=baseSpeed
+		if Flags.exhausted==false:
+			speed=baseSpeed
+		
 		stanimaAction=false
 
 
@@ -252,7 +271,7 @@ func _on_enemy_generator_timeout():
 		upchoice=4
 	
 	var chance=rng.randi_range(0,upchoice)
-
+	chance=0
 	if chance<1:
 		var trash=trashScene.instantiate()
 		trash.position.x=(($interactive.position.x)*-1)+1400

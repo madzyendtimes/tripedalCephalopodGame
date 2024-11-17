@@ -61,9 +61,10 @@ func show_prize():
 
 	var istr="res://"+name+"text"+str(treenum)+".PNG"
 	var image = Image.load_from_file(istr)
-	Flags.playerInventory.append({"type":type,"item":treenum,"img":istr})
+
 	var texture = ImageTexture.create_from_image(image)
 	ts.texture = texture
+	Flags.playerInventory.append({"type":type,"item":treenum,"img":istr,"imgt":texture,"effect":Flags.itemMap[type].varients[treenum-1].effect})
 	#ts.position.x=$AnimatedSprite2D.position.x
 	#ts.position.y=$AnimatedSprite2D.position.y+400
 

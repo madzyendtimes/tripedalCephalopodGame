@@ -26,8 +26,13 @@ func _process(delta):
 		if Input.is_action_just_pressed("down"):
 			SelectItem(0,1)
 		if Input.is_action_just_pressed("jump"):
-			Flags.pukestate=true
-			Flags.playerInventory.remove_at(Flags.selectedItem-1)
+			print(Flags.playerInventory.size())
+			print(Flags.selectedItem)
+			if Flags.selectedItem<Flags.playerInventory.size():
+				Flags.effect=Flags.playerInventory[Flags.selectedItem-1].effect
+				Flags.playerInventory.remove_at(Flags.selectedItem-1)
+			else:
+				Flags.effect=""
 			contract()
 		
 			

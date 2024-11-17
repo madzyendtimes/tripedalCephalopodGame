@@ -9,12 +9,13 @@ var baseStats=playerStats
 var playerSearch:=false
 var inSearch:=false
 var dir:=1
-var itemMap:=[{"type":"food","varients":[{"name":"old pizza"},{"name":"noodles... or worms!"},{"name":"suspect sandwitch"}]},{"type":"scrap","varients":[{"name":"tin foil hat"},{"name":"crushed soda"},{"name":"broken mirror"}]},[{"type":"quest","varients":[{"name":"legs"}]}]]
+var itemMap:=[{"type":"food","varients":[{"name":"old pizza","effect":"restorehp"},{"name":"noodles... or worms!","effect":"puke|restorehp"},{"name":"suspect sandwitch","effect":"puke"}]},{"type":"scrap","varients":[{"name":"tin foil hat","effect":"stanimaExtend"},{"name":"crushed soda","effect":"recyle"},{"name":"broken mirror","effect":"warp"}]},[{"type":"quest","varients":[{"name":"legs","effect":"quest"}]}]]
 var paused:=false
 var resetOnce:=false
 var selectedItem:=-1
 var exhausted=false
 var pukestate=false
+var effect=""
 
 
 
