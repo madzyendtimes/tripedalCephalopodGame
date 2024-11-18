@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://wwtbb45id3op"]
+
+[ext_resource type="Script" path="res://puke.gd" id="1_kxs6m"]
+[ext_resource type="Texture2D" uid="uid://cf6nmhw63nsr4" path="res://effects/groundpuke.PNG" id="1_v01xg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jgjpp"]
+size = Vector2(198, 59)
+
+[node name="puke" type="Area2D"]
+collision_layer = 512
+collision_mask = 4
+script = ExtResource("1_kxs6m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7.5)
+shape = SubResource("RectangleShape2D_jgjpp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v01xg")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

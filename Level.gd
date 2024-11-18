@@ -1,5 +1,6 @@
 extends Node2D
 signal hit
+signal pukehit
 var rng=RandomNumberGenerator.new()
 var treeScene:PackedScene=load("res://tree.tscn")
 var enemyScene:PackedScene=load("res://groundling.tscn")
@@ -8,6 +9,7 @@ var trashScene:PackedScene=load("res://interact.tscn")
 var warpScene:PackedScene=load("res://warp.tscn")
 var tvScene:PackedScene=load("res://tv.tscn")
 var missleScene:PackedScene=load("res://missle.tscn")
+var pukeScene:PackedScene=load("res://puke.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -82,6 +84,9 @@ func doEffect():
 	match sEff:
 		"puke":
 			Flags.pukestate=true
+			if !$player/AnimatedSprite2D.is_playing():
+				$player/AnimatedSprite2D.play()
+			renderPuke()
 		"restorehp":
 		
 			Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
@@ -90,7 +95,7 @@ func doEffect():
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
 			Flags.mesmerized=false
 			$player.walkani()
-			pass
+
 		"mesmerized":
 			Flags.mesmerized=true
 			$player.walkani()
@@ -122,6 +127,19 @@ func doEffect():
 	Flags.effect=""	
 	
 func missleHit(body):
+	body.hit()
+
+
+func renderPuke():
+
+	var puke=pukeScene.instantiate()
+	puke.position.x=($interactive.position.x*-1)+550+(200*(Flags.dir*-1))
+	puke.position.y=550
+	$interactive.add_child(puke)
+	puke.pukehit.connect(pukeHit)
+
+	
+func pukeHit(body):
 	body.hit()
 	
 func warpCB(loc):
@@ -186,11 +204,13 @@ func _process(delta):
 		Flags.dir=1
 		moveDir(1,true,Flags.dir,true)		
 		ani=true
-		
+	if Flags.pukestate==true:
+		ani=true
 	if !ani && (Flags.inFight==false && Flags.playerSearch==false):		
 		$player/AnimatedSprite2D.pause()
 	else:
-		$player/AnimatedSprite2D.play()
+		if !$player/AnimatedSprite2D.is_playing():
+			$player/AnimatedSprite2D.play()
 
 	if Flags.mesmerized==true:
 		stopRun()
@@ -229,6 +249,10 @@ func _process(delta):
 	
 	if Input.is_action_just_released("run"):
 		stopRun()
+	
+	if Flags.pukestate==true:
+		$player/AnimatedSprite2D.play()
+		
 
 
 func stopRun():

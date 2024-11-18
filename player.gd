@@ -14,7 +14,7 @@ func _ready():
 func _process(delta):
 	if Flags.pukestate==true:
 		puke()
-		Flags.pukestate=false;
+
 		
 
 func fight():
@@ -45,13 +45,12 @@ func hit():
 func puke():
 	$AnimatedSprite2D.animation="puke"+Flags.hat	
 
-	var tween= get_tree().create_tween()
-	tween.tween_property($animatedSprite2D,"position",Vector2(0,$AnimatedSprite2D.position.y+200),.1)
-	tween.tween_callback(outpuke)
+	await get_tree().create_timer(1).timeout
+	outpuke()
 	
 func outpuke():
-	pass
-	#$AnimatedSprite2D.animation="default"+Flags.hat
+	Flags.pukestate=false
+	$AnimatedSprite2D.animation="default"+Flags.hat
 func outhit():
 	var tween = get_tree().create_tween()
 	tween.tween_property($AnimatedSprite2D, "position", Vector2($AnimatedSprite2D.position.x,oldy), .1)
