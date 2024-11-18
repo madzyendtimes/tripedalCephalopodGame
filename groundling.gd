@@ -14,7 +14,11 @@ func _on_body_entered(body):
 		$die.play()
 		$"../../player".hit()
 	
-
+func hit():
+	$AnimatedSprite2D.animation="dead"
+	dead=true
+	$hit.play()
+	
 func _process(delta):
 	
 	if Flags.paused==true:
@@ -22,5 +26,3 @@ func _process(delta):
 	
 	if dead==false:
 		position.x-=.5
-
-

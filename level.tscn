@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cr1wl1ovvxs20"]
+[gd_scene load_steps=66 format=3 uid="uid://cr1wl1ovvxs20"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dreupjy7qiymi" path="res://npc.tscn" id="2_q0aer"]
 [ext_resource type="PackedScene" uid="uid://kbcdr5hqbmpf" path="res://interact.tscn" id="3_wwvka"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="4_2ul28"]
+[ext_resource type="PackedScene" uid="uid://h0fu05w45w1i" path="res://missle.tscn" id="4_a4tke"]
 [ext_resource type="Texture2D" uid="uid://d20rivj1yrkr7" path="res://player/fight/walk1.PNG" id="4_cl57f"]
 [ext_resource type="Script" path="res://npc.gd" id="5_3jyy4"]
 [ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="5_usucn"]
@@ -288,6 +289,8 @@ texture = ExtResource("2_fr0tk")
 
 [node name="interactive" type="Node2D" parent="."]
 
+[node name="missle" parent="interactive" instance=ExtResource("4_a4tke")]
+
 [node name="interact" parent="interactive" instance=ExtResource("3_wwvka")]
 
 [node name="npcs" type="Node2D" parent="."]
@@ -353,6 +356,7 @@ shape = SubResource("RectangleShape2D_k83so")
 [node name="groundling" parent="enemy" instance=ExtResource("7_f4tqc")]
 show_behind_parent = true
 position = Vector2(1475, 510)
+collision_mask = 258
 
 [node name="rocks" type="Node2D" parent="."]
 
@@ -373,6 +377,7 @@ autoplay = true
 
 [node name="stats" parent="." instance=ExtResource("30_mddu5")]
 
+[connection signal="hit" from="interactive/missle" to="." method="_on_missle_hit"]
 [connection signal="trashable" from="interactive/interact" to="player" method="_on_interact_trashable"]
 [connection signal="body_entered" from="npcs/npc" to="player" method="_on_npc_body_entered"]
 [connection signal="trashable" from="player" to="interactive/interact" method="_on_player_trashable"]

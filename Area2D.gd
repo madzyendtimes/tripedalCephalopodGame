@@ -58,7 +58,6 @@ func show_prize():
 	var numvariant=types[type].num
 	var ts=$Sprite2D
 	var treenum=rng.randi_range(1,numvariant)
-
 	var istr="res://"+name+"text"+str(treenum)+".PNG"
 	var image = Image.load_from_file(istr)
 

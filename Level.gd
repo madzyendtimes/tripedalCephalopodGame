@@ -1,5 +1,5 @@
 extends Node2D
-
+signal hit
 var rng=RandomNumberGenerator.new()
 var treeScene:PackedScene=load("res://tree.tscn")
 var enemyScene:PackedScene=load("res://groundling.tscn")
@@ -7,6 +7,7 @@ var rockScene:PackedScene=load("res://rock.tscn")
 var trashScene:PackedScene=load("res://interact.tscn")
 var warpScene:PackedScene=load("res://warp.tscn")
 var tvScene:PackedScene=load("res://tv.tscn")
+var missleScene:PackedScene=load("res://missle.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -20,6 +21,7 @@ var viewStat:=false
 var types=[{"name":"trees/tree","num":5},{"name":"trees/buildings/sky","num":4}]
 var stanimaAction:=false
 var warpS
+var missle
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	viewStat=false
@@ -94,8 +96,14 @@ func doEffect():
 		"normal":
 			Flags.mesmerized=false
 			$player.walkani()
-		"recycle":
-			pass
+		"kick":
+			missle=missleScene.instantiate()
+			$interactive.add_child(missle)
+			
+			missle.position.x=($interactive.position.x*-1)+550
+			missle.position.y=550
+			missle.dir=Flags.dir
+			missle.hit.connect(missleHit)
 		"warp":
 			var loc=Flags.warploc
 			Flags.warploc=-1*$interactive.position.x
@@ -112,6 +120,10 @@ func doEffect():
 		"quest":
 			pass
 	Flags.effect=""	
+	
+func missleHit(body):
+	print(body)
+	body.hit()
 	
 func warpCB(loc):
 	warpto(loc)
@@ -295,7 +307,7 @@ func _on_enemy_generator_timeout():
 		upchoice=5
 	
 	var chance=rng.randi_range(0,upchoice)
-#	chance=0
+	
 	if chance<1:
 		var trash=trashScene.instantiate()
 		trash.position.x=(($interactive.position.x)*-1)+1400
@@ -342,4 +354,9 @@ func _on_rock_body_entered(body):
 
 func _on_audio_stream_player_finished():
 	$AudioStreamPlayer.play()
+	pass # Replace with function body.
+
+
+func _on_missle_hit() -> void:
+	print("hit?")
 	pass # Replace with function body.

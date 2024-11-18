@@ -89,7 +89,7 @@ animations = [{
 
 [node name="rock" type="Area2D"]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 258
 script = ExtResource("1_k7xbt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

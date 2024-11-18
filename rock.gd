@@ -20,3 +20,5 @@ func _on_body_entered(body):
 	
 	$"../../player".hit()
 	
+func hit():
+	queue_free()

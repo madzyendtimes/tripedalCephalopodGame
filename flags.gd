@@ -17,7 +17,7 @@ var itemMap:=[
 	]},
 	{"type":"scrap","varients":
 		[{"name":"tin foil hat","effect":"that"},
-		{"name":"crushed soda","effect":"recyle"},
+		{"name":"crushed soda","effect":"kick"},
 		{"name":"broken mirror","effect":"warp"}
 	]},
 	{"type":"quest","varients":[{"name":"legs","effect":"quest"}]}]
