@@ -11,16 +11,17 @@ var inSearch:=false
 var dir:=1
 var itemMap:=[
 	{"type":"food","varients":[
-		{"name":"old pizza","effect":"restorehp"},
-		{"name":"noodles... or worms!","effect":"puke|restorehp"},
-		{"name":"suspect sandwitch","effect":"puke"}
+		{"name":"old pizza","effect":"restorehp","consumable":true},
+		{"name":"noodles... or worms!","effect":"puke|restorehp","consumable":true},
+		{"name":"suspect sandwitch","effect":"puke","consumable":true}
 	]},
 	{"type":"scrap","varients":
-		[{"name":"tin foil hat","effect":"that"},
-		{"name":"crushed soda","effect":"kick"},
-		{"name":"broken mirror","effect":"warp"}
+		[{"name":"tin foil hat","effect":"that","consumable":true},
+		{"name":"crushed soda","effect":"kick","consumable":true},
+		{"name":"broken mirror","effect":"warp","consumable":true}
 	]},
-	{"type":"quest","varients":[{"name":"legs","effect":"quest"}]}]
+	{"type":"quest","varients":[{"name":"legs","effect":"quest","consumable":false}
+	]}]
 var paused:=false
 var resetOnce:=false
 var selectedItem:=-1

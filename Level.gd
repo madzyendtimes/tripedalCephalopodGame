@@ -338,12 +338,13 @@ func _on_enemy_generator_timeout():
 		return
 	
 	if chance<5:
-		var trash=trashScene.instantiate()
-		trash.position.x=(($interactive.position.x)*-1)+1400
-		trash.questItem=true
-		questDistributed=true
-		$interactive.add_child(trash)	
-		return
+		if questDistributed==false:
+			var trash=trashScene.instantiate()
+			trash.position.x=(($interactive.position.x)*-1)+1400
+			trash.questItem=true
+			questDistributed=true
+			$interactive.add_child(trash)	
+			return
 	#move to own generator
 #	enemy.connect("collisionMeteor", on_meteor_collision)
 

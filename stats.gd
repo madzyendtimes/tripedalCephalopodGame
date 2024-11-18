@@ -29,7 +29,9 @@ func _process(delta):
 	
 			if Flags.selectedItem<=Flags.playerInventory.size():
 				Flags.effect=Flags.playerInventory[Flags.selectedItem-1].effect
-				Flags.playerInventory.remove_at(Flags.selectedItem-1)
+				if Flags.playerInventory[Flags.selectedItem-1].consumable==true:
+					Flags.playerInventory.remove_at(Flags.selectedItem-1)
+					
 			else:
 				Flags.effect=""
 			contract()
