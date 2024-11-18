@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cr1wl1ovvxs20"]
+[gd_scene load_steps=67 format=3 uid="uid://cr1wl1ovvxs20"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -61,6 +61,7 @@
 [ext_resource type="Texture2D" uid="uid://bogwowocg1r48" path="res://player/searchthat/searchthat1.PNG" id="44_0rqos"]
 [ext_resource type="Texture2D" uid="uid://iays8cfpuhct" path="res://player/searchthat/searchthat2.PNG" id="45_g4nc3"]
 [ext_resource type="Texture2D" uid="uid://digrdjfqd0u1j" path="res://player/searchthat/searchthat3.PNG" id="46_mbeyk"]
+[ext_resource type="PackedScene" uid="uid://cj0omacioofjm" path="res://expander.tscn" id="57_a6jor"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y3yxv"]
 resource_local_to_scene = true
@@ -302,7 +303,7 @@ script = ExtResource("5_3jyy4")
 position = Vector2(671, 423)
 scale = Vector2(2, 2)
 collision_layer = 2
-collision_mask = 140
+collision_mask = 1164
 script = ExtResource("2_dlod8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
@@ -357,6 +358,9 @@ shape = SubResource("RectangleShape2D_k83so")
 show_behind_parent = true
 position = Vector2(1475, 510)
 collision_mask = 258
+
+[node name="expander" parent="enemy" instance=ExtResource("57_a6jor")]
+position = Vector2(-566, 351)
 
 [node name="rocks" type="Node2D" parent="."]
 

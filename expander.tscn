@@ -1,0 +1,68 @@
+[gd_scene load_steps=12 format=3 uid="uid://cj0omacioofjm"]
+
+[ext_resource type="Script" path="res://area_2d.gd" id="1_ep7v2"]
+[ext_resource type="Texture2D" uid="uid://c0rx6in5w55bd" path="res://expander/ascended1.PNG" id="2_xby6v"]
+[ext_resource type="Texture2D" uid="uid://dw73t8phk54ij" path="res://expander/ascended2.PNG" id="3_eynlq"]
+[ext_resource type="Texture2D" uid="uid://bgnob6j4geoec" path="res://expander/ascended3.PNG" id="4_oay5x"]
+[ext_resource type="Texture2D" uid="uid://01pxnok3ajte" path="res://expander/ascended4.PNG" id="5_ly2yn"]
+[ext_resource type="Texture2D" uid="uid://b5sspu5h5krrx" path="res://expander/descent1.PNG" id="6_2mrwb"]
+[ext_resource type="Texture2D" uid="uid://b3pnn7qqky28" path="res://expander/descent2.PNG" id="7_frks5"]
+[ext_resource type="Texture2D" uid="uid://dh8sylb7slqn3" path="res://expander/descent3.PNG" id="8_br1h6"]
+[ext_resource type="Texture2D" uid="uid://b1j80e18qaq2p" path="res://expander/descent4.PNG" id="9_juuqn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n3y72"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xby6v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_eynlq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oay5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ly2yn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_2mrwb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_frks5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_br1h6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_juuqn")
+}],
+"loop": true,
+"name": &"descend",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ytkf"]
+size = Vector2(67, 269)
+
+[node name="expander" type="Area2D"]
+collision_layer = 1024
+collision_mask = 2
+script = ExtResource("1_ep7v2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_n3y72")
+autoplay = "default"
+frame_progress = 0.139421
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-22, 106)
+shape = SubResource("RectangleShape2D_2ytkf")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
