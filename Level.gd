@@ -89,6 +89,7 @@ func doEffect():
 			Flags.hat="that"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
 			Flags.mesmerized=false
+			$player.walkani()
 			pass
 		"mesmerized":
 			Flags.mesmerized=true
@@ -99,7 +100,6 @@ func doEffect():
 		"kick":
 			missle=missleScene.instantiate()
 			$interactive.add_child(missle)
-			
 			missle.position.x=($interactive.position.x*-1)+550
 			missle.position.y=550
 			missle.dir=Flags.dir
@@ -122,7 +122,6 @@ func doEffect():
 	Flags.effect=""	
 	
 func missleHit(body):
-	print(body)
 	body.hit()
 	
 func warpCB(loc):
@@ -147,7 +146,7 @@ func _process(delta):
 		stanimaAction=false
 		Flags.exhausted=true
 		$player.walkani()
-		speed=0.5
+		speed=1
 	if stanimaAction==false:
 		
 		Flags.playerStats.stanima=min(Flags.playerStats.stanima+Flags.playerStats.stanimaRate,Flags.playerStats.maxStanima)
@@ -194,6 +193,7 @@ func _process(delta):
 		$player/AnimatedSprite2D.play()
 
 	if Flags.mesmerized==true:
+		stopRun()
 		return
 
 		
@@ -224,15 +224,20 @@ func _process(delta):
 		$player.search()
 
 	if Input.is_action_just_pressed("run") && canJump==true && Flags.exhausted==false:
-		speed=4
+		speed=4		
 		stanimaAction=true
 	
 	if Input.is_action_just_released("run"):
-		if Flags.exhausted==false:
-			speed=baseSpeed
-		
-		stanimaAction=false
+		stopRun()
 
+
+func stopRun():
+		if Flags.exhausted==false && canJump==true:
+			speed=currSpeed
+		else:
+			currSpeed=baseSpeed
+		$player.walkani()
+		stanimaAction=false
 
 func moveDir(base,flip,dir,offS):
 		$treeholder.position.x+=dir*base*speed 
@@ -272,13 +277,13 @@ func stop_fight():
 		canJump=true
 		Flags.inFight=false
 		Flags.playerDead=false
+		stopRun()
 			
 func reset_player():
 	speed=currSpeed
 	var tween = get_tree().create_tween()
 	tween.tween_property($player, "position", Vector2(gx,gy), .5).from(Vector2(gx,gy-300))
 	tween.tween_callback(reset_flags)
-
 # type=
 
 func reset_flags():

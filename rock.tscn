@@ -1,12 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://bc7psai3ypuc6"]
+[gd_scene load_steps=25 format=3 uid="uid://bc7psai3ypuc6"]
 
 [ext_resource type="Script" path="res://rock.gd" id="1_k7xbt"]
 [ext_resource type="Texture2D" uid="uid://dtyfccaltintm" path="res://rocks/rock3/rock1.PNG" id="1_uv5by"]
 [ext_resource type="Texture2D" uid="uid://kuri4lcv8u8c" path="res://rocks/rock3/rock2.PNG" id="2_3ohho"]
+[ext_resource type="Texture2D" uid="uid://onf2rpxm3oc2" path="res://rocks/explode/explode1.PNG" id="2_y8nea"]
+[ext_resource type="Texture2D" uid="uid://b8dx26d405j52" path="res://rocks/explode/explode2.PNG" id="3_hcgwr"]
 [ext_resource type="Texture2D" uid="uid://bbkunmfdtpv1u" path="res://rocks/rock3/rock3.PNG" id="3_hgibr"]
+[ext_resource type="Texture2D" uid="uid://mbwi7p3skie3" path="res://rocks/explode/explode3.PNG" id="4_5jg1x"]
 [ext_resource type="Texture2D" uid="uid://bke41ph1063k" path="res://rocks/rock3/rock4.PNG" id="4_beun1"]
+[ext_resource type="Texture2D" uid="uid://cfxvrggimqjei" path="res://rocks/explode/explode4.PNG" id="5_mc152"]
 [ext_resource type="Texture2D" uid="uid://vi6ewhvye34v" path="res://rocks/rock3/rock5.PNG" id="5_mu6ws"]
 [ext_resource type="Texture2D" uid="uid://dkbeqmb6jkkrr" path="res://rocks/rock3/rock6.PNG" id="6_ennhr"]
+[ext_resource type="Texture2D" uid="uid://bi4y2hvaxf78o" path="res://rocks/explode/explode5.PNG" id="6_g8pcj"]
 [ext_resource type="Texture2D" uid="uid://c8nfmkm0wqw6a" path="res://rocks/rock2/rock1.PNG" id="7_plcgr"]
 [ext_resource type="Texture2D" uid="uid://boedxgvw74axf" path="res://rocks/rock2/rock2.PNG" id="8_h6mig"]
 [ext_resource type="Texture2D" uid="uid://bix43ob3jimxx" path="res://rocks/rock2/rock3.PNG" id="9_p1ry7"]
@@ -23,6 +28,26 @@ radius = 99.1816
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nrqg5"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_y8nea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hcgwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5jg1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mc152")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_g8pcj")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_uv5by")
@@ -99,7 +124,6 @@ shape = SubResource("CircleShape2D_kehxu")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(935, 475)
 sprite_frames = SubResource("SpriteFrames_nrqg5")
-animation = &"rock1"
-frame_progress = 0.394372
+animation = &"rock3"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
