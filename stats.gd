@@ -26,11 +26,16 @@ func _process(delta):
 		if Input.is_action_just_pressed("down"):
 			SelectItem(0,1)
 		if Input.is_action_just_pressed("jump"):
-	
+
 			if Flags.selectedItem<=Flags.playerInventory.size():
-				Flags.effect=Flags.playerInventory[Flags.selectedItem-1].effect
-				if Flags.playerInventory[Flags.selectedItem-1].consumable==true:
+				var pi=Flags.playerInventory[Flags.selectedItem-1]
+				print(pi)
+				Flags.effect=pi.effect
+				if pi.consumable==true:
 					Flags.playerInventory.remove_at(Flags.selectedItem-1)
+					if pi.swap!={}:
+						doswap(pi.swap)
+
 					
 			else:
 				Flags.effect=""
@@ -40,6 +45,9 @@ func _process(delta):
 		if Input.is_action_just_pressed("reset")&&Flags.resetOnce==true:
 			
 			contract()
+		
+func doswap(obj):
+	Flags.addToInventory(obj.type,obj.varient)
 		
 
 

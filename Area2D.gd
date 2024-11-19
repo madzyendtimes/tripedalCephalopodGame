@@ -2,7 +2,7 @@ extends Area2D
 var notSearched:=true
 var searchable:=false
 var questItem:=false
-var types=[{"name":"items/food/food","num":3},{"name":"items/scrap/scrap","num":4},{"name":"items/quest/legs","num":1}]
+var types=Flags.types
 var type:=0
 signal trashable
 
@@ -63,17 +63,7 @@ func show_prize():
 
 	var texture = ImageTexture.create_from_image(image)
 	ts.texture = texture
-	
-	Flags.playerInventory.append({"type":type,
-		"item":treenum,
-		"img":istr,
-		"imgt":texture,
-		"effect":Flags.itemMap[type].varients[max(0,treenum-1)].effect,
-		"consumable":Flags.itemMap[type].varients[max(0,treenum-1)].consumable
-		})
-	#ts.position.x=$AnimatedSprite2D.position.x
-	#ts.position.y=$AnimatedSprite2D.position.y+400
-
+	Flags.addToInventory(type,treenum)
 	add_child(ts)
 	if questItem==true:
 		$questfound.play()

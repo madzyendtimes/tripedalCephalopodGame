@@ -132,7 +132,8 @@ func doEffect():
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
 			dotime(returnbeg)
 				
-			
+		"stanima":
+			Flags.playerStats.stanima+=Flags.playerStats.stanima
 		"quest":
 			pass
 	Flags.effect=""	
