@@ -13,6 +13,7 @@ var tvScene:PackedScene=load("res://tv.tscn")
 var missleScene:PackedScene=load("res://missle.tscn")
 var pukeScene:PackedScene=load("res://puke.tscn")
 var expanderScene:PackedScene=load("res://expander.tscn")
+var tallmScene:PackedScene=load("res://monster_tall.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -136,6 +137,8 @@ func doEffect():
 			Flags.playerStats.stanima+=Flags.playerStats.stanima
 		"quest":
 			pass
+		"hit":
+			$player.hit()
 	Flags.effect=""	
 
 
@@ -363,10 +366,10 @@ func get_bg_texture(type):
 
 
 func _on_enemy_generator_timeout():
-	var upchoice=5
+	var upchoice=6
 
 	if $interactive.position.x>-5000 && questDistributed==false:
-		upchoice=6
+		upchoice=7
 	
 	var chance=rng.randi_range(0,upchoice)
 	
@@ -405,11 +408,14 @@ func _on_enemy_generator_timeout():
 		expander.position.y=350
 		$interactive.add_child(expander)
 		return
-	
-
-
-	
 	if chance<6:
+		var enemy=tallmScene.instantiate()
+		enemy.position.y=450
+		enemy.position.x=(($enemy.position.x)*-1)+1400
+		$enemy.add_child(enemy)
+		return
+
+	if chance<7:
 		if questDistributed==false:
 			var trash=trashScene.instantiate()
 			trash.position.x=(($interactive.position.x)*-1)+1400

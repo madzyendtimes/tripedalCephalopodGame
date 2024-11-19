@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://ytvcm6k2cyxt"]
+
+[ext_resource type="Texture2D" uid="uid://d0u7i6lcnsvfn" path="res://enemies/diapertooth/diapertooth1.PNG" id="1_2g1cs"]
+[ext_resource type="Script" path="res://monster_tall.gd" id="1_4ars4"]
+[ext_resource type="Texture2D" uid="uid://v3uhnxfjmniu" path="res://enemies/diapertooth/diapertooth2.PNG" id="2_obd2l"]
+[ext_resource type="Texture2D" uid="uid://coys71fu8kkom" path="res://enemies/diapertooth/diapertooth3.PNG" id="3_cknxo"]
+[ext_resource type="Texture2D" uid="uid://crfdarwti6ivl" path="res://enemies/diapertooth/diapertooth4.PNG" id="4_rl2sn"]
+[ext_resource type="Texture2D" uid="uid://bg8qyicqk8lwl" path="res://enemies/diapertooth/diapertoothdead.PNG" id="5_x31e8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7648x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2g1cs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_obd2l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_cknxo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rl2sn")
+}],
+"loop": true,
+"name": &"diapertooth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_x31e8")
+}],
+"loop": true,
+"name": &"diapertoothdead",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ocmt"]
+size = Vector2(183, 404)
+
+[node name="monsterTall" type="Area2D"]
+collision_layer = 2048
+collision_mask = 2
+script = ExtResource("1_4ars4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, -88.5)
+scale = Vector2(1.86667, 1.59)
+sprite_frames = SubResource("SpriteFrames_7648x")
+animation = &"diapertooth"
+autoplay = "diapertooth"
+frame_progress = 0.69334
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -66)
+shape = SubResource("RectangleShape2D_1ocmt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
