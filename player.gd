@@ -98,13 +98,21 @@ func outSearch():
 	
 
 func walkani():
+
 	if Flags.mesmerized==true:
-		$AnimatedSprite2D.animation="mesmerized"
+		
+
+		$AnimatedSprite2D.animation="mesmerized"+Flags.hat
+
+		$AnimatedSprite2D.play()
 		return
 	if Flags.exhausted==true:
 		$AnimatedSprite2D.animation="exhausted"+Flags.hat
 	else:
 		$AnimatedSprite2D.animation="default"+Flags.hat
+	print(Flags.hat)
+	print(Flags.mesmerized)
+	print ("mesmerized"+Flags.hat)
 		
 func _on_interact_trashable(body):
 	pass

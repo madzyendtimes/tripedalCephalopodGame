@@ -1,6 +1,8 @@
 extends Node2D
 signal hit
 signal pukehit
+signal begout
+signal timeout
 var rng=RandomNumberGenerator.new()
 var treeScene:PackedScene=load("res://tree.tscn")
 var enemyScene:PackedScene=load("res://groundling.tscn")
@@ -10,6 +12,7 @@ var warpScene:PackedScene=load("res://warp.tscn")
 var tvScene:PackedScene=load("res://tv.tscn")
 var missleScene:PackedScene=load("res://missle.tscn")
 var pukeScene:PackedScene=load("res://puke.tscn")
+var expanderScene:PackedScene=load("res://expander.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -81,6 +84,7 @@ func doEffect():
 	var aSel = sEff.split("|")
 	if aSel.size()>1:
 		sEff=aSel[rng.randi_range(0,aSel.size()-1)]		
+
 	match sEff:
 		"puke":
 			Flags.pukestate=true
@@ -95,6 +99,7 @@ func doEffect():
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
 			Flags.mesmerized=false
 			$player.walkani()
+			dotime(returnhat)
 
 		"mesmerized":
 			Flags.mesmerized=true
@@ -122,10 +127,38 @@ func doEffect():
 			tween.tween_property($player, "modulate", Color(1,1,1,0), .5)
 			tween.tween_callback(warpCB.bind(loc))
 			pass
+		"beg":
+			Flags.hat="beg"
+			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
+			dotime(returnbeg)
+				
+			
 		"quest":
 			pass
 	Flags.effect=""	
-	
+
+
+
+func dotime(timefunc):
+	var gt:Timer=Timer.new()
+	add_child(gt)
+	gt.wait_time=30.0
+	gt.one_shot=true			
+	gt.timeout.connect(timefunc)
+	gt.start()
+
+
+
+func returnhat():
+	if Flags.hat=="that":
+		Flags.hat=""
+
+func returnbeg():
+	if Flags.hat=="beg":
+		Flags.hat=""
+
+
+
 func missleHit(body):
 	body.hit()
 
@@ -240,7 +273,6 @@ func _process(delta):
 		tween.tween_callback(reset_player)
 		
 	if Input.is_action_just_pressed("search") && canJump==true:
-		#.do_search()
 		$player.search()
 
 	if Input.is_action_just_pressed("run") && canJump==true && Flags.exhausted==false:
@@ -330,10 +362,10 @@ func get_bg_texture(type):
 
 
 func _on_enemy_generator_timeout():
-	var upchoice=4
+	var upchoice=5
 
 	if $interactive.position.x>-5000 && questDistributed==false:
-		upchoice=5
+		upchoice=6
 	
 	var chance=rng.randi_range(0,upchoice)
 	
@@ -365,8 +397,18 @@ func _on_enemy_generator_timeout():
 		tv.position.x=(($interactive.position.x)*-1)+1400
 		$interactive.add_child(tv)
 		return
-	
+
 	if chance<5:
+		var expander=expanderScene.instantiate()
+		expander.position.x=(($enemy.position.x)*-1)+1400
+		expander.position.y=350
+		$interactive.add_child(expander)
+		return
+	
+
+
+	
+	if chance<6:
 		if questDistributed==false:
 			var trash=trashScene.instantiate()
 			trash.position.x=(($interactive.position.x)*-1)+1400
@@ -375,7 +417,7 @@ func _on_enemy_generator_timeout():
 			$interactive.add_child(trash)	
 			return
 	#move to own generator
-#	enemy.connect("collisionMeteor", on_meteor_collision)
+
 
 
 func _on_rock_body_entered(body):

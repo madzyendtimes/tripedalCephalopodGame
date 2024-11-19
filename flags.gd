@@ -18,7 +18,8 @@ var itemMap:=[
 	{"type":"scrap","varients":
 		[{"name":"tin foil hat","effect":"that","consumable":true},
 		{"name":"crushed soda","effect":"kick","consumable":true},
-		{"name":"broken mirror","effect":"warp","consumable":true}
+		{"name":"broken mirror","effect":"warp","consumable":true},
+		{"name":"begging board","effect":"beg","consumable":true}
 	]},
 	{"type":"quest","varients":[{"name":"legs","effect":"quest","consumable":false}
 	]}]

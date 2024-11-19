@@ -19,8 +19,8 @@ func _on_active_body_entered(body: Node2D) -> void:
 
 
 func _on_active_body_exited(body: Node2D) -> void:
-	Flags.mesmerized=false
-	Flags.hat=""
-	Flags.effect="normal"
+	if Flags.mesmerized:
+		Flags.mesmerized=false
+		Flags.effect="normal"
 
 	

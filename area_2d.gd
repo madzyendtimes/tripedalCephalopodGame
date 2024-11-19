@@ -4,6 +4,8 @@ extends Area2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	doaniChange()
+	var rng=RandomNumberGenerator.new()
+	$AnimatedSprite2D.flip_h=!rng.randi_range(0,1)>0
 	pass # Replace with function body.
 
 
@@ -20,9 +22,10 @@ func doaniChange():
 	else:
 		$CollisionShape2D.position.y=96
 		$AnimatedSprite2D.animation="default"
-	await get_tree().create_timer(2).timeout
-	if doaniChange != null:
-		doaniChange()
+	if get_tree()!=null:
+		await get_tree().create_timer(2).timeout
+		if doaniChange != null:
+			doaniChange()
 
 
 func _on_area_entered(area: Area2D) -> void:

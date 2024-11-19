@@ -4,7 +4,7 @@ var path="res://enemies/groundling/"
 var dead=false
 
 func _on_body_entered(body):
-	if dead==true:
+	if dead==true || Flags.hat=="beg":
 		return
 	if Flags.inFight==true:
 		$AnimatedSprite2D.animation="dead"
