@@ -1,15 +1,23 @@
-[gd_scene load_steps=18 format=3 uid="uid://kbcdr5hqbmpf"]
+[gd_scene load_steps=26 format=3 uid="uid://kbcdr5hqbmpf"]
 
 [ext_resource type="Script" path="res://Area2D.gd" id="1_ifjqp"]
 [ext_resource type="Texture2D" uid="uid://bne16e66ilpxs" path="res://chests/chest1/closed1.PNG" id="2_ovaff"]
+[ext_resource type="Texture2D" uid="uid://dcgjs7o2konpn" path="res://chests/fridge/closed.PNG" id="3_7weij"]
 [ext_resource type="Texture2D" uid="uid://c05fepakh2nbs" path="res://chests/chest1/open1.PNG" id="3_lanrv"]
 [ext_resource type="Texture2D" uid="uid://b5fadoovoal2u" path="res://chests/chest1/search1.PNG" id="4_sa4wx"]
+[ext_resource type="Texture2D" uid="uid://dffkthxj2w6kp" path="res://chests/fridge/open.PNG" id="4_y74jl"]
+[ext_resource type="Texture2D" uid="uid://c36m3188gf5ow" path="res://chests/fridge/fridge1.PNG" id="5_alcig"]
 [ext_resource type="Texture2D" uid="uid://c2wqq2agm2h3d" path="res://chests/chest1/search2.PNG" id="5_ms4oe"]
+[ext_resource type="Texture2D" uid="uid://bwpvtuytk4idj" path="res://chests/fridge/fridge2.PNG" id="6_7r053"]
 [ext_resource type="Texture2D" uid="uid://dmgh7cjudcvlg" path="res://chests/chest1/search3.PNG" id="6_c38qx"]
 [ext_resource type="Texture2D" uid="uid://iw141q2r6vsn" path="res://chests/chest1/search4.PNG" id="7_4s18t"]
+[ext_resource type="Texture2D" uid="uid://7dl0f5jwm62u" path="res://chests/fridge/fridge3.PNG" id="7_6orbf"]
 [ext_resource type="Texture2D" uid="uid://dfddveln73ia" path="res://chests/chest1/search5.PNG" id="8_arrq0"]
+[ext_resource type="Texture2D" uid="uid://b3q7duumh8ovn" path="res://chests/fridge/fridge4.PNG" id="8_sqws0"]
 [ext_resource type="Texture2D" uid="uid://dcjuv1awhfapw" path="res://chests/chest1/search6.PNG" id="9_abu03"]
+[ext_resource type="Texture2D" uid="uid://6le6oucexq73" path="res://chests/fridge/fridge5.PNG" id="9_sv6no"]
 [ext_resource type="Texture2D" uid="uid://bkke0iqdicsl8" path="res://chests/chest1/search7.PNG" id="10_2ywfm"]
+[ext_resource type="Texture2D" uid="uid://dmfv4xeuwamtb" path="res://chests/fridge/fridge6.PNG" id="10_jlyoa"]
 [ext_resource type="Texture2D" uid="uid://b2qj0cnxhp2v2" path="res://chests/chest1/search8.PNG" id="11_vbg07"]
 [ext_resource type="Texture2D" uid="uid://bgwty4c3hpap4" path="res://chests/chest1/search9.PNG" id="12_ewggp"]
 [ext_resource type="Texture2D" uid="uid://bsll63jk3d7vc" path="res://chests/chest1/search10.PNG" id="13_u6mne"]
@@ -24,6 +32,45 @@ animations = [{
 }],
 "loop": true,
 "name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_7weij")
+}],
+"loop": true,
+"name": &"fridgeclosed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_y74jl")
+}],
+"loop": true,
+"name": &"fridgeopen",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_alcig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7r053")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6orbf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sqws0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_sv6no")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jlyoa")
+}],
+"loop": true,
+"name": &"fridgesearch",
 "speed": 5.0
 }, {
 "frames": [{
@@ -81,9 +128,8 @@ script = ExtResource("1_ifjqp")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1207, 381)
 sprite_frames = SubResource("SpriteFrames_qre8i")
-animation = &"closed"
+animation = &"fridgesearch"
 autoplay = "closed"
-frame_progress = 0.299782
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1196, 420)

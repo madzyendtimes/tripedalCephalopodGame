@@ -89,10 +89,10 @@ stream = SubResource("VideoStreamTheora_ld20p")
 stream = ExtResource("2_f22xb")
 autoplay = true
 
-[node name="loading" type="Node2D" parent="."]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="loading"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(342, 536)
 sprite_frames = SubResource("SpriteFrames_n2kwb")
 autoplay = "default"
 frame_progress = 0.572919
+
+[node name="loading" type="Node2D" parent="."]

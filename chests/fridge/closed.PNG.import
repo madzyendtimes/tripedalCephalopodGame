@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ladnnbiqjx04"
-path="res://.godot/imported/legstext1.PNG-19b547b42b8f611f9ec49b9555a75643.ctex"
+uid="uid://dcgjs7o2konpn"
+path="res://.godot/imported/closed.PNG-80d6782e4adf77d19dd1075e252b8f10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/quest/legstext1.PNG"
-dest_files=["res://.godot/imported/legstext1.PNG-19b547b42b8f611f9ec49b9555a75643.ctex"]
+source_file="res://chests/fridge/closed.PNG"
+dest_files=["res://.godot/imported/closed.PNG-80d6782e4adf77d19dd1075e252b8f10.ctex"]
 
 [params]
 

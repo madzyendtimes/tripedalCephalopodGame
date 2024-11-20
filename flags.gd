@@ -1,5 +1,5 @@
 extends Node
-
+var titlescreen:="title"
 var canJump:=true
 var inFight:=false
 var playerDead:=false
@@ -22,7 +22,9 @@ var itemMap:=[
 		{"name":"broken mirror","effect":"warp","consumable":true,"swap":{}},
 		{"name":"begging board","effect":"beg","consumable":true,"swap":{}}
 	]},
-	{"type":"quest","varients":[{"name":"legs","effect":"quest","consumable":false,"swap":{}}
+	{"type":"quest","varients":
+		[{"name":"legs","effect":"quest","consumable":false,"swap":{}},
+		{"name":"specimen","effect":"quest","consumable":false,"swap":{}}
 	]}]
 var paused:=false
 var resetOnce:=false
@@ -33,7 +35,7 @@ var effect=""
 var warploc=2950
 var hat=""
 var mesmerized=false
-var types=[{"name":"items/food/food","num":4},{"name":"items/scrap/scrap","num":4},{"name":"items/quest/legs","num":1}]
+var types=[{"name":"items/food/food","num":4},{"name":"items/scrap/scrap","num":4},{"name":"items/quest/item","num":1}]
 
 func reset():
 	mesmerized=false

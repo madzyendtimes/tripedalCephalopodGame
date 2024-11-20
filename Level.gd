@@ -14,6 +14,7 @@ var missleScene:PackedScene=load("res://missle.tscn")
 var pukeScene:PackedScene=load("res://puke.tscn")
 var expanderScene:PackedScene=load("res://expander.tscn")
 var tallmScene:PackedScene=load("res://monster_tall.tscn")
+var welcomeScene:PackedScene=load("res://welcome_center.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -28,8 +29,10 @@ var types=[{"name":"trees/tree","num":5},{"name":"trees/buildings/sky","num":4}]
 var stanimaAction:=false
 var warpS
 var missle
+var dangerZone
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Flags.titlescreen="title"
 	viewStat=false
 
 		
@@ -70,6 +73,10 @@ func _ready():
 	
 #	statScene=statloader.instantiate()
 #	add_child(statScene)
+	var welcome=welcomeScene.instantiate()
+	$locationfront.add_child(welcome)
+	welcome.position=Vector2(min(301+(301*.6189),301*3)*100,400)
+	dangerZone={"less":11100,"more":welcome.position.x-3000}
 	statScene=$stats
 	oldmod = $player.modulate
 	warpS=warpScene.instantiate()
@@ -139,6 +146,8 @@ func doEffect():
 			pass
 		"hit":
 			$player.hit()
+		"win":
+			dowin()
 	Flags.effect=""	
 
 
@@ -366,63 +375,66 @@ func get_bg_texture(type):
 
 
 func _on_enemy_generator_timeout():
-	var upchoice=6
+	if (dangerZone.less*-1>$enemy.position.x):
+		if (dangerZone.more*-1<$enemy.position.x):
+			
+			var upchoice=6
 
-	if $interactive.position.x>-5000 && questDistributed==false:
-		upchoice=7
-	
-	var chance=rng.randi_range(0,upchoice)
-	
-	if chance<1:
-		var trash=trashScene.instantiate()
-		trash.position.x=(($interactive.position.x)*-1)+1400
-		
-		$interactive.add_child(trash)	
-		return
+			if $interactive.position.x>-5000 && questDistributed==false:
+				upchoice=7
+			
+			var chance=rng.randi_range(0,upchoice)
+			
+			if chance<1:
+				var trash=trashScene.instantiate()
+				trash.position.x=(($interactive.position.x)*-1)+1400
+				
+				$interactive.add_child(trash)	
+				return
 
 
-	if chance<2:
-		var rock=rockScene.instantiate()
-		rock.position.x=(($rocks.position.x)*-1)+1400;
-		rock.get_child(1).flip_h=!rng.randi_range(0,1)>0
-		#rock.position.y=0
-		rock.setAnimation(str(rng.randi_range(1,3)))
-		$rocks.add_child(rock)
-		return
+			if chance<2:
+				var rock=rockScene.instantiate()
+				rock.position.x=(($rocks.position.x)*-1)+1400;
+				rock.get_child(1).flip_h=!rng.randi_range(0,1)>0
+				#rock.position.y=0
+				rock.setAnimation(str(rng.randi_range(1,3)))
+				$rocks.add_child(rock)
+				return
 
-	if chance<3:
-		var enemy=enemyScene.instantiate()
-		enemy.position.y=500
-		enemy.position.x=(($enemy.position.x)*-1)+1400
-		$enemy.add_child(enemy)
-		return
-	if chance<4:
-		var tv=tvScene.instantiate()
-		tv.position.x=(($interactive.position.x)*-1)+1400
-		$interactive.add_child(tv)
-		return
+			if chance<3:
+				var enemy=enemyScene.instantiate()
+				enemy.position.y=500
+				enemy.position.x=(($enemy.position.x)*-1)+1400
+				$enemy.add_child(enemy)
+				return
+			if chance<4:
+				var tv=tvScene.instantiate()
+				tv.position.x=(($interactive.position.x)*-1)+1400
+				$interactive.add_child(tv)
+				return
 
-	if chance<5:
-		var expander=expanderScene.instantiate()
-		expander.position.x=(($enemy.position.x)*-1)+1400
-		expander.position.y=350
-		$interactive.add_child(expander)
-		return
-	if chance<6:
-		var enemy=tallmScene.instantiate()
-		enemy.position.y=450
-		enemy.position.x=(($enemy.position.x)*-1)+1400
-		$enemy.add_child(enemy)
-		return
+			if chance<5:
+				var expander=expanderScene.instantiate()
+				expander.position.x=(($enemy.position.x)*-1)+1400
+				expander.position.y=350
+				$interactive.add_child(expander)
+				return
+			if chance<6:
+				var enemy=tallmScene.instantiate()
+				enemy.position.y=450
+				enemy.position.x=(($enemy.position.x)*-1)+1400
+				$enemy.add_child(enemy)
+				return
 
-	if chance<7:
-		if questDistributed==false:
-			var trash=trashScene.instantiate()
-			trash.position.x=(($interactive.position.x)*-1)+1400
-			trash.questItem=true
-			questDistributed=true
-			$interactive.add_child(trash)	
-			return
+			if chance<7:
+				if questDistributed==false:
+					var trash=trashScene.instantiate()
+					trash.position.x=(($interactive.position.x)*-1)+1400
+					trash.questItem=true
+					questDistributed=true
+					$interactive.add_child(trash)	
+					return
 	#move to own generator
 
 
@@ -439,3 +451,21 @@ func _on_audio_stream_player_finished():
 func _on_missle_hit() -> void:
 	print("hit?")
 	pass # Replace with function body.
+
+
+func _on_tutorial_body_entered(body: Node2D) -> void:
+	print("tutorial land")
+	warpto(-10500)
+	spawn()
+
+func spawn():
+	var trash=trashScene.instantiate()
+	trash.position.x=(8990*-1)
+	trash.setType("fridge")		
+	trash.setItem(2,2)	
+	$interactive.add_child(trash)	
+	return
+
+func dowin():
+	Flags.titlescreen="win"
+	$player.restart()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://cr1wl1ovvxs20"]
+[gd_scene load_steps=108 format=3 uid="uid://cr1wl1ovvxs20"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="4_2ul28"]
 [ext_resource type="PackedScene" uid="uid://h0fu05w45w1i" path="res://missle.tscn" id="4_a4tke"]
 [ext_resource type="Texture2D" uid="uid://d20rivj1yrkr7" path="res://player/fight/walk1.PNG" id="4_cl57f"]
+[ext_resource type="Texture2D" uid="uid://4m08f3jurlqs" path="res://decorations/cityoutskirts/signs/tutorial.PNG" id="4_km83g"]
 [ext_resource type="Script" path="res://npc.gd" id="5_3jyy4"]
+[ext_resource type="Texture2D" uid="uid://ig3t15w63i23" path="res://decorations/cityoutskirts/signs/danger.PNG" id="5_ec3b4"]
 [ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="5_usucn"]
 [ext_resource type="Texture2D" uid="uid://bowtiwa8luaw8" path="res://player/fight/walk3.PNG" id="6_ffkg2"]
 [ext_resource type="PackedScene" uid="uid://b27gj7e7e87hj" path="res://groundling.tscn" id="7_f4tqc"]
@@ -19,20 +21,28 @@
 [ext_resource type="Texture2D" uid="uid://dp8urd45vca12" path="res://player/fight/punch2.PNG" id="8_kv877"]
 [ext_resource type="Texture2D" uid="uid://cxa8x213b4fnw" path="res://player/fight/punch3.PNG" id="9_1fosa"]
 [ext_resource type="Texture2D" uid="uid://u7tcp4ltu80v" path="res://player/deadthat.PNG" id="9_x8nb5"]
+[ext_resource type="Texture2D" uid="uid://dtausojy550m4" path="res://npc/angrella/talk1.PNG" id="10_4ato1"]
 [ext_resource type="Texture2D" uid="uid://gbvxjs4awv43" path="res://player/deadbeg.PNG" id="10_6deas"]
 [ext_resource type="Texture2D" uid="uid://d1si5d67c28yu" path="res://player/fight/punch4.PNG" id="10_c3itr"]
+[ext_resource type="Texture2D" uid="uid://dmh5qsjnbchy2" path="res://npc/angrella/talk2.PNG" id="11_gs1jx"]
 [ext_resource type="Texture2D" uid="uid://dehk8cthp1hi3" path="res://player/fight/punch5.PNG" id="11_qqygd"]
 [ext_resource type="Texture2D" uid="uid://c6bveekvvs77k" path="res://player/exhausted/exhausted1.PNG" id="12_jmvq2"]
+[ext_resource type="Texture2D" uid="uid://b836df7xyh6y2" path="res://npc/angrella/jumptutorial.PNG" id="12_wcksl"]
 [ext_resource type="Texture2D" uid="uid://dig26kdfto1rn" path="res://player/search/shake1.PNG" id="13_d72hm"]
 [ext_resource type="Texture2D" uid="uid://batp6unuoga60" path="res://player/walkthat/walkthat1.PNG" id="13_l146d"]
+[ext_resource type="Script" path="res://sludgebutt.gd" id="13_ovjp5"]
 [ext_resource type="PackedScene" uid="uid://bc7psai3ypuc6" path="res://rock.tscn" id="13_tggde"]
+[ext_resource type="Texture2D" uid="uid://c5iulupedgkqn" path="res://npc/sludgebutt/sludgebutt1.PNG" id="13_y6jk6"]
 [ext_resource type="Texture2D" uid="uid://dv8arp8360vhf" path="res://player/exhausted/exhausted2.PNG" id="13_ywgca"]
 [ext_resource type="Texture2D" uid="uid://dvbhmkmluwfec" path="res://player/search/shake2.PNG" id="14_1ybuh"]
 [ext_resource type="Texture2D" uid="uid://d1vxqa6ylpcow" path="res://player/walkthat/walkthat2.PNG" id="14_ej8ob"]
+[ext_resource type="Texture2D" uid="uid://udigahkpj1ol" path="res://npc/sludgebutt/sludgebutt2.PNG" id="14_ns2el"]
 [ext_resource type="Texture2D" uid="uid://bm36g6tvngpks" path="res://player/exhausted/exhausted3.PNG" id="14_ui603"]
+[ext_resource type="Texture2D" uid="uid://drebx1jb1mlts" path="res://npc/sludgebutt/questcompletetext.PNG" id="15_2taxa"]
 [ext_resource type="Texture2D" uid="uid://2dytwx22luvo" path="res://player/walkbeg/walkbeg1.PNG" id="15_c7ear"]
 [ext_resource type="Texture2D" uid="uid://c70pp3in1qhcc" path="res://player/walkthat/walkthat3.PNG" id="15_f85wx"]
 [ext_resource type="Texture2D" uid="uid://dfs1jo344o6rr" path="res://player/search/shake3.PNG" id="15_tk3yi"]
+[ext_resource type="Texture2D" uid="uid://bjt4hai4ttkuk" path="res://npc/sludgebutt/questtext.PNG" id="16_7iadb"]
 [ext_resource type="Texture2D" uid="uid://dimoy7lqjoy7m" path="res://player/walkbeg/walkbeg2.PNG" id="16_sr6pj"]
 [ext_resource type="Texture2D" uid="uid://btao0ksax3aqi" path="res://location/home/front.PNG" id="17_7wont"]
 [ext_resource type="Texture2D" uid="uid://bwvb4ieksh6dh" path="res://player/walkbeg/walkbeg3.PNG" id="17_p6770"]
@@ -85,10 +95,63 @@
 [ext_resource type="Texture2D" uid="uid://c0bsyaqhxcvc4" path="res://player/searchbeg/searchbeg1.PNG" id="68_ed1iq"]
 [ext_resource type="Texture2D" uid="uid://dxog0jsddlb1h" path="res://player/searchbeg/searchbeg2.PNG" id="69_tqirq"]
 [ext_resource type="Texture2D" uid="uid://dk8fctv3offgf" path="res://player/searchbeg/searchbeg3.PNG" id="70_vrnn3"]
+[ext_resource type="Script" path="res://tutorial.gd" id="81_bqg1q"]
+[ext_resource type="Texture2D" uid="uid://b0x7w52xctc7x" path="res://location/tutorial/tutorialback.PNG" id="82_8p1p5"]
+[ext_resource type="Texture2D" uid="uid://driq162ck5stl" path="res://location/tutorial/tutorialfront.PNG" id="83_4r3hh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y3yxv"]
 resource_local_to_scene = true
 shader = ExtResource("2_14n0n")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e2jih"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_4ato1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_gs1jx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_see4a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_y6jk6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ns2el")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dl0sn"]
+size = Vector2(152, 254)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fibwg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_2taxa")
+}],
+"loop": true,
+"name": &"complete",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_7iadb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_602p8"]
 radius = 29.5
@@ -395,16 +458,23 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k83so"]
 size = Vector2(510, 458)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5vwe"]
+size = Vector2(293, 416)
+
 [node name="Level" type="Node2D"]
 position = Vector2(-10, 4)
 script = ExtResource("1_68yp1")
 
 [node name="treeholder" type="Node2D" parent="."]
+z_index = -6
 material = SubResource("ShaderMaterial_y3yxv")
 
 [node name="treeholder2" type="Node2D" parent="."]
+z_index = -3
 
 [node name="locationback" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="locationback"]
 
 [node name="Area2D" type="Node2D" parent="locationback"]
 z_as_relative = false
@@ -415,9 +485,18 @@ texture = ExtResource("2_fr0tk")
 
 [node name="Sprite2D" type="Sprite2D" parent="locationback/Area2D"]
 
+[node name="Tutorialsign" type="Sprite2D" parent="locationback"]
+position = Vector2(164, 417)
+texture = ExtResource("4_km83g")
+
+[node name="dangersign" type="Sprite2D" parent="locationback"]
+position = Vector2(4514, 438)
+texture = ExtResource("5_ec3b4")
+
 [node name="interactive" type="Node2D" parent="."]
 
 [node name="missle" parent="interactive" instance=ExtResource("4_a4tke")]
+position = Vector2(-127, -44)
 
 [node name="interact" parent="interactive" instance=ExtResource("3_wwvka")]
 
@@ -426,11 +505,43 @@ texture = ExtResource("2_fr0tk")
 [node name="npc" parent="npcs" instance=ExtResource("2_q0aer")]
 script = ExtResource("5_3jyy4")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs"]
+position = Vector2(-9454, 356)
+scale = Vector2(1.35333, 1.28667)
+sprite_frames = SubResource("SpriteFrames_e2jih")
+autoplay = "default"
+frame_progress = 0.491663
+
+[node name="Jumptutorial" type="Sprite2D" parent="npcs"]
+position = Vector2(-9214, 178)
+scale = Vector2(0.932, 0.79)
+texture = ExtResource("12_wcksl")
+
+[node name="sludgebutt" type="Area2D" parent="npcs"]
+collision_layer = 1024
+collision_mask = 2
+script = ExtResource("13_ovjp5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs/sludgebutt"]
+position = Vector2(-8638, 428)
+sprite_frames = SubResource("SpriteFrames_see4a")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npcs/sludgebutt"]
+position = Vector2(-8610, 436)
+shape = SubResource("RectangleShape2D_dl0sn")
+
+[node name="text" type="AnimatedSprite2D" parent="npcs/sludgebutt"]
+position = Vector2(-8306, 228)
+scale = Vector2(1.04, 0.92)
+sprite_frames = SubResource("SpriteFrames_fibwg")
+autoplay = "default"
+
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(671, 423)
 scale = Vector2(2, 2)
 collision_layer = 2
-collision_mask = 1164
+collision_mask = 5260
 script = ExtResource("2_dlod8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
@@ -479,20 +590,40 @@ texture = ExtResource("17_7wont")
 position = Vector2(3785, 363)
 shape = SubResource("RectangleShape2D_k83so")
 
+[node name="tutorial" type="Area2D" parent="locationfront"]
+position = Vector2(0, -75)
+scale = Vector2(1.3, 1.3)
+collision_layer = 4096
+collision_mask = 2
+script = ExtResource("81_bqg1q")
+
+[node name="Sprite2D" type="Sprite2D" parent="locationfront/tutorial"]
+z_index = -1
+position = Vector2(-724, 339)
+texture = ExtResource("82_8p1p5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="locationfront/tutorial"]
+position = Vector2(-861.5, 360)
+shape = SubResource("RectangleShape2D_e5vwe")
+
+[node name="Sprite2D2" type="Sprite2D" parent="locationfront/tutorial"]
+position = Vector2(-728, 338)
+texture = ExtResource("83_4r3hh")
+
 [node name="enemy" type="Node2D" parent="."]
 
 [node name="groundling" parent="enemy" instance=ExtResource("7_f4tqc")]
 show_behind_parent = true
-position = Vector2(1475, 510)
+position = Vector2(-3960, 492)
 collision_mask = 258
 
 [node name="expander" parent="enemy" instance=ExtResource("57_a6jor")]
-position = Vector2(-566, 351)
+position = Vector2(-4936, 323)
 
 [node name="rocks" type="Node2D" parent="."]
 
 [node name="rock" parent="rocks" instance=ExtResource("13_tggde")]
-position = Vector2(-886, 12)
+position = Vector2(-10206, 12)
 
 [node name="treeholder3" type="Node2D" parent="."]
 
@@ -507,11 +638,14 @@ stream = ExtResource("23_kcqfy")
 autoplay = true
 
 [node name="stats" parent="." instance=ExtResource("30_mddu5")]
+metadata/_edit_lock_ = true
 
 [connection signal="hit" from="interactive/missle" to="." method="_on_missle_hit"]
 [connection signal="trashable" from="interactive/interact" to="player" method="_on_interact_trashable"]
 [connection signal="body_entered" from="npcs/npc" to="player" method="_on_npc_body_entered"]
+[connection signal="body_entered" from="npcs/sludgebutt" to="npcs/sludgebutt" method="_on_body_entered"]
 [connection signal="trashable" from="player" to="interactive/interact" method="_on_player_trashable"]
+[connection signal="body_entered" from="locationfront/tutorial" to="." method="_on_tutorial_body_entered"]
 [connection signal="body_entered" from="rocks/rock" to="." method="_on_rock_body_entered"]
 [connection signal="body_entered" from="rocks/rock" to="player" method="_on_rock_body_entered"]
 [connection signal="timeout" from="enemyGenerator" to="." method="_on_enemy_generator_timeout"]

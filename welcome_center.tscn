@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://byixa3lhue5ij"]
+
+[ext_resource type="Texture2D" uid="uid://dmyh4cleoor5e" path="res://location/welcome center/welcomefront.PNG" id="1_kitan"]
+[ext_resource type="Script" path="res://welcome_center.gd" id="1_ndfbo"]
+[ext_resource type="Texture2D" uid="uid://c28xe0gidhjko" path="res://location/welcome center/welcomeback.PNG" id="2_fmh6a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e4k8p"]
+size = Vector2(448, 510)
+
+[node name="welcomeCenter" type="Area2D"]
+collision_layer = 8192
+collision_mask = 2
+script = ExtResource("1_ndfbo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kitan")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(151, -16)
+shape = SubResource("RectangleShape2D_e4k8p")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_fmh6a")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

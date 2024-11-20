@@ -49,5 +49,7 @@ func treeUpdate():
 	tween.tween_property(startScreen, "position", Vector2(0,0), .5)
 	tween.tween_callback(killStart)	
 
+
+
 func killStart():
 	remove_child(startScreen)	
