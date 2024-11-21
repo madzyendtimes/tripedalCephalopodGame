@@ -76,7 +76,8 @@ func _ready():
 	var welcome=welcomeScene.instantiate()
 	$locationfront.add_child(welcome)
 	welcome.position=Vector2(min(301+(301*.6189),301*3)*100,400)
-	dangerZone={"less":11100,"more":welcome.position.x-3000}
+
+	dangerZone={"less":4114,"more":welcome.position.x-3000}
 	statScene=$stats
 	oldmod = $player.modulate
 	warpS=warpScene.instantiate()
@@ -375,6 +376,7 @@ func get_bg_texture(type):
 
 
 func _on_enemy_generator_timeout():
+
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
@@ -449,18 +451,27 @@ func _on_audio_stream_player_finished():
 
 
 func _on_missle_hit() -> void:
-	print("hit?")
 	pass # Replace with function body.
 
 
 func _on_tutorial_body_entered(body: Node2D) -> void:
-	print("tutorial land")
-	warpto(-10500)
+	speed=1
+	warpto(-16250)
 	spawn()
+	spawntrash(7680,1,1)
+	$AudioStreamPlayer.stop()
+	$tutorialmusic.play()
+
+func backHome():
+
+	warpto(0)
+	$AudioStreamPlayer.play()
+	$tutorialmusic.stop()
+
 
 func spawn():
 	var trash=trashScene.instantiate()
-	trash.position.x=(8990*-1)
+	trash.position.x=(15050*-1)
 	trash.setType("fridge")		
 	trash.setItem(2,2)	
 	$interactive.add_child(trash)	
@@ -469,3 +480,32 @@ func spawn():
 func dowin():
 	Flags.titlescreen="win"
 	$player.restart()
+
+func spawntrash(xpos,t,v):
+	var trash=trashScene.instantiate()
+	trash.position.x=(xpos*-1)
+	trash.setItem(t,v)	
+	$interactive.add_child(trash)	
+	return	
+
+	
+func spawnEnemyAt(ep):
+	var enemy=enemyScene.instantiate()
+	enemy.position.y=500
+	enemy.position.x=(ep*-1)
+	$enemy.add_child(enemy)
+	return
+
+func _on_pailface_body_entered(body: Node2D) -> void:
+	spawnEnemyAt(12400)
+	pass # Replace with function body.
+
+
+func _on_exit_body_entered(body: Node2D) -> void:
+	backHome()
+	pass # Replace with function body.
+
+
+func _on_backtostart_body_entered(body: Node2D) -> void:
+	backHome()
+	pass # Replace with function body.

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2s14p2ye3oan"]
+
+[ext_resource type="Texture2D" uid="uid://dh8srqvdkify4" path="res://npc/pailface/pailface1.PNG" id="1_78xwq"]
+[ext_resource type="Texture2D" uid="uid://cpo4wjq2iog44" path="res://npc/pailface/pailface2.PNG" id="2_usmju"]
+[ext_resource type="Texture2D" uid="uid://b3iogd757n7sh" path="res://npc/pailface/text.PNG" id="3_6ygby"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dc6ww"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_78xwq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_usmju")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_in88c"]
+radius = 88.0
+height = 512.0
+
+[node name="pailface" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(7, 13)
+scale = Vector2(0.953333, 0.948)
+sprite_frames = SubResource("SpriteFrames_dc6ww")
+autoplay = "default"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(320, -152)
+scale = Vector2(1.028, 0.86)
+texture = ExtResource("3_6ygby")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_in88c")

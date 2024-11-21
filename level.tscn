@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://cr1wl1ovvxs20"]
+[gd_scene load_steps=131 format=3 uid="uid://cr1wl1ovvxs20"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -14,16 +14,21 @@
 [ext_resource type="Script" path="res://npc.gd" id="5_3jyy4"]
 [ext_resource type="Texture2D" uid="uid://ig3t15w63i23" path="res://decorations/cityoutskirts/signs/danger.PNG" id="5_ec3b4"]
 [ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="5_usucn"]
+[ext_resource type="Texture2D" uid="uid://cq3s57dqcum5v" path="res://decorations/tutorial/studentcenter.PNG" id="6_7sct6"]
 [ext_resource type="Texture2D" uid="uid://bowtiwa8luaw8" path="res://player/fight/walk3.PNG" id="6_ffkg2"]
 [ext_resource type="PackedScene" uid="uid://b27gj7e7e87hj" path="res://groundling.tscn" id="7_f4tqc"]
 [ext_resource type="Texture2D" uid="uid://dt26il247oonc" path="res://player/fight/punch1.PNG" id="7_mqtj6"]
+[ext_resource type="Texture2D" uid="uid://dmmroypcbr0it" path="res://decorations/tutorial/cafeteria.PNG" id="7_sl0do"]
+[ext_resource type="Texture2D" uid="uid://yi5af2oq0r2" path="res://decorations/tutorial/wreckroom.PNG" id="8_ejmpv"]
 [ext_resource type="Script" path="res://enemyGenerator.gd" id="8_hs2bf"]
 [ext_resource type="Texture2D" uid="uid://dp8urd45vca12" path="res://player/fight/punch2.PNG" id="8_kv877"]
 [ext_resource type="Texture2D" uid="uid://cxa8x213b4fnw" path="res://player/fight/punch3.PNG" id="9_1fosa"]
+[ext_resource type="Texture2D" uid="uid://bpbiq2xw4k68p" path="res://decorations/tutorial/exit.PNG" id="9_rp4wn"]
 [ext_resource type="Texture2D" uid="uid://u7tcp4ltu80v" path="res://player/deadthat.PNG" id="9_x8nb5"]
 [ext_resource type="Texture2D" uid="uid://dtausojy550m4" path="res://npc/angrella/talk1.PNG" id="10_4ato1"]
 [ext_resource type="Texture2D" uid="uid://gbvxjs4awv43" path="res://player/deadbeg.PNG" id="10_6deas"]
 [ext_resource type="Texture2D" uid="uid://d1si5d67c28yu" path="res://player/fight/punch4.PNG" id="10_c3itr"]
+[ext_resource type="Texture2D" uid="uid://c66qs5crmy77l" path="res://decorations/tutorial/backtostart.PNG" id="10_h115f"]
 [ext_resource type="Texture2D" uid="uid://dmh5qsjnbchy2" path="res://npc/angrella/talk2.PNG" id="11_gs1jx"]
 [ext_resource type="Texture2D" uid="uid://dehk8cthp1hi3" path="res://player/fight/punch5.PNG" id="11_qqygd"]
 [ext_resource type="Texture2D" uid="uid://c6bveekvvs77k" path="res://player/exhausted/exhausted1.PNG" id="12_jmvq2"]
@@ -47,7 +52,9 @@
 [ext_resource type="Texture2D" uid="uid://btao0ksax3aqi" path="res://location/home/front.PNG" id="17_7wont"]
 [ext_resource type="Texture2D" uid="uid://bwvb4ieksh6dh" path="res://player/walkbeg/walkbeg3.PNG" id="17_p6770"]
 [ext_resource type="AudioStream" uid="uid://b5diaegodc4xu" path="res://sounds/die.mp3" id="18_cggrm"]
+[ext_resource type="PackedScene" uid="uid://b2s14p2ye3oan" path="res://pailface.tscn" id="18_dbl8f"]
 [ext_resource type="AudioStream" uid="uid://cbglxmkk1gbwe" path="res://sounds/punch1.mp3" id="18_oxidk"]
+[ext_resource type="Script" path="res://pailface.gd" id="19_prjnd"]
 [ext_resource type="Texture2D" uid="uid://yuepvxakb6is" path="res://player/exhaustedthat/exhaustedthat1.PNG" id="19_th3vs"]
 [ext_resource type="AudioStream" uid="uid://6dd0on15gn4i" path="res://sounds/trash.mp3.mp3" id="19_wak06"]
 [ext_resource type="AudioStream" uid="uid://cts5mr5pidjys" path="res://sounds/jump2.mp3" id="20_6cbuf"]
@@ -61,14 +68,23 @@
 [ext_resource type="Texture2D" uid="uid://c7kkd3t5lp7ox" path="res://player/exhaustedbeg/exhaustedbeg1.PNG" id="24_84teh"]
 [ext_resource type="Texture2D" uid="uid://c0bvasq6pqahv" path="res://player/puke/puke5.PNG" id="24_g1qg1"]
 [ext_resource type="Texture2D" uid="uid://blytohpko7fyf" path="res://player/exhaustedbeg/exhaustedbeg2.PNG" id="25_8qxuw"]
+[ext_resource type="Texture2D" uid="uid://cn020rbt5e0ci" path="res://npc/snitchyjoe/snitchyjoe1.PNG" id="25_dow64"]
+[ext_resource type="Texture2D" uid="uid://ddjiojmxk0u1" path="res://npc/snitchyjoe/snitchyjoe2.PNG" id="26_bts4l"]
 [ext_resource type="Texture2D" uid="uid://cclgjls2yokjr" path="res://player/exhaustedbeg/exhaustedbeg3.PNG" id="26_vta3l"]
+[ext_resource type="Texture2D" uid="uid://d0r6u85iha5nu" path="res://npc/snitchyjoe/text.PNG" id="27_ku1u7"]
 [ext_resource type="Texture2D" uid="uid://juo8bc6nvb64" path="res://player/fightthat/fightthat1.PNG" id="27_m0ihu"]
 [ext_resource type="Texture2D" uid="uid://dj7pr8fpv6t7k" path="res://player/fightthat/fightthat2.PNG" id="28_fbnkp"]
+[ext_resource type="Texture2D" uid="uid://dgctyurakgpyd" path="res://npc/forlorna/forlorna1.PNG" id="28_yunte"]
 [ext_resource type="Texture2D" uid="uid://cmjbxbwjca6jp" path="res://player/fightthat/fightthat3.PNG" id="29_eqbb5"]
+[ext_resource type="Texture2D" uid="uid://cf86hcxguoq05" path="res://npc/forlorna/forlorna2.PNG" id="29_q4gt8"]
 [ext_resource type="Texture2D" uid="uid://bb4ngdr08p55w" path="res://player/fightthat/fightthat4.PNG" id="30_0v8nd"]
 [ext_resource type="PackedScene" uid="uid://ow4cwtw0wx7m" path="res://stats.tscn" id="30_mddu5"]
+[ext_resource type="Texture2D" uid="uid://cahmxptlo6w4x" path="res://npc/forlorna/text.PNG" id="30_p0b63"]
+[ext_resource type="Texture2D" uid="uid://dq2008dtan2m7" path="res://npc/lilHype/lilhype1.PNG" id="31_r56fl"]
 [ext_resource type="Texture2D" uid="uid://wequwctjw2da" path="res://player/mesmerized/mesmerized1.PNG" id="31_v75h5"]
 [ext_resource type="Texture2D" uid="uid://cpllfmuvxgems" path="res://player/mesmerized/mesmerized2.PNG" id="32_52jr6"]
+[ext_resource type="Texture2D" uid="uid://cd7xyh5ka8cof" path="res://npc/lilHype/lilhype2.PNG" id="32_w7imu"]
+[ext_resource type="Texture2D" uid="uid://o5u8nhsslrlf" path="res://npc/lilHype/text.PNG" id="33_87cpu"]
 [ext_resource type="Texture2D" uid="uid://b8wqhflwmsr1s" path="res://player/mesmerized/mesmerized3.PNG" id="33_fa4mq"]
 [ext_resource type="Texture2D" uid="uid://dgn1tgtg5byj" path="res://player/fightbeg/fightbeg1.PNG" id="35_s3fyc"]
 [ext_resource type="Texture2D" uid="uid://b4it0qhp5ible" path="res://player/fightbeg/fightbeg2.PNG" id="36_gopek"]
@@ -98,10 +114,18 @@
 [ext_resource type="Script" path="res://tutorial.gd" id="81_bqg1q"]
 [ext_resource type="Texture2D" uid="uid://b0x7w52xctc7x" path="res://location/tutorial/tutorialback.PNG" id="82_8p1p5"]
 [ext_resource type="Texture2D" uid="uid://driq162ck5stl" path="res://location/tutorial/tutorialfront.PNG" id="83_4r3hh"]
+[ext_resource type="PackedScene" uid="uid://cc0mg3sc5ufvh" path="res://tv.tscn" id="107_57c1h"]
+[ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="116_lqqny"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y3yxv"]
 resource_local_to_scene = true
 shader = ExtResource("2_14n0n")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gkw57"]
+radius = 272.47
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pfs00"]
+radius = 339.411
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e2jih"]
 animations = [{
@@ -147,6 +171,48 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("16_7iadb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8lftt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_dow64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_bts4l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cf8fk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_yunte")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_q4gt8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qc4e5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_r56fl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_w7imu")
 }],
 "loop": true,
 "name": &"default",
@@ -493,6 +559,43 @@ texture = ExtResource("4_km83g")
 position = Vector2(4514, 438)
 texture = ExtResource("5_ec3b4")
 
+[node name="studentcenter" type="Sprite2D" parent="locationback"]
+position = Vector2(-10806, 244)
+texture = ExtResource("6_7sct6")
+
+[node name="Cafeteria" type="Sprite2D" parent="locationback"]
+position = Vector2(-9326, 268)
+texture = ExtResource("7_sl0do")
+
+[node name="Wreckroom" type="Sprite2D" parent="locationback"]
+position = Vector2(-7814, 324)
+scale = Vector2(1.3, 1.36)
+texture = ExtResource("8_ejmpv")
+
+[node name="backtostart" type="Area2D" parent="locationback"]
+collision_layer = 64
+collision_mask = 2
+
+[node name="Backtostart" type="Sprite2D" parent="locationback/backtostart"]
+position = Vector2(-15958, 364)
+texture = ExtResource("10_h115f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="locationback/backtostart"]
+position = Vector2(-16478, 356)
+shape = SubResource("CircleShape2D_gkw57")
+
+[node name="exit" type="Area2D" parent="locationback"]
+collision_layer = 64
+collision_mask = 2
+
+[node name="Exit" type="Sprite2D" parent="locationback/exit"]
+position = Vector2(-4150, 380)
+texture = ExtResource("9_rp4wn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="locationback/exit"]
+position = Vector2(-2782, 364)
+shape = SubResource("CircleShape2D_pfs00")
+
 [node name="interactive" type="Node2D" parent="."]
 
 [node name="missle" parent="interactive" instance=ExtResource("4_a4tke")]
@@ -506,14 +609,14 @@ position = Vector2(-127, -44)
 script = ExtResource("5_3jyy4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs"]
-position = Vector2(-9454, 356)
+position = Vector2(-15358, 340)
 scale = Vector2(1.35333, 1.28667)
 sprite_frames = SubResource("SpriteFrames_e2jih")
 autoplay = "default"
 frame_progress = 0.491663
 
 [node name="Jumptutorial" type="Sprite2D" parent="npcs"]
-position = Vector2(-9214, 178)
+position = Vector2(-15118, 162)
 scale = Vector2(0.932, 0.79)
 texture = ExtResource("12_wcksl")
 
@@ -523,19 +626,57 @@ collision_mask = 2
 script = ExtResource("13_ovjp5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs/sludgebutt"]
-position = Vector2(-8638, 428)
+position = Vector2(-14542, 412)
 sprite_frames = SubResource("SpriteFrames_see4a")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npcs/sludgebutt"]
-position = Vector2(-8610, 436)
+position = Vector2(-14514, 420)
 shape = SubResource("RectangleShape2D_dl0sn")
 
 [node name="text" type="AnimatedSprite2D" parent="npcs/sludgebutt"]
-position = Vector2(-8306, 228)
+position = Vector2(-14210, 212)
 scale = Vector2(1.04, 0.92)
 sprite_frames = SubResource("SpriteFrames_fibwg")
 autoplay = "default"
+
+[node name="pailface" parent="npcs" instance=ExtResource("18_dbl8f")]
+position = Vector2(-13174, 292)
+script = ExtResource("19_prjnd")
+
+[node name="snitchyJoe" type="Node2D" parent="npcs"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs/snitchyJoe"]
+position = Vector2(-11838, 260)
+scale = Vector2(1, 1.076)
+sprite_frames = SubResource("SpriteFrames_8lftt")
+autoplay = "default"
+
+[node name="Sprite2D" type="Sprite2D" parent="npcs/snitchyJoe"]
+position = Vector2(-11574, 140)
+scale = Vector2(0.916, 0.86)
+texture = ExtResource("27_ku1u7")
+
+[node name="forlorna" type="Node2D" parent="npcs"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs/forlorna"]
+position = Vector2(-7222, 324)
+sprite_frames = SubResource("SpriteFrames_cf8fk")
+autoplay = "default"
+
+[node name="Text" type="Sprite2D" parent="npcs/forlorna"]
+position = Vector2(-6926, 180)
+scale = Vector2(1.296, 0.85)
+texture = ExtResource("30_p0b63")
+
+[node name="lilhype" type="AnimatedSprite2D" parent="npcs"]
+position = Vector2(-4662, 332)
+sprite_frames = SubResource("SpriteFrames_qc4e5")
+autoplay = "default"
+
+[node name="lilhypetext" type="Sprite2D" parent="npcs"]
+position = Vector2(-4350, 204)
+texture = ExtResource("33_87cpu")
 
 [node name="player" type="CharacterBody2D" parent="."]
 position = Vector2(671, 423)
@@ -614,16 +755,23 @@ texture = ExtResource("83_4r3hh")
 
 [node name="groundling" parent="enemy" instance=ExtResource("7_f4tqc")]
 show_behind_parent = true
-position = Vector2(-3960, 492)
+position = Vector2(11066, 612)
 collision_mask = 258
 
 [node name="expander" parent="enemy" instance=ExtResource("57_a6jor")]
-position = Vector2(-4936, 323)
+position = Vector2(-5382, 316)
+
+[node name="tv" parent="enemy" instance=ExtResource("107_57c1h")]
+z_index = -1
+position = Vector2(-5606, -68)
+metadata/_edit_lock_ = true
 
 [node name="rocks" type="Node2D" parent="."]
 
 [node name="rock" parent="rocks" instance=ExtResource("13_tggde")]
-position = Vector2(-10206, 12)
+position = Vector2(-16110, -4)
+
+[node name="rock2" parent="rocks" instance=ExtResource("13_tggde")]
 
 [node name="treeholder3" type="Node2D" parent="."]
 
@@ -640,10 +788,17 @@ autoplay = true
 [node name="stats" parent="." instance=ExtResource("30_mddu5")]
 metadata/_edit_lock_ = true
 
+[node name="tutorialmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("116_lqqny")
+volume_db = 1.0
+
+[connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
+[connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]
 [connection signal="hit" from="interactive/missle" to="." method="_on_missle_hit"]
 [connection signal="trashable" from="interactive/interact" to="player" method="_on_interact_trashable"]
 [connection signal="body_entered" from="npcs/npc" to="player" method="_on_npc_body_entered"]
 [connection signal="body_entered" from="npcs/sludgebutt" to="npcs/sludgebutt" method="_on_body_entered"]
+[connection signal="body_entered" from="npcs/pailface" to="." method="_on_pailface_body_entered"]
 [connection signal="trashable" from="player" to="interactive/interact" method="_on_player_trashable"]
 [connection signal="body_entered" from="locationfront/tutorial" to="." method="_on_tutorial_body_entered"]
 [connection signal="body_entered" from="rocks/rock" to="." method="_on_rock_body_entered"]
