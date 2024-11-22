@@ -1,11 +1,19 @@
 extends Node
+
+const stats=preload("res://playerstats.gd")
+
 var titlescreen:="title"
 var canJump:=true
 var inFight:=false
 var playerDead:=false
 var playerInventory:=[]
-var playerStats:={"health":1,"maxHealth":3,"stanima":600,"maxStanima":600,"stanimaRate":1,"speed":1,"maxSpeed":1,"power":1,"maxPower":1}
+
+
+#var playerStats:={"health":1,"maxHealth":3,"stanima":600,"maxStanima":600,"stanimaRate":1,"speed":1,"maxSpeed":1,"power":1,"maxPower":1}
+var playerStats=stats.new()
+
 var baseStats=playerStats
+var bonus:={"stanima":0,"health":0,"power":0,"speed":0}
 var playerSearch:=false
 var inSearch:=false
 var dir:=1
@@ -50,7 +58,8 @@ func reset():
 	inFight=false
 	playerDead=false
 	playerInventory=[]
-	playerStats={"health":playerStats.maxHealth,"maxHealth":playerStats.maxHealth,"stanima":playerStats.maxStanima,"maxStanima":playerStats.maxStanima,"stanimaRate":1,"speed":playerStats.maxSpeed,"maxSpeed":1,"power":playerStats.maxPower,"maxPower":1}
+	#playerStats=stats.new()
+	#playerStats={"health":playerStats.maxHealth,"maxHealth":playerStats.maxHealth,"stanima":playerStats.maxStanima,"maxStanima":playerStats.maxStanima,"stanimaRate":1,"speed":playerStats.maxSpeed,"maxSpeed":1,"power":playerStats.maxPower,"maxPower":1}
 	playerSearch=false
 	inSearch=false
 	paused=false
