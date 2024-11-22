@@ -56,7 +56,7 @@ func _ready():
 			yscale=.54
 			ypos=rng.randi_range(75,100)
 		ts.scale=Vector2(randf_range(.5,1),yscale)
-		
+		ts.modulate=Color(rng.randf_range(0.0,1.0),rng.randf_range(0.0,1.0),rng.randf_range(0.0,1.0))
 
 		
 
