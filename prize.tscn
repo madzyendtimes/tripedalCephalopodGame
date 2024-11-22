@@ -1,0 +1,128 @@
+[gd_scene load_steps=18 format=3 uid="uid://pqkx45lcjvp3"]
+
+[ext_resource type="Texture2D" uid="uid://bkd8f7ih6dmc4" path="res://items/food/foodtext1.PNG" id="1_6p05w"]
+[ext_resource type="Texture2D" uid="uid://bnk2oy1mvg5l2" path="res://items/food/foodtext2.PNG" id="2_42l5c"]
+[ext_resource type="Texture2D" uid="uid://bw51mxh5rdsul" path="res://items/food/foodtext3.PNG" id="3_pdf4y"]
+[ext_resource type="Texture2D" uid="uid://f75kmcv6c5iu" path="res://items/food/foodtext4.PNG" id="4_ia7gl"]
+[ext_resource type="Texture2D" uid="uid://ladnnbiqjx04" path="res://items/quest/itemtext1.PNG" id="5_y0f7r"]
+[ext_resource type="Texture2D" uid="uid://dsl05thsv34mg" path="res://items/quest/item1.PNG" id="6_c1lbh"]
+[ext_resource type="Texture2D" uid="uid://bas62vcn0vb8p" path="res://items/quest/itemtext2.PNG" id="7_ri84g"]
+[ext_resource type="Texture2D" uid="uid://de4rv5mf15gcq" path="res://items/quest/item2.PNG" id="8_nlp5d"]
+[ext_resource type="Texture2D" uid="uid://cdqvko6k0r4p" path="res://items/scrap/scraptext1.PNG" id="9_g3t1o"]
+[ext_resource type="Texture2D" uid="uid://dbgqc3me3pbgt" path="res://items/scrap/scrap1.PNG" id="10_h0bi4"]
+[ext_resource type="Texture2D" uid="uid://bq5u1dqk43a0" path="res://items/scrap/scraptext2.PNG" id="11_2p12s"]
+[ext_resource type="Texture2D" uid="uid://ds4fjttdr7nsw" path="res://items/scrap/scrap2.PNG" id="12_sko7t"]
+[ext_resource type="Texture2D" uid="uid://m4hlkdj3w02r" path="res://items/scrap/scraptext3.PNG" id="13_4w4pv"]
+[ext_resource type="Texture2D" uid="uid://dnqsl1orm8iyv" path="res://items/scrap/scrap3.PNG" id="14_vtkna"]
+[ext_resource type="Texture2D" uid="uid://nqcsuxkl727t" path="res://items/scrap/scraptext4.PNG" id="15_hx6di"]
+[ext_resource type="Texture2D" uid="uid://dka2evv7l1cho" path="res://items/scrap/scrap4.PNG" id="16_0fxkd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wi1fi"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6p05w")
+}],
+"loop": false,
+"name": &"food1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_42l5c")
+}],
+"loop": true,
+"name": &"food2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pdf4y")
+}],
+"loop": true,
+"name": &"food3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ia7gl")
+}],
+"loop": true,
+"name": &"food4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_y0f7r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_c1lbh")
+}],
+"loop": true,
+"name": &"quest1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ri84g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nlp5d")
+}],
+"loop": true,
+"name": &"quest2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_g3t1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_h0bi4")
+}],
+"loop": false,
+"name": &"scrap1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_2p12s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_sko7t")
+}],
+"loop": false,
+"name": &"scrap2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_4w4pv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vtkna")
+}],
+"loop": false,
+"name": &"scrap3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_hx6di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_0fxkd")
+}],
+"loop": false,
+"name": &"scrap4",
+"speed": 5.0
+}]
+
+[node name="prize" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_wi1fi")
+animation = &"quest2"

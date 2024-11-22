@@ -1,4 +1,4 @@
-[gd_scene load_steps=131 format=3 uid="uid://cr1wl1ovvxs20"]
+[gd_scene load_steps=132 format=3 uid="uid://cr1wl1ovvxs20"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -116,6 +116,7 @@
 [ext_resource type="Texture2D" uid="uid://driq162ck5stl" path="res://location/tutorial/tutorialfront.PNG" id="83_4r3hh"]
 [ext_resource type="PackedScene" uid="uid://cc0mg3sc5ufvh" path="res://tv.tscn" id="107_57c1h"]
 [ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="116_lqqny"]
+[ext_resource type="PackedScene" uid="uid://b7y4prfovsln4" path="res://assets.tscn" id="117_jg7m3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y3yxv"]
 resource_local_to_scene = true
@@ -791,6 +792,8 @@ metadata/_edit_lock_ = true
 [node name="tutorialmusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("116_lqqny")
 volume_db = 1.0
+
+[node name="assets" parent="." instance=ExtResource("117_jg7m3")]
 
 [connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]

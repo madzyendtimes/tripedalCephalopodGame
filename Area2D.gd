@@ -66,17 +66,20 @@ func show_prize():
 		type=ptype	
 	var name=types[type].name
 	var numvariant=types[type].num
+
 	var ts=$Sprite2D
 	var treenum=rng.randi_range(1,numvariant)
 	if deterministic==true:
 		treenum=pvar
+	$prize.animation=types[type].type+str(treenum)
 	var istr="res://"+name+"text"+str(treenum)+".PNG"
 	var image = Image.load_from_file(istr)
+#need to fix
 
-	var texture = ImageTexture.create_from_image(image)
-	ts.texture = texture
+#	var texture = ImageTexture.create_from_image(image)
+#	ts.texture = texture
 	Flags.addToInventory(type,treenum)
-	add_child(ts)
+#	add_child(ts)
 	if questItem==true:
 		$questfound.play()
 

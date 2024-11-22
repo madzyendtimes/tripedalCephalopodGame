@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://b7y4prfovsln4"]
+
+[ext_resource type="Texture2D" uid="uid://dtqglkk6b7n88" path="res://trees/buildings/sky1.PNG" id="1_4ktsh"]
+[ext_resource type="Texture2D" uid="uid://m1xtw64s7url" path="res://trees/buildings/sky2.PNG" id="2_8wouc"]
+[ext_resource type="Texture2D" uid="uid://bxkqu6b6ac87b" path="res://trees/buildings/sky3.PNG" id="3_epnry"]
+[ext_resource type="Texture2D" uid="uid://7ona6fes0x4q" path="res://trees/buildings/sky4.PNG" id="4_qt6fm"]
+[ext_resource type="Texture2D" uid="uid://d247ubip11a5h" path="res://trees/tree1.PNG" id="5_m3ayj"]
+[ext_resource type="Texture2D" uid="uid://b7wmn4eacowr5" path="res://trees/tree2.PNG" id="6_67f62"]
+[ext_resource type="Texture2D" uid="uid://cg0ubfcb7xyg8" path="res://trees/tree3.PNG" id="7_nahnj"]
+[ext_resource type="Texture2D" uid="uid://q4uiottbqssv" path="res://trees/tree4.PNG" id="8_w2a2j"]
+[ext_resource type="Texture2D" uid="uid://nsu3cp81eshi" path="res://trees/tree5.PNG" id="9_terip"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tx663"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4ktsh")
+}],
+"loop": true,
+"name": &"s1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8wouc")
+}],
+"loop": true,
+"name": &"s2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_epnry")
+}],
+"loop": true,
+"name": &"s3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qt6fm")
+}],
+"loop": true,
+"name": &"s4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_m3ayj")
+}],
+"loop": false,
+"name": &"t1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_67f62")
+}],
+"loop": true,
+"name": &"t2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_nahnj")
+}],
+"loop": true,
+"name": &"t3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_w2a2j")
+}],
+"loop": true,
+"name": &"t4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_terip")
+}],
+"loop": true,
+"name": &"t5",
+"speed": 5.0
+}]
+
+[node name="assets" type="AnimatedSprite2D"]
+position = Vector2(-1902, 2052)
+sprite_frames = SubResource("SpriteFrames_tx663")
+animation = &"s4"

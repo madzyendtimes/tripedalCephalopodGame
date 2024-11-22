@@ -15,6 +15,7 @@ var pukeScene:PackedScene=load("res://puke.tscn")
 var expanderScene:PackedScene=load("res://expander.tscn")
 var tallmScene:PackedScene=load("res://monster_tall.tscn")
 var welcomeScene:PackedScene=load("res://welcome_center.tscn")
+var assetsScene:PackedScene=load("res://assets.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -364,13 +365,14 @@ func get_bg_texture(type):
 	if type>types.size()-1:
 
 		type=0
+	var s:="t" 
+	if type==1: s="s"
 	var name=types[type].name
 	var numvariant=types[type].num
-	var ts=treeScene.instantiate()
+
 	var treenum=rng.randi_range(1,numvariant)
-	var image = Image.load_from_file("res://"+name+str(treenum)+".PNG")
-	var texture = ImageTexture.create_from_image(image)
-	ts.texture = texture
+	var ts=assetsScene.instantiate()
+	ts.animation=s+str(treenum)
 	return ts
 	
 

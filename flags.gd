@@ -35,7 +35,7 @@ var effect=""
 var warploc=2950
 var hat=""
 var mesmerized=false
-var types=[{"name":"items/food/food","num":4},{"name":"items/scrap/scrap","num":4},{"name":"items/quest/item","num":1}]
+var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap/scrap","num":4,"type":"scrap"},{"name":"items/quest/item","num":1,"type":"quest"}]
 
 func reset():
 	mesmerized=false
@@ -59,6 +59,7 @@ func addToInventory(type,numvarient):
 	print("addtoinventory")
 	var name=types[type].name
 	var treenum=numvarient
+
 	var istr="res://"+name+"text"+str(treenum)+".PNG"
 	var image = Image.load_from_file(istr)
 	var texture = ImageTexture.create_from_image(image)

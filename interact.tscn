@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://kbcdr5hqbmpf"]
+[gd_scene load_steps=27 format=3 uid="uid://kbcdr5hqbmpf"]
 
 [ext_resource type="Script" path="res://Area2D.gd" id="1_ifjqp"]
 [ext_resource type="Texture2D" uid="uid://bne16e66ilpxs" path="res://chests/chest1/closed1.PNG" id="2_ovaff"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://bsll63jk3d7vc" path="res://chests/chest1/search10.PNG" id="13_u6mne"]
 [ext_resource type="AudioStream" uid="uid://biei2vdvtf0jq" path="res://sounds/questfound.mp3" id="14_8mgh4"]
 [ext_resource type="AudioStream" uid="uid://6dd0on15gn4i" path="res://sounds/trash.mp3.mp3" id="14_xtshd"]
+[ext_resource type="PackedScene" uid="uid://pqkx45lcjvp3" path="res://prize.tscn" id="24_yyx1v"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qre8i"]
 animations = [{
@@ -136,6 +137,7 @@ position = Vector2(1196, 420)
 shape = SubResource("RectangleShape2D_w6bvr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1204, 166)
 scale = Vector2(0.9, 0.866667)
 
@@ -145,6 +147,11 @@ stream = ExtResource("14_8mgh4")
 [node name="trash" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("14_xtshd")
 volume_db = 3.748
+
+[node name="prize" parent="." instance=ExtResource("24_yyx1v")]
+position = Vector2(1241, 128)
+animation = &"default"
+autoplay = "default"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
