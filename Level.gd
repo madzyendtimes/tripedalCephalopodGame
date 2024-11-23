@@ -109,7 +109,7 @@ func doEffect():
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
 			Flags.mesmerized=false
 			$player.walkani()
-			dotime(returnhat)
+			dotime(returnhat,30.0)
 
 		"mesmerized":
 			Flags.mesmerized=true
@@ -140,10 +140,12 @@ func doEffect():
 		"beg":
 			Flags.hat="beg"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
-			dotime(returnbeg)
+			dotime(returnbeg,30.0)
 				
 		"stanima":
-			Flags.playerStats.stanima+=Flags.playerStats.stanima
+			Flags.playerStats.bonusStanima=Flags.playerStats.maxStanima
+			Flags.playerStats.stanima=Flags.playerStats.maxStanima
+			dotime(returnBonus.bind("stanima"),10.0)
 		"quest":
 			pass
 		"hit":
@@ -154,14 +156,17 @@ func doEffect():
 
 
 
-func dotime(timefunc):
+func dotime(timefunc,ntime):
 	var gt:Timer=Timer.new()
 	add_child(gt)
-	gt.wait_time=30.0
+	gt.wait_time=ntime
 	gt.one_shot=true			
 	gt.timeout.connect(timefunc)
 	gt.start()
 
+
+func returnBonus(skey):
+	Flags.playerStats.bonusStanima=0
 
 
 func returnhat():
@@ -214,7 +219,6 @@ func _process(delta):
 		$player.walkani()
 		speed=1
 	if stanimaAction==false:
-		
 		Flags.playerStats.stanima=min(Flags.playerStats.stanima+Flags.playerStats.stanimaRate,Flags.playerStats.maxStanima)
 		if Flags.exhausted==true && Flags.playerStats.stanima>(Flags.playerStats.maxStanima/2):
 			speed=currSpeed
@@ -388,7 +392,7 @@ func _on_enemy_generator_timeout():
 				upchoice=7
 			
 			var chance=rng.randi_range(0,upchoice)
-			
+			chance=0
 			if chance<1:
 				var trash=trashScene.instantiate()
 				trash.position.x=(($interactive.position.x)*-1)+1400

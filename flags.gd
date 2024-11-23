@@ -58,7 +58,7 @@ func reset():
 	inFight=false
 	playerDead=false
 	playerInventory=[]
-	#playerStats=stats.new()
+	playerStats=stats.new()
 	#playerStats={"health":playerStats.maxHealth,"maxHealth":playerStats.maxHealth,"stanima":playerStats.maxStanima,"maxStanima":playerStats.maxStanima,"stanimaRate":1,"speed":playerStats.maxSpeed,"maxSpeed":1,"power":playerStats.maxPower,"maxPower":1}
 	playerSearch=false
 	inSearch=false

@@ -30,18 +30,11 @@ var health: int :
 		return actual.health+bonus.health
 	set(val):
 		setStat("health",val)			
-		'''
-		var diff=0
-		if val<actual.health:
-			diff=actual.health-val
-			var tdiff=bonus.health-diff
-			bonus.health=max(0,bonus.health-diff)
-			diff=tdiff			
-		actual.health=min(val-diff,maximum.health)
-		'''			
+	
 var stanima: int :
 	get:
 		return actual.stanima+bonus.stanima
+
 	set(val):
 		setStat("stanima",val)			
 
@@ -99,12 +92,15 @@ var bonusHealth:int:
 		return bonus.health
 	set(val):
 		bonus.health=val
+
 		
 var bonusStanima:int:
 	get:
 		return bonus.stanima
 	set(val):
 		bonus.stanima=val
+		
+		#dotime(resetBonus,10.0,"stanima",val), can't get timer to work in class
 
 var bonusSpeed:int:
 	get:
@@ -124,6 +120,27 @@ var bonusStanimaRate:int:
 	set(val):
 		bonus.stanimaRate=val
 
+func resetBonus():
+	var key="stanima"
+	print("reset",key)
+	bonus[key]=0
+
+func dotime(timefunc,ntime,skey,val):
+	print("dotime")
+	if val<1:
+		return
+	var gt:Timer=Timer.new()
+	add_child(gt)
+	gt.wait_time=30.0
+	gt.one_shot=true			
+	gt.timeout.connect(timefunc)
+
+	add_child(gt)
+	gt.start()			
+
+	
+
+
 
 func setStat(key,val):
 		var diff=0
@@ -142,7 +159,9 @@ func setStat(key,val):
 			bonus[key]=max(0,bonus[key]-diff)
 	#		print("bonus:",bonus[key])
 			diff=tdiff
-		#print("diff:",diff)			
+		#print("diff:",diff)
+		else:
+			diff=val-actual[key]
 		actual[key]=min(actual[key]+diff,maximum[key])
 	#	if key!="stanima":
 	#		print(actual[key])
