@@ -461,15 +461,18 @@ func _on_missle_hit() -> void:
 
 
 func _on_tutorial_body_entered(body: Node2D) -> void:
+	
 	speed=1
 	warpto(-16250)
-	spawn()
-	spawntrash(7680,1,1)
+	if Flags.Levels.tutorial.instantiated==false:
+		spawn()
+		spawntrash(7680,1,1)
+		Flags.Levels.tutorial.instantiated=true
 	$AudioStreamPlayer.stop()
 	$tutorialmusic.play()
 
 func backHome():
-
+	Flags.Levels.tutorial.completed=true
 	warpto(0)
 	$AudioStreamPlayer.play()
 	$tutorialmusic.stop()

@@ -119,7 +119,7 @@ func _on_interact_trashable(body):
 
 
 func _on_npc_body_entered(body):
-
+	print(body)
 	var count=0
 	for x in Flags.playerInventory:
 		if (x.type==2):

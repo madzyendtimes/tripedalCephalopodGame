@@ -7,8 +7,8 @@ var canJump:=true
 var inFight:=false
 var playerDead:=false
 var playerInventory:=[]
-
-
+var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
+var Quests:=[{"name":"legless","completed":false,"reward":{"method":"permaboost","vars":[1,"maxHealth"],"text":"You found my legs! Let me teach you the ancient zombie art of extra health"}}]
 #var playerStats:={"health":1,"maxHealth":3,"stanima":600,"maxStanima":600,"stanimaRate":1,"speed":1,"maxSpeed":1,"power":1,"maxPower":1}
 var playerStats=stats.new()
 
