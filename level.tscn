@@ -799,6 +799,7 @@ volume_db = 1.0
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]
 [connection signal="hit" from="interactive/missle" to="." method="_on_missle_hit"]
 [connection signal="trashable" from="interactive/interact" to="player" method="_on_interact_trashable"]
+[connection signal="body_entered" from="npcs/npc" to="npcs/npc" method="_on_body_entered"]
 [connection signal="body_entered" from="npcs/npc" to="player" method="_on_npc_body_entered"]
 [connection signal="body_entered" from="npcs/sludgebutt" to="npcs/sludgebutt" method="_on_body_entered"]
 [connection signal="body_entered" from="npcs/pailface" to="." method="_on_pailface_body_entered"]

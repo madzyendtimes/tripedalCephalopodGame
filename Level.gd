@@ -392,7 +392,7 @@ func _on_enemy_generator_timeout():
 				upchoice=7
 			
 			var chance=rng.randi_range(0,upchoice)
-			chance=0
+			chance=6
 			if chance<1:
 				var trash=trashScene.instantiate()
 				trash.position.x=(($interactive.position.x)*-1)+1400

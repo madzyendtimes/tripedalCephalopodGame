@@ -110,21 +110,10 @@ func walkani():
 		$AnimatedSprite2D.animation="exhausted"+Flags.hat
 	else:
 		$AnimatedSprite2D.animation="default"+Flags.hat
-	print(Flags.hat)
-	print(Flags.mesmerized)
-	print ("mesmerized"+Flags.hat)
 		
 func _on_interact_trashable(body):
 	pass
 
 
 func _on_npc_body_entered(body):
-	print(body)
-	var count=0
-	for x in Flags.playerInventory:
-		if (x.type==2):
-			$"../npcs/npc".foundQuest();
-			Flags.playerInventory.remove_at(count)
-		count+=1
-#	{"type":type,"item":treenum}
-	pass # Replace with function body.
+	pass
