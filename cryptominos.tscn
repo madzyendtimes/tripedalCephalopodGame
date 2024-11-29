@@ -1,0 +1,141 @@
+[gd_scene load_steps=18 format=3 uid="uid://dwktembd8mfv7"]
+
+[ext_resource type="Script" path="res://cryptominos.gd" id="1_7jtwu"]
+[ext_resource type="Texture2D" uid="uid://bhrbh5bfn04xq" path="res://player/forward/forward1.PNG" id="1_ubthq"]
+[ext_resource type="Texture2D" uid="uid://dbkyrrxyhngsl" path="res://player/forward/forward2.PNG" id="2_73rgc"]
+[ext_resource type="Script" path="res://complayer.gd" id="2_no82x"]
+[ext_resource type="Script" path="res://floor.gd" id="3_k4tu1"]
+[ext_resource type="Texture2D" uid="uid://c538auj77juw0" path="res://player/forward/forward3.PNG" id="3_mgjsw"]
+[ext_resource type="Script" path="res://exit.gd" id="6_0ynij"]
+[ext_resource type="PackedScene" uid="uid://dd3ek8osevi1x" path="res://cryptominoswscenes/comrock.tscn" id="8_ac0yy"]
+[ext_resource type="Texture2D" uid="uid://bpffw0lif2h8w" path="res://enterable/cryptominos/assets/IMG_6155.PNG" id="9_5bixw"]
+[ext_resource type="Texture2D" uid="uid://dkgyyqiavos5" path="res://enterable/cryptominos/assets/IMG_6156.PNG" id="10_5clmj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3hv1"]
+size = Vector2(1680, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tvqkq"]
+size = Vector2(154, 509)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk7tr"]
+size = Vector2(1690, 82)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggttb"]
+size = Vector2(82, 800)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_884p2"]
+radius = 96.0
+height = 192.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1riec"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ubthq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_73rgc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mgjsw")
+}],
+"loop": true,
+"name": &"forward",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xh6wk"]
+size = Vector2(80, 117)
+
+[node name="cryptominos" type="Node2D"]
+script = ExtResource("1_7jtwu")
+
+[node name="pickaxe" parent="." instance_placeholder="res://pickaxe.tscn"]
+
+[node name="playarea" type="Node2D" parent="."]
+
+[node name="comrock" parent="playarea" instance=ExtResource("8_ac0yy")]
+position = Vector2(-208, 0)
+
+[node name="boundary" type="StaticBody2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="floor" type="Area2D" parent="boundary"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("3_k4tu1")
+
+[node name="Img6158" type="Sprite2D" parent="boundary/floor"]
+position = Vector2(592, 672)
+rotation = -1.55683
+scale = Vector2(1.01504, 1.61492)
+skew = 0.00995088
+texture = ExtResource("9_5bixw")
+
+[node name="floor" type="CollisionShape2D" parent="boundary/floor"]
+position = Vector2(824, 640)
+shape = SubResource("RectangleShape2D_h3hv1")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="boundary"]
+position = Vector2(40, 256)
+shape = SubResource("RectangleShape2D_tvqkq")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="boundary"]
+position = Vector2(808, -40)
+shape = SubResource("RectangleShape2D_jk7tr")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="boundary"]
+position = Vector2(1152, 320)
+shape = SubResource("RectangleShape2D_ggttb")
+
+[node name="floor2" type="CollisionShape2D" parent="boundary"]
+position = Vector2(824, 704)
+shape = SubResource("RectangleShape2D_h3hv1")
+metadata/_edit_lock_ = true
+
+[node name="Img6157" type="Sprite2D" parent="boundary"]
+position = Vector2(608, -64)
+rotation = 1.58999
+scale = Vector2(1.22392, 1.59708)
+texture = ExtResource("9_5bixw")
+
+[node name="Img6156" type="Sprite2D" parent="boundary"]
+position = Vector2(64, 152)
+scale = Vector2(1, 1)
+texture = ExtResource("9_5bixw")
+
+[node name="Img6155" type="Sprite2D" parent="boundary"]
+position = Vector2(1160, 328)
+scale = Vector2(0.8, 1.06)
+texture = ExtResource("9_5bixw")
+
+[node name="exit" type="Area2D" parent="."]
+script = ExtResource("6_0ynij")
+
+[node name="Img6156" type="Sprite2D" parent="exit"]
+position = Vector2(64, 584)
+scale = Vector2(0.766667, 0.804)
+texture = ExtResource("10_5clmj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit"]
+position = Vector2(-72, 584)
+shape = SubResource("CapsuleShape2D_884p2")
+
+[node name="complayer" type="CharacterBody2D" parent="."]
+script = ExtResource("2_no82x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="complayer"]
+position = Vector2(256, 600)
+scale = Vector2(0.72, 0.606667)
+sprite_frames = SubResource("SpriteFrames_1riec")
+animation = &"forward"
+autoplay = "forward"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="complayer"]
+position = Vector2(216, 608)
+shape = SubResource("RectangleShape2D_xh6wk")
+
+[connection signal="body_entered" from="boundary/floor" to="boundary/floor" method="_on_body_entered"]
+[connection signal="body_entered" from="exit" to="exit" method="_on_body_entered"]

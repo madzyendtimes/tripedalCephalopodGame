@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://drxsi6f0btwdn"]
+
+[ext_resource type="Script" path="res://pickax.gd" id="1_ep22r"]
+[ext_resource type="Texture2D" uid="uid://ytrdrkfyklf4" path="res://enterable/cryptominos/assets/pickaxe.PNG" id="2_jhndm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hvuv5"]
+radius = 32.0
+
+[node name="pickaxe" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 5
+motion_mode = 1
+script = ExtResource("1_ep22r")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(208, 496)
+scale = Vector2(0.355, 0.415)
+texture = ExtResource("2_jhndm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(200, 488)
+shape = SubResource("CircleShape2D_hvuv5")

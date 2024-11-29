@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=3 uid="uid://cr1wl1ovvxs20"]
+[gd_scene load_steps=133 format=3 uid="uid://cr1wl1ovvxs20"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://b3bdpe4vkh5x0" path="res://location/home/back.PNG" id="2_fr0tk"]
 [ext_resource type="PackedScene" uid="uid://b2hkkwk1b41kv" path="res://tree.tscn" id="2_nllk3"]
 [ext_resource type="PackedScene" uid="uid://dreupjy7qiymi" path="res://npc.tscn" id="2_q0aer"]
-[ext_resource type="Texture2D" uid="uid://d1s4lqu3w7n6r" path="res://location/tutorial/blackboaard.PNG" id="3_7vpnf"]
 [ext_resource type="PackedScene" uid="uid://kbcdr5hqbmpf" path="res://interact.tscn" id="3_wwvka"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="4_2ul28"]
 [ext_resource type="PackedScene" uid="uid://h0fu05w45w1i" path="res://missle.tscn" id="4_a4tke"]
@@ -64,12 +63,10 @@
 [ext_resource type="Texture2D" uid="uid://chwomnyha5ggm" path="res://player/puke/puke2.PNG" id="21_m7lqc"]
 [ext_resource type="Texture2D" uid="uid://cyrega5atbfll" path="res://player/exhaustedthat/exhaustedthat3.PNG" id="21_n2oub"]
 [ext_resource type="Texture2D" uid="uid://darcp6a0fme6o" path="res://player/puke/puke3.PNG" id="22_gu85y"]
-[ext_resource type="Texture2D" uid="uid://bimsw8oqu1xk8" path="res://npc/sludgebutt/questcomplete.PNG" id="23_7wcso"]
 [ext_resource type="AudioStream" uid="uid://yotkhxff2mfd" path="res://music/Fallen Date.wav" id="23_kcqfy"]
 [ext_resource type="Texture2D" uid="uid://bb3qxm3k41yq7" path="res://player/puke/puke4.PNG" id="23_q1lkx"]
 [ext_resource type="Texture2D" uid="uid://c7kkd3t5lp7ox" path="res://player/exhaustedbeg/exhaustedbeg1.PNG" id="24_84teh"]
 [ext_resource type="Texture2D" uid="uid://c0bvasq6pqahv" path="res://player/puke/puke5.PNG" id="24_g1qg1"]
-[ext_resource type="Texture2D" uid="uid://x10nc4ufvaex" path="res://npc/sludgebutt/questcomplete2.PNG" id="24_rb1w3"]
 [ext_resource type="Texture2D" uid="uid://blytohpko7fyf" path="res://player/exhaustedbeg/exhaustedbeg2.PNG" id="25_8qxuw"]
 [ext_resource type="Texture2D" uid="uid://cn020rbt5e0ci" path="res://npc/snitchyjoe/snitchyjoe1.PNG" id="25_dow64"]
 [ext_resource type="Texture2D" uid="uid://ddjiojmxk0u1" path="res://npc/snitchyjoe/snitchyjoe2.PNG" id="26_bts4l"]
@@ -114,9 +111,6 @@
 [ext_resource type="Texture2D" uid="uid://c0bsyaqhxcvc4" path="res://player/searchbeg/searchbeg1.PNG" id="68_ed1iq"]
 [ext_resource type="Texture2D" uid="uid://dxog0jsddlb1h" path="res://player/searchbeg/searchbeg2.PNG" id="69_tqirq"]
 [ext_resource type="Texture2D" uid="uid://dk8fctv3offgf" path="res://player/searchbeg/searchbeg3.PNG" id="70_vrnn3"]
-[ext_resource type="Texture2D" uid="uid://bhrbh5bfn04xq" path="res://player/forward/forward1.PNG" id="71_cg1a6"]
-[ext_resource type="Texture2D" uid="uid://dbkyrrxyhngsl" path="res://player/forward/forward2.PNG" id="72_pwvgq"]
-[ext_resource type="Texture2D" uid="uid://c538auj77juw0" path="res://player/forward/forward3.PNG" id="73_vh3e1"]
 [ext_resource type="Script" path="res://tutorial.gd" id="81_bqg1q"]
 [ext_resource type="Texture2D" uid="uid://b0x7w52xctc7x" path="res://location/tutorial/tutorialback.PNG" id="82_8p1p5"]
 [ext_resource type="Texture2D" uid="uid://driq162ck5stl" path="res://location/tutorial/tutorialfront.PNG" id="83_4r3hh"]
@@ -124,7 +118,6 @@
 [ext_resource type="PackedScene" uid="uid://dhtaqwcus62o1" path="res://enterable.tscn" id="108_lhqd7"]
 [ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="116_lqqny"]
 [ext_resource type="PackedScene" uid="uid://b7y4prfovsln4" path="res://assets.tscn" id="117_jg7m3"]
-[ext_resource type="PackedScene" uid="uid://dwktembd8mfv7" path="res://cryptominos.tscn" id="125_dyu73"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y3yxv"]
 resource_local_to_scene = true
@@ -161,17 +154,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("23_7wcso")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_rb1w3")
-}],
-"loop": true,
-"name": &"questcomplete",
 "speed": 5.0
 }]
 
@@ -412,20 +394,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("71_cg1a6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("72_pwvgq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("73_vh3e1")
-}],
-"loop": true,
-"name": &"forward",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("31_v75h5")
 }, {
 "duration": 1.0,
@@ -569,24 +537,6 @@ script = ExtResource("1_68yp1")
 z_index = -6
 material = SubResource("ShaderMaterial_y3yxv")
 
-[node name="Blackboaard2" type="Sprite2D" parent="treeholder"]
-z_index = -1
-position = Vector2(-12422, 260)
-scale = Vector2(1.18, 1.18333)
-texture = ExtResource("3_7vpnf")
-
-[node name="Blackboaard3" type="Sprite2D" parent="treeholder"]
-z_index = -1
-position = Vector2(-9830, 185.25)
-scale = Vector2(1.4, 0.9425)
-texture = ExtResource("3_7vpnf")
-
-[node name="Blackboaard" type="Sprite2D" parent="treeholder"]
-z_index = -1
-position = Vector2(-14934, 268)
-scale = Vector2(0.92, 0.9)
-texture = ExtResource("3_7vpnf")
-
 [node name="treeholder2" type="Node2D" parent="."]
 z_index = -3
 
@@ -648,10 +598,6 @@ texture = ExtResource("9_rp4wn")
 position = Vector2(-2782, 364)
 shape = SubResource("CircleShape2D_pfs00")
 
-[node name="enterable" parent="locationback" instance=ExtResource("108_lhqd7")]
-z_index = -5
-position = Vector2(10098, 196)
-
 [node name="interactive" type="Node2D" parent="."]
 
 [node name="missle" parent="interactive" instance=ExtResource("4_a4tke")]
@@ -684,9 +630,7 @@ script = ExtResource("13_ovjp5")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs/sludgebutt"]
 position = Vector2(-14542, 412)
 sprite_frames = SubResource("SpriteFrames_see4a")
-animation = &"questcomplete"
 autoplay = "default"
-frame_progress = 0.647872
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="npcs/sludgebutt"]
 position = Vector2(-14514, 420)
@@ -751,8 +695,9 @@ shape = SubResource("CapsuleShape2D_602p8")
 position = Vector2(-25.5, -7)
 scale = Vector2(0.826667, 0.715)
 sprite_frames = SubResource("SpriteFrames_qc2jh")
-animation = &"forward"
+animation = &"mesmerizedbeg"
 autoplay = "default"
+frame_progress = 0.46249
 
 [node name="dead" type="AudioStreamPlayer2D" parent="player"]
 position = Vector2(-335.5, -211.5)
@@ -808,15 +753,14 @@ shape = SubResource("RectangleShape2D_e5vwe")
 position = Vector2(-728, 338)
 texture = ExtResource("83_4r3hh")
 
-[node name="cryptominos" parent="locationfront/tutorial" instance=ExtResource("125_dyu73")]
-position = Vector2(-76890.8, 60.7692)
-scale = Vector2(0.769231, 0.769231)
+[node name="enterable" parent="locationfront" instance=ExtResource("108_lhqd7")]
+position = Vector2(10914, 28)
 
 [node name="enemy" type="Node2D" parent="."]
 
 [node name="groundling" parent="enemy" instance=ExtResource("7_f4tqc")]
 show_behind_parent = true
-position = Vector2(11802, 476)
+position = Vector2(11066, 612)
 collision_mask = 258
 
 [node name="expander" parent="enemy" instance=ExtResource("57_a6jor")]

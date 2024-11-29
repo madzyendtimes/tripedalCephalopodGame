@@ -14,7 +14,7 @@ func showpop():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
-	if Flags.paused==false:		
+	if Flags.paused==false || Flags.entered.active==true:		
 		update()
 	else:
 		if Input.is_action_just_pressed("right"):
@@ -76,7 +76,7 @@ func SelectItem(selx,sely):
 
 func update():
 	$PopupPanel.visible=true
-	$PopupPanel/statbar/Label.text="health :"+str(Flags.playerStats.health)+" - stanima :"+str(Flags.playerStats.stanima)+" - speed :"+str(Flags.playerStats.speed)+ " - power : "+str(Flags.playerStats.power)
+	$PopupPanel/statbar/Label.text="health :"+str(Flags.playerStats.health)+" - stanima :"+str(Flags.playerStats.stanima)+" - speed :"+str(Flags.playerStats.speed)+ " - power : "+str(Flags.playerStats.power)+"loc:"+str(Flags.l)
 	
 func contract():
 	update()

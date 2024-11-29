@@ -11,16 +11,7 @@ func _process(delta: float) -> void:
 	pass
 
 
-
 func _on_body_entered(body: Node2D) -> void:
-	var count=0
-	for x in Flags.playerInventory:
-		if (x.type==2)&&(x.item==2):
-			$AnimatedSprite2D.animation="questcomplete"
-			#todo - incorporate into quest dictionary
-			$text.animation="complete"
-			
-			Flags.playerInventory.remove_at(count)
-		count+=1	
-	
+	if body.name.find("pickaxe")>-1:
+		body.queue_free()
 	pass # Replace with function body.

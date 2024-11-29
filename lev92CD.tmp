@@ -808,10 +808,6 @@ shape = SubResource("RectangleShape2D_e5vwe")
 position = Vector2(-728, 338)
 texture = ExtResource("83_4r3hh")
 
-[node name="cryptominos" parent="locationfront/tutorial" instance=ExtResource("125_dyu73")]
-position = Vector2(-76890.8, 60.7692)
-scale = Vector2(0.769231, 0.769231)
-
 [node name="enemy" type="Node2D" parent="."]
 
 [node name="groundling" parent="enemy" instance=ExtResource("7_f4tqc")]
@@ -854,6 +850,9 @@ stream = ExtResource("116_lqqny")
 volume_db = 1.0
 
 [node name="assets" parent="." instance=ExtResource("117_jg7m3")]
+
+[node name="cryptominos" parent="." instance=ExtResource("125_dyu73")]
+position = Vector2(-18686, 44)
 
 [connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]

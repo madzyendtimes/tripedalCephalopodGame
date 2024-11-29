@@ -1,0 +1,64 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhtaqwcus62o1"]
+
+[ext_resource type="Script" path="res://enterable.gd" id="1_s0w2e"]
+[ext_resource type="Texture2D" uid="uid://cxwsygujr1gmc" path="res://enterable/cryptominos/facade/back.PNG" id="2_twv8i"]
+[ext_resource type="Texture2D" uid="uid://bf6hoqud67rt3" path="res://enterable/cryptominos/facade/front.PNG" id="3_5tqrh"]
+[ext_resource type="Texture2D" uid="uid://g4uvde152ooe" path="res://enterable/cryptominos/facade/entered.PNG" id="4_3nckp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ijtse"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_twv8i")
+}],
+"loop": true,
+"name": &"cryptominos",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_078ag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5tqrh")
+}],
+"loop": true,
+"name": &"cryptominos",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3nckp")
+}],
+"loop": true,
+"name": &"cryptominosentered",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jqsjo"]
+size = Vector2(432, 1234)
+
+[node name="enterable" type="Area2D"]
+collision_layer = 32768
+collision_mask = 2
+script = ExtResource("1_s0w2e")
+
+[node name="back" type="AnimatedSprite2D" parent="."]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_ijtse")
+animation = &"cryptominos"
+
+[node name="front" type="AnimatedSprite2D" parent="."]
+position = Vector2(-16, 70.5)
+scale = Vector2(0.82, 0.666)
+sprite_frames = SubResource("SpriteFrames_078ag")
+animation = &"cryptominosentered"
+autoplay = "cryptominos"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = -1
+position = Vector2(-8, 560)
+shape = SubResource("RectangleShape2D_jqsjo")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

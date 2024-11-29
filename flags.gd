@@ -1,13 +1,23 @@
 extends Node
 
 const stats=preload("res://playerstats.gd")
-
+var l=0
+var playerposition
+var playerscale
 var titlescreen:="title"
 var canJump:=true
 var inFight:=false
 var playerDead:=false
 var playerInventory:=[]
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
+var megaStats:={"gems":0}
+var entered:={
+	"ready":false,
+	"active":false,
+	"building":"",
+	"type":""
+	}
+
 var Quests:={
 		"legless":
 			{"completed":false,
@@ -50,6 +60,8 @@ var warploc=2950
 var hat=""
 var mesmerized=false
 var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap/scrap","num":4,"type":"scrap"},{"name":"items/quest/item","num":1,"type":"quest"}]
+var conveniance={"oldloc":0}
+
 
 func reset():
 	mesmerized=false
@@ -69,7 +81,9 @@ func reset():
 	playerSearch=false
 	inSearch=false
 	paused=false
-
+	conveniance={"oldloc":0}
+	
+	
 func addToInventory(type,numvarient):
 	print("addtoinventory")
 	var name=types[type].name

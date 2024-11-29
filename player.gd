@@ -8,6 +8,8 @@ var oldy
 var inHit:=false
 
 func _ready():
+	Flags.playerposition=self.position
+	Flags.playerscale=self.scale
 	oldmod = $AnimatedSprite2D.modulate
 	inHit=false
 
@@ -95,8 +97,10 @@ func outSearch():
 		Flags.playerSearch=false
 		Flags.inSearch=false
 		walkani()
+func enter():
+	$AnimatedSprite2D.animation="forward"
+	$AnimatedSprite2D.play()
 	
-
 func walkani():
 
 	if Flags.mesmerized==true:

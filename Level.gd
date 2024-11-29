@@ -16,6 +16,7 @@ var expanderScene:PackedScene=load("res://expander.tscn")
 var tallmScene:PackedScene=load("res://monster_tall.tscn")
 var welcomeScene:PackedScene=load("res://welcome_center.tscn")
 var assetsScene:PackedScene=load("res://assets.tscn")
+var enterScene:PackedScene=load("res://enterable.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -94,8 +95,18 @@ func doEffect():
 	var aSel = sEff.split("|")
 	if aSel.size()>1:
 		sEff=aSel[rng.randi_range(0,aSel.size()-1)]		
-
+	print(sEff)
 	match sEff:
+		"exitcryptominos":			
+			warpCB(Flags.conveniance.oldloc*-1)
+			Flags.paused=false
+			$player/AnimatedSprite2D.play()
+			var tween=get_tree().create_tween()
+			tween.parallel().tween_property($player,"scale",Flags.playerscale,.5)
+			tween.parallel().tween_property($player,"position",Flags.playerposition,.5)
+			$player.walkani()
+			#tween.tween_callback(entered)		
+					
 		"puke":
 			Flags.pukestate=true
 			if !$player/AnimatedSprite2D.is_playing():
@@ -196,6 +207,7 @@ func pukeHit(body):
 	body.hit()
 	
 func warpCB(loc):
+
 	warpto(loc)
 	var tween = get_tree().create_tween()
 	tween.tween_property($player, "modulate", oldmod, .5)
@@ -207,6 +219,10 @@ func _process(delta):
 	if Flags.paused==true:
 		Flags.resetOnce=true
 		return
+	
+	if Input.is_action_just_released("run"):
+		stopRun()
+	
 	
 	if Flags.effect!="":
 		doEffect()
@@ -247,7 +263,6 @@ func _process(delta):
 				statScene.addInventory(i,count)
 			Flags.resetOnce=false
 	
-	
 	if Input.is_action_pressed("right"):
 		Flags.dir=-1
 		moveDir(1,true,Flags.dir,true)
@@ -256,6 +271,7 @@ func _process(delta):
 		Flags.dir=1
 		moveDir(1,true,Flags.dir,true)		
 		ani=true
+
 	if Flags.pukestate==true:
 		ani=true
 	if !ani && (Flags.inFight==false && Flags.playerSearch==false):		
@@ -297,14 +313,33 @@ func _process(delta):
 	if Input.is_action_just_pressed("run") && canJump==true && Flags.exhausted==false:
 		speed=4		
 		stanimaAction=true
+
+	if Input.is_action_just_pressed("enter") && Flags.entered.ready==true:
+		if Flags.entered.building.allreadyentered==false:
+			$player.enter()
+			Flags.entered.active=true
+			Flags.paused=true
+			Flags.entered.building.allreadyentered=true
+			
+			Flags.conveniance.oldloc=$locationback.position.x
+			ani=true
+			var tween=get_tree().create_tween()
+			tween.parallel().tween_property($player,"scale",Vector2(0.4,0.4),1.5)
+			tween.parallel().tween_property($player,"position",Vector2($player.position.x,350),1.5)
+			tween.tween_callback(entered)		
+
+
 	
-	if Input.is_action_just_released("run"):
-		stopRun()
-	
+
 	if Flags.pukestate==true:
 		$player/AnimatedSprite2D.play()
 		
-
+func entered():
+	speed=1
+	warpCB(-99949)
+	$player.position.y=0
+	Flags.entered.building.start()
+	Flags.entered.building.close()
 
 func stopRun():
 		if Flags.exhausted==false && canJump==true:
@@ -315,6 +350,7 @@ func stopRun():
 		stanimaAction=false
 
 func moveDir(base,flip,dir,offS):
+		Flags.l=$locationback.position.x
 		$treeholder.position.x+=dir*base*speed 
 		$treeholder2.position.x+=dir*(base+0.5)*speed 
 		$treeholder3.position.x+=dir*(base+1.5)*speed
@@ -386,13 +422,13 @@ func _on_enemy_generator_timeout():
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
-			var upchoice=6
+			var upchoice=7
 
 			if $interactive.position.x>-5000 && questDistributed==false:
-				upchoice=7
+				upchoice=8
 			
 			var chance=rng.randi_range(0,upchoice)
-			chance=6
+			#chance=6
 			if chance<1:
 				var trash=trashScene.instantiate()
 				trash.position.x=(($interactive.position.x)*-1)+1400
@@ -434,8 +470,13 @@ func _on_enemy_generator_timeout():
 				enemy.position.x=(($enemy.position.x)*-1)+1400
 				$enemy.add_child(enemy)
 				return
-
 			if chance<7:
+				var ent=enterScene.instantiate()
+				ent.position.x=($locationback.position.x*-1)+1400
+				ent.position.y=196
+				$locationback.add_child(ent)
+
+			if chance<8:
 				if questDistributed==false:
 					var trash=trashScene.instantiate()
 					trash.position.x=(($interactive.position.x)*-1)+1400
@@ -464,6 +505,7 @@ func _on_tutorial_body_entered(body: Node2D) -> void:
 	
 	speed=1
 	warpto(-16250)
+
 	if Flags.Levels.tutorial.instantiated==false:
 		spawn()
 		spawntrash(7680,1,1)
@@ -516,5 +558,6 @@ func _on_exit_body_entered(body: Node2D) -> void:
 
 
 func _on_backtostart_body_entered(body: Node2D) -> void:
-	backHome()
+	if body.name=="player":
+		backHome()
 	pass # Replace with function body.

@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://dd3ek8osevi1x"]
+
+[ext_resource type="Script" path="res://comrock.gd" id="1_ksaax"]
+[ext_resource type="Texture2D" uid="uid://c4mryo21x83g4" path="res://enterable/cryptominos/assets/jewel.PNG" id="2_tm6fk"]
+[ext_resource type="Texture2D" uid="uid://bp461xakfukr3" path="res://enterable/cryptominos/assets/rock.PNG" id="3_ki3xy"]
+[ext_resource type="Texture2D" uid="uid://437y5c6mplal" path="res://enterable/cryptominos/assets/skull.PNG" id="4_23s6g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2iqf8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tm6fk")
+}],
+"loop": true,
+"name": &"gem",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ki3xy")
+}],
+"loop": true,
+"name": &"rock",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_23s6g")
+}],
+"loop": true,
+"name": &"skull",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b60dx"]
+radius = 24.0
+
+[node name="comrock" type="Area2D"]
+script = ExtResource("1_ksaax")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(368, 32)
+scale = Vector2(0.33, 0.29)
+sprite_frames = SubResource("SpriteFrames_2iqf8")
+animation = &"rock"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(368, 32)
+shape = SubResource("CircleShape2D_b60dx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
