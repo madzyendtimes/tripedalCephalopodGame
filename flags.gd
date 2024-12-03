@@ -1,5 +1,6 @@
 extends Node
 
+var weather=""
 const stats=preload("res://playerstats.gd")
 var l=0
 var playerposition
@@ -9,6 +10,7 @@ var canJump:=true
 var inFight:=false
 var playerDead:=false
 var playerInventory:=[]
+var interactablenpc=""
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
 var megaStats:={"gems":0}
 var entered:={
@@ -44,12 +46,19 @@ var itemMap:=[
 		[{"name":"tin foil hat","effect":"that","consumable":true,"swap":{}},
 		{"name":"crushed soda","effect":"kick","consumable":true,"swap":{}},
 		{"name":"broken mirror","effect":"warp","consumable":true,"swap":{}},
-		{"name":"begging board","effect":"beg","consumable":true,"swap":{}}
+		{"name":"begging board","effect":"beg","consumable":true,"swap":{}},
+		{"name":"horror movie","effect":"horror","consumable":true,"swap":{}},
+		{"name":"plutonium","effect":"radiation","consumable":true,"swap":{}}
 	]},
 	{"type":"quest","varients":
 		[{"name":"legs","effect":"quest","consumable":false,"swap":{}},
 		{"name":"specimen","effect":"quest","consumable":false,"swap":{}}
 	]}]
+var flavornpc:={"npc":[
+	{"name":"fanguymanly","deployed":false},
+	{"name":"princessoccula","deployed":false},
+	{"name":"win3","deployed":false}
+]}
 var paused:=false
 var resetOnce:=false
 var selectedItem:=-1
@@ -59,13 +68,21 @@ var effect=""
 var warploc=2950
 var hat=""
 var mesmerized=false
-var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap/scrap","num":4,"type":"scrap"},{"name":"items/quest/item","num":1,"type":"quest"}]
+var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap/scrap","num":6,"type":"scrap"},{"name":"items/quest/item","num":1,"type":"quest"}]
 var conveniance={"oldloc":0}
-
+var horror:=false
+var radiation:=false
 
 func reset():
+	var radiation=false
+	var flavornpc:={"npc":[
+	{"name":"fanguymanly","deployed":false},
+	{"name":"princessoccula","deployed":false},
+	{"name":"win3","deployed":false}
+	]}
 	mesmerized=false
 	hat=""
+	horror=false
 	warploc=2950
 	effect=""
 	pukestate=false

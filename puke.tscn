@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://wwtbb45id3op"]
+[gd_scene load_steps=4 format=3 uid="uid://c7l0jlud2hsw6"]
 
 [ext_resource type="Script" path="res://puke.gd" id="1_kxs6m"]
 [ext_resource type="Texture2D" uid="uid://cf6nmhw63nsr4" path="res://effects/groundpuke.PNG" id="1_v01xg"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ytvcm6k2cyxt"]
+[gd_scene load_steps=9 format=3 uid="uid://dtgxlfvbv3vte"]
 
 [ext_resource type="Texture2D" uid="uid://d0u7i6lcnsvfn" path="res://enemies/diapertooth/diapertooth1.PNG" id="1_2g1cs"]
 [ext_resource type="Script" path="res://monster_tall.gd" id="1_4ars4"]

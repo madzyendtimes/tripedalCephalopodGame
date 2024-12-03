@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://bid0ue1i8kuhe"]
+
+[ext_resource type="Texture2D" uid="uid://dtm1mcs1ddp4o" path="res://npc/fanguymanly/fanguymanly1.PNG" id="1_dn1sp"]
+[ext_resource type="Script" path="res://flavornpc.gd" id="1_y36xa"]
+[ext_resource type="Texture2D" uid="uid://bupdrdias4m1r" path="res://npc/fanguymanly/fanguymanly2.PNG" id="2_0g060"]
+[ext_resource type="Texture2D" uid="uid://bhf3cyupogrc4" path="res://npc/princessOcula/ocula1.PNG" id="3_pcned"]
+[ext_resource type="Texture2D" uid="uid://cv86q1skmriyg" path="res://npc/princessOcula/ocula2.PNG" id="4_jalxh"]
+[ext_resource type="Texture2D" uid="uid://bo8s1rmrj11km" path="res://npc/win3/win31.PNG" id="5_0qfb4"]
+[ext_resource type="Texture2D" uid="uid://b05pawbl6kjvl" path="res://npc/win3/win32.PNG" id="6_qkk82"]
+[ext_resource type="Texture2D" uid="uid://bm66q2c3nvb7b" path="res://npc/fanguymanly/fanguymanlytext.PNG" id="7_6n78j"]
+[ext_resource type="Texture2D" uid="uid://buwqvmkirbg0k" path="res://npc/princessOcula/oculaText.PNG" id="8_8igf4"]
+[ext_resource type="Texture2D" uid="uid://dsi3hwuwfyl27" path="res://npc/win3/win3text.PNG" id="9_uacx3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cidpi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_dn1sp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0g060")
+}],
+"loop": true,
+"name": &"fanguymanly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pcned")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jalxh")
+}],
+"loop": true,
+"name": &"princessoccula",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0qfb4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qkk82")
+}],
+"loop": true,
+"name": &"win3",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hh854"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_6n78j")
+}],
+"loop": true,
+"name": &"fanguymanlytext",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_8igf4")
+}],
+"loop": true,
+"name": &"princessocculatext",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_uacx3")
+}],
+"loop": true,
+"name": &"win3text",
+"speed": 5.0
+}]
+
+[node name="flavornpc" type="Node2D"]
+position = Vector2(0, 16)
+script = ExtResource("1_y36xa")
+
+[node name="npc" type="AnimatedSprite2D" parent="."]
+position = Vector2(155, 325)
+scale = Vector2(0.82, 0.82)
+sprite_frames = SubResource("SpriteFrames_cidpi")
+animation = &"win3"
+
+[node name="text" type="AnimatedSprite2D" parent="."]
+position = Vector2(360, 176)
+scale = Vector2(0.74, 0.72)
+sprite_frames = SubResource("SpriteFrames_hh854")
+animation = &"fanguymanlytext"

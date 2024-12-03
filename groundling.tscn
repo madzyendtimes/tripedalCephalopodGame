@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b27gj7e7e87hj"]
+[gd_scene load_steps=10 format=3 uid="uid://cpm4tmnn754ff"]
 
 [ext_resource type="Script" path="res://groundling.gd" id="1_xhkfi"]
 [ext_resource type="Texture2D" uid="uid://dhyf35vk7m5y4" path="res://enemies/groundling/walk1.PNG" id="2_0hg70"]

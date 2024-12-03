@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbom6s5p8gmcd"]
+[gd_scene load_steps=6 format=3 uid="uid://2j6o1viju847"]
 
 [ext_resource type="Texture2D" uid="uid://c7lqx5jqxrvkf" path="res://effects/warp/warp1.PNG" id="1_o888i"]
 [ext_resource type="Script" path="res://warp.gd" id="1_vssc4"]

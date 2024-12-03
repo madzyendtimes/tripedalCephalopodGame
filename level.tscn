@@ -1,15 +1,15 @@
-[gd_scene load_steps=140 format=3 uid="uid://cr1wl1ovvxs20"]
+[gd_scene load_steps=168 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
 [ext_resource type="Script" path="res://player.gd" id="2_dlod8"]
 [ext_resource type="Texture2D" uid="uid://b3bdpe4vkh5x0" path="res://location/home/back.PNG" id="2_fr0tk"]
-[ext_resource type="PackedScene" uid="uid://b2hkkwk1b41kv" path="res://tree.tscn" id="2_nllk3"]
-[ext_resource type="PackedScene" uid="uid://dreupjy7qiymi" path="res://npc.tscn" id="2_q0aer"]
+[ext_resource type="PackedScene" path="res://tree.tscn" id="2_nllk3"]
+[ext_resource type="PackedScene" path="res://npc.tscn" id="2_q0aer"]
 [ext_resource type="Texture2D" uid="uid://d1s4lqu3w7n6r" path="res://location/tutorial/blackboaard.PNG" id="3_7vpnf"]
-[ext_resource type="PackedScene" uid="uid://kbcdr5hqbmpf" path="res://interact.tscn" id="3_wwvka"]
+[ext_resource type="PackedScene" path="res://interact.tscn" id="3_wwvka"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="4_2ul28"]
-[ext_resource type="PackedScene" uid="uid://h0fu05w45w1i" path="res://missle.tscn" id="4_a4tke"]
+[ext_resource type="PackedScene" path="res://missle.tscn" id="4_a4tke"]
 [ext_resource type="Texture2D" uid="uid://d20rivj1yrkr7" path="res://player/fight/walk1.PNG" id="4_cl57f"]
 [ext_resource type="Texture2D" uid="uid://4m08f3jurlqs" path="res://decorations/cityoutskirts/signs/tutorial.PNG" id="4_km83g"]
 [ext_resource type="Script" path="res://npc.gd" id="5_3jyy4"]
@@ -17,7 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="5_usucn"]
 [ext_resource type="Texture2D" uid="uid://cq3s57dqcum5v" path="res://decorations/tutorial/studentcenter.PNG" id="6_7sct6"]
 [ext_resource type="Texture2D" uid="uid://bowtiwa8luaw8" path="res://player/fight/walk3.PNG" id="6_ffkg2"]
-[ext_resource type="PackedScene" uid="uid://b27gj7e7e87hj" path="res://groundling.tscn" id="7_f4tqc"]
+[ext_resource type="PackedScene" path="res://groundling.tscn" id="7_f4tqc"]
 [ext_resource type="Texture2D" uid="uid://dt26il247oonc" path="res://player/fight/punch1.PNG" id="7_mqtj6"]
 [ext_resource type="Texture2D" uid="uid://dmmroypcbr0it" path="res://decorations/tutorial/cafeteria.PNG" id="7_sl0do"]
 [ext_resource type="Texture2D" uid="uid://yi5af2oq0r2" path="res://decorations/tutorial/wreckroom.PNG" id="8_ejmpv"]
@@ -37,7 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://dig26kdfto1rn" path="res://player/search/shake1.PNG" id="13_d72hm"]
 [ext_resource type="Texture2D" uid="uid://batp6unuoga60" path="res://player/walkthat/walkthat1.PNG" id="13_l146d"]
 [ext_resource type="Script" path="res://sludgebutt.gd" id="13_ovjp5"]
-[ext_resource type="PackedScene" uid="uid://bc7psai3ypuc6" path="res://rock.tscn" id="13_tggde"]
+[ext_resource type="PackedScene" path="res://rock.tscn" id="13_tggde"]
 [ext_resource type="Texture2D" uid="uid://c5iulupedgkqn" path="res://npc/sludgebutt/sludgebutt1.PNG" id="13_y6jk6"]
 [ext_resource type="Texture2D" uid="uid://dv8arp8360vhf" path="res://player/exhausted/exhausted2.PNG" id="13_ywgca"]
 [ext_resource type="Texture2D" uid="uid://dvbhmkmluwfec" path="res://player/search/shake2.PNG" id="14_1ybuh"]
@@ -51,23 +51,31 @@
 [ext_resource type="Texture2D" uid="uid://bjt4hai4ttkuk" path="res://npc/sludgebutt/questtext.PNG" id="16_7iadb"]
 [ext_resource type="Texture2D" uid="uid://dimoy7lqjoy7m" path="res://player/walkbeg/walkbeg2.PNG" id="16_sr6pj"]
 [ext_resource type="Texture2D" uid="uid://btao0ksax3aqi" path="res://location/home/front.PNG" id="17_7wont"]
+[ext_resource type="Script" path="res://gemna.gd" id="17_asgom"]
 [ext_resource type="Texture2D" uid="uid://bwvb4ieksh6dh" path="res://player/walkbeg/walkbeg3.PNG" id="17_p6770"]
 [ext_resource type="AudioStream" uid="uid://b5diaegodc4xu" path="res://sounds/die.mp3" id="18_cggrm"]
-[ext_resource type="PackedScene" uid="uid://b2s14p2ye3oan" path="res://pailface.tscn" id="18_dbl8f"]
+[ext_resource type="PackedScene" path="res://pailface.tscn" id="18_dbl8f"]
 [ext_resource type="AudioStream" uid="uid://cbglxmkk1gbwe" path="res://sounds/punch1.mp3" id="18_oxidk"]
+[ext_resource type="Texture2D" uid="uid://ddk81jqy53xqf" path="res://npc/gemna/gemnatext.PNG" id="18_p5k4v"]
 [ext_resource type="Script" path="res://pailface.gd" id="19_prjnd"]
 [ext_resource type="Texture2D" uid="uid://yuepvxakb6is" path="res://player/exhaustedthat/exhaustedthat1.PNG" id="19_th3vs"]
 [ext_resource type="AudioStream" uid="uid://6dd0on15gn4i" path="res://sounds/trash.mp3.mp3" id="19_wak06"]
+[ext_resource type="Texture2D" uid="uid://coclpfsxscvc5" path="res://npc/gemna/gemnaCompleteText.PNG" id="19_xli40"]
 [ext_resource type="AudioStream" uid="uid://cts5mr5pidjys" path="res://sounds/jump2.mp3" id="20_6cbuf"]
 [ext_resource type="Texture2D" uid="uid://dn7eb870848fg" path="res://player/exhaustedthat/exhaustedthat2.PNG" id="20_8iq16"]
+[ext_resource type="Texture2D" uid="uid://biyloyknuao3b" path="res://npc/gemna/gemna1.PNG" id="20_334ox"]
 [ext_resource type="Texture2D" uid="uid://b6ootfv77ildd" path="res://player/puke/puke1.PNG" id="20_d3fqs"]
 [ext_resource type="Texture2D" uid="uid://chwomnyha5ggm" path="res://player/puke/puke2.PNG" id="21_m7lqc"]
 [ext_resource type="Texture2D" uid="uid://cyrega5atbfll" path="res://player/exhaustedthat/exhaustedthat3.PNG" id="21_n2oub"]
+[ext_resource type="Texture2D" uid="uid://bwglwr6oqc5fg" path="res://npc/gemna/gemna2.PNG" id="21_ws368"]
 [ext_resource type="Texture2D" uid="uid://darcp6a0fme6o" path="res://player/puke/puke3.PNG" id="22_gu85y"]
+[ext_resource type="Texture2D" uid="uid://dsmgx0kh82byh" path="res://npc/gemna/gemnacomplete1.PNG" id="22_wa8vn"]
 [ext_resource type="Texture2D" uid="uid://bimsw8oqu1xk8" path="res://npc/sludgebutt/questcomplete.PNG" id="23_7wcso"]
+[ext_resource type="Texture2D" uid="uid://dswtsk7j5ibfc" path="res://npc/gemna/gemnacomplete2.PNG" id="23_hrphj"]
 [ext_resource type="AudioStream" uid="uid://yotkhxff2mfd" path="res://music/Fallen Date.wav" id="23_kcqfy"]
 [ext_resource type="Texture2D" uid="uid://bb3qxm3k41yq7" path="res://player/puke/puke4.PNG" id="23_q1lkx"]
 [ext_resource type="Texture2D" uid="uid://c7kkd3t5lp7ox" path="res://player/exhaustedbeg/exhaustedbeg1.PNG" id="24_84teh"]
+[ext_resource type="PackedScene" uid="uid://bid0ue1i8kuhe" path="res://flavornpc.tscn" id="24_f2tfj"]
 [ext_resource type="Texture2D" uid="uid://c0bvasq6pqahv" path="res://player/puke/puke5.PNG" id="24_g1qg1"]
 [ext_resource type="Texture2D" uid="uid://x10nc4ufvaex" path="res://npc/sludgebutt/questcomplete2.PNG" id="24_rb1w3"]
 [ext_resource type="Texture2D" uid="uid://blytohpko7fyf" path="res://player/exhaustedbeg/exhaustedbeg2.PNG" id="25_8qxuw"]
@@ -81,7 +89,7 @@
 [ext_resource type="Texture2D" uid="uid://cmjbxbwjca6jp" path="res://player/fightthat/fightthat3.PNG" id="29_eqbb5"]
 [ext_resource type="Texture2D" uid="uid://cf86hcxguoq05" path="res://npc/forlorna/forlorna2.PNG" id="29_q4gt8"]
 [ext_resource type="Texture2D" uid="uid://bb4ngdr08p55w" path="res://player/fightthat/fightthat4.PNG" id="30_0v8nd"]
-[ext_resource type="PackedScene" uid="uid://ow4cwtw0wx7m" path="res://stats.tscn" id="30_mddu5"]
+[ext_resource type="PackedScene" path="res://stats.tscn" id="30_mddu5"]
 [ext_resource type="Texture2D" uid="uid://cahmxptlo6w4x" path="res://npc/forlorna/text.PNG" id="30_p0b63"]
 [ext_resource type="Texture2D" uid="uid://dq2008dtan2m7" path="res://npc/lilHype/lilhype1.PNG" id="31_r56fl"]
 [ext_resource type="Texture2D" uid="uid://wequwctjw2da" path="res://player/mesmerized/mesmerized1.PNG" id="31_v75h5"]
@@ -108,7 +116,7 @@
 [ext_resource type="Texture2D" uid="uid://b6ohmp4cv1i2w" path="res://player/pukebeg/pukebeg1.PNG" id="55_qcon0"]
 [ext_resource type="Texture2D" uid="uid://bshibitw2i3r6" path="res://player/pukebeg/pukebeg2.PNG" id="56_vj7ye"]
 [ext_resource type="Texture2D" uid="uid://bun670mjly8l" path="res://player/pukebeg/pukebeg3.PNG" id="57_14531"]
-[ext_resource type="PackedScene" uid="uid://cj0omacioofjm" path="res://expander.tscn" id="57_a6jor"]
+[ext_resource type="PackedScene" path="res://expander.tscn" id="57_a6jor"]
 [ext_resource type="Texture2D" uid="uid://dunw4h3rxhovi" path="res://player/pukebeg/pukebeg4.PNG" id="58_mfc70"]
 [ext_resource type="Texture2D" uid="uid://bbpae3lg3jfa6" path="res://player/pukebeg/pukebeg5.PNG" id="59_ucehp"]
 [ext_resource type="Texture2D" uid="uid://c0bsyaqhxcvc4" path="res://player/searchbeg/searchbeg1.PNG" id="68_ed1iq"]
@@ -120,11 +128,24 @@
 [ext_resource type="Script" path="res://tutorial.gd" id="81_bqg1q"]
 [ext_resource type="Texture2D" uid="uid://b0x7w52xctc7x" path="res://location/tutorial/tutorialback.PNG" id="82_8p1p5"]
 [ext_resource type="Texture2D" uid="uid://driq162ck5stl" path="res://location/tutorial/tutorialfront.PNG" id="83_4r3hh"]
-[ext_resource type="PackedScene" uid="uid://cc0mg3sc5ufvh" path="res://tv.tscn" id="107_57c1h"]
-[ext_resource type="PackedScene" uid="uid://dhtaqwcus62o1" path="res://enterable.tscn" id="108_lhqd7"]
+[ext_resource type="PackedScene" path="res://tv.tscn" id="107_57c1h"]
+[ext_resource type="PackedScene" path="res://enterable.tscn" id="108_lhqd7"]
 [ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="116_lqqny"]
-[ext_resource type="PackedScene" uid="uid://b7y4prfovsln4" path="res://assets.tscn" id="117_jg7m3"]
-[ext_resource type="PackedScene" uid="uid://dwktembd8mfv7" path="res://cryptominos.tscn" id="125_dyu73"]
+[ext_resource type="PackedScene" path="res://assets.tscn" id="117_jg7m3"]
+[ext_resource type="PackedScene" path="res://cryptominos.tscn" id="125_dyu73"]
+[ext_resource type="Script" path="res://weather.gd" id="126_gpbvy"]
+[ext_resource type="Texture2D" uid="uid://dprgsok8wnlsv" path="res://weather/rain/rain1.PNG" id="126_q1g0u"]
+[ext_resource type="Texture2D" uid="uid://dyscohkd2m7jo" path="res://weather/night/IMG_6174.PNG" id="127_fp4fk"]
+[ext_resource type="Texture2D" uid="uid://b8tkictloc4f2" path="res://weather/rain/rain2.PNG" id="127_pyqxp"]
+[ext_resource type="Texture2D" uid="uid://di6i4swwody7" path="res://weather/rain/rain3.PNG" id="128_gfc41"]
+[ext_resource type="Texture2D" uid="uid://xcsnk0jif2lk" path="res://weather/snow/IMG_6178.PNG" id="131_33ebi"]
+[ext_resource type="Texture2D" uid="uid://crn8pm8cjhykn" path="res://weather/snow/IMG_6179.PNG" id="132_t02bo"]
+[ext_resource type="Texture2D" uid="uid://t3t2kgk0cgkp" path="res://weather/snow/IMG_6180.PNG" id="133_6gikk"]
+[ext_resource type="Texture2D" uid="uid://bvdadvm3irg5c" path="res://weather/sun/sun1.PNG" id="134_fu4jl"]
+[ext_resource type="Texture2D" uid="uid://22q08vvl230c" path="res://weather/sun/sun2.PNG" id="135_m1qdu"]
+[ext_resource type="Texture2D" uid="uid://5aifp2r5ewd7" path="res://weather/sun/sun3.PNG" id="136_xbklo"]
+[ext_resource type="Texture2D" uid="uid://cfoklgwqqs7wi" path="res://random/IMG_6181.PNG" id="144_s1wvq"]
+[ext_resource type="Shader" path="res://my.gdshader" id="146_atsho"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y3yxv"]
 resource_local_to_scene = true
@@ -135,6 +156,54 @@ radius = 272.47
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pfs00"]
 radius = 339.411
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fcxne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_p5k4v")
+}],
+"loop": true,
+"name": &"text",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_xli40")
+}],
+"loop": true,
+"name": &"textcomplete",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_53ti5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_334ox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ws368")
+}],
+"loop": true,
+"name": &"gemna",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_wa8vn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_hrphj")
+}],
+"loop": true,
+"name": &"gemnacomplete",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_73mud"]
+radius = 64.0
+height = 272.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e2jih"]
 animations = [{
@@ -561,6 +630,79 @@ size = Vector2(510, 458)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e5vwe"]
 size = Vector2(293, 416)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_ftqse"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("127_fp4fk")
+}],
+"loop": true,
+"name": &"night",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("126_q1g0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("127_pyqxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_gfc41")
+}],
+"loop": true,
+"name": &"rain",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("131_33ebi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("132_t02bo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("133_6gikk")
+}],
+"loop": true,
+"name": &"snow",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("134_fu4jl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_m1qdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("136_xbklo")
+}],
+"loop": true,
+"name": &"sun",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5su2b"]
+size = Vector2(1195, 715)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_injbr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("144_s1wvq")
+}],
+"loop": true,
+"name": &"horror",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j66sv"]
+shader = ExtResource("146_atsho")
+shader_parameter/brightness = 1.0
+shader_parameter/contrast = 1.0
+shader_parameter/saturation = 1.0
+
 [node name="Level" type="Node2D"]
 position = Vector2(-10, 4)
 script = ExtResource("1_68yp1")
@@ -650,7 +792,7 @@ shape = SubResource("CircleShape2D_pfs00")
 
 [node name="enterable" parent="locationback" instance=ExtResource("108_lhqd7")]
 z_index = -5
-position = Vector2(10098, 196)
+position = Vector2(5162, -4268)
 
 [node name="interactive" type="Node2D" parent="."]
 
@@ -663,6 +805,30 @@ position = Vector2(-127, -44)
 
 [node name="npc" parent="npcs" instance=ExtResource("2_q0aer")]
 script = ExtResource("5_3jyy4")
+
+[node name="gemna" type="Area2D" parent="npcs/npc"]
+script = ExtResource("17_asgom")
+
+[node name="text" type="AnimatedSprite2D" parent="npcs/npc/gemna"]
+position = Vector2(35861, 200)
+scale = Vector2(0.596, 0.54)
+sprite_frames = SubResource("SpriteFrames_fcxne")
+animation = &"text"
+autoplay = "text"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs/npc/gemna"]
+position = Vector2(35673, 341)
+scale = Vector2(1.48, 1.34)
+sprite_frames = SubResource("SpriteFrames_53ti5")
+animation = &"gemna"
+autoplay = "gemna"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npcs/npc/gemna"]
+position = Vector2(35706, 388)
+shape = SubResource("CapsuleShape2D_73mud")
+
+[node name="flavornpc" parent="npcs/npc" instance=ExtResource("24_f2tfj")]
+visible = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs"]
 position = Vector2(-15358, 340)
@@ -855,12 +1021,52 @@ volume_db = 1.0
 
 [node name="assets" parent="." instance=ExtResource("117_jg7m3")]
 
+[node name="weather" type="Area2D" parent="."]
+position = Vector2(-6, 4)
+script = ExtResource("126_gpbvy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="weather"]
+position = Vector2(604, 1132)
+scale = Vector2(1.204, 1.02)
+sprite_frames = SubResource("SpriteFrames_ftqse")
+animation = &"snow"
+autoplay = "rain"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="weather"]
+use_parent_material = true
+position = Vector2(606.5, 1140)
+shape = SubResource("RectangleShape2D_5su2b")
+
+[node name="random" type="Node2D" parent="."]
+position = Vector2(10, -4)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="random"]
+position = Vector2(599, 1972)
+scale = Vector2(1.186, 1)
+sprite_frames = SubResource("SpriteFrames_injbr")
+animation = &"horror"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+modulate = Color(0.0610439, 0.836409, 0.0513737, 1)
+self_modulate = Color(0.0564227, 0.733321, 0.0472033, 1)
+anchor_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="colorect" type="ColorRect" parent="Camera2D/CanvasLayer"]
+material = SubResource("ShaderMaterial_j66sv")
+offset_left = -16.0
+offset_right = 1504.0
+offset_bottom = 656.0
+
 [connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]
 [connection signal="hit" from="interactive/missle" to="." method="_on_missle_hit"]
 [connection signal="trashable" from="interactive/interact" to="player" method="_on_interact_trashable"]
 [connection signal="body_entered" from="npcs/npc" to="npcs/npc" method="_on_body_entered"]
 [connection signal="body_entered" from="npcs/npc" to="player" method="_on_npc_body_entered"]
+[connection signal="body_entered" from="npcs/npc/gemna" to="npcs/npc/gemna" method="_on_body_entered"]
+[connection signal="body_exited" from="npcs/npc/gemna" to="npcs/npc/gemna" method="_on_body_exited"]
 [connection signal="body_entered" from="npcs/sludgebutt" to="npcs/sludgebutt" method="_on_body_entered"]
 [connection signal="body_entered" from="npcs/pailface" to="." method="_on_pailface_body_entered"]
 [connection signal="trashable" from="player" to="interactive/interact" method="_on_player_trashable"]

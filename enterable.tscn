@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhtaqwcus62o1"]
+[gd_scene load_steps=8 format=3 uid="uid://ej35f8d30wde"]
 
 [ext_resource type="Script" path="res://enterable.gd" id="1_s0w2e"]
 [ext_resource type="Texture2D" uid="uid://cxwsygujr1gmc" path="res://enterable/cryptominos/facade/back.PNG" id="2_twv8i"]

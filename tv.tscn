@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cc0mg3sc5ufvh"]
+[gd_scene load_steps=7 format=3 uid="uid://bu7gmej612ogw"]
 
 [ext_resource type="Script" path="res://tv.gd" id="1_r560u"]
 [ext_resource type="Texture2D" uid="uid://ctixitctvmitk" path="res://enemies/tv/tv1.PNG" id="2_7ye4l"]

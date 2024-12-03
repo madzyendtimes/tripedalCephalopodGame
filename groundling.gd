@@ -24,5 +24,5 @@ func _process(delta):
 	if Flags.paused==true:
 		return
 	
-	if dead==false:
+	if dead==false && Flags.horror==false:
 		position.x-=.5

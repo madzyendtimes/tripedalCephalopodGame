@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://h0fu05w45w1i"]
+[gd_scene load_steps=4 format=3 uid="uid://dgoj5xbbjud02"]
 
 [ext_resource type="Script" path="res://missle.gd" id="1_ghhpp"]
 [ext_resource type="Texture2D" uid="uid://ds4fjttdr7nsw" path="res://items/scrap/scrap2.PNG" id="2_tljpr"]

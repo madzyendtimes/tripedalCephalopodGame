@@ -17,6 +17,7 @@ var tallmScene:PackedScene=load("res://monster_tall.tscn")
 var welcomeScene:PackedScene=load("res://welcome_center.tscn")
 var assetsScene:PackedScene=load("res://assets.tscn")
 var enterScene:PackedScene=load("res://enterable.tscn")
+var flavorScene:PackedScene=load("res://flavornpc.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -88,6 +89,50 @@ func _ready():
 	$interactive.add_child(warpS)
 	warpS.play()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+func horrorend():
+	Flags.horror=false
+func dohorror():
+	var timer=get_tree().create_timer(rng.randf_range(0.5,2)).timeout
+	Flags.horror=true
+	$random.position.y=-1500
+	var tween=get_tree().create_tween()
+	tween.tween_property($random,"modulate",Color(1,1,1,0),.5)
+	tween.tween_callback(horrorflash)
+	dotime(horrorend,5)
+
+
+func horrorflash():
+	$random.position.y=0
+	var tween=get_tree().create_tween()
+	tween.tween_property($random,"modulate",Color(1,1,1,1),.5)		
+
+func triggerhorror():
+	dotime(dohorror,rng.randf_range(0.5,5.0))
+	
+
+func setShaderParam(parm,val):
+	$Camera2D/CanvasLayer/colorect.material.set_shader_parameter(parm,val)
+
+
+
+func dopuke():
+	Flags.pukestate=true
+	if !$player/AnimatedSprite2D.is_playing():
+		$player/AnimatedSprite2D.play()
+	renderPuke()
+
+func randpuke():	
+	dotime(dopuke,rng.randf_range(0.0,2.0));			
+	if Flags.radiation==true:
+		dotime(randpuke,1.0)
+
+func radiationend():
+	Flags.radiation=false
+	var tween=get_tree().create_tween()
+	tween.parallel().tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/brightness",1.0,1.0)
+	tween.parallel().tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/contrast",1.0,1.0)
+	tween.parallel().tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/saturation",1.0,1.0)
+
 
 func doEffect():
 	#var itemMap:=[{"type":"food","varients":[{"name":"old pizza","effect":"restorehp"},{"name":"noodles... or worms!","effect":"puke|restorehp"},{"name":"suspect sandwitch","effect":"puke"}]},{"type":"scrap","varients":[{"name":"tin foil hat","effect":"stanimaExtend"},{"name":"crushed soda","effect":"recyle"},{"name":"broken mirror","effect":"warp"}]},[{"type":"quest","varients":[{"name":"legs","effect":"quest"}]}]]
@@ -97,6 +142,19 @@ func doEffect():
 		sEff=aSel[rng.randi_range(0,aSel.size()-1)]		
 	print(sEff)
 	match sEff:
+		"radiation":
+			Flags.radiation=true;
+			randpuke()
+			var radtime=rng.randi_range(1,10)
+			var tween=get_tree().create_tween()
+			tween.parallel().set_loops(radtime).tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/brightness",8.0,1.5).from_current()
+			tween.parallel().set_loops(radtime).tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/contrast",5.0,1.0).from_current()
+			tween.parallel().set_loops(radtime).tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/saturation",6.0,1.0).from_current()
+			tween.tween_callback(radiationend)
+			#$Camera2D/CanvasLayer/colorect.material.set_shader_parameter("contrast",10.0)
+			#$Camera2D/CanvasLayer/colorect.material.set_shader_parameter("saturation",10.0)
+		"horror":
+			triggerhorror()
 		"exitcryptominos":			
 			warpCB(Flags.conveniance.oldloc*-1)
 			Flags.paused=false
@@ -108,10 +166,7 @@ func doEffect():
 			#tween.tween_callback(entered)		
 					
 		"puke":
-			Flags.pukestate=true
-			if !$player/AnimatedSprite2D.is_playing():
-				$player/AnimatedSprite2D.play()
-			renderPuke()
+			dopuke()
 		"restorehp":
 		
 			Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
@@ -228,7 +283,10 @@ func _process(delta):
 		doEffect()
 		
 	if stanimaAction==true:
-		Flags.playerStats.stanima-=Flags.playerStats.stanimaRate
+		var rate=Flags.playerStats.stanimaRate
+		if Flags.weather=="sun":
+			rate=5
+		Flags.playerStats.stanima-=rate
 	if Flags.playerStats.stanima<1:
 		stanimaAction=false
 		Flags.exhausted=true
@@ -310,7 +368,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("search") && canJump==true:
 		$player.search()
 
-	if Input.is_action_just_pressed("run") && canJump==true && Flags.exhausted==false:
+	if Input.is_action_just_pressed("run") && canJump==true && Flags.exhausted==false && Flags.weather!="snow":
 		speed=4		
 		stanimaAction=true
 
@@ -335,6 +393,7 @@ func _process(delta):
 		$player/AnimatedSprite2D.play()
 		
 func entered():
+	weatheroff()
 	speed=1
 	warpCB(-99949)
 	$player.position.y=0
@@ -422,13 +481,13 @@ func _on_enemy_generator_timeout():
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
-			var upchoice=7
+			var upchoice=11
 
 			if $interactive.position.x>-5000 && questDistributed==false:
-				upchoice=8
+				upchoice=12
 			
 			var chance=rng.randi_range(0,upchoice)
-			#chance=6
+			#chance=0
 			if chance<1:
 				var trash=trashScene.instantiate()
 				trash.position.x=(($interactive.position.x)*-1)+1400
@@ -475,8 +534,22 @@ func _on_enemy_generator_timeout():
 				ent.position.x=($locationback.position.x*-1)+1400
 				ent.position.y=196
 				$locationback.add_child(ent)
-
+				return
 			if chance<8:
+				$weather.changeweather()
+				$weather.position.y=-800
+				return
+			if chance<9:
+				weatheroff()
+				return			
+			if chance<10:
+				var flavor=flavorScene.instantiate()
+				flavor.position.x=($npcs.position.x*-1)+1400
+				flavor.choose()	
+				if flavor.candeploy==true:
+					$npcs.add_child(flavor)
+				
+			if chance<11:
 				if questDistributed==false:
 					var trash=trashScene.instantiate()
 					trash.position.x=(($interactive.position.x)*-1)+1400
@@ -487,7 +560,10 @@ func _on_enemy_generator_timeout():
 	#move to own generator
 
 
-
+func weatheroff():
+	$weather.position.y=0
+	Flags.weather=""
+	
 func _on_rock_body_entered(body):
 	$player.hit()
 
@@ -502,7 +578,7 @@ func _on_missle_hit() -> void:
 
 
 func _on_tutorial_body_entered(body: Node2D) -> void:
-	
+	weatheroff()
 	speed=1
 	warpto(-16250)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dwktembd8mfv7"]
+[gd_scene load_steps=18 format=3 uid="uid://dos1618drl4dc"]
 
 [ext_resource type="Script" path="res://cryptominos.gd" id="1_7jtwu"]
 [ext_resource type="Texture2D" uid="uid://bhrbh5bfn04xq" path="res://player/forward/forward1.PNG" id="1_ubthq"]
@@ -103,7 +103,6 @@ texture = ExtResource("9_5bixw")
 
 [node name="Img6156" type="Sprite2D" parent="boundary"]
 position = Vector2(64, 152)
-scale = Vector2(1, 1)
 texture = ExtResource("9_5bixw")
 
 [node name="Img6155" type="Sprite2D" parent="boundary"]

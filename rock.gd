@@ -8,6 +8,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Flags.weather=="rain":
+		position.x+=.5
+	
 	pass
 
 func setAnimation(val):

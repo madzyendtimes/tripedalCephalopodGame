@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	if Flags.paused==true:
 		return
 	
-	if (!dead):
+	if (!dead)&& Flags.horror==false:
 		position.x-=speed*dir
 
 
