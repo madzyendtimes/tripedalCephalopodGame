@@ -1,12 +1,36 @@
-[gd_scene load_steps=7 format=3 uid="uid://bu7gmej612ogw"]
+[gd_scene load_steps=14 format=3 uid="uid://bu7gmej612ogw"]
 
 [ext_resource type="Script" path="res://tv.gd" id="1_r560u"]
 [ext_resource type="Texture2D" uid="uid://ctixitctvmitk" path="res://enemies/tv/tv1.PNG" id="2_7ye4l"]
+[ext_resource type="Texture2D" uid="uid://bn38bfk5irtuf" path="res://enemies/tv/eyes1.PNG" id="2_cick3"]
 [ext_resource type="Texture2D" uid="uid://dcoqo5fi36kkt" path="res://enemies/tv/tv2.PNG" id="3_608pq"]
+[ext_resource type="Texture2D" uid="uid://jurn7gu5ymoq" path="res://enemies/tv/eyes2.PNG" id="3_r07oe"]
+[ext_resource type="Texture2D" uid="uid://vi671gebukrr" path="res://enemies/tv/eyes3.PNG" id="4_3r7pf"]
 [ext_resource type="Texture2D" uid="uid://b6pcp4e6lei7m" path="res://enemies/tv/tv3.PNG" id="4_rhagn"]
+[ext_resource type="Texture2D" uid="uid://gjwv1scw64bp" path="res://enemies/tv/eyes4.PNG" id="5_5yic6"]
+[ext_resource type="Texture2D" uid="uid://bmb11fl1bfr83" path="res://enemies/tv/bloodtv1.PNG" id="9_2k1eo"]
+[ext_resource type="Texture2D" uid="uid://h0jgukcmyb4d" path="res://enemies/tv/bloodtv2.PNG" id="10_c3rft"]
+[ext_resource type="Texture2D" uid="uid://b6o5moeoc732n" path="res://enemies/tv/bloodtv3.PNG" id="11_cg5dr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5rov7"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cick3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_r07oe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3r7pf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5yic6")
+}],
+"loop": true,
+"name": &"eyes",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_7ye4l")
@@ -18,7 +42,21 @@ animations = [{
 "texture": ExtResource("4_rhagn")
 }],
 "loop": true,
-"name": &"default",
+"name": &"tv",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_2k1eo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c3rft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_cg5dr")
+}],
+"loop": true,
+"name": &"tvhorror",
 "speed": 5.0
 }]
 
@@ -37,7 +75,8 @@ collision_mask = 2
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="active"]
 position = Vector2(2, 373)
 sprite_frames = SubResource("SpriteFrames_5rov7")
-autoplay = "default"
+animation = &"eyes"
+autoplay = "tv"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="active"]
 position = Vector2(-3, 266.25)

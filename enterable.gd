@@ -1,11 +1,25 @@
 extends Area2D
 
+var type:="cryptominos"
+
+
 var allreadyentered=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	choosetype()
 	pass # Replace with function body.
 
-
+func choosetype():
+	var rng:=RandomNumberGenerator.new()
+	var choice:=rng.randi_range(0,2)
+	if choice==1:
+		type="temple"
+		$front.animation=type
+		$back.animation=type
+	if choice==2:
+		type="witchhut"
+		$front.animation=type
+		$back.animation=type
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
@@ -14,7 +28,7 @@ func start():
 	$"../../locationfront/tutorial/cryptominos".start()
 
 func close():
-	$front.animation="cryptominosentered"
+	$front.animation=type+"entered"
 	
 	
 func _on_body_entered(body: Node2D) -> void:

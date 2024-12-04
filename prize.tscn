@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ci1b5qa4hjlss"]
+[gd_scene load_steps=33 format=3 uid="uid://ci1b5qa4hjlss"]
 
 [ext_resource type="Texture2D" uid="uid://bkd8f7ih6dmc4" path="res://items/food/foodtext1.PNG" id="1_6p05w"]
 [ext_resource type="Texture2D" uid="uid://qq54pby7ag3" path="res://items/collectable/IMG_6184.PNG" id="1_hjc26"]
@@ -15,9 +15,13 @@
 [ext_resource type="Texture2D" uid="uid://r0fepsxy3y55" path="res://items/collectable/IMG_6190.PNG" id="7_0n0f8"]
 [ext_resource type="Texture2D" uid="uid://bas62vcn0vb8p" path="res://items/quest/itemtext2.PNG" id="7_ri84g"]
 [ext_resource type="Texture2D" uid="uid://de4rv5mf15gcq" path="res://items/quest/item2.PNG" id="8_nlp5d"]
+[ext_resource type="Texture2D" uid="uid://dmyjkrt564kr3" path="res://items/fancy/fancytext1.PNG" id="8_ttdxo"]
+[ext_resource type="Texture2D" uid="uid://65fik2ppv784" path="res://items/fancy/fancy1.PNG" id="9_6oi63"]
 [ext_resource type="Texture2D" uid="uid://cdqvko6k0r4p" path="res://items/scrap/scraptext1.PNG" id="9_g3t1o"]
 [ext_resource type="Texture2D" uid="uid://dbgqc3me3pbgt" path="res://items/scrap/scrap1.PNG" id="10_h0bi4"]
+[ext_resource type="Texture2D" uid="uid://bf7f523cpib3u" path="res://items/fancy/fancytext2.PNG" id="10_lkykb"]
 [ext_resource type="Texture2D" uid="uid://bq5u1dqk43a0" path="res://items/scrap/scraptext2.PNG" id="11_2p12s"]
+[ext_resource type="Texture2D" uid="uid://blkqb3cqavfs4" path="res://items/fancy/fancy2.PNG" id="11_6n4ty"]
 [ext_resource type="Texture2D" uid="uid://ds4fjttdr7nsw" path="res://items/scrap/scrap2.PNG" id="12_sko7t"]
 [ext_resource type="Texture2D" uid="uid://m4hlkdj3w02r" path="res://items/scrap/scraptext3.PNG" id="13_4w4pv"]
 [ext_resource type="Texture2D" uid="uid://dnqsl1orm8iyv" path="res://items/scrap/scrap3.PNG" id="14_vtkna"]
@@ -89,6 +93,28 @@ animations = [{
 "frames": [],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ttdxo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6oi63")
+}],
+"loop": true,
+"name": &"fancy1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_lkykb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6n4ty")
+}],
+"loop": true,
+"name": &"fancy2",
 "speed": 5.0
 }, {
 "frames": [{
@@ -214,4 +240,4 @@ animations = [{
 
 [node name="prize" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_wi1fi")
-animation = &"collectable7"
+animation = &"fancy2"

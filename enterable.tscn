@@ -1,9 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://ej35f8d30wde"]
+[gd_scene load_steps=14 format=3 uid="uid://ej35f8d30wde"]
 
 [ext_resource type="Script" path="res://enterable.gd" id="1_s0w2e"]
 [ext_resource type="Texture2D" uid="uid://cxwsygujr1gmc" path="res://enterable/cryptominos/facade/back.PNG" id="2_twv8i"]
 [ext_resource type="Texture2D" uid="uid://bf6hoqud67rt3" path="res://enterable/cryptominos/facade/front.PNG" id="3_5tqrh"]
+[ext_resource type="Texture2D" uid="uid://xuvmd8v88x3x" path="res://enterable/temple/facade/back.PNG" id="3_epco5"]
 [ext_resource type="Texture2D" uid="uid://g4uvde152ooe" path="res://enterable/cryptominos/facade/entered.PNG" id="4_3nckp"]
+[ext_resource type="Texture2D" uid="uid://bx1a83ytvvdk2" path="res://enterable/witchhut/back.PNG" id="4_go3pj"]
+[ext_resource type="Texture2D" uid="uid://w7lddi2irp3a" path="res://enterable/temple/facade/front.PNG" id="7_u5ksl"]
+[ext_resource type="Texture2D" uid="uid://dnj4251pkqwqn" path="res://enterable/temple/facade/closed.PNG" id="8_fynqs"]
+[ext_resource type="Texture2D" uid="uid://dhthw0l4hn6ow" path="res://enterable/witchhut/front.PNG" id="9_qe8tx"]
+[ext_resource type="Texture2D" uid="uid://cbosi1eiuig3f" path="res://enterable/witchhut/closed.PNG" id="10_mdndk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ijtse"]
 animations = [{
@@ -13,6 +19,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"cryptominos",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_epco5")
+}],
+"loop": true,
+"name": &"temple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_go3pj")
+}],
+"loop": true,
+"name": &"witchhut",
 "speed": 5.0
 }]
 
@@ -33,6 +55,38 @@ animations = [{
 "loop": true,
 "name": &"cryptominosentered",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_u5ksl")
+}],
+"loop": true,
+"name": &"temple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_fynqs")
+}],
+"loop": true,
+"name": &"templeentered",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_qe8tx")
+}],
+"loop": true,
+"name": &"witchhut",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_mdndk")
+}],
+"loop": true,
+"name": &"witchhutentered",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jqsjo"]
@@ -47,12 +101,13 @@ script = ExtResource("1_s0w2e")
 z_index = -1
 sprite_frames = SubResource("SpriteFrames_ijtse")
 animation = &"cryptominos"
+autoplay = "cryptominos"
 
 [node name="front" type="AnimatedSprite2D" parent="."]
 position = Vector2(-16, 70.5)
 scale = Vector2(0.82, 0.666)
 sprite_frames = SubResource("SpriteFrames_078ag")
-animation = &"cryptominosentered"
+animation = &"witchhut"
 autoplay = "cryptominos"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

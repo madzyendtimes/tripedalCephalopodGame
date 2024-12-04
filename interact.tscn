@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://bsll63jk3d7vc" path="res://chests/chest1/search10.PNG" id="13_u6mne"]
 [ext_resource type="AudioStream" uid="uid://biei2vdvtf0jq" path="res://sounds/questfound.mp3" id="14_8mgh4"]
 [ext_resource type="AudioStream" uid="uid://6dd0on15gn4i" path="res://sounds/trash.mp3.mp3" id="14_xtshd"]
-[ext_resource type="PackedScene" path="res://prize.tscn" id="24_yyx1v"]
+[ext_resource type="PackedScene" uid="uid://ci1b5qa4hjlss" path="res://prize.tscn" id="24_yyx1v"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qre8i"]
 animations = [{

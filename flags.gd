@@ -29,7 +29,7 @@ var Quests:={
 		}
 #var playerStats:={"health":1,"maxHealth":3,"stanima":600,"maxStanima":600,"stanimaRate":1,"speed":1,"maxSpeed":1,"power":1,"maxPower":1}
 var playerStats=stats.new()
-
+var credit:=false
 var baseStats=playerStats
 var bonus:={"stanima":0,"health":0,"power":0,"speed":0}
 var playerSearch:=false
@@ -50,6 +50,10 @@ var itemMap:=[
 		{"name":"horror movie","effect":"horror","consumable":true,"swap":{}},
 		{"name":"plutonium","effect":"radiation","consumable":true,"swap":{}}
 	]},
+	{"type":"fancy","varients":
+		[{"name":"gold card","effect":"spendingspree","consumable":true,"swap":{}},
+		{"name":"gem","effect":"getgems","consumable":true,"swap":{}},
+	]},
 	{"type":"quest","varients":
 		[{"name":"legs","effect":"quest","consumable":false,"swap":{}},
 		{"name":"specimen","effect":"quest","consumable":false,"swap":{}}
@@ -68,18 +72,21 @@ var effect=""
 var warploc=2950
 var hat=""
 var mesmerized=false
-var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap/scrap","num":6,"type":"scrap"},{"name":"items/quest/item","num":1,"type":"quest"}]
+var controlled=false
+var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap/scrap","num":6,"type":"scrap"},{"name":"items/fancy/fancy","num":2,"type":"fancy"},{"name":"items/quest/item","num":1,"type":"quest"}]
 var conveniance={"oldloc":0}
 var horror:=false
 var radiation:=false
 
 func reset():
-	var radiation=false
-	var flavornpc:={"npc":[
+	controlled=false
+	radiation=false
+	flavornpc={"npc":[
 	{"name":"fanguymanly","deployed":false},
 	{"name":"princessoccula","deployed":false},
 	{"name":"win3","deployed":false}
 	]}
+	credit=false
 	mesmerized=false
 	hat=""
 	horror=false

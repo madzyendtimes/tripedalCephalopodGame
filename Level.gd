@@ -18,6 +18,7 @@ var welcomeScene:PackedScene=load("res://welcome_center.tscn")
 var assetsScene:PackedScene=load("res://assets.tscn")
 var enterScene:PackedScene=load("res://enterable.tscn")
 var flavorScene:PackedScene=load("res://flavornpc.tscn")
+var flyerScene:PackedScene=load("res://flyer.tscn")
 var canJump:=true
 var baseSpeed:=1
 var speed:=1
@@ -33,6 +34,7 @@ var stanimaAction:=false
 var warpS
 var missle
 var dangerZone
+var canrandom=true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Flags.titlescreen="title"
@@ -142,6 +144,10 @@ func doEffect():
 		sEff=aSel[rng.randi_range(0,aSel.size()-1)]		
 	print(sEff)
 	match sEff:
+		"spendingspree":
+			Flags.credit=true
+		"getgems":
+			Flags.megaStats.gems+=rng.randi_range(1,3)
 		"radiation":
 			Flags.radiation=true;
 			randpuke()
@@ -176,12 +182,15 @@ func doEffect():
 			Flags.mesmerized=false
 			$player.walkani()
 			dotime(returnhat,30.0)
-
+		"controlled":
+			Flags.controlled=true
+			$player.walkani()
 		"mesmerized":
 			Flags.mesmerized=true
 			$player.walkani()
 		"normal":
 			Flags.mesmerized=false
+			Flags.controlled=false
 			$player.walkani()
 		"kick":
 			missle=missleScene.instantiate()
@@ -267,6 +276,44 @@ func warpCB(loc):
 	var tween = get_tree().create_tween()
 	tween.tween_property($player, "modulate", oldmod, .5)
 
+
+
+func dorandaction():
+	var randaction:=rng.randi_range(0,4)
+	if randaction==0:
+		Flags.dir=-1
+		moveDir(rng.randi_range(1,200),true,Flags.dir,true)
+	if randaction==1:
+		Flags.dir=1
+		moveDir(rng.randi_range(1,200),true,Flags.dir,true)		
+	if randaction==2&& canJump==true:
+		canJump=false
+		Flags.inFight=true
+		$player.fight()
+		var tween = get_tree().create_tween()
+		oldmod = $player.modulate
+		tween.tween_property($player, "modulate", oldmod, .65)
+		tween.tween_callback(stop_fight)
+	if randaction==3 && canJump==true:
+		canJump=false
+		currSpeed=speed
+		speed+=5
+		var tween = get_tree().create_tween()
+		gy=$player.position.y
+		gx=$player.position.x
+		$player/jump.play()
+		tween.tween_property($player, "position", Vector2(gx,gy-300), .5)
+		tween.tween_callback(reset_player)
+	if randaction==4 && canJump==true:
+		$player.search()
+	canrandom=false	
+	dotime(rando,rng.randi_range(1.0,4.0))
+		
+
+
+func rando():
+	canrandom=true
+
 func _process(delta):
 	
 
@@ -274,7 +321,11 @@ func _process(delta):
 	if Flags.paused==true:
 		Flags.resetOnce=true
 		return
-	
+	if Flags.controlled==true && canrandom==true:
+		dorandaction()
+		
+		
+		
 	if Input.is_action_just_released("run"):
 		stopRun()
 	
@@ -548,8 +599,13 @@ func _on_enemy_generator_timeout():
 				flavor.choose()	
 				if flavor.candeploy==true:
 					$npcs.add_child(flavor)
-				
+				return
 			if chance<11:
+				var flyer=flyerScene.instantiate()
+				flyer.position.x=($enemy.position.x*-1)+1400
+				$enemy.add_child(flyer)	
+				return
+			if chance<12:
 				if questDistributed==false:
 					var trash=trashScene.instantiate()
 					trash.position.x=(($interactive.position.x)*-1)+1400
