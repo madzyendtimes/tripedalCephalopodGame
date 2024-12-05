@@ -10,6 +10,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if type=="tvhorror":
+		if $active.get_overlapping_areas().size()>0:
+			for enemy in $active.get_overlapping_areas():
+				enemy.runaway()
+				
 	pass
 
 func chooseType():

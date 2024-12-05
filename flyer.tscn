@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://g1ac1yi42oru"]
+[gd_scene load_steps=11 format=3 uid="uid://g1ac1yi42oru"]
 
 [ext_resource type="Script" path="res://flyer.gd" id="1_m8uu6"]
 [ext_resource type="Texture2D" uid="uid://bsg1447kn5qbx" path="res://enemies/flying/flyling1.PNG" id="1_p0hsu"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bdt8thrnqt7bi" path="res://enemies/flying/flyingb2.PNG" id="3_fv33m"]
 [ext_resource type="Texture2D" uid="uid://bon6x4l6vwisp" path="res://enemies/flying/flyingc1.PNG" id="6_6hwhv"]
 [ext_resource type="Texture2D" uid="uid://dn3fnl3x1afff" path="res://enemies/flying/flyingc2.PNG" id="7_8sror"]
+[ext_resource type="Texture2D" uid="uid://baue5rnxnlo6o" path="res://enemies/flying/flyingccrashed.PNG" id="8_bcn70"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4k2br"]
 animations = [{
@@ -42,6 +43,14 @@ animations = [{
 "loop": true,
 "name": &"drone",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_bcn70")
+}],
+"loop": true,
+"name": &"dronecrashed",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fnedh"]
@@ -55,7 +64,7 @@ script = ExtResource("1_m8uu6")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(56, 112)
 sprite_frames = SubResource("SpriteFrames_4k2br")
-animation = &"drone"
+animation = &"dronecrashed"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

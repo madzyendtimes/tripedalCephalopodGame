@@ -1,18 +1,18 @@
-[gd_scene load_steps=33 format=3 uid="uid://ci1b5qa4hjlss"]
+[gd_scene load_steps=35 format=3 uid="uid://ci1b5qa4hjlss"]
 
 [ext_resource type="Texture2D" uid="uid://bkd8f7ih6dmc4" path="res://items/food/foodtext1.PNG" id="1_6p05w"]
-[ext_resource type="Texture2D" uid="uid://qq54pby7ag3" path="res://items/collectable/IMG_6184.PNG" id="1_hjc26"]
+[ext_resource type="Texture2D" uid="uid://qq54pby7ag3" path="res://items/collectable/collectable1.PNG" id="1_hjc26"]
 [ext_resource type="Texture2D" uid="uid://bnk2oy1mvg5l2" path="res://items/food/foodtext2.PNG" id="2_42l5c"]
-[ext_resource type="Texture2D" uid="uid://dg83xve4q2bc7" path="res://items/collectable/IMG_6185.PNG" id="2_omepc"]
+[ext_resource type="Texture2D" uid="uid://dg83xve4q2bc7" path="res://items/collectable/collectable2.PNG" id="2_omepc"]
 [ext_resource type="Texture2D" uid="uid://bw51mxh5rdsul" path="res://items/food/foodtext3.PNG" id="3_pdf4y"]
-[ext_resource type="Texture2D" uid="uid://b2tegpjlp3fmj" path="res://items/collectable/IMG_6186.PNG" id="3_tcn0g"]
-[ext_resource type="Texture2D" uid="uid://dwr4ejkrmj78m" path="res://items/collectable/IMG_6187.PNG" id="4_aac04"]
+[ext_resource type="Texture2D" uid="uid://b2tegpjlp3fmj" path="res://items/collectable/collectable3.PNG" id="3_tcn0g"]
+[ext_resource type="Texture2D" uid="uid://dwr4ejkrmj78m" path="res://items/collectable/collectable4.PNG" id="4_aac04"]
 [ext_resource type="Texture2D" uid="uid://f75kmcv6c5iu" path="res://items/food/foodtext4.PNG" id="4_ia7gl"]
-[ext_resource type="Texture2D" uid="uid://c6ja4f1g8ac5k" path="res://items/collectable/IMG_6188.PNG" id="5_2s12y"]
+[ext_resource type="Texture2D" uid="uid://c6ja4f1g8ac5k" path="res://items/collectable/collectable5.PNG" id="5_2s12y"]
 [ext_resource type="Texture2D" uid="uid://ladnnbiqjx04" path="res://items/quest/itemtext1.PNG" id="5_y0f7r"]
 [ext_resource type="Texture2D" uid="uid://dsl05thsv34mg" path="res://items/quest/item1.PNG" id="6_c1lbh"]
-[ext_resource type="Texture2D" uid="uid://cq4dbcclf8614" path="res://items/collectable/IMG_6189.PNG" id="6_xhicj"]
-[ext_resource type="Texture2D" uid="uid://r0fepsxy3y55" path="res://items/collectable/IMG_6190.PNG" id="7_0n0f8"]
+[ext_resource type="Texture2D" uid="uid://cq4dbcclf8614" path="res://items/collectable/collectable6.PNG" id="6_xhicj"]
+[ext_resource type="Texture2D" uid="uid://r0fepsxy3y55" path="res://items/collectable/collectable7.PNG" id="7_0n0f8"]
 [ext_resource type="Texture2D" uid="uid://bas62vcn0vb8p" path="res://items/quest/itemtext2.PNG" id="7_ri84g"]
 [ext_resource type="Texture2D" uid="uid://de4rv5mf15gcq" path="res://items/quest/item2.PNG" id="8_nlp5d"]
 [ext_resource type="Texture2D" uid="uid://dmyjkrt564kr3" path="res://items/fancy/fancytext1.PNG" id="8_ttdxo"]
@@ -22,8 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://bf7f523cpib3u" path="res://items/fancy/fancytext2.PNG" id="10_lkykb"]
 [ext_resource type="Texture2D" uid="uid://bq5u1dqk43a0" path="res://items/scrap/scraptext2.PNG" id="11_2p12s"]
 [ext_resource type="Texture2D" uid="uid://blkqb3cqavfs4" path="res://items/fancy/fancy2.PNG" id="11_6n4ty"]
+[ext_resource type="Texture2D" uid="uid://47l81qkrywpu" path="res://items/fancy/fancytext3.PNG" id="12_1t27v"]
 [ext_resource type="Texture2D" uid="uid://ds4fjttdr7nsw" path="res://items/scrap/scrap2.PNG" id="12_sko7t"]
 [ext_resource type="Texture2D" uid="uid://m4hlkdj3w02r" path="res://items/scrap/scraptext3.PNG" id="13_4w4pv"]
+[ext_resource type="Texture2D" uid="uid://cgtphnxbpnf2y" path="res://items/fancy/fancy3.PNG" id="13_ewm4o"]
 [ext_resource type="Texture2D" uid="uid://dnqsl1orm8iyv" path="res://items/scrap/scrap3.PNG" id="14_vtkna"]
 [ext_resource type="Texture2D" uid="uid://nqcsuxkl727t" path="res://items/scrap/scraptext4.PNG" id="15_hx6di"]
 [ext_resource type="Texture2D" uid="uid://dka2evv7l1cho" path="res://items/scrap/scrap4.PNG" id="16_0fxkd"]
@@ -115,6 +117,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"fancy2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_1t27v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ewm4o")
+}],
+"loop": true,
+"name": &"fancy3",
 "speed": 5.0
 }, {
 "frames": [{
@@ -240,4 +253,4 @@ animations = [{
 
 [node name="prize" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_wi1fi")
-animation = &"fancy2"
+animation = &"collectable7"

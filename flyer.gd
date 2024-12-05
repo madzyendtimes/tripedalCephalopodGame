@@ -1,5 +1,5 @@
 extends Area2D
-
+var prizeScene:PackedScene=load("res://prize.tscn")
 var dir:=-1
 var spd:=2.5
 var ypos:=0
@@ -10,11 +10,16 @@ var minchange:=1.0
 var canflip:=true
 var rng=RandomNumberGenerator.new()
 var type:="default"
+var crashed:=false
+var runningaway:=false
+var freefall:=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	selectType()
 
 	pass # Replace with function body.
+
+
 
 
 func selectType():
@@ -40,10 +45,31 @@ func _process(delta):
 	
 	if Flags.paused==true:
 		return
-	
+		
+	if type=="drone":
+		if crashed==true  && freefall==true:
+			position.y+=7
+			if position.y>500:
+				freefall=false
+				showprize()
+			return
+	if crashed==true:
+		return	
 	if Flags.horror==false:
 		position.x-=spd*dir
 		position.y=ypos
+
+func showprize():
+	var prize=prizeScene.instantiate()
+	var version=rng.randi_range(1,7)
+	prize.animation="collectable"+str(version)
+	Flags.addToInventory(4,version)
+	add_child(prize)
+	pass
+
+
+
+
 
 func changedirection():
 
@@ -61,6 +87,20 @@ func changedirection():
 	var nxtchange=rng.randf_range(minchange,maxchange)
 	dotime(changedirection,nxtchange)
 
+
+func runaway():
+	if runningaway==false:
+		runningaway=true
+		dir=dir*-1
+		dotime(recourage,3.0)
+		$AnimatedSprite2D.flip_h=true
+
+func recourage():
+	runningaway=true
+	dir=dir*-1
+	$AnimatedSprite2D.flip_h=false
+
+
 func dotime(timefunc,ntime):
 	var gt:Timer=Timer.new()
 	add_child(gt)
@@ -70,7 +110,11 @@ func dotime(timefunc,ntime):
 	gt.start()
 
 func getpackage():
-	self.queue_free()
+	crashed=true
+	freefall=true
+	$AnimatedSprite2D.animation=type+"crashed"
+	
+#	self.queue_free()
 	#Flags.effect="prize"
 
 

@@ -144,6 +144,8 @@ func doEffect():
 		sEff=aSel[rng.randi_range(0,aSel.size()-1)]		
 	print(sEff)
 	match sEff:
+		"changeweather":
+			changeweather()
 		"spendingspree":
 			Flags.credit=true
 		"getgems":
@@ -282,10 +284,10 @@ func dorandaction():
 	var randaction:=rng.randi_range(0,4)
 	if randaction==0:
 		Flags.dir=-1
-		moveDir(rng.randi_range(1,200),true,Flags.dir,true)
+		moveDir(rng.randi_range(1,75),true,Flags.dir,true)
 	if randaction==1:
 		Flags.dir=1
-		moveDir(rng.randi_range(1,200),true,Flags.dir,true)		
+		moveDir(rng.randi_range(1,75),true,Flags.dir,true)		
 	if randaction==2&& canJump==true:
 		canJump=false
 		Flags.inFight=true
@@ -538,7 +540,7 @@ func _on_enemy_generator_timeout():
 				upchoice=12
 			
 			var chance=rng.randi_range(0,upchoice)
-			#chance=0
+			#chance=10
 			if chance<1:
 				var trash=trashScene.instantiate()
 				trash.position.x=(($interactive.position.x)*-1)+1400
@@ -614,7 +616,9 @@ func _on_enemy_generator_timeout():
 					$interactive.add_child(trash)	
 					return
 	#move to own generator
-
+func changeweather():
+	$weather.changeweatherforce()
+	$weather.position.y=-800
 
 func weatheroff():
 	$weather.position.y=0

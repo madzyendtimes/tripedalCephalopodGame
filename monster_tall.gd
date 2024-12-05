@@ -3,6 +3,7 @@ var hp:=2
 var dead:=false
 var speed=1
 var dir:=1
+var runningaway:=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,6 +17,26 @@ func _process(delta: float) -> void:
 	
 	if (!dead)&& Flags.horror==false:
 		position.x-=speed*dir
+
+func runaway():
+	if runningaway==false:
+		runningaway=true
+		dir=dir*-1
+		dotime(recourage,3.0)
+		$AnimatedSprite2D.flip_h=true
+
+func recourage():
+	runningaway=true
+	dir=dir*-1
+	$AnimatedSprite2D.flip_h=false
+
+func dotime(timefunc,ntime):
+	var gt:Timer=Timer.new()
+	add_child(gt)
+	gt.wait_time=ntime
+	gt.one_shot=true			
+	gt.timeout.connect(timefunc)
+	gt.start()
 
 
 func _on_body_entered(body: Node2D) -> void:

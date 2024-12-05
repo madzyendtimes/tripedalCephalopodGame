@@ -70,7 +70,7 @@ script = ExtResource("1_r560u")
 
 [node name="active" type="Area2D" parent="."]
 collision_layer = 128
-collision_mask = 2
+collision_mask = 2054
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="active"]
 position = Vector2(2, 373)

@@ -53,11 +53,27 @@ var itemMap:=[
 	{"type":"fancy","varients":
 		[{"name":"gold card","effect":"spendingspree","consumable":true,"swap":{}},
 		{"name":"gem","effect":"getgems","consumable":true,"swap":{}},
+		{"name":"weather machine","effect":"changeweather","consumable":true,"swap":{}},
 	]},
+
 	{"type":"quest","varients":
 		[{"name":"legs","effect":"quest","consumable":false,"swap":{}},
 		{"name":"specimen","effect":"quest","consumable":false,"swap":{}}
-	]}]
+	]},
+		{"type":"collectable","varients":
+		[{"name":"the mime who cried","effect":"combustable","consumable":true,"swap":{}},
+		{"name":"the mime who cried","effect":"combustable","consumable":true,"swap":{}},
+		{"name":"40 devils","effect":"combustable","consumable":true,"swap":{}},
+		{"name":"cave of the nylon web","effect":"combustable","consumable":true,"swap":{}},
+		{"name":"megaponpopulos","effect":"combustable","consumable":true,"swap":{}},
+		{"name":"batman slaps dracula","effect":"combustable","consumable":true,"swap":{}},
+		{"name":"london during midnight","effect":"combustable","consumable":true,"swap":{}},
+	]}
+	
+	
+	
+	
+	]
 var flavornpc:={"npc":[
 	{"name":"fanguymanly","deployed":false},
 	{"name":"princessoccula","deployed":false},
@@ -73,7 +89,7 @@ var warploc=2950
 var hat=""
 var mesmerized=false
 var controlled=false
-var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap/scrap","num":6,"type":"scrap"},{"name":"items/fancy/fancy","num":2,"type":"fancy"},{"name":"items/quest/item","num":1,"type":"quest"}]
+var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap/scrap","num":6,"type":"scrap"},{"name":"items/fancy/fancy","num":3,"type":"fancy"},{"name":"items/quest/item","num":1,"type":"quest"},{"name":"items/collectable/collectable","num":7,"type":"collectable"}]
 var conveniance={"oldloc":0}
 var horror:=false
 var radiation:=false
@@ -126,3 +142,12 @@ func addToInventory(type,numvarient):
 		}
 	print(invitem)
 	playerInventory.append(invitem)
+
+
+func dotime(timefunc,ntime):
+	var gt:Timer=Timer.new()
+	add_child(gt)
+	gt.wait_time=ntime
+	gt.one_shot=true			
+	gt.timeout.connect(timefunc)
+	gt.start()
