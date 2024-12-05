@@ -39,7 +39,7 @@ func selectType():
 		maxchange=2.0
 		minspd=1.0
 		canflip=false
-	dotime(changedirection,1.0)
+	Flags.dotime(changedirection,1.0)
 
 func _process(delta):
 	
@@ -85,29 +85,20 @@ func changedirection():
 	spd=rng.randf_range(minspd,maxspd)
 	ypos=rng.randi_range(-5,5)
 	var nxtchange=rng.randf_range(minchange,maxchange)
-	dotime(changedirection,nxtchange)
+	Flags.dotime(changedirection,nxtchange)
 
 
 func runaway():
 	if runningaway==false:
 		runningaway=true
 		dir=dir*-1
-		dotime(recourage,3.0)
+		Flags.dotime(recourage,3.0)
 		$AnimatedSprite2D.flip_h=true
 
 func recourage():
 	runningaway=true
 	dir=dir*-1
 	$AnimatedSprite2D.flip_h=false
-
-
-func dotime(timefunc,ntime):
-	var gt:Timer=Timer.new()
-	add_child(gt)
-	gt.wait_time=ntime
-	gt.one_shot=true			
-	gt.timeout.connect(timefunc)
-	gt.start()
 
 func getpackage():
 	crashed=true

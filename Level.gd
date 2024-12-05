@@ -35,11 +35,11 @@ var warpS
 var missle
 var dangerZone
 var canrandom=true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Flags.titlescreen="title"
 	viewStat=false
-
 		
 	speed=baseSpeed
 	Flags.reset()
@@ -100,7 +100,7 @@ func dohorror():
 	var tween=get_tree().create_tween()
 	tween.tween_property($random,"modulate",Color(1,1,1,0),.5)
 	tween.tween_callback(horrorflash)
-	dotime(horrorend,5)
+	Flags.dotime(horrorend,5)
 
 
 func horrorflash():
@@ -109,7 +109,7 @@ func horrorflash():
 	tween.tween_property($random,"modulate",Color(1,1,1,1),.5)		
 
 func triggerhorror():
-	dotime(dohorror,rng.randf_range(0.5,5.0))
+	Flags.dotime(dohorror,rng.randf_range(0.5,5.0))
 	
 
 func setShaderParam(parm,val):
@@ -124,9 +124,9 @@ func dopuke():
 	renderPuke()
 
 func randpuke():	
-	dotime(dopuke,rng.randf_range(0.0,2.0));			
+	Flags.dotime(dopuke,rng.randf_range(0.0,2.0));			
 	if Flags.radiation==true:
-		dotime(randpuke,1.0)
+		Flags.dotime(randpuke,1.0)
 
 func radiationend():
 	Flags.radiation=false
@@ -183,7 +183,7 @@ func doEffect():
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
 			Flags.mesmerized=false
 			$player.walkani()
-			dotime(returnhat,30.0)
+			Flags.dotime(returnhat,30.0)
 		"controlled":
 			Flags.controlled=true
 			$player.walkani()
@@ -217,12 +217,12 @@ func doEffect():
 		"beg":
 			Flags.hat="beg"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
-			dotime(returnbeg,30.0)
+			Flags.dotime(returnbeg,30.0)
 				
 		"stanima":
 			Flags.playerStats.bonusStanima=Flags.playerStats.maxStanima
 			Flags.playerStats.stanima=Flags.playerStats.maxStanima
-			dotime(returnBonus.bind("stanima"),10.0)
+			Flags.dotime(returnBonus.bind("stanima"),10.0)
 		"quest":
 			pass
 		"hit":
@@ -232,14 +232,6 @@ func doEffect():
 	Flags.effect=""	
 
 
-
-func dotime(timefunc,ntime):
-	var gt:Timer=Timer.new()
-	add_child(gt)
-	gt.wait_time=ntime
-	gt.one_shot=true			
-	gt.timeout.connect(timefunc)
-	gt.start()
 
 
 func returnBonus(skey):
@@ -309,7 +301,7 @@ func dorandaction():
 	if randaction==4 && canJump==true:
 		$player.search()
 	canrandom=false	
-	dotime(rando,rng.randi_range(1.0,4.0))
+	Flags.dotime(rando,rng.randi_range(1.0,4.0))
 		
 
 
@@ -540,7 +532,7 @@ func _on_enemy_generator_timeout():
 				upchoice=12
 			
 			var chance=rng.randi_range(0,upchoice)
-			#chance=10
+			chance=10
 			if chance<1:
 				var trash=trashScene.instantiate()
 				trash.position.x=(($interactive.position.x)*-1)+1400
