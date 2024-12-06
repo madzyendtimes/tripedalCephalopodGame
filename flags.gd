@@ -12,7 +12,7 @@ var playerDead:=false
 var playerInventory:=[]
 var interactablenpc=""
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
-var megaStats:={"gems":0}
+var megaStats:={"gems":99,"health":3,"speed":1,"power":1,"inventory":[],"inventorycapacity":0,"credit":false}
 var entered:={
 	"ready":false,
 	"active":false,

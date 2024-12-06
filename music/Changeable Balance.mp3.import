@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dec0gx8c0mfwe"
+path="res://.godot/imported/Changeable Balance.mp3-9e3260bbd9622a274e0c95db5a64cf38.mp3str"
+
+[deps]
+
+source_file="res://music/Changeable Balance.mp3"
+dest_files=["res://.godot/imported/Changeable Balance.mp3-9e3260bbd9622a274e0c95db5a64cf38.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

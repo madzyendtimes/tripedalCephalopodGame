@@ -1,0 +1,178 @@
+[gd_scene load_steps=19 format=3 uid="uid://bnkp4iv4btgno"]
+
+[ext_resource type="Script" path="res://trader.gd" id="1_3qe6a"]
+[ext_resource type="FontFile" uid="uid://ck07uk066rkqa" path="res://fonts/Metalien.otf" id="2_rkvjt"]
+[ext_resource type="Texture2D" uid="uid://dswtsk7j5ibfc" path="res://npc/gemna/gemnacomplete2.PNG" id="3_x27aj"]
+[ext_resource type="Texture2D" uid="uid://bbgwcukl8y6bb" path="res://npc/gemna/eat2.PNG" id="4_igq05"]
+[ext_resource type="Texture2D" uid="uid://blkqb3cqavfs4" path="res://items/fancy/fancy2.PNG" id="5_3e0c4"]
+[ext_resource type="Texture2D" uid="uid://nsbuwc4s6ka0" path="res://npc/gemna/eat1.PNG" id="5_5cyqd"]
+[ext_resource type="Texture2D" uid="uid://cagrdr3good50" path="res://npc/gemna/eat3.PNG" id="6_s6t0s"]
+[ext_resource type="Texture2D" uid="uid://m5wgcrnc5uqw" path="res://npc/gemna/eat4.PNG" id="7_e0bwo"]
+[ext_resource type="AudioStream" uid="uid://dec0gx8c0mfwe" path="res://music/Changeable Balance.mp3" id="9_kn0le"]
+
+[sub_resource type="Theme" id="Theme_5sl5r"]
+default_font = ExtResource("2_rkvjt")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xghmr"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xgnlr"]
+bg_color = Color(0.052, 0.052, 0.052, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duag0"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6njg1"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56vxm"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dg5pk"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_inoyk"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("3_x27aj")
+}, {
+"duration": 1.6,
+"texture": ExtResource("4_igq05")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_5cyqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_igq05")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_s6t0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_e0bwo")
+}],
+"loop": true,
+"name": &"eat",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_q7xns"]
+
+[node name="trader" type="Node2D"]
+script = ExtResource("1_3qe6a")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.574008, 0.234215, 0.415841, 1)
+
+[node name="choices" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 408.0
+offset_top = 56.0
+offset_right = 1055.0
+offset_bottom = 586.0
+theme = SubResource("Theme_5sl5r")
+
+[node name="choice1" type="Label" parent="CanvasLayer/choices"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_xghmr")
+text = "99     Pay To Win"
+
+[node name="choice2" type="Label" parent="CanvasLayer/choices"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_xgnlr")
+text = "10     Limited Will & Testament"
+
+[node name="choice3" type="Label" parent="CanvasLayer/choices"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_duag0")
+text = "08     Musle Memory"
+
+[node name="choice4" type="Label" parent="CanvasLayer/choices"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_6njg1")
+text = "08     Well Fed"
+
+[node name="choice5" type="Label" parent="CanvasLayer/choices"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_56vxm")
+text = "08     ADHD"
+
+[node name="choice6" type="Label" parent="CanvasLayer/choices"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_dg5pk")
+text = "05     Unlimited Credit"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(104, 456)
+sprite_frames = SubResource("SpriteFrames_inoyk")
+autoplay = "default"
+frame_progress = 0.353669
+
+[node name="Fancy2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(496, 120)
+scale = Vector2(0.873333, 0.606667)
+texture = ExtResource("5_3e0c4")
+
+[node name="Fancy3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(504, 208)
+scale = Vector2(0.873333, 0.606667)
+texture = ExtResource("5_3e0c4")
+
+[node name="Fancy4" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(512, 304)
+scale = Vector2(0.873333, 0.606667)
+texture = ExtResource("5_3e0c4")
+
+[node name="Fancy5" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(512, 384)
+scale = Vector2(0.873333, 0.606667)
+texture = ExtResource("5_3e0c4")
+
+[node name="Fancy6" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(520, 472)
+scale = Vector2(0.873333, 0.606667)
+texture = ExtResource("5_3e0c4")
+
+[node name="Fancy7" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(520, 560)
+scale = Vector2(0.873333, 0.606667)
+texture = ExtResource("5_3e0c4")
+
+[node name="playergems" type="Label" parent="CanvasLayer"]
+offset_left = 40.0
+offset_top = 64.0
+offset_right = 280.0
+offset_bottom = 152.0
+theme = SubResource("Theme_q7xns")
+theme_override_font_sizes/font_size = 33
+text = "00"
+
+[node name="gem label" type="Label" parent="CanvasLayer"]
+offset_left = 96.0
+offset_top = 64.0
+offset_right = 336.0
+offset_bottom = 152.0
+theme = SubResource("Theme_q7xns")
+theme_override_font_sizes/font_size = 33
+text = "Gems"
+
+[node name="music" type="AudioStreamPlayer2D" parent="CanvasLayer"]
+stream = ExtResource("9_kn0le")
