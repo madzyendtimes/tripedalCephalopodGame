@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=3 uid="uid://bjlg8hhdf4x7l"]
+[gd_scene load_steps=169 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -146,6 +146,7 @@
 [ext_resource type="Texture2D" uid="uid://5aifp2r5ewd7" path="res://weather/sun/sun3.PNG" id="136_xbklo"]
 [ext_resource type="Texture2D" uid="uid://cfoklgwqqs7wi" path="res://random/IMG_6181.PNG" id="144_s1wvq"]
 [ext_resource type="Shader" path="res://my.gdshader" id="146_atsho"]
+[ext_resource type="PackedScene" uid="uid://bnkp4iv4btgno" path="res://trader.tscn" id="147_ctibj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y3yxv"]
 resource_local_to_scene = true
@@ -807,6 +808,8 @@ position = Vector2(-127, -44)
 script = ExtResource("5_3jyy4")
 
 [node name="gemna" type="Area2D" parent="npcs/npc"]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("17_asgom")
 
 [node name="text" type="AnimatedSprite2D" parent="npcs/npc/gemna"]
@@ -1058,6 +1061,8 @@ material = SubResource("ShaderMaterial_j66sv")
 offset_left = -16.0
 offset_right = 1504.0
 offset_bottom = 656.0
+
+[node name="trader" parent="." instance=ExtResource("147_ctibj")]
 
 [connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]

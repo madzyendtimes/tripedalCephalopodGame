@@ -19,10 +19,11 @@ var assetsScene:PackedScene=load("res://assets.tscn")
 var enterScene:PackedScene=load("res://enterable.tscn")
 var flavorScene:PackedScene=load("res://flavornpc.tscn")
 var flyerScene:PackedScene=load("res://flyer.tscn")
+
 var canJump:=true
-var baseSpeed:=1
-var speed:=1
-var currSpeed:=1
+var baseSpeed=Flags.megaStats.speed
+var speed=baseSpeed
+var currSpeed=speed
 var gy:=0
 var gx:=0
 var oldmod
@@ -40,9 +41,10 @@ var canrandom=true
 func _ready():
 	Flags.titlescreen="title"
 	viewStat=false
-		
-	speed=baseSpeed
+	$trader.visible=false	
 	Flags.reset()
+	baseSpeed=Flags.megaStats.speed
+	speed=baseSpeed
 	$"..".killStart()
 	$treeholder.position.y=-175
 	$treeholder2.position.y=-150
@@ -90,6 +92,12 @@ func _ready():
 	warpS.position.x=Flags.warploc;
 	$interactive.add_child(warpS)
 	warpS.play()
+	#uncomment to test gemna
+	#speed=1
+	#warpto(34000)
+	#this sets off the spawntimer testing before removing old static enemyGeneraator
+	dospawns()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func horrorend():
 	Flags.horror=false
@@ -137,6 +145,8 @@ func radiationend():
 
 
 func doEffect():
+	if Flags.mode!="level":
+		return
 	#var itemMap:=[{"type":"food","varients":[{"name":"old pizza","effect":"restorehp"},{"name":"noodles... or worms!","effect":"puke|restorehp"},{"name":"suspect sandwitch","effect":"puke"}]},{"type":"scrap","varients":[{"name":"tin foil hat","effect":"stanimaExtend"},{"name":"crushed soda","effect":"recyle"},{"name":"broken mirror","effect":"warp"}]},[{"type":"quest","varients":[{"name":"legs","effect":"quest"}]}]]
 	var sEff=Flags.effect
 	var aSel = sEff.split("|")
@@ -310,7 +320,8 @@ func rando():
 
 func _process(delta):
 	
-
+	if Flags.mode!="level":
+		return
 	
 	if Flags.paused==true:
 		Flags.resetOnce=true
@@ -332,13 +343,15 @@ func _process(delta):
 		if Flags.weather=="sun":
 			rate=5
 		Flags.playerStats.stanima-=rate
+
 	if Flags.playerStats.stanima<1:
 		stanimaAction=false
 		Flags.exhausted=true
 		$player.walkani()
 		speed=1
 	if stanimaAction==false:
-		Flags.playerStats.stanima=min(Flags.playerStats.stanima+Flags.playerStats.stanimaRate,Flags.playerStats.maxStanima)
+		
+		Flags.playerStats.stanima=min(Flags.playerStats.stanima+Flags.playerStats.stanimaRecharge,Flags.playerStats.maxStanima)
 		if Flags.exhausted==true && Flags.playerStats.stanima>(Flags.playerStats.maxStanima/2):
 			speed=currSpeed
 			Flags.exhausted=false
@@ -411,10 +424,14 @@ func _process(delta):
 		tween.tween_callback(reset_player)
 		
 	if Input.is_action_just_pressed("search") && canJump==true:
+		print("what",Flags.interactablenpc)
+		if Flags.interactablenpc!=null:
+			interact()
+			return
 		$player.search()
 
 	if Input.is_action_just_pressed("run") && canJump==true && Flags.exhausted==false && Flags.weather!="snow":
-		speed=4		
+		speed=baseSpeed+4		
 		stanimaAction=true
 
 	if Input.is_action_just_pressed("enter") && Flags.entered.ready==true:
@@ -436,7 +453,27 @@ func _process(delta):
 
 	if Flags.pukestate==true:
 		$player/AnimatedSprite2D.play()
-		
+
+func interact():
+	Flags.paused=true
+	Flags.mode=Flags.interactablenpc.mode
+	doMode()
+	pass
+
+func doMode():
+	match Flags.mode:
+		"trader":
+			$trader.visible=true
+			$AudioStreamPlayer.stop()
+			$trader.start(self)
+	
+	
+	pass
+	
+func intreturn():
+	$AudioStreamPlayer.play()
+	
+	
 func entered():
 	weatheroff()
 	speed=1
@@ -454,23 +491,26 @@ func stopRun():
 		stanimaAction=false
 
 func moveDir(base,flip,dir,offS):
-		Flags.l=$locationback.position.x
-		$treeholder.position.x+=dir*base*speed 
-		$treeholder2.position.x+=dir*(base+0.5)*speed 
-		$treeholder3.position.x+=dir*(base+1.5)*speed
-		$rocks.position.x+=dir*(base+0.60)*speed
-		$npcs.position.x+=dir*(base+0.45)*speed
-		$interactive.position.x+=dir*(base+0.45)*speed
-		$enemy.position.x+=dir*(base+0.5)*speed
-		$locationback.position.x+=dir*(base+0.6)*speed
-		$locationfront.position.x+=dir*(base+0.6)*speed
-		if flip:
-				$player/AnimatedSprite2D.flip_h=(dir==1)
-		if dir!=1:
-			$player/AnimatedSprite2D.offset=Vector2(0,0)
-		else:
-			if offS==true:
-				$player/AnimatedSprite2D.offset=Vector2(-100,0)
+	var gospeed=speed
+	if Flags.weather=="snow":
+		gospeed=max(1,speed/2)
+	Flags.l=$locationback.position.x
+	$treeholder.position.x+=dir*base*gospeed 
+	$treeholder2.position.x+=dir*(base+0.5)*gospeed 
+	$treeholder3.position.x+=dir*(base+1.5)*gospeed
+	$rocks.position.x+=dir*(base+0.60)*gospeed
+	$npcs.position.x+=dir*(base+0.45)*gospeed
+	$interactive.position.x+=dir*(base+0.45)*gospeed
+	$enemy.position.x+=dir*(base+0.5)*gospeed
+	$locationback.position.x+=dir*(base+0.6)*gospeed
+	$locationfront.position.x+=dir*(base+0.6)*gospeed
+	if flip:
+			$player/AnimatedSprite2D.flip_h=(dir==1)
+	if dir!=1:
+		$player/AnimatedSprite2D.offset=Vector2(0,0)
+	else:
+		if offS==true:
+			$player/AnimatedSprite2D.offset=Vector2(-100,0)
 
 
 func warpto(base):
@@ -519,10 +559,16 @@ func get_bg_texture(type):
 	ts.animation=s+str(treenum)
 	return ts
 	
-
-
 func _on_enemy_generator_timeout():
+	#dospawns()
+	pass
 
+func dospawns():
+	if Flags.mode!="level":
+		#checkspawn in 5 seconds
+		Flags.dotime(dospawns,3.0)
+		return
+		
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
@@ -532,7 +578,12 @@ func _on_enemy_generator_timeout():
 				upchoice=12
 			
 			var chance=rng.randi_range(0,upchoice)
-			chance=10
+			
+			var nextSpawn=rng.randf_range(1.5,5.0)
+			Flags.dotime(dospawns,nextSpawn)
+			
+			
+			#chance=10 #force spawns here
 			if chance<1:
 				var trash=trashScene.instantiate()
 				trash.position.x=(($interactive.position.x)*-1)+1400
@@ -607,6 +658,7 @@ func _on_enemy_generator_timeout():
 					questDistributed=true
 					$interactive.add_child(trash)	
 					return
+	Flags.dotime(dospawns,3.0)
 	#move to own generator
 func changeweather():
 	$weather.changeweatherforce()
@@ -652,7 +704,7 @@ func spawn():
 	var trash=trashScene.instantiate()
 	trash.position.x=(15050*-1)
 	trash.setType("fridge")		
-	trash.setItem(2,2)	
+	trash.setItem(3,2)	
 	$interactive.add_child(trash)	
 	return
 

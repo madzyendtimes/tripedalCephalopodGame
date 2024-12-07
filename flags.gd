@@ -10,26 +10,28 @@ var canJump:=true
 var inFight:=false
 var playerDead:=false
 var playerInventory:=[]
-var interactablenpc=""
+var interactablenpc=null
+var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"inventory":[],"inventorycapacity":0,"credit":false}
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
-var megaStats:={"gems":99,"health":3,"speed":1,"power":1,"inventory":[],"inventorycapacity":0,"credit":false}
+var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"inventory":[],"inventorycapacity":0,"credit":false}
 var entered:={
 	"ready":false,
 	"active":false,
 	"building":"",
 	"type":""
 	}
-
+#need to add sludgebutt and add raandom extra npcQuests for gems 
 var Quests:={
 		"legless":
 			{"completed":false,
-			"objective":[2,1],
+			"objective":[3,1],
 			"reward":{"method":"permaboost","vars":[1,"maxHealth"],"text":"You found my legs! Let me teach you the ancient zombie art of extra health"}
 			}
 		}
 #var playerStats:={"health":1,"maxHealth":3,"stanima":600,"maxStanima":600,"stanimaRate":1,"speed":1,"maxSpeed":1,"power":1,"maxPower":1}
 var playerStats=stats.new()
-var credit:=false
+
+var credit=megaStats.credit
 var baseStats=playerStats
 var bonus:={"stanima":0,"health":0,"power":0,"speed":0}
 var playerSearch:=false
@@ -80,6 +82,7 @@ var flavornpc:={"npc":[
 	{"name":"win3","deployed":false}
 ]}
 var paused:=false
+var mode:="level"
 var resetOnce:=false
 var selectedItem:=-1
 var exhausted=false
@@ -95,6 +98,7 @@ var horror:=false
 var radiation:=false
 
 func reset():
+
 	controlled=false
 	radiation=false
 	flavornpc={"npc":[
@@ -102,7 +106,6 @@ func reset():
 	{"name":"princessoccula","deployed":false},
 	{"name":"win3","deployed":false}
 	]}
-	credit=false
 	mesmerized=false
 	hat=""
 	horror=false
@@ -117,12 +120,13 @@ func reset():
 	playerDead=false
 	playerInventory=[]
 	playerStats=stats.new()
-	#playerStats={"health":playerStats.maxHealth,"maxHealth":playerStats.maxHealth,"stanima":playerStats.maxStanima,"maxStanima":playerStats.maxStanima,"stanimaRate":1,"speed":playerStats.maxSpeed,"maxSpeed":1,"power":playerStats.maxPower,"maxPower":1}
 	playerSearch=false
 	inSearch=false
 	paused=false
 	conveniance={"oldloc":0}
-	
+	mode="level"
+	refreshPlayer()
+	credit=megaStats.credit
 	
 func addToInventory(type,numvarient):
 	print("addtoinventory")
@@ -151,3 +155,53 @@ func dotime(timefunc,ntime):
 	gt.one_shot=true			
 	gt.timeout.connect(timefunc)
 	gt.start()
+	
+	
+func save():
+	print(megaStats)
+	var save_file = FileAccess.open("user://tcv1.save", FileAccess.WRITE)
+	var json_string = JSON.stringify(megaStats)
+	save_file.store_line(json_string)
+	print(megaStats)
+func defaultmegastats():
+	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"inventory":[],"inventorycapacity":0,"credit":false}
+	
+func loader():
+	if not FileAccess.file_exists("user://tcv1.save"):
+		defaultmegastats()
+		return
+
+	var save_file = FileAccess.open("user://tcv1.save", FileAccess.READ)
+
+	while save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		
+		if not parse_result == OK:
+			defaultmegastats()
+			continue
+
+		megaStats=json.data
+		refreshPlayer()
+		
+func refreshPlayer():
+	playerStats.actual={
+		"health":megaStats.health,
+		"stanima":megaStats.stanima+0,
+		"power":megaStats.power,
+		"speed":megaStats.speed,
+		"stanimaRate":megaStats.stanimaRate,
+		"stanimaRecharge":megaStats.stanimaRecharge
+	}
+	playerStats.maximum={
+		"health":megaStats.health,
+		"stanima":megaStats.stanima+0,
+		"power":megaStats.power,
+		"speed":megaStats.speed,
+		"stanimaRate":megaStats.stanimaRate,
+		"stanimaRecharge":megaStats.stanimaRecharge
+	}
+	print(megaStats)
+	credit=megaStats.credit		
+		

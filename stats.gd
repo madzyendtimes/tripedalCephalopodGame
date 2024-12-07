@@ -14,7 +14,7 @@ func showpop():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 
-	if Flags.paused==false || Flags.entered.active==true:		
+	if Flags.paused==false || Flags.entered.active==true||Flags.mode!="statsScreen":		
 		update()
 	else:
 		if Input.is_action_just_pressed("right"):
@@ -82,9 +82,11 @@ func contract():
 	update()
 	$PopupPanel2.visible=false
 	Flags.paused=false
+	Flags.mode="level"
 	
 func expand():
 #	$PopupPanel.size.y=100
+	Flags.mode="statsScreen"
 	$PopupPanel2.visible=true
 	Flags.paused=true
 

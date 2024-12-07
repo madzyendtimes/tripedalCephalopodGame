@@ -56,9 +56,9 @@ func _on_body_exited(body):
 
 func show_prize():
 	var rng=RandomNumberGenerator.new()
-	type=rng.randi_range(0,1)
+	type=rng.randi_range(0,2)
 	if questItem==true:
-		type=2	
+		type=3	
 	if type>types.size()-1:
 		type=0
 

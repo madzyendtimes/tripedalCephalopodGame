@@ -7,22 +7,25 @@ var bonus:={
 	"stanima":0,
 	"power":0,
 	"speed":0,
-	"stanimaRate":0
+	"stanimaRate":0,
+	"stanimaRecharge":0
 }
+
 var maximum:={
 	"health":3,
 	"stanima":600,
 	"power":1,
 	"speed":1,
-	"stanimaRate":1
-	
+	"stanimaRate":1,
+	"stanimaRecharge":1
 }
 var actual:={
 	"health":3,
 	"stanima":600,
 	"power":1,
 	"speed":1,
-	"stanimaRate":1	
+	"stanimaRate":1,
+	"stanimaRecharge":1
 }
 	
 var health: int :
@@ -37,6 +40,14 @@ var stanima: int :
 
 	set(val):
 		setStat("stanima",val)			
+
+var stanimaRecharge: int :
+	get:
+		return actual.stanimaRecharge+bonus.stanimaRecharge
+
+	set(val):
+		setStat("stanimaRecharge",val)			
+
 
 var power: int :
 	get:
@@ -67,6 +78,14 @@ var maxStanima:int:
 		return maximum.stanima
 	set(val):
 		maximum.stanima=val
+
+var maxStanimaRecharge:int:
+	get:
+		return maximum.stanimaRecharge
+	set(val):
+		maximum.stanimaRecharge=val
+
+
 
 var maxSpeed:int:
 	get:
@@ -119,6 +138,13 @@ var bonusStanimaRate:int:
 		return bonus.stanimaRate
 	set(val):
 		bonus.stanimaRate=val
+
+var bonusStanimaRecharge:int:
+	get:
+		return bonus.stanimaRecharge
+	set(val):
+		bonus.stanimaRecharge=val
+
 
 func resetBonus():
 	var key="stanima"

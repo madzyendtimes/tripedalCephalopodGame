@@ -9,6 +9,7 @@ func _ready():
 		$Title.animation="win"
 	else:
 		$Title.animation="title"
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

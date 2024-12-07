@@ -65,6 +65,7 @@ animations = [{
 [sub_resource type="Theme" id="Theme_q7xns"]
 
 [node name="trader" type="Node2D"]
+visible = false
 script = ExtResource("1_3qe6a")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -124,7 +125,7 @@ text = "05     Unlimited Credit"
 position = Vector2(104, 456)
 sprite_frames = SubResource("SpriteFrames_inoyk")
 autoplay = "default"
-frame_progress = 0.353669
+frame_progress = 0.279924
 
 [node name="Fancy2" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(496, 120)
