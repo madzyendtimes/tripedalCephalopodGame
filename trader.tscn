@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://bnkp4iv4btgno"]
+[gd_scene load_steps=23 format=3 uid="uid://bnkp4iv4btgno"]
 
 [ext_resource type="Script" path="res://trader.gd" id="1_3qe6a"]
+[ext_resource type="AudioStream" uid="uid://cbfs2xeaanff6" path="res://sounds/buzz.mp3" id="2_j885c"]
 [ext_resource type="FontFile" uid="uid://ck07uk066rkqa" path="res://fonts/Metalien.otf" id="2_rkvjt"]
 [ext_resource type="Texture2D" uid="uid://dswtsk7j5ibfc" path="res://npc/gemna/gemnacomplete2.PNG" id="3_x27aj"]
 [ext_resource type="Texture2D" uid="uid://bbgwcukl8y6bb" path="res://npc/gemna/eat2.PNG" id="4_igq05"]
@@ -9,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://cagrdr3good50" path="res://npc/gemna/eat3.PNG" id="6_s6t0s"]
 [ext_resource type="Texture2D" uid="uid://m5wgcrnc5uqw" path="res://npc/gemna/eat4.PNG" id="7_e0bwo"]
 [ext_resource type="AudioStream" uid="uid://dec0gx8c0mfwe" path="res://music/Changeable Balance.mp3" id="9_kn0le"]
+[ext_resource type="Texture2D" uid="uid://di6d08e6dthxk" path="res://decorations/menus/coming.PNG" id="9_ousne"]
+[ext_resource type="Texture2D" uid="uid://d38pcm2cdyooh" path="res://decorations/menus/soldout.PNG" id="10_5kji0"]
+[ext_resource type="AudioStream" uid="uid://d1cexbf7v885f" path="res://sounds/purchase.mp3" id="12_pr461"]
 
 [sub_resource type="Theme" id="Theme_5sl5r"]
 default_font = ExtResource("2_rkvjt")
@@ -65,7 +69,6 @@ animations = [{
 [sub_resource type="Theme" id="Theme_q7xns"]
 
 [node name="trader" type="Node2D"]
-visible = false
 script = ExtResource("1_3qe6a")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -125,25 +128,25 @@ text = "05     Unlimited Credit"
 position = Vector2(104, 456)
 sprite_frames = SubResource("SpriteFrames_inoyk")
 autoplay = "default"
-frame_progress = 0.279924
+frame_progress = 0.220531
 
 [node name="Fancy2" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(496, 120)
+position = Vector2(512, 120)
 scale = Vector2(0.873333, 0.606667)
 texture = ExtResource("5_3e0c4")
 
 [node name="Fancy3" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(504, 208)
+position = Vector2(512, 208)
 scale = Vector2(0.873333, 0.606667)
 texture = ExtResource("5_3e0c4")
 
 [node name="Fancy4" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(512, 304)
+position = Vector2(520, 304)
 scale = Vector2(0.873333, 0.606667)
 texture = ExtResource("5_3e0c4")
 
 [node name="Fancy5" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(512, 384)
+position = Vector2(520, 384)
 scale = Vector2(0.873333, 0.606667)
 texture = ExtResource("5_3e0c4")
 
@@ -175,5 +178,67 @@ theme = SubResource("Theme_q7xns")
 theme_override_font_sizes/font_size = 33
 text = "Gems"
 
+[node name="Coming6" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(912, 536)
+texture = ExtResource("9_ousne")
+
+[node name="Coming5" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(816, 464)
+texture = ExtResource("9_ousne")
+
+[node name="Coming4" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(864, 368)
+texture = ExtResource("9_ousne")
+
+[node name="Coming3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(888, 280)
+texture = ExtResource("9_ousne")
+
+[node name="Coming2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(848, 192)
+texture = ExtResource("9_ousne")
+
+[node name="Coming1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(824, 96)
+texture = ExtResource("9_ousne")
+
 [node name="music" type="AudioStreamPlayer2D" parent="CanvasLayer"]
 stream = ExtResource("9_kn0le")
+
+[node name="Soldout6" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(584, 536)
+texture = ExtResource("10_5kji0")
+
+[node name="Soldout5" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(568, 448)
+texture = ExtResource("10_5kji0")
+
+[node name="Soldout4" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(576, 360)
+texture = ExtResource("10_5kji0")
+
+[node name="Soldout3" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(560, 280)
+texture = ExtResource("10_5kji0")
+
+[node name="Soldout2" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(584, 184)
+texture = ExtResource("10_5kji0")
+
+[node name="Soldout1" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(552, 104)
+texture = ExtResource("10_5kji0")
+
+[node name="purchase" type="AudioStreamPlayer2D" parent="CanvasLayer"]
+stream = ExtResource("12_pr461")
+volume_db = 10.339
+
+[node name="invalid" type="AudioStreamPlayer2D" parent="CanvasLayer"]
+stream = ExtResource("2_j885c")
+volume_db = 2.433

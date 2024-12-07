@@ -2,31 +2,35 @@ extends Node2D
 var choice:=6
 var lastchoice:=6
 var choices:=[
-	{"price":99,"effect":"winner","instock":true,"text":"pay to win"},
-	{"price":10,"effect":"carryinventory","instock":true,"text":"limited will & testament"},
-	{"price":8,"effect":"addstrength","instock":Flags.megaStats.power<(Flags.megaStats.capPower+1),"text":"muscle memory"},
-	{"price":8,"effect":"addhealth","instock":Flags.megaStats.health<(Flags.megaStats.capHealth+1),"text":"well fed"},
-	{"price":8,"effect":"addspeed","instock":Flags.megaStats.speed<(Flags.megaStats.capSpeed+1),"text":"adhd"},
-	{"price":5,"effect":"moneybags","instock":Flags.megaStats.credit!=true,"text":"unlimited credit"},
-	{"price":8,"effect":"addstanima","instock":Flags.megaStats.stanima<(Flags.megaStats.capStanima+1),"text":"coffee iv"},
-	{"price":999,"effect":"nocap","instock":Flags.megaStats.capPower<1000,"text":"no cap"},
-	{"price":15,"effect":"slowspeed","instock":Flags.megaStats.speed>1,"text":"adhd meds"},
-	{"price":75,"effect":"doublejump","instock":true,"text":"extra air friction"},
-	{"price":75,"effect":"deathgifts","instock":true,"text":"death gifts"},
-	{"price":99,"effect":"fistshot","instock":true,"text":"hand cannon"},
-	{"price":99,"effect":"flybuddy","instock":true,"text":"B.O."},
-	{"price":75,"effect":"levelselect","instock":true,"text":"flat circle dissector"},
-	{"price":85,"effect":"transmute","instock":true,"text":"philosopher's reactor"}
+	{"price":99,"effect":"winner","instock":true,"text":"pay to win","implemented":true},
+	{"price":10,"effect":"carryinventory","instock":true,"text":"limited will & testament","implemented":false},
+	{"price":8,"effect":"addstrength","instock":Flags.megaStats.power<(Flags.megaStats.capPower+1),"text":"muscle memory","implemented":true},
+	{"price":8,"effect":"addhealth","instock":Flags.megaStats.health<(Flags.megaStats.capHealth+1),"text":"well fed","implemented":true},
+	{"price":8,"effect":"addspeed","instock":Flags.megaStats.speed<(Flags.megaStats.capSpeed+1),"text":"adhd","implemented":true},
+	{"price":5,"effect":"moneybags","instock":Flags.megaStats.credit!=true,"text":"unlimited credit","implemented":true},
+	{"price":8,"effect":"addstanima","instock":Flags.megaStats.stanima<(Flags.megaStats.capStanima+1),"text":"coffee iv","implemented":true},
+	{"price":999,"effect":"nocap","instock":Flags.megaStats.capPower<1000,"text":"no cap","implemented":true},
+	{"price":15,"effect":"slowspeed","instock":Flags.megaStats.speed>1,"text":"adhd meds","implemented":true},
+	{"price":75,"effect":"doublejump","instock":true,"text":"extra air friction","implemented":false},
+	{"price":75,"effect":"deathgifts","instock":true,"text":"death gifts","implemented":false},
+	{"price":99,"effect":"fistshot","instock":true,"text":"hand cannon","implemented":false},
+	{"price":99,"effect":"flybuddy","instock":true,"text":"Oder De Body","implemented":false},
+	{"price":75,"effect":"levelselect","instock":true,"text":"flat circle dissector","implemented":false},
+	{"price":85,"effect":"transmute","instock":true,"text":"philosopher's rock","implemented":false},
+	{"price":85,"effect":"homebase","instock":true,"text":"mortage","implemented":false}
 	]
 var stock:=[]
 var home=""
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#$CanvasLayer/music.play()
 	$CanvasLayer.visible=false
-	select(0)
-	#Flags.load() #uncomment to test locally
-	pass # Replace with function body.
+
+#uncomment to test locally
+	#Flags.load() 
+	#start(self)
+
+
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,19 +48,50 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("fight")||Input.is_action_just_pressed("reset"):
 		exit()
 
+
+func getstock():
+	var rng=RandomNumberGenerator.new()
+	var c=choices[rng.randi_range(0,choices.size()-1)]
+	for i in stock:
+		if i.text==c.text:
+			c=getstock()
+	return c
+	
+	
 func start(returnlevel):
+#	Flags.megaStats.gems=200
+	Flags.mode="trader"
+	choice=6
+	lastchoice=6
 	$CanvasLayer.visible=true
 	home=returnlevel
 	$CanvasLayer/music.play()
-	pass
 
+	for i in range(1,7):
+		var item=getstock()
+		stock.append(item)
+		var canva="CanvasLayer/choices/choice"+str(i)
+		get_node(canva).text=str(stock[i-1].price)+"        "+stock[i-1].text
+		if stock[i-1].instock==false:
+			get_node(canva).set("theme_override_colors/font_color",Color.RED)
+			get_node("CanvasLayer/Soldout"+str(i)).visible=true
+		else:
+			get_node("CanvasLayer/Soldout"+str(i)).visible=false
+		if stock[i-1].implemented==false:
+			get_node(canva).set("theme_override_colors/font_color",Color.RED)
+			get_node("CanvasLayer/Coming"+str(i)).visible=true
+		else:
+			get_node("CanvasLayer/Coming"+str(i)).visible=false		
+	select(0)
+			
 func purchase():
-	if Flags.megaStats.gems>=choices[choice-1].price && choices[choice-1].instock==true:
-		Flags.megaStats.gems-=choices[choice-1].price
+	if Flags.megaStats.gems>=stock[choice-1].price && stock[choice-1].instock==true&& stock[choice-1].implemented==true:
+		Flags.megaStats.gems-=stock[choice-1].price
 		var canva="CanvasLayer/choices/choice"+str(choice)
-		choices[choice-1].instock=false
+		stock[choice-1].instock=false
 		get_node(canva).set("theme_override_colors/font_color",Color.RED)
-		match choices[choice-1].effect:
+		get_node("CanvasLayer/Soldout"+str(choice)).visible=true
+		match stock[choice-1].effect:
 			"addhealth":
 				Flags.megaStats.health+=1
 				Flags.playerStats.maxHealth=Flags.megaStats.health
@@ -86,7 +121,6 @@ func purchase():
 			"moneybags":
 				Flags.megaStats.credit=true
 				Flags.credit=true
-				
 			"carryinventory":
 				Flags.megaStats.inventorycapacity+=1
 				
@@ -101,8 +135,10 @@ func purchase():
 				
 		$CanvasLayer/AnimatedSprite2D.animation="eat"
 		Flags.save()
+		$CanvasLayer/purchase.play()
 		Flags.dotime(backtonormal,3.0)		
-	pass
+	else:
+		$CanvasLayer/invalid.play()
 
 
 func backtonormal():
