@@ -1,5 +1,6 @@
 extends Node
 
+var freshstart=false
 var weather=""
 const stats=preload("res://playerstats.gd")
 var l=0
@@ -167,7 +168,7 @@ func defaultmegastats():
 	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"inventory":[],"inventorycapacity":0,"credit":false}
 	
 func loader():
-	if not FileAccess.file_exists("user://tcv1.save"):
+	if not FileAccess.file_exists("user://tcv1.save")|| freshstart==true:
 		defaultmegastats()
 		return
 

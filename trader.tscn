@@ -128,7 +128,7 @@ text = "05     Unlimited Credit"
 position = Vector2(104, 456)
 sprite_frames = SubResource("SpriteFrames_inoyk")
 autoplay = "default"
-frame_progress = 0.220531
+frame_progress = 0.564528
 
 [node name="Fancy2" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(512, 120)

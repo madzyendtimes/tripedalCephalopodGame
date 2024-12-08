@@ -17,7 +17,8 @@ var choices:=[
 	{"price":99,"effect":"flybuddy","instock":true,"text":"Oder De Body","implemented":false},
 	{"price":75,"effect":"levelselect","instock":true,"text":"flat circle dissector","implemented":false},
 	{"price":85,"effect":"transmute","instock":true,"text":"philosopher's rock","implemented":false},
-	{"price":85,"effect":"homebase","instock":true,"text":"mortage","implemented":false}
+	{"price":85,"effect":"homebase","instock":true,"text":"mortage","implemented":false},
+	{"price":1,"effect":"vapor","instock":true,"text":"vapor ware","implemented":false}
 	]
 var stock:=[]
 var home=""

@@ -19,7 +19,7 @@ var assetsScene:PackedScene=load("res://assets.tscn")
 var enterScene:PackedScene=load("res://enterable.tscn")
 var flavorScene:PackedScene=load("res://flavornpc.tscn")
 var flyerScene:PackedScene=load("res://flyer.tscn")
-
+var multiScene:PackedScene=load("res://multistage.tscn")
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
 var speed=baseSpeed
@@ -572,10 +572,10 @@ func dospawns():
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
-			var upchoice=11
+			var upchoice=12
 
 			if $interactive.position.x>-5000 && questDistributed==false:
-				upchoice=12
+				upchoice=13
 			
 			var chance=rng.randi_range(0,upchoice)
 			
@@ -583,7 +583,7 @@ func dospawns():
 			Flags.dotime(dospawns,nextSpawn)
 			
 			
-			#chance=10 #force spawns here
+			#chance=11 #force spawns here
 			if chance<1:
 				var trash=trashScene.instantiate()
 				trash.position.x=(($interactive.position.x)*-1)+1400
@@ -651,6 +651,13 @@ func dospawns():
 				$enemy.add_child(flyer)	
 				return
 			if chance<12:
+				var multi=multiScene.instantiate()
+				multi.position.x=($enemy.position.x*-1)+1400
+				multi.position.y=400
+				$enemy.add_child(multi)	
+				return	
+				
+			if chance<13:
 				if questDistributed==false:
 					var trash=trashScene.instantiate()
 					trash.position.x=(($interactive.position.x)*-1)+1400

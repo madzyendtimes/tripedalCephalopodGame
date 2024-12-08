@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2j0ll20iy6ha"]
+
+[ext_resource type="Script" path="res://multistage.gd" id="1_blsc5"]
+[ext_resource type="Texture2D" uid="uid://bepcn7a4cf3jb" path="res://enemies/goopbaby/dead.PNG" id="2_fwwy8"]
+[ext_resource type="Texture2D" uid="uid://bov7rcq6p4rvg" path="res://enemies/goopbaby/stageb1.PNG" id="3_ccirr"]
+[ext_resource type="Texture2D" uid="uid://blwyynxvxmlnx" path="res://enemies/goopbaby/stageb2.PNG" id="4_ybbhy"]
+[ext_resource type="Texture2D" uid="uid://tx5tj5bee2qx" path="res://enemies/goopbaby/stageb3.PNG" id="5_bm4w2"]
+[ext_resource type="Texture2D" uid="uid://cn6jnmdwi5uur" path="res://enemies/goopbaby/stagea1.PNG" id="6_0ream"]
+[ext_resource type="Texture2D" uid="uid://brj4gsax6fiwm" path="res://enemies/goopbaby/stagea2.PNG" id="7_htq2j"]
+[ext_resource type="Texture2D" uid="uid://cay5hn54oyrrw" path="res://enemies/goopbaby/stagea3.PNG" id="8_4oiuq"]
+[ext_resource type="Texture2D" uid="uid://begi2rldau7to" path="res://enemies/goopbaby/stagea4.PNG" id="9_ipudm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r3u5b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fwwy8")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ccirr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ybbhy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bm4w2")
+}],
+"loop": true,
+"name": &"short",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_0ream")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_htq2j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4oiuq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ipudm")
+}],
+"loop": true,
+"name": &"tall",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j7ila"]
+radius = 40.0
+height = 384.0
+
+[node name="multistage" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_blsc5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_r3u5b")
+animation = &"dead"
+autoplay = "tall"
+
+[node name="collisiontall" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_j7ila")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
