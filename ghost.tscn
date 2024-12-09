@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://3e4nurw16uev"]
+
+[ext_resource type="Script" path="res://ghost.gd" id="1_qnf7r"]
+[ext_resource type="Texture2D" uid="uid://c8u0yg2c63htg" path="res://enterable/temple/assets/demonghost1.PNG" id="1_uo0ff"]
+[ext_resource type="Texture2D" uid="uid://bj5tglf4mojyl" path="res://enterable/temple/assets/demonghost2.PNG" id="2_6pnmj"]
+[ext_resource type="Texture2D" uid="uid://bleoosf2fllbl" path="res://enterable/temple/assets/holyghost1.PNG" id="3_6htne"]
+[ext_resource type="Texture2D" uid="uid://swpebbglm4ua" path="res://enterable/temple/assets/holyghost2.PNG" id="4_0radu"]
+[ext_resource type="Texture2D" uid="uid://cxjbfjvkyb246" path="res://enterable/temple/assets/peaceghost1.PNG" id="5_wck2f"]
+[ext_resource type="Texture2D" uid="uid://dhfpfivqs2a5y" path="res://enterable/temple/assets/peaceghost2.PNG" id="6_qsxq3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1spmh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_uo0ff")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_6pnmj")
+}],
+"loop": true,
+"name": &"demon",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6htne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0radu")
+}],
+"loop": true,
+"name": &"holy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_wck2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qsxq3")
+}],
+"loop": true,
+"name": &"peace",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ht03"]
+radius = 40.0
+height = 176.0
+
+[node name="ghost" type="Area2D"]
+position = Vector2(56, -56)
+collision_mask = 2
+script = ExtResource("1_qnf7r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(672, 240)
+sprite_frames = SubResource("SpriteFrames_1spmh")
+animation = &"peace"
+frame_progress = 0.802082
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(688, 232)
+shape = SubResource("CapsuleShape2D_7ht03")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

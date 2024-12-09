@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://qvhfqa3kjxom"]
+
+[ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="1_87e6u"]
+[ext_resource type="Script" path="res://trash.gd" id="1_uhsav"]
+[ext_resource type="Texture2D" uid="uid://bg8qyicqk8lwl" path="res://enemies/diapertooth/diapertoothdead.PNG" id="2_74s4n"]
+[ext_resource type="Texture2D" uid="uid://bepcn7a4cf3jb" path="res://enemies/goopbaby/dead.PNG" id="3_63802"]
+[ext_resource type="Texture2D" uid="uid://cwkwuw5cty8kt" path="res://enemies/groundling/dead.PNG" id="4_hf63r"]
+[ext_resource type="Texture2D" uid="uid://cf6nmhw63nsr4" path="res://effects/groundpuke.PNG" id="5_v3gew"]
+[ext_resource type="Texture2D" uid="uid://blkqb3cqavfs4" path="res://items/fancy/fancy2.PNG" id="6_vh24o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kslkm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_87e6u")
+}],
+"loop": true,
+"name": &"blood1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_74s4n")
+}],
+"loop": true,
+"name": &"blood2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_63802")
+}],
+"loop": true,
+"name": &"blood3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_hf63r")
+}],
+"loop": true,
+"name": &"blood4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_v3gew")
+}],
+"loop": true,
+"name": &"blood5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_vh24o")
+}],
+"loop": true,
+"name": &"gem",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_40i60"]
+radius = 16.0
+height = 144.391
+
+[node name="trash" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_uhsav")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-193.25, 56)
+scale = Vector2(0.87, 0.373333)
+sprite_frames = SubResource("SpriteFrames_kslkm")
+animation = &"blood1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-200, 56)
+rotation = -1.59872
+shape = SubResource("CapsuleShape2D_40i60")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

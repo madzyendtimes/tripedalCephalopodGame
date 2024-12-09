@@ -1,0 +1,232 @@
+[gd_scene load_steps=26 format=3 uid="uid://utpjm1uc1isi"]
+
+[ext_resource type="Script" path="res://temple.gd" id="1_qyduo"]
+[ext_resource type="PackedScene" uid="uid://qvhfqa3kjxom" path="res://trash.tscn" id="2_xeo57"]
+[ext_resource type="Script" path="res://boundary.gd" id="7_4ryn0"]
+[ext_resource type="Texture2D" uid="uid://cifofdq1rfmcc" path="res://enterable/temple/assets/bench.PNG" id="7_hwn6t"]
+[ext_resource type="Texture2D" uid="uid://v8a5mtpfitl7" path="res://enterable/temple/assets/pillar.PNG" id="8_71g88"]
+[ext_resource type="Texture2D" uid="uid://dakjcaoeyoegg" path="res://enterable/temple/assets/alterdemon.PNG" id="9_asbvu"]
+[ext_resource type="Texture2D" uid="uid://ifjculxqapsf" path="res://enterable/temple/assets/alterholy.PNG" id="10_ilio2"]
+[ext_resource type="Texture2D" uid="uid://c6a331hfvf510" path="res://enterable/temple/assets/alterpeace.PNG" id="11_0ao2p"]
+[ext_resource type="AudioStream" uid="uid://n0ixwmtpn538" path="res://music/Crisp Combination.wav" id="11_4rie1"]
+[ext_resource type="PackedScene" uid="uid://cswyauqiemr53" path="res://templeplayer.tscn" id="19_whsrp"]
+[ext_resource type="Texture2D" uid="uid://bpbiq2xw4k68p" path="res://decorations/tutorial/exit.PNG" id="24_bwqjc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3srw1"]
+size = Vector2(1083, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbro0"]
+size = Vector2(1290, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50qyk"]
+size = Vector2(20, 450)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cosc6"]
+size = Vector2(338, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlkwl"]
+size = Vector2(456, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boski"]
+size = Vector2(20, 330)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nfqc1"]
+size = Vector2(20, 802)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fikku"]
+size = Vector2(18, 176.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6lxm"]
+size = Vector2(346, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u2ifw"]
+size = Vector2(528, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dku0d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b6whv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_asbvu")
+}],
+"loop": true,
+"name": &"demon",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_ilio2")
+}],
+"loop": true,
+"name": &"holy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_0ao2p")
+}],
+"loop": true,
+"name": &"peace",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ywm24"]
+radius = 48.0
+height = 192.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_17lif"]
+radius = 32.0
+height = 256.0
+
+[node name="temple" type="Node2D"]
+position = Vector2(0, -8)
+script = ExtResource("1_qyduo")
+
+[node name="trashlayer" type="Node2D" parent="."]
+
+[node name="trash" parent="trashlayer" instance=ExtResource("2_xeo57")]
+
+[node name="boundary" type="StaticBody2D" parent="."]
+position = Vector2(-64, -56)
+script = ExtResource("7_4ryn0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="boundary"]
+position = Vector2(568, 88)
+shape = SubResource("RectangleShape2D_3srw1")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="boundary"]
+position = Vector2(656, 800)
+shape = SubResource("RectangleShape2D_gbro0")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="boundary"]
+position = Vector2(104, 224)
+shape = SubResource("RectangleShape2D_50qyk")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="boundary"]
+position = Vector2(176, 432)
+shape = SubResource("RectangleShape2D_cosc6")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="boundary"]
+position = Vector2(876, 192)
+shape = SubResource("RectangleShape2D_tlkwl")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="boundary"]
+position = Vector2(1008, 152)
+shape = SubResource("RectangleShape2D_boski")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="boundary"]
+position = Vector2(1128, 384)
+shape = SubResource("RectangleShape2D_nfqc1")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="boundary"]
+position = Vector2(712, 448)
+shape = SubResource("RectangleShape2D_fikku")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="boundary"]
+position = Vector2(352, 264)
+shape = SubResource("RectangleShape2D_e6lxm")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="boundary"]
+position = Vector2(760, 416)
+shape = SubResource("RectangleShape2D_u2ifw")
+
+[node name="Area2D" type="Area2D" parent="boundary"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boundary/Area2D"]
+shape = SubResource("CircleShape2D_dku0d")
+
+[node name="Bench4" type="Sprite2D" parent="boundary"]
+position = Vector2(824, 216)
+scale = Vector2(0.64, 0.46)
+texture = ExtResource("7_hwn6t")
+
+[node name="Bench3" type="Sprite2D" parent="boundary"]
+position = Vector2(536, 48)
+scale = Vector2(1.49, 0.74)
+texture = ExtResource("7_hwn6t")
+flip_v = true
+
+[node name="Pillar" type="Sprite2D" parent="boundary"]
+position = Vector2(106, 224)
+scale = Vector2(0.62, 0.64)
+texture = ExtResource("8_71g88")
+
+[node name="Pillar2" type="Sprite2D" parent="boundary"]
+position = Vector2(1624, 480)
+texture = ExtResource("8_71g88")
+
+[node name="Pillar3" type="Sprite2D" parent="boundary"]
+position = Vector2(1003.13, 184.345)
+rotation = -3.12239
+scale = Vector2(0.513981, 0.579981)
+texture = ExtResource("8_71g88")
+
+[node name="Bench2" type="Sprite2D" parent="boundary"]
+position = Vector2(760, 432)
+scale = Vector2(0.772592, 0.650074)
+skew = 0.0191985
+texture = ExtResource("7_hwn6t")
+flip_h = true
+
+[node name="Pillar4" type="Sprite2D" parent="boundary"]
+position = Vector2(176, 424)
+rotation = -1.52367
+scale = Vector2(0.58, 0.48)
+texture = ExtResource("8_71g88")
+
+[node name="Pillar5" type="Sprite2D" parent="boundary"]
+position = Vector2(1128, 384)
+texture = ExtResource("8_71g88")
+
+[node name="alter" type="Area2D" parent="."]
+position = Vector2(48, 64)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="alter"]
+position = Vector2(272, -7.99999)
+scale = Vector2(0.535, 0.42)
+sprite_frames = SubResource("SpriteFrames_b6whv")
+animation = &"peace"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="alter"]
+position = Vector2(272, 56)
+shape = SubResource("CapsuleShape2D_ywm24")
+
+[node name="Bench" type="Sprite2D" parent="."]
+position = Vector2(280, 232)
+scale = Vector2(0.5475, 0.3375)
+texture = ExtResource("7_hwn6t")
+
+[node name="ghostholder" type="Node2D" parent="."]
+
+[node name="Pillar" type="Sprite2D" parent="."]
+position = Vector2(648, 360)
+scale = Vector2(0.42, 0.62)
+texture = ExtResource("8_71g88")
+flip_v = true
+
+[node name="templeplayer" parent="." instance=ExtResource("19_whsrp")]
+position = Vector2(256, 584)
+
+[node name="Bench4" type="Sprite2D" parent="."]
+position = Vector2(480, 672)
+texture = ExtResource("7_hwn6t")
+
+[node name="exit" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="exit"]
+
+[node name="Exit" type="Sprite2D" parent="exit"]
+position = Vector2(0, 520)
+scale = Vector2(0.82, 0.804)
+texture = ExtResource("24_bwqjc")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit"]
+position = Vector2(-32, 544)
+shape = SubResource("CapsuleShape2D_17lif")
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_4rie1")
+
+[connection signal="body_entered" from="boundary/Area2D" to="boundary" method="_on_area_2d_body_entered"]
