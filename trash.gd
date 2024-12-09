@@ -17,6 +17,12 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	if body.inoffer:
+		return
+	if body.bag>9:
+		return
+
 	if type=="gem":
 		Flags.megaStats.gems+=1
+	body.clean()
 	queue_free()	

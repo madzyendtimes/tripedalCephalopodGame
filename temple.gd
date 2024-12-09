@@ -41,3 +41,14 @@ func createghost():
 		ghost.position.y=ty
 		$ghostholder.add_child(ghost)	
 		
+func eliminateghosts(type):
+	if $templeplayer.bag>9:
+		for i in $ghostholder.get_children():
+			i.dissapear(type)
+	$templeplayer.bag=0
+
+func _on_alter_body_entered(body: Node2D) -> void:
+	print("game acknowledges")
+	$templeplayer.offer()
+	eliminateghosts($alter.type)
+	pass # Replace with function body.

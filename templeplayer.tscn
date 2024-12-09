@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cswyauqiemr53"]
+[gd_scene load_steps=14 format=3 uid="uid://cswyauqiemr53"]
 
 [ext_resource type="Script" path="res://templeplayer.gd" id="1_ey2rs"]
 [ext_resource type="Texture2D" uid="uid://kd831fw8ak4s" path="res://enterable/temple/assets/playerfront1.PNG" id="2_78ao4"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://phh4ejvd166k" path="res://enterable/temple/assets/playerwalk1.PNG" id="5_hh8nr"]
 [ext_resource type="Texture2D" uid="uid://pmon0ttupdi2" path="res://enterable/temple/assets/playerwalk2.PNG" id="6_ro3i4"]
 [ext_resource type="Texture2D" uid="uid://djxo4u3pqt282" path="res://enterable/temple/assets/playerwalk3.PNG" id="7_j23sb"]
+[ext_resource type="Texture2D" uid="uid://d20rivj1yrkr7" path="res://player/fight/walk1.PNG" id="9_y06o1"]
+[ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="10_3j4ct"]
+[ext_resource type="Texture2D" uid="uid://bowtiwa8luaw8" path="res://player/fight/walk3.PNG" id="11_0pchl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_blhdy"]
 animations = [{
@@ -44,6 +47,20 @@ animations = [{
 "texture": ExtResource("7_j23sb")
 }],
 "loop": true,
+"name": &"pickup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_y06o1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3j4ct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_0pchl")
+}],
+"loop": true,
 "name": &"walk",
 "speed": 5.0
 }]
@@ -54,13 +71,13 @@ height = 144.0
 
 [node name="templeplayer" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 13
 script = ExtResource("1_ey2rs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(32, 88)
 sprite_frames = SubResource("SpriteFrames_blhdy")
-animation = &"dead"
+animation = &"walk"
 autoplay = "walk"
 offset = Vector2(0, -120)
 

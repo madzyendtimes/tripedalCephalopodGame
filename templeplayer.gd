@@ -16,9 +16,12 @@ var reverted=false
 var free=true
 var oldtest=floor(position.y/100)
 var dead=false
+var bag=0
+var inoffer=false
+
 
 func _process(delta: float) -> void:
-	if dead:
+	if dead or inoffer:
 		return
 
 
@@ -56,11 +59,26 @@ func _process(delta: float) -> void:
 		var tween=get_tree().create_tween()
 		tween.tween_property(self,"scale",Vector2(tempscale,tempscale),0.3).from_current()
 
+func makeoffer():
+	$AnimatedSprite2D.animation="front"
+	inoffer=true
+	Flags.dotime(walk,1.6)	
+
+func offer():
+	Flags.dotime(makeoffer,0.5)
 
 func hit():
 	dead=true
 	$AnimatedSprite2D.animation="dead"	
 
+func walk():
+	inoffer=false
+	$AnimatedSprite2D.animation="walk"
+
+func clean():
+	$AnimatedSprite2D.animation="pickup"
+	bag+=1
+	Flags.dotime(walk,0.6)
 
 func revert():
 

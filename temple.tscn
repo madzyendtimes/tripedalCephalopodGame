@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://utpjm1uc1isi"]
+[gd_scene load_steps=27 format=3 uid="uid://utpjm1uc1isi"]
 
 [ext_resource type="Script" path="res://temple.gd" id="1_qyduo"]
 [ext_resource type="PackedScene" uid="uid://qvhfqa3kjxom" path="res://trash.tscn" id="2_xeo57"]
+[ext_resource type="Script" path="res://alter.gd" id="6_1xn0k"]
 [ext_resource type="Script" path="res://boundary.gd" id="7_4ryn0"]
 [ext_resource type="Texture2D" uid="uid://cifofdq1rfmcc" path="res://enterable/temple/assets/bench.PNG" id="7_hwn6t"]
 [ext_resource type="Texture2D" uid="uid://v8a5mtpfitl7" path="res://enterable/temple/assets/pillar.PNG" id="8_71g88"]
@@ -181,6 +182,9 @@ texture = ExtResource("8_71g88")
 
 [node name="alter" type="Area2D" parent="."]
 position = Vector2(48, 64)
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("6_1xn0k")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="alter"]
 position = Vector2(272, -7.99999)
@@ -230,3 +234,5 @@ shape = SubResource("CapsuleShape2D_17lif")
 stream = ExtResource("11_4rie1")
 
 [connection signal="body_entered" from="boundary/Area2D" to="boundary" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="alter" to="." method="_on_alter_body_entered"]
+[connection signal="body_entered" from="alter" to="alter" method="_on_body_entered"]

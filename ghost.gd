@@ -17,6 +17,9 @@ func _ready() -> void:
 	$AnimatedSprite2D.play()
 	getdir()
 
+func dissapear(variant):
+	if type==variant:
+		kill()
 
 func getdir():
 	tx=rng.randi_range(-1,1)
