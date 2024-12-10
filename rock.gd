@@ -14,10 +14,11 @@ func _process(delta):
 	pass
 
 func setAnimation(val):
-	$AnimatedSprite2D.animation="rock"+val
+	$AnimatedSprite2D.animation="rock"+str(val)
 	
 	
-
+func choose():
+	setAnimation(Flags.rng.randi_range(1,3))
 
 func _on_body_entered(body):
 	

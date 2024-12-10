@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cswyauqiemr53"]
+[gd_scene load_steps=20 format=3 uid="uid://cswyauqiemr53"]
 
 [ext_resource type="Script" path="res://templeplayer.gd" id="1_ey2rs"]
 [ext_resource type="Texture2D" uid="uid://kd831fw8ak4s" path="res://enterable/temple/assets/playerfront1.PNG" id="2_78ao4"]
@@ -6,11 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://dmd85urce0o63" path="res://enterable/temple/assets/playerfront2.PNG" id="3_mdr4q"]
 [ext_resource type="Texture2D" uid="uid://b3olpegpa1q0q" path="res://enterable/temple/assets/playerfront3.PNG" id="4_ckpkt"]
 [ext_resource type="Texture2D" uid="uid://phh4ejvd166k" path="res://enterable/temple/assets/playerwalk1.PNG" id="5_hh8nr"]
+[ext_resource type="Texture2D" uid="uid://o2axxa4t5yl4" path="res://enterable/temple/assets/fullbag1.PNG" id="6_d8mh6"]
 [ext_resource type="Texture2D" uid="uid://pmon0ttupdi2" path="res://enterable/temple/assets/playerwalk2.PNG" id="6_ro3i4"]
 [ext_resource type="Texture2D" uid="uid://djxo4u3pqt282" path="res://enterable/temple/assets/playerwalk3.PNG" id="7_j23sb"]
-[ext_resource type="Texture2D" uid="uid://d20rivj1yrkr7" path="res://player/fight/walk1.PNG" id="9_y06o1"]
-[ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="10_3j4ct"]
-[ext_resource type="Texture2D" uid="uid://bowtiwa8luaw8" path="res://player/fight/walk3.PNG" id="11_0pchl"]
+[ext_resource type="Texture2D" uid="uid://dornv70xnpwbt" path="res://enterable/temple/assets/fullbag2.PNG" id="7_rmntv"]
+[ext_resource type="Texture2D" uid="uid://ckjs5113nr038" path="res://enterable/temple/assets/fullbag3.PNG" id="8_71xth"]
+[ext_resource type="Texture2D" uid="uid://ocavrd1udw7j" path="res://enterable/temple/assets/hit1.PNG" id="9_tl7xn"]
+[ext_resource type="Texture2D" uid="uid://cdlcfj2p7lnba" path="res://enterable/temple/assets/hit2.PNG" id="10_qjv1o"]
+[ext_resource type="Texture2D" uid="uid://dkkajv5lsujr5" path="res://enterable/temple/assets/hit3.PNG" id="11_17ydm"]
+[ext_resource type="Texture2D" uid="uid://bmtg5ehixwu8q" path="res://enterable/temple/assets/emptybag1.PNG" id="12_mrcmd"]
+[ext_resource type="Texture2D" uid="uid://yaqjfsjnrp5" path="res://enterable/temple/assets/emptybag2.PNG" id="13_6jdvq"]
+[ext_resource type="Texture2D" uid="uid://cs4aq8bwgd4u3" path="res://enterable/temple/assets/emptybag3.PNG" id="14_ava7j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_blhdy"]
 animations = [{
@@ -38,6 +44,34 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("6_d8mh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_rmntv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_71xth")
+}],
+"loop": true,
+"name": &"fullbag",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_tl7xn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qjv1o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_17ydm")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("5_hh8nr")
 }, {
 "duration": 1.0,
@@ -52,13 +86,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_y06o1")
+"texture": ExtResource("12_mrcmd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_3j4ct")
+"texture": ExtResource("13_6jdvq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_0pchl")
+"texture": ExtResource("14_ava7j")
 }],
 "loop": true,
 "name": &"walk",
@@ -66,8 +100,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ya6uo"]
-radius = 24.0
-height = 144.0
+radius = 32.0
+height = 128.0
 
 [node name="templeplayer" type="CharacterBody2D"]
 collision_layer = 2
@@ -77,9 +111,10 @@ script = ExtResource("1_ey2rs")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(32, 88)
 sprite_frames = SubResource("SpriteFrames_blhdy")
-animation = &"walk"
+animation = &"hit"
 autoplay = "walk"
 offset = Vector2(0, -120)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-24, -16)
 shape = SubResource("CapsuleShape2D_ya6uo")

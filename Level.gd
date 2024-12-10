@@ -36,9 +36,14 @@ var warpS
 var missle
 var dangerZone
 var canrandom=true
-
+var randopercents=true
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
+	if randopercents:
+		Flags.percentageMap.sort_custom(func(a, b): return rng.randi_range(0,1)>0)
+	
+	
 	Flags.titlescreen="title"
 	viewStat=false
 	$trader.visible=false	
@@ -558,6 +563,74 @@ func get_bg_texture(type):
 	var ts=assetsScene.instantiate()
 	ts.animation=s+str(treenum)
 	return ts
+
+
+
+
+func createchoice(holder,scn,pos,brandflip,setani,ypos,deploycheck):
+		var spwn=scn.instantiate()
+		spwn.position.x=((holder.position.x)*-1)+pos
+		if brandflip:
+			spwn.get_child(1).flip_h=!rng.randi_range(0,1)>0
+		if setani>1:
+			spwn.choose()
+		if ypos!=0:
+			spwn.position.y=ypos
+		if deploycheck && !spwn.candeploy:
+			return
+		holder.add_child(spwn)	
+
+var spawnulator:=[
+
+]
+
+func dochances(val):
+	if val<1:
+		createchoice($interactive,trashScene,1400,false,1,0,false)
+		return
+	if val<2:
+		createchoice($rocks,rockScene,1400,true,3,0,false)
+		return
+	if val<3:
+		createchoice($enemy,enemyScene,1400,false,1,500,false)
+		return
+	if val<4:
+		createchoice($interactive,tvScene,1400,false,1,0,false)
+		return
+	if val<5:
+		createchoice($enemy,expanderScene,1400,false,1,350,false)
+		return
+	if val<6:
+		createchoice($enemy,tallmScene,1400,false,1,450,false)
+		return
+	if val<7:
+		createchoice($locationback,enterScene,1400,false,1,196,false)
+		return
+	if val<8:
+		$weather.changeweather()
+		$weather.position.y=-800
+		return	
+	if val<9:
+		weatheroff()
+		return
+	if val<10:
+		createchoice($npcs,flavorScene,1400,false,3,0,true)
+		return
+	if val<11:
+		createchoice($enemy,flyerScene,1400,false,1,0,false)
+		return
+	if val<12:
+		createchoice($enemy,multiScene,1400,false,1,400,false)
+		return
+	if val<13:
+		if questDistributed==false:
+			var trash=trashScene.instantiate()
+			trash.position.x=(($interactive.position.x)*-1)+1400
+			trash.questItem=true
+			questDistributed=true
+			$interactive.add_child(trash)	
+			return	
+
 	
 func _on_enemy_generator_timeout():
 	#dospawns()
@@ -578,93 +651,23 @@ func dospawns():
 				upchoice=13
 			
 			var chance=rng.randi_range(0,upchoice)
-			
-			var nextSpawn=rng.randf_range(1.5,5.0)
+			var newchance=rng.randi_range(1,100)
+			var agg=0
+			var count=0
+			for i in Flags.percentageMap:
+				agg+=i
+				if newchance<=agg:
+					dochances(count)
+					newchance=10000					
+					break
+				count+=1									
+	
+			var nextSpawn=rng.randf_range(3.5,7.0)
 			Flags.dotime(dospawns,nextSpawn)
-			
+			return
 			
 			#chance=11 #force spawns here
-			if chance<1:
-				var trash=trashScene.instantiate()
-				trash.position.x=(($interactive.position.x)*-1)+1400
-				
-				$interactive.add_child(trash)	
-				return
 
-
-			if chance<2:
-				var rock=rockScene.instantiate()
-				rock.position.x=(($rocks.position.x)*-1)+1400;
-				rock.get_child(1).flip_h=!rng.randi_range(0,1)>0
-				#rock.position.y=0
-				rock.setAnimation(str(rng.randi_range(1,3)))
-				$rocks.add_child(rock)
-				return
-
-			if chance<3:
-				var enemy=enemyScene.instantiate()
-				enemy.position.y=500
-				enemy.position.x=(($enemy.position.x)*-1)+1400
-				$enemy.add_child(enemy)
-				return
-			if chance<4:
-				var tv=tvScene.instantiate()
-				tv.position.x=(($interactive.position.x)*-1)+1400
-				$interactive.add_child(tv)
-				return
-
-			if chance<5:
-				var expander=expanderScene.instantiate()
-				expander.position.x=(($enemy.position.x)*-1)+1400
-				expander.position.y=350
-				$interactive.add_child(expander)
-				return
-			if chance<6:
-				var enemy=tallmScene.instantiate()
-				enemy.position.y=450
-				enemy.position.x=(($enemy.position.x)*-1)+1400
-				$enemy.add_child(enemy)
-				return
-			if chance<7:
-				var ent=enterScene.instantiate()
-				ent.position.x=($locationback.position.x*-1)+1400
-				ent.position.y=196
-				$locationback.add_child(ent)
-				return
-			if chance<8:
-				$weather.changeweather()
-				$weather.position.y=-800
-				return
-			if chance<9:
-				weatheroff()
-				return			
-			if chance<10:
-				var flavor=flavorScene.instantiate()
-				flavor.position.x=($npcs.position.x*-1)+1400
-				flavor.choose()	
-				if flavor.candeploy==true:
-					$npcs.add_child(flavor)
-				return
-			if chance<11:
-				var flyer=flyerScene.instantiate()
-				flyer.position.x=($enemy.position.x*-1)+1400
-				$enemy.add_child(flyer)	
-				return
-			if chance<12:
-				var multi=multiScene.instantiate()
-				multi.position.x=($enemy.position.x*-1)+1400
-				multi.position.y=400
-				$enemy.add_child(multi)	
-				return	
-				
-			if chance<13:
-				if questDistributed==false:
-					var trash=trashScene.instantiate()
-					trash.position.x=(($interactive.position.x)*-1)+1400
-					trash.questItem=true
-					questDistributed=true
-					$interactive.add_child(trash)	
-					return
 	Flags.dotime(dospawns,3.0)
 	#move to own generator
 func changeweather():

@@ -1,5 +1,25 @@
 extends Node
 
+var treeScene:PackedScene=load("res://tree.tscn")
+var enemyScene:PackedScene=load("res://groundling.tscn")
+var rockScene:PackedScene=load("res://rock.tscn")
+var trashScene:PackedScene=load("res://interact.tscn")
+var warpScene:PackedScene=load("res://warp.tscn")
+var tvScene:PackedScene=load("res://tv.tscn")
+var missleScene:PackedScene=load("res://missle.tscn")
+var pukeScene:PackedScene=load("res://puke.tscn")
+var expanderScene:PackedScene=load("res://expander.tscn")
+var tallmScene:PackedScene=load("res://monster_tall.tscn")
+var welcomeScene:PackedScene=load("res://welcome_center.tscn")
+var assetsScene:PackedScene=load("res://assets.tscn")
+var enterScene:PackedScene=load("res://enterable.tscn")
+var flavorScene:PackedScene=load("res://flavornpc.tscn")
+var flyerScene:PackedScene=load("res://flyer.tscn")
+var multiScene:PackedScene=load("res://multistage.tscn")
+
+
+
+
 var freshstart=false
 var weather=""
 const stats=preload("res://playerstats.gd")
@@ -97,6 +117,23 @@ var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap
 var conveniance={"oldloc":0}
 var horror:=false
 var radiation:=false
+var questpc:=[
+	{"name":"epsilon","mode":"jobboard"},
+	{"name":"gemna","mode":"trader"}
+]
+
+var percentageMap=[10,10,10,10,10,10,10,5,5,5,5,5,5]
+
+var rng=RandomNumberGenerator.new()
+
+
+
+var questDistributed=false
+
+func weatheroff():
+	$weather.position.y=0
+	Flags.weather=""
+
 
 func reset():
 
@@ -105,7 +142,9 @@ func reset():
 	flavornpc={"npc":[
 	{"name":"fanguymanly","deployed":false},
 	{"name":"princessoccula","deployed":false},
-	{"name":"win3","deployed":false}
+	{"name":"win3","deployed":false},
+	{"name":"infotammy","deployed":false},
+	{"name":"piper","deployed":false}
 	]}
 	mesmerized=false
 	hat=""
@@ -206,3 +245,7 @@ func refreshPlayer():
 	print(megaStats)
 	credit=megaStats.credit		
 		
+func clearnode(danode):
+	var removenode=danode.get_children()
+	for i in removenode:
+		i.queue_free()

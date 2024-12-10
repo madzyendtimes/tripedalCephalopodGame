@@ -1,15 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://bid0ue1i8kuhe"]
+[gd_scene load_steps=19 format=3 uid="uid://bid0ue1i8kuhe"]
 
 [ext_resource type="Texture2D" uid="uid://dtm1mcs1ddp4o" path="res://npc/fanguymanly/fanguymanly1.PNG" id="1_dn1sp"]
 [ext_resource type="Script" path="res://flavornpc.gd" id="1_y36xa"]
 [ext_resource type="Texture2D" uid="uid://bupdrdias4m1r" path="res://npc/fanguymanly/fanguymanly2.PNG" id="2_0g060"]
 [ext_resource type="Texture2D" uid="uid://bhf3cyupogrc4" path="res://npc/princessOcula/ocula1.PNG" id="3_pcned"]
 [ext_resource type="Texture2D" uid="uid://cv86q1skmriyg" path="res://npc/princessOcula/ocula2.PNG" id="4_jalxh"]
+[ext_resource type="Texture2D" uid="uid://h23x3nbcabqa" path="res://npc/tammy1.PNG" id="4_rlvye"]
 [ext_resource type="Texture2D" uid="uid://bo8s1rmrj11km" path="res://npc/win3/win31.PNG" id="5_0qfb4"]
+[ext_resource type="Texture2D" uid="uid://4nkb7iy8ck6x" path="res://npc/infotammy/tammy2.PNG" id="5_qsqpo"]
+[ext_resource type="Texture2D" uid="uid://biuntywasu6sl" path="res://npc/piper/piper1.PNG" id="6_bd5ld"]
 [ext_resource type="Texture2D" uid="uid://b05pawbl6kjvl" path="res://npc/win3/win32.PNG" id="6_qkk82"]
 [ext_resource type="Texture2D" uid="uid://bm66q2c3nvb7b" path="res://npc/fanguymanly/fanguymanlytext.PNG" id="7_6n78j"]
+[ext_resource type="Texture2D" uid="uid://ddfxssrreknx6" path="res://npc/piper/piper2.PNG" id="7_i4b7i"]
 [ext_resource type="Texture2D" uid="uid://buwqvmkirbg0k" path="res://npc/princessOcula/oculaText.PNG" id="8_8igf4"]
 [ext_resource type="Texture2D" uid="uid://dsi3hwuwfyl27" path="res://npc/win3/win3text.PNG" id="9_uacx3"]
+[ext_resource type="Texture2D" uid="uid://1vnodvvogy37" path="res://npc/infotammy/text.PNG" id="13_gpxhp"]
+[ext_resource type="Texture2D" uid="uid://bahipuch8spfu" path="res://npc/piper/text.PNG" id="14_4jt60"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cidpi"]
 animations = [{
@@ -22,6 +28,28 @@ animations = [{
 }],
 "loop": true,
 "name": &"fanguymanly",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_rlvye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qsqpo")
+}],
+"loop": true,
+"name": &"infotammy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bd5ld")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_i4b7i")
+}],
+"loop": true,
+"name": &"piper",
 "speed": 5.0
 }, {
 "frames": [{
@@ -59,6 +87,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("13_gpxhp")
+}],
+"loop": true,
+"name": &"infotammytext",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_4jt60")
+}],
+"loop": true,
+"name": &"pipertext",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("8_8igf4")
 }],
 "loop": true,
@@ -82,10 +126,11 @@ script = ExtResource("1_y36xa")
 position = Vector2(155, 325)
 scale = Vector2(0.82, 0.82)
 sprite_frames = SubResource("SpriteFrames_cidpi")
-animation = &"win3"
+animation = &"piper"
+frame_progress = 0.122491
 
 [node name="text" type="AnimatedSprite2D" parent="."]
 position = Vector2(360, 176)
 scale = Vector2(0.74, 0.72)
 sprite_frames = SubResource("SpriteFrames_hh854")
-animation = &"fanguymanlytext"
+animation = &"pipertext"
