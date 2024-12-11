@@ -36,10 +36,10 @@ var warpS
 var missle
 var dangerZone
 var canrandom=true
-var randopercents=true
+var randopercents=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	$Camera2D.make_current()
 	if randopercents:
 		Flags.percentageMap.sort_custom(func(a, b): return rng.randi_range(0,1)>0)
 	
@@ -178,15 +178,8 @@ func doEffect():
 			#$Camera2D/CanvasLayer/colorect.material.set_shader_parameter("saturation",10.0)
 		"horror":
 			triggerhorror()
-		"exitcryptominos":			
-			warpCB(Flags.conveniance.oldloc*-1)
-			Flags.paused=false
-			$player/AnimatedSprite2D.play()
-			var tween=get_tree().create_tween()
-			tween.parallel().tween_property($player,"scale",Flags.playerscale,.5)
-			tween.parallel().tween_property($player,"position",Flags.playerposition,.5)
-			$player.walkani()
-			#tween.tween_callback(entered)		
+		"exitenterable":
+			exit()
 					
 		"puke":
 			dopuke()
@@ -247,6 +240,16 @@ func doEffect():
 	Flags.effect=""	
 
 
+func exit():
+	$Camera2D.make_current()			
+	Flags.paused=false
+	Flags.mode="level"
+	$player/AnimatedSprite2D.play()
+	$AudioStreamPlayer.play()
+	var tween=get_tree().create_tween()
+	tween.parallel().tween_property($player,"scale",Flags.playerscale,.5)
+	tween.parallel().tween_property($player,"position",Flags.playerposition,.5)
+	$player.walkani()
 
 
 func returnBonus(skey):
@@ -482,9 +485,8 @@ func intreturn():
 func entered():
 	weatheroff()
 	speed=1
-	warpCB(-99949)
-	$player.position.y=0
-	Flags.entered.building.start()
+	$AudioStreamPlayer.stop()
+	Flags.entered.building.start(self)
 	Flags.entered.building.close()
 
 func stopRun():

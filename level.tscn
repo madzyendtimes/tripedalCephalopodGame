@@ -1,4 +1,4 @@
-[gd_scene load_steps=169 format=3 uid="uid://bjlg8hhdf4x7l"]
+[gd_scene load_steps=171 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -132,6 +132,7 @@
 [ext_resource type="PackedScene" uid="uid://ej35f8d30wde" path="res://enterable.tscn" id="108_lhqd7"]
 [ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="116_lqqny"]
 [ext_resource type="PackedScene" path="res://assets.tscn" id="117_jg7m3"]
+[ext_resource type="PackedScene" uid="uid://utpjm1uc1isi" path="res://temple.tscn" id="119_0ei4f"]
 [ext_resource type="PackedScene" uid="uid://dos1618drl4dc" path="res://cryptominos.tscn" id="125_dyu73"]
 [ext_resource type="Script" path="res://weather.gd" id="126_gpbvy"]
 [ext_resource type="Texture2D" uid="uid://dprgsok8wnlsv" path="res://weather/rain/rain1.PNG" id="126_q1g0u"]
@@ -147,6 +148,7 @@
 [ext_resource type="Texture2D" uid="uid://cfoklgwqqs7wi" path="res://random/IMG_6181.PNG" id="144_s1wvq"]
 [ext_resource type="Shader" path="res://my.gdshader" id="146_atsho"]
 [ext_resource type="PackedScene" uid="uid://bnkp4iv4btgno" path="res://trader.tscn" id="147_ctibj"]
+[ext_resource type="PackedScene" uid="uid://bmq0wbqe1b72p" path="res://witchhut.tscn" id="149_847de"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y3yxv"]
 resource_local_to_scene = true
@@ -977,10 +979,6 @@ shape = SubResource("RectangleShape2D_e5vwe")
 position = Vector2(-728, 338)
 texture = ExtResource("83_4r3hh")
 
-[node name="cryptominos" parent="locationfront/tutorial" instance=ExtResource("125_dyu73")]
-position = Vector2(-76890.8, 60.7692)
-scale = Vector2(0.769231, 0.769231)
-
 [node name="enemy" type="Node2D" parent="."]
 
 [node name="groundling" parent="enemy" instance=ExtResource("7_f4tqc")]
@@ -1063,6 +1061,24 @@ offset_right = 1504.0
 offset_bottom = 656.0
 
 [node name="trader" parent="." instance=ExtResource("147_ctibj")]
+
+[node name="cryptominos" parent="." instance=ExtResource("125_dyu73")]
+position = Vector2(-99958, 3.99995)
+
+[node name="temple" parent="." instance=ExtResource("119_0ei4f")]
+position = Vector2(34, 4164)
+
+[node name="witchhut" parent="." instance=ExtResource("149_847de")]
+position = Vector2(18, -2516)
+
+[node name="cryptominoscamera" type="Camera2D" parent="."]
+position = Vector2(-99318, 324)
+
+[node name="templecamera" type="Camera2D" parent="."]
+position = Vector2(594, 4508)
+
+[node name="witchhutcamera" type="Camera2D" parent="."]
+position = Vector2(586, -2196)
 
 [connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]

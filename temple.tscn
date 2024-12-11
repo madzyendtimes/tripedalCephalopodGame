@@ -290,3 +290,4 @@ texture = ExtResource("7_hwn6t")
 [connection signal="body_entered" from="alter" to="." method="_on_alter_body_entered"]
 [connection signal="body_entered" from="alter" to="alter" method="_on_body_entered"]
 [connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
+[connection signal="finished" from="music" to="." method="_on_music_finished"]
