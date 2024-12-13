@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bnlttjgnqg5ek"
+path="res://.godot/imported/Brilliant Charles.wav-310717dd6a408694c256902adf4c635e.sample"
+
+[deps]
+
+source_file="res://music/Brilliant Charles.wav"
+dest_files=["res://.godot/imported/Brilliant Charles.wav-310717dd6a408694c256902adf4c635e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

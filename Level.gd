@@ -39,6 +39,7 @@ var canrandom=true
 var randopercents=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Flags.mode="level"
 	$Camera2D.make_current()
 	if randopercents:
 		Flags.percentageMap.sort_custom(func(a, b): return rng.randi_range(0,1)>0)
@@ -152,7 +153,6 @@ func radiationend():
 func doEffect():
 	if Flags.mode!="level":
 		return
-	#var itemMap:=[{"type":"food","varients":[{"name":"old pizza","effect":"restorehp"},{"name":"noodles... or worms!","effect":"puke|restorehp"},{"name":"suspect sandwitch","effect":"puke"}]},{"type":"scrap","varients":[{"name":"tin foil hat","effect":"stanimaExtend"},{"name":"crushed soda","effect":"recyle"},{"name":"broken mirror","effect":"warp"}]},[{"type":"quest","varients":[{"name":"legs","effect":"quest"}]}]]
 	var sEff=Flags.effect
 	var aSel = sEff.split("|")
 	if aSel.size()>1:
@@ -174,8 +174,6 @@ func doEffect():
 			tween.parallel().set_loops(radtime).tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/contrast",5.0,1.0).from_current()
 			tween.parallel().set_loops(radtime).tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/saturation",6.0,1.0).from_current()
 			tween.tween_callback(radiationend)
-			#$Camera2D/CanvasLayer/colorect.material.set_shader_parameter("contrast",10.0)
-			#$Camera2D/CanvasLayer/colorect.material.set_shader_parameter("saturation",10.0)
 		"horror":
 			triggerhorror()
 		"exitenterable":
@@ -695,6 +693,7 @@ func _on_missle_hit() -> void:
 
 func _on_tutorial_body_entered(body: Node2D) -> void:
 	weatheroff()
+	$enemy/tv.settype("tv")
 	speed=1
 	warpto(-16250)
 

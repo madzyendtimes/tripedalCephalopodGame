@@ -17,6 +17,10 @@ func _process(delta: float) -> void:
 				
 	pass
 
+func settype(ptype):
+	type=ptype
+	$active/AnimatedSprite2D.animation=ptype
+
 func chooseType():
 	var rng:=RandomNumberGenerator.new()
 	var t:=rng.randi_range(0,2)

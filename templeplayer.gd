@@ -18,10 +18,27 @@ var oldtest=floor(position.y/100)
 var dead=false
 var bag=0
 var inoffer=false
-
+var oldmod=modulate
+var inhit=false
 
 func _process(delta: float) -> void:
-	if dead or inoffer:
+	
+	if Flags.mode!="temple":
+		return
+	
+	if Input.is_action_just_pressed("reset"):
+		Flags.playerStats.health=10
+		dead=false
+		inhit=false
+		inoffer=false
+		bag=0
+		
+		walk()
+		
+		$"..".reset()
+		$"..".devstart()
+
+	if dead or inoffer or Flags.mode!="temple":
 		return
 
 
@@ -60,6 +77,10 @@ func _process(delta: float) -> void:
 		tween.tween_property(self,"scale",Vector2(tempscale,tempscale),0.3).from_current()
 
 func makeoffer():
+	if dead:
+		$AnimatedSprite2D.animation="dead"	
+		return
+		
 	$AnimatedSprite2D.animation="front"
 	inoffer=true
 	Flags.dotime(walk,1.6)	
@@ -68,14 +89,42 @@ func offer():
 	Flags.dotime(makeoffer,0.5)
 
 func hit():
-	dead=true
-	$AnimatedSprite2D.animation="dead"	
+	inhit=true
+	$AnimatedSprite2D.animation="hit"
+	#var tween=get_tree().create_tween()
+	#tween.tween_property(self,"modulate",Color.RED,0.5)
+#
+
+	Flags.playerStats.health-=1
+#	tween.tween_property(self,"modulate",oldmod,0.5)
+	if Flags.playerStats.health<1:
+		dead=true
+		$AnimatedSprite2D.animation="dead"
+		return	
+	Flags.dotime(outhit,1.4)
+
+
+func outhit():
+	inhit=false
+	walk()
 
 func walk():
+	if dead:
+		$AnimatedSprite2D.animation="dead"	
+		return	
+	if inhit:
+		return
 	inoffer=false
 	$AnimatedSprite2D.animation="walk"
+	if bag>9:
+		$AnimatedSprite2D.animation="fullbag"
 
 func clean():
+	if inhit:
+		return
+	if dead:
+		$AnimatedSprite2D.animation="dead"
+		return	
 	$AnimatedSprite2D.animation="pickup"
 	bag+=1
 	Flags.dotime(walk,0.6)

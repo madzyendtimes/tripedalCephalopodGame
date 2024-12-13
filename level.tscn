@@ -1,4 +1,4 @@
-[gd_scene load_steps=171 format=3 uid="uid://bjlg8hhdf4x7l"]
+[gd_scene load_steps=170 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -21,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://dt26il247oonc" path="res://player/fight/punch1.PNG" id="7_mqtj6"]
 [ext_resource type="Texture2D" uid="uid://dmmroypcbr0it" path="res://decorations/tutorial/cafeteria.PNG" id="7_sl0do"]
 [ext_resource type="Texture2D" uid="uid://yi5af2oq0r2" path="res://decorations/tutorial/wreckroom.PNG" id="8_ejmpv"]
-[ext_resource type="Script" path="res://enemyGenerator.gd" id="8_hs2bf"]
 [ext_resource type="Texture2D" uid="uid://dp8urd45vca12" path="res://player/fight/punch2.PNG" id="8_kv877"]
 [ext_resource type="Texture2D" uid="uid://cxa8x213b4fnw" path="res://player/fight/punch3.PNG" id="9_1fosa"]
 [ext_resource type="Texture2D" uid="uid://bpbiq2xw4k68p" path="res://decorations/tutorial/exit.PNG" id="9_rp4wn"]
@@ -1005,10 +1004,6 @@ position = Vector2(-16110, -4)
 
 [node name="tree" parent="." instance=ExtResource("2_nllk3")]
 
-[node name="enemyGenerator" type="Timer" parent="."]
-wait_time = 2.878
-script = ExtResource("8_hs2bf")
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_kcqfy")
 autoplay = true
@@ -1094,5 +1089,4 @@ position = Vector2(586, -2196)
 [connection signal="body_entered" from="locationfront/tutorial" to="." method="_on_tutorial_body_entered"]
 [connection signal="body_entered" from="rocks/rock" to="." method="_on_rock_body_entered"]
 [connection signal="body_entered" from="rocks/rock" to="player" method="_on_rock_body_entered"]
-[connection signal="timeout" from="enemyGenerator" to="." method="_on_enemy_generator_timeout"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://ddyrim015boa1"]
+
+[ext_resource type="Texture2D" uid="uid://yv74srbjgltw" path="res://enterable/witchhut/assets/ingredients/arm.PNG" id="1_jq32w"]
+[ext_resource type="Texture2D" uid="uid://dmyhiaxlnqnxo" path="res://enterable/witchhut/assets/ingredients/clothes.PNG" id="2_fpqpx"]
+[ext_resource type="Texture2D" uid="uid://08p8yxb7wq2v" path="res://enterable/witchhut/assets/ingredients/eye.PNG" id="3_4w1kw"]
+[ext_resource type="Texture2D" uid="uid://bhp6m2oqfon0" path="res://enterable/witchhut/assets/ingredients/face.PNG" id="4_5nj6n"]
+[ext_resource type="Texture2D" uid="uid://5kaokilu36p3" path="res://enterable/witchhut/assets/ingredients/hair.PNG" id="5_jgdwg"]
+[ext_resource type="Texture2D" uid="uid://btyyppft3xoiy" path="res://enterable/witchhut/assets/ingredients/leg.PNG" id="6_bsakp"]
+[ext_resource type="Texture2D" uid="uid://hgx66wgsvjq4" path="res://enterable/witchhut/assets/ingredients/mouth.PNG" id="7_542fi"]
+[ext_resource type="Texture2D" uid="uid://13fbs7nxigt1" path="res://enterable/witchhut/assets/ingredients/tongue.PNG" id="8_w8xd1"]
+[ext_resource type="Texture2D" uid="uid://x3dtvonxpaao" path="res://enterable/witchhut/assets/ingredients/torso.PNG" id="9_y31ib"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_47514"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jq32w")
+}],
+"loop": true,
+"name": &"arm",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fpqpx")
+}],
+"loop": true,
+"name": &"clothes",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4w1kw")
+}],
+"loop": true,
+"name": &"eye",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5nj6n")
+}],
+"loop": true,
+"name": &"face",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jgdwg")
+}],
+"loop": true,
+"name": &"hair",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bsakp")
+}],
+"loop": true,
+"name": &"leg",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_542fi")
+}],
+"loop": true,
+"name": &"mouth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_w8xd1")
+}],
+"loop": true,
+"name": &"tongue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_y31ib")
+}],
+"loop": true,
+"name": &"torso",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5t344"]
+radius = 24.0
+height = 80.0
+
+[node name="ingredient" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_47514")
+animation = &"torso"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
+shape = SubResource("CapsuleShape2D_5t344")

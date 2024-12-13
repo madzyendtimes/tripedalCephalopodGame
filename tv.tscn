@@ -75,7 +75,7 @@ collision_mask = 2054
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="active"]
 position = Vector2(2, 373)
 sprite_frames = SubResource("SpriteFrames_5rov7")
-animation = &"eyes"
+animation = &"tv"
 autoplay = "tv"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="active"]

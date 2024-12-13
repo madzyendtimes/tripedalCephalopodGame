@@ -13,7 +13,7 @@ func showpop():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
+	print(Flags.paused,Flags.entered,Flags.mode)
 	if Flags.paused==false || Flags.entered.active==true||Flags.mode!="statsScreen":		
 		update()
 	else:
@@ -76,7 +76,8 @@ func SelectItem(selx,sely):
 
 func update():
 	$PopupPanel.visible=true
-	$PopupPanel/statbar/Label.text="health :"+str(Flags.playerStats.health)+" - stanima :"+str(Flags.playerStats.stanima)+" - speed :"+str(Flags.playerStats.speed)+ " - power : "+str(Flags.playerStats.power)+"loc:"+str(Flags.l)
+	$PopupPanel/statbar/Label.text="health :"+str(Flags.playerStats.health)+" - stanima :"+str(Flags.playerStats.stanima)+" - speed : "+str(Flags.playerStats.speed)+ " - power : "+str(Flags.playerStats.power)+" - gems: "+str(Flags.megaStats.gems)
+	#"loc:"+str(Flags.l)
 	
 func contract():
 	update()
