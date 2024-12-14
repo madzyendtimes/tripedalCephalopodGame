@@ -1,5 +1,5 @@
-extends Area2D
-
+extends Node2D
+var type=""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,11 +10,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-
-func _on_body_entered(body: Node2D) -> void:
-	print(body.name)
-	if Flags.entered.active==true:
-		Flags.paused=false;
-		Flags.entered.active=false
-		Flags.effect="exitenterable"
-	pass # Replace with function body.
+func settype(ptype):
+	type=ptype
+	$AnimatedSprite2D.animation=ptype
+	
+func press():
+	$AnimatedSprite2D.animation=type+"pressed"
+	Flags.dotime(unpress,.7)
+	
+	
+func unpress():
+	$AnimatedSprite2D.animation=type

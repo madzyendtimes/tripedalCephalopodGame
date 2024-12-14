@@ -125,7 +125,7 @@ var questpc:=[
 #var percentageMap=[10,10,10,10,10,10,10,5,5,5,5,5,5]
 var percentageMap=[0,0,0,0,0,0,100,0,0,0,0,0,0] #enterable
 var rng=RandomNumberGenerator.new()
-
+var witchevents=""
 
 
 var questDistributed=false

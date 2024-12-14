@@ -24,8 +24,11 @@ func choosetype():
 func _process(delta: float) -> void:
 	pass
 
-func start():
-	$"../../locationfront/tutorial/cryptominos".start()
+func start(called):	
+	called.get_node(type+"camera").make_current()
+	Flags.mode=type
+	called.get_node(type).start(called)
+
 
 func close():
 	$front.animation=type+"entered"

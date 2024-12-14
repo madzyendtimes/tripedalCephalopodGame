@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://biglriot8avek"]
+
+[ext_resource type="Script" path="res://inputbutton.gd" id="1_4omwg"]
+[ext_resource type="Texture2D" uid="uid://cv8egekpw3ybr" path="res://input/controller/fight.PNG" id="1_iurmk"]
+[ext_resource type="Texture2D" uid="uid://w1s1wqw7a7ef" path="res://input/controller/fightpressed.PNG" id="2_alvn6"]
+[ext_resource type="Texture2D" uid="uid://cl15jged6rdd1" path="res://input/controller/jump.PNG" id="3_bjfeh"]
+[ext_resource type="Texture2D" uid="uid://brmvng0qdawlf" path="res://input/controller/jumppressed.PNG" id="4_sugjl"]
+[ext_resource type="Texture2D" uid="uid://cmui6mgesdgpb" path="res://input/controller/run.PNG" id="5_3y5ti"]
+[ext_resource type="Texture2D" uid="uid://bm2lkuhkemnst" path="res://input/controller/runpressed.PNG" id="6_jpb7n"]
+[ext_resource type="Texture2D" uid="uid://by0rd5gunei0l" path="res://input/controller/search.PNG" id="7_ftnwn"]
+[ext_resource type="Texture2D" uid="uid://w4gssd7bohjn" path="res://input/controller/searchpressed.PNG" id="8_5padr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qt6js"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_iurmk")
+}],
+"loop": true,
+"name": &"fight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_alvn6")
+}],
+"loop": true,
+"name": &"fightpressed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bjfeh")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_sugjl")
+}],
+"loop": true,
+"name": &"jumppressed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3y5ti")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_jpb7n")
+}],
+"loop": true,
+"name": &"runpressed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ftnwn")
+}],
+"loop": true,
+"name": &"search",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_5padr")
+}],
+"loop": true,
+"name": &"searchpressed",
+"speed": 5.0
+}]
+
+[node name="inputbutton" type="Node2D"]
+script = ExtResource("1_4omwg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1.43051e-06)
+scale = Vector2(0.73, 0.61)
+sprite_frames = SubResource("SpriteFrames_qt6js")
+animation = &"searchpressed"

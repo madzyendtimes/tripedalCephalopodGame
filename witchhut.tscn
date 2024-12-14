@@ -1,19 +1,28 @@
-[gd_scene load_steps=41 format=3 uid="uid://bmq0wbqe1b72p"]
+[gd_scene load_steps=57 format=3 uid="uid://bmq0wbqe1b72p"]
 
 [ext_resource type="Script" path="res://witchhut.gd" id="1_segje"]
 [ext_resource type="Texture2D" uid="uid://bvlmeil7lqiyx" path="res://enterable/witchhut/assets/witchplayer/button.PNG" id="2_cgy88"]
+[ext_resource type="Script" path="res://button.gd" id="2_db37q"]
 [ext_resource type="PackedScene" uid="uid://ddyrim015boa1" path="res://ingredient.tscn" id="2_jbqsg"]
 [ext_resource type="Texture2D" uid="uid://bnfabr4tmmrq5" path="res://enterable/witchhut/assets/cauldren/front.PNG" id="3_6jq55"]
 [ext_resource type="Texture2D" uid="uid://dh5m4yt62ytf0" path="res://enterable/witchhut/assets/cauldren/calm2.PNG" id="4_su37m"]
 [ext_resource type="Texture2D" uid="uid://cbly0l7qo5f7k" path="res://enterable/witchhut/assets/cauldren/calm3.PNG" id="5_ab5c3"]
+[ext_resource type="Script" path="res://punish.gd" id="5_hbmuy"]
+[ext_resource type="Script" path="res://soup.gd" id="6_1mlgs"]
 [ext_resource type="Texture2D" uid="uid://bvyar1jmr7t3g" path="res://enterable/witchhut/assets/cauldren/calm4.PNG" id="6_mn273"]
+[ext_resource type="Texture2D" uid="uid://d1b1p7cqlj7h5" path="res://enterable/witchhut/assets/cauldren/punish1.PNG" id="6_utusc"]
+[ext_resource type="Texture2D" uid="uid://cmgaarmjvl8d5" path="res://enterable/witchhut/assets/cauldren/punish2.PNG" id="7_7uxnu"]
 [ext_resource type="Texture2D" uid="uid://b12v3wxmkl57l" path="res://enterable/witchhut/assets/cauldren/splash2.PNG" id="7_tphxw"]
 [ext_resource type="Texture2D" uid="uid://h30e2vkrsaa7" path="res://enterable/witchhut/assets/cauldren/splash3.PNG" id="8_namwt"]
+[ext_resource type="Texture2D" uid="uid://cv6hikyxea3b2" path="res://enterable/witchhut/assets/cauldren/punish3.PNG" id="8_pvqkb"]
 [ext_resource type="Texture2D" uid="uid://be4ms8rje8nlt" path="res://enterable/witchhut/assets/cauldren/splash.PNG" id="9_6rbue"]
+[ext_resource type="Texture2D" uid="uid://by3qg8pbu02i4" path="res://enterable/witchhut/assets/cauldren/punish4.PNG" id="9_nu1a4"]
+[ext_resource type="Texture2D" uid="uid://bdoaruoqykc24" path="res://enterable/witchhut/assets/cauldren/punish5.PNG" id="10_a20us"]
 [ext_resource type="Texture2D" uid="uid://bhrbh5bfn04xq" path="res://player/forward/forward1.PNG" id="10_pq25f"]
 [ext_resource type="Script" path="res://witchplayer.gd" id="10_r2eta"]
 [ext_resource type="Texture2D" uid="uid://bpbiq2xw4k68p" path="res://decorations/tutorial/exit.PNG" id="10_wnwpc"]
 [ext_resource type="Texture2D" uid="uid://dbkyrrxyhngsl" path="res://player/forward/forward2.PNG" id="11_ftsuh"]
+[ext_resource type="Texture2D" uid="uid://lb2vuhjvht4x" path="res://enterable/witchhut/assets/cauldren/punish6.PNG" id="11_qq0hc"]
 [ext_resource type="Texture2D" uid="uid://c538auj77juw0" path="res://player/forward/forward3.PNG" id="12_i6snf"]
 [ext_resource type="Texture2D" uid="uid://d20rivj1yrkr7" path="res://player/fight/walk1.PNG" id="13_2oys0"]
 [ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="14_v2wrt"]
@@ -23,11 +32,16 @@
 [ext_resource type="Texture2D" uid="uid://djoajs5n503ux" path="res://enterable/witchhut/assets/witchplayer/press1.PNG" id="18_oagdm"]
 [ext_resource type="Texture2D" uid="uid://i6xwxak42ato" path="res://enterable/witchhut/assets/witchplayer/press2.PNG" id="19_nemt2"]
 [ext_resource type="Texture2D" uid="uid://uwkd75312gh6" path="res://enterable/witchhut/assets/witchplayer/press3.PNG" id="20_qvyoj"]
+[ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="22_q8wkn"]
 [ext_resource type="AudioStream" uid="uid://bv3qpfv21xy3y" path="res://music/Prosperous Camp.wav" id="24_tdb3s"]
 [ext_resource type="Texture2D" uid="uid://nerkrrrh8oea" path="res://enterable/witchhut/assets/pipe/pipe1.PNG" id="25_fqkcs"]
+[ext_resource type="Texture2D" uid="uid://ocavrd1udw7j" path="res://enterable/temple/assets/hit1.PNG" id="25_x4rpi"]
 [ext_resource type="Texture2D" uid="uid://d27pvmwlrdnm5" path="res://enterable/witchhut/assets/pipe/pipe2.PNG" id="26_c6unv"]
+[ext_resource type="Texture2D" uid="uid://cdlcfj2p7lnba" path="res://enterable/temple/assets/hit2.PNG" id="26_v8cjo"]
 [ext_resource type="Texture2D" uid="uid://3wxf6gpp8khr" path="res://enterable/witchhut/assets/pipe/pipe3.PNG" id="27_21hrx"]
+[ext_resource type="Texture2D" uid="uid://dkkajv5lsujr5" path="res://enterable/temple/assets/hit3.PNG" id="27_n3pay"]
 [ext_resource type="Texture2D" uid="uid://0ila61u3yoxj" path="res://enterable/witchhut/assets/necrowitch/read1.PNG" id="28_enats"]
+[ext_resource type="Script" path="res://necrowitch.gd" id="29_78k5f"]
 [ext_resource type="Texture2D" uid="uid://bvgpijmssqiqh" path="res://enterable/witchhut/assets/necrowitch/read2.PNG" id="29_plg3v"]
 [ext_resource type="Texture2D" uid="uid://dlen1q6qb3fvp" path="res://enterable/witchhut/assets/necrowitch/rip1.PNG" id="30_g06gc"]
 [ext_resource type="Texture2D" uid="uid://dxlh27hoeh35v" path="res://enterable/witchhut/assets/necrowitch/rip2.PNG" id="31_ja5ul"]
@@ -41,6 +55,35 @@ size = Vector2(1618, 20)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_nmkax"]
 load_path = "res://.godot/imported/calm1.PNG-8254735e9e081960f033b410bd83ba49.ctex"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ffoic"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_utusc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7uxnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pvqkb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_nu1a4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_a20us")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_qq0hc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkdag"]
+size = Vector2(202, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ic8k5"]
 animations = [{
@@ -56,6 +99,11 @@ animations = [{
 }],
 "loop": true,
 "name": &"calm",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"ouch",
 "speed": 5.0
 }, {
 "frames": [{
@@ -81,6 +129,14 @@ height = 224.0
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("22_q8wkn")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("10_pq25f")
 }, {
 "duration": 1.0,
@@ -91,6 +147,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"forward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_x4rpi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_v8cjo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_n3pay")
+}],
+"loop": true,
+"name": &"hit",
 "speed": 5.0
 }, {
 "frames": [{
@@ -183,6 +253,8 @@ animations = [{
 script = ExtResource("1_segje")
 
 [node name="button" type="Area2D" parent="."]
+position = Vector2(0, 10)
+script = ExtResource("2_db37q")
 
 [node name="Button" type="Sprite2D" parent="button"]
 position = Vector2(360, 488)
@@ -212,20 +284,35 @@ texture = SubResource("CompressedTexture2D_nmkax")
 [node name="ingredient" parent="ingredients" instance=ExtResource("2_jbqsg")]
 position = Vector2(656, 64)
 
-[node name="cauldrenfront" type="Node2D" parent="."]
+[node name="punish" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("5_hbmuy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="punish"]
+position = Vector2(504, 456)
+rotation = -0.151844
+sprite_frames = SubResource("SpriteFrames_ffoic")
+autoplay = "default"
+frame_progress = 0.0494341
+
+[node name="cauldrenfront" type="Area2D" parent="."]
 
 [node name="Front" type="Sprite2D" parent="cauldrenfront"]
 position = Vector2(648, 560)
 texture = ExtResource("3_6jq55")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cauldrenfront"]
+position = Vector2(664, 576)
+shape = SubResource("RectangleShape2D_tkdag")
+
 [node name="soup" type="Node2D" parent="."]
+script = ExtResource("6_1mlgs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="soup"]
 position = Vector2(656, 560)
 sprite_frames = SubResource("SpriteFrames_ic8k5")
-animation = &"calm"
+animation = &"ouch"
 autoplay = "calm"
-frame_progress = 0.390702
 
 [node name="exit" type="Area2D" parent="."]
 
@@ -242,36 +329,44 @@ flip_h = true
 script = ExtResource("10_r2eta")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="witchplayer"]
-position = Vector2(360, 488)
+position = Vector2(248, 496)
 scale = Vector2(1.27667, 1.26333)
 sprite_frames = SubResource("SpriteFrames_tnq0w")
-animation = &"look"
+animation = &"dead"
 autoplay = "walk"
-frame_progress = 0.0182208
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="witchplayer"]
-position = Vector2(336, 560)
+position = Vector2(224, 568)
 shape = SubResource("CapsuleShape2D_fcjit")
 
 [node name="music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("24_tdb3s")
 
 [node name="pipe" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="pipe"]
 position = Vector2(664, 248)
 sprite_frames = SubResource("SpriteFrames_lh0gm")
 autoplay = "default"
-frame_progress = 0.729471
+frame_progress = 0.788564
+metadata/_edit_lock_ = true
 
 [node name="necrowitch" type="Node2D" parent="."]
+script = ExtResource("29_78k5f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="necrowitch"]
-position = Vector2(1264, 504)
+position = Vector2(1088, 504)
 scale = Vector2(0.713333, 0.74)
 sprite_frames = SubResource("SpriteFrames_aadka")
 animation = &"rip"
-frame_progress = 0.53122
+frame_progress = 0.590239
 
+[node name="recipes" type="Node2D" parent="."]
+
+[node name="playerinput" type="Node2D" parent="."]
+
+[connection signal="body_entered" from="button" to="witchplayer" method="_on_button_body_entered"]
+[connection signal="body_entered" from="cauldrenfront" to="." method="_on_cauldrenfront_body_entered"]
 [connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
 [connection signal="finished" from="music" to="." method="_on_music_finished"]

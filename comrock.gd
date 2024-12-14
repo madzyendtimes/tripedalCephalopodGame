@@ -23,7 +23,7 @@ func chooseType():
 	id=$AnimatedSprite2D.animation
 func gameover():
 	if Flags.entered.active==true:
-		Flags.effect="exitcryptominos"
+		Flags.effect="exitenterable"
 		Flags.paused=false;
 		Flags.entered.active=false
 		print("gameover")

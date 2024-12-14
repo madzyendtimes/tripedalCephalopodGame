@@ -1,4 +1,4 @@
-extends Area2D
+extends CanvasLayer
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,10 +11,12 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_body_entered(body: Node2D) -> void:
-	print(body.name)
-	if Flags.entered.active==true:
-		Flags.paused=false;
-		Flags.entered.active=false
-		Flags.effect="exitenterable"
-	pass # Replace with function body.
+func punish():
+	visible=true
+	$AnimatedSprite2D.play()
+	Flags.dotime(calm,1.0)
+
+func calm():
+	visible=false
+	
+		

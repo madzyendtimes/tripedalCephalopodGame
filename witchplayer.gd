@@ -1,29 +1,73 @@
 extends CharacterBody2D
-
-
+var playerdead=false
+var speed=5
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+var engaged=false
+var firsttime=true
+var playerhit=false
 
+func _process(delta: float) -> void:
 
-func _physics_process(delta: float) -> void:
-	
-	if Flags.mode!="witchhut":
+	if Flags.mode!="witchhut" || playerdead:
 		return
 
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if engaged==false:
+		$AnimatedSprite2D.animation="walk"	
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	move_and_slide()
+
+	if Input.is_action_pressed("right"):
+		if !engaged:
+			position.x+=1*speed
+			$AnimatedSprite2D.flip_h=false
+		
+	if Input.is_action_pressed("left"):
+		$AnimatedSprite2D.flip_h=true
+		engaged=false
+		position.x-=1*speed
+	
+	if !engaged:
+		return
+	
+	
+func unpress():
+	if !playerhit:
+		$AnimatedSprite2D.animation="look"
+	
+func unhit():
+	playerhit=false
+	$AnimatedSprite2D.animation="look"
+	#var tween=get_tree().create_tween()
+
+	
+func hit():
+	$AnimatedSprite2D.animation="hit"
+	playerhit=true
+
+	if Flags.playerStats.health<1:
+		$AnimatedSprite2D.animation="dead"
+		playerdead=true
+		return
+		
+
+	Flags.dotime(unhit,1.5)
+	#var tweener=get_tree().create_tween()
+	#tweener.
+	
+func press():
+	$AnimatedSprite2D.animation="press"
+	Flags.dotime(unpress,.5)
+	
+
+func _on_button_body_entered(body: Node2D) -> void:
+	print("buttoned")
+	if firsttime:
+		firsttime=false
+		return
+	$AnimatedSprite2D.animation="look"
+	engaged=true
+	$AnimatedSprite2D.flip_h=false
+	Flags.witchevents="newrecipe"
+	pass # Replace with function body.

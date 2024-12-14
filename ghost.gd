@@ -4,6 +4,14 @@ var rng=RandomNumberGenerator.new()
 var speed=1
 var tx=0
 var ty=0
+
+var xbound=1400
+var ybound=1000
+var xboundo=-1400
+var yboundo=-700
+var oldx=0
+var oldy=0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var tempt=rng.randi_range(1,3)
@@ -29,8 +37,8 @@ func getdir():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position.y+=ty*speed
-	position.x+=tx*speed
+	position.y=clamp(position.y+ty*speed,yboundo,ybound)
+	position.x=clamp(position.x+tx*speed,xboundo,xbound)
 	pass
 
 func kill():

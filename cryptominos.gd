@@ -18,8 +18,8 @@ func _process(delta: float) -> void:
 
 	pass
 
-func start():
-	
+func start(called):
+	print("cryptostarted")
 	Flags.entered.active=true
 	Flags.paused=true
 	var axe=axeScene.instantiate()

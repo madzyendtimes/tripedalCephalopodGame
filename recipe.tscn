@@ -1,0 +1,96 @@
+[gd_scene load_steps=12 format=3 uid="uid://b6jccahuqdv5t"]
+
+[ext_resource type="Texture2D" uid="uid://dja3d4y83r1jm" path="res://enterable/witchhut/assets/spellbook/arm.PNG" id="1_1jyq3"]
+[ext_resource type="Script" path="res://recipe.gd" id="1_oj50j"]
+[ext_resource type="Texture2D" uid="uid://fg7v6b4q22dv" path="res://enterable/witchhut/assets/spellbook/clothes.PNG" id="2_guw0p"]
+[ext_resource type="Texture2D" uid="uid://bpyq235m2j524" path="res://enterable/witchhut/assets/spellbook/eyes.PNG" id="3_xhxvj"]
+[ext_resource type="Texture2D" uid="uid://jx2i5w0qeg1t" path="res://enterable/witchhut/assets/spellbook/face.PNG" id="4_2ovpk"]
+[ext_resource type="Texture2D" uid="uid://c1mr24bd3std0" path="res://enterable/witchhut/assets/spellbook/hair.PNG" id="5_ypu0q"]
+[ext_resource type="Texture2D" uid="uid://cwy5mktp4l140" path="res://enterable/witchhut/assets/spellbook/foot.PNG" id="6_vl8t7"]
+[ext_resource type="Texture2D" uid="uid://p7dgobe8is3t" path="res://enterable/witchhut/assets/spellbook/mouth.PNG" id="7_bxjmx"]
+[ext_resource type="Texture2D" uid="uid://hmsvdbqss42y" path="res://enterable/witchhut/assets/spellbook/tongue.PNG" id="8_6xcxi"]
+[ext_resource type="Texture2D" uid="uid://bip00e5nlrfnl" path="res://enterable/witchhut/assets/spellbook/torso.PNG" id="9_v0e4w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nld4s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1jyq3")
+}],
+"loop": true,
+"name": &"arm",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_guw0p")
+}],
+"loop": true,
+"name": &"clothes",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_xhxvj")
+}],
+"loop": true,
+"name": &"eye",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2ovpk")
+}],
+"loop": true,
+"name": &"face",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ypu0q")
+}],
+"loop": true,
+"name": &"hair",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_vl8t7")
+}],
+"loop": true,
+"name": &"leg",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_bxjmx")
+}],
+"loop": true,
+"name": &"mouth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_6xcxi")
+}],
+"loop": true,
+"name": &"tongue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_v0e4w")
+}],
+"loop": true,
+"name": &"torso",
+"speed": 5.0
+}]
+
+[node name="reccipe" type="Node2D"]
+script = ExtResource("1_oj50j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(12, 4)
+scale = Vector2(0.44, 0.44)
+sprite_frames = SubResource("SpriteFrames_nld4s")
+animation = &"torso"
