@@ -36,7 +36,7 @@ func close():
 	
 func _on_body_entered(body: Node2D) -> void:
 
-	print("enterable")
+
 	Flags.entered.ready=true
 	Flags.entered.building=self
 	Flags.entered.type=$front.animation
@@ -45,7 +45,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_body_exited(body: Node2D) -> void:
-	print("unenterable")
 	Flags.entered.ready=false
 	#Flags.entered.active=false
 	

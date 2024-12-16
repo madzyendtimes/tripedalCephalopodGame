@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ow4cwtw0wx7m"]
+[gd_scene load_steps=3 format=3 uid="uid://dywaphievidhc"]
 
 [ext_resource type="Script" path="res://stats.gd" id="1_370n0"]
-[ext_resource type="Theme" uid="uid://c3oiugsuwc64" path="res://stattheme.tres" id="1_ruft0"]
+[ext_resource type="Theme" path="res://stattheme.tres" id="1_ruft0"]
 
 [node name="stats" type="Control"]
 modulate = Color(1, 0.654902, 0.992157, 1)

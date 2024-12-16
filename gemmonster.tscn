@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://4hhuo2qn1mc4"]
+
+[ext_resource type="Texture2D" uid="uid://c2b7p0rogh54w" path="res://enterable/witchhut/assets/gemmonster/walk1.PNG" id="1_6k730"]
+[ext_resource type="Script" path="res://gemmonster.gd" id="1_i3jbm"]
+[ext_resource type="Texture2D" uid="uid://dgnuu7mdefm1x" path="res://enterable/witchhut/assets/gemmonster/walk2.PNG" id="2_v6kr7"]
+[ext_resource type="Texture2D" uid="uid://b4tx7tqqb4rs" path="res://enterable/witchhut/assets/gemmonster/walk3.PNG" id="3_se6m6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wmevr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6k730")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_v6kr7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_se6m6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8s8p5"]
+radius = 32.0
+height = 80.0
+
+[node name="gemmonster" type="Area2D"]
+collision_layer = 9
+collision_mask = 3
+script = ExtResource("1_i3jbm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wmevr")
+autoplay = "default"
+frame_progress = 0.880054
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-64, 24)
+shape = SubResource("CapsuleShape2D_8s8p5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

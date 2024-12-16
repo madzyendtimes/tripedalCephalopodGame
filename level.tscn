@@ -1,129 +1,57 @@
-[gd_scene load_steps=170 format=3 uid="uid://bjlg8hhdf4x7l"]
+[gd_scene load_steps=96 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
-[ext_resource type="Script" path="res://player.gd" id="2_dlod8"]
 [ext_resource type="Texture2D" uid="uid://b3bdpe4vkh5x0" path="res://location/home/back.PNG" id="2_fr0tk"]
 [ext_resource type="PackedScene" path="res://tree.tscn" id="2_nllk3"]
 [ext_resource type="PackedScene" uid="uid://fxs76c7jxk0o" path="res://npc.tscn" id="2_q0aer"]
 [ext_resource type="Texture2D" uid="uid://d1s4lqu3w7n6r" path="res://location/tutorial/blackboaard.PNG" id="3_7vpnf"]
 [ext_resource type="PackedScene" uid="uid://47rqth40v12t" path="res://interact.tscn" id="3_wwvka"]
-[ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="4_2ul28"]
 [ext_resource type="PackedScene" uid="uid://dgoj5xbbjud02" path="res://missle.tscn" id="4_a4tke"]
-[ext_resource type="Texture2D" uid="uid://d20rivj1yrkr7" path="res://player/fight/walk1.PNG" id="4_cl57f"]
 [ext_resource type="Texture2D" uid="uid://4m08f3jurlqs" path="res://decorations/cityoutskirts/signs/tutorial.PNG" id="4_km83g"]
 [ext_resource type="Script" path="res://npc.gd" id="5_3jyy4"]
 [ext_resource type="Texture2D" uid="uid://ig3t15w63i23" path="res://decorations/cityoutskirts/signs/danger.PNG" id="5_ec3b4"]
-[ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="5_usucn"]
 [ext_resource type="Texture2D" uid="uid://cq3s57dqcum5v" path="res://decorations/tutorial/studentcenter.PNG" id="6_7sct6"]
-[ext_resource type="Texture2D" uid="uid://bowtiwa8luaw8" path="res://player/fight/walk3.PNG" id="6_ffkg2"]
 [ext_resource type="PackedScene" uid="uid://cpm4tmnn754ff" path="res://groundling.tscn" id="7_f4tqc"]
-[ext_resource type="Texture2D" uid="uid://dt26il247oonc" path="res://player/fight/punch1.PNG" id="7_mqtj6"]
 [ext_resource type="Texture2D" uid="uid://dmmroypcbr0it" path="res://decorations/tutorial/cafeteria.PNG" id="7_sl0do"]
 [ext_resource type="Texture2D" uid="uid://yi5af2oq0r2" path="res://decorations/tutorial/wreckroom.PNG" id="8_ejmpv"]
-[ext_resource type="Texture2D" uid="uid://dp8urd45vca12" path="res://player/fight/punch2.PNG" id="8_kv877"]
-[ext_resource type="Texture2D" uid="uid://cxa8x213b4fnw" path="res://player/fight/punch3.PNG" id="9_1fosa"]
 [ext_resource type="Texture2D" uid="uid://bpbiq2xw4k68p" path="res://decorations/tutorial/exit.PNG" id="9_rp4wn"]
-[ext_resource type="Texture2D" uid="uid://u7tcp4ltu80v" path="res://player/deadthat.PNG" id="9_x8nb5"]
 [ext_resource type="Texture2D" uid="uid://dtausojy550m4" path="res://npc/angrella/talk1.PNG" id="10_4ato1"]
-[ext_resource type="Texture2D" uid="uid://gbvxjs4awv43" path="res://player/deadbeg.PNG" id="10_6deas"]
-[ext_resource type="Texture2D" uid="uid://d1si5d67c28yu" path="res://player/fight/punch4.PNG" id="10_c3itr"]
 [ext_resource type="Texture2D" uid="uid://c66qs5crmy77l" path="res://decorations/tutorial/backtostart.PNG" id="10_h115f"]
 [ext_resource type="Texture2D" uid="uid://dmh5qsjnbchy2" path="res://npc/angrella/talk2.PNG" id="11_gs1jx"]
-[ext_resource type="Texture2D" uid="uid://dehk8cthp1hi3" path="res://player/fight/punch5.PNG" id="11_qqygd"]
-[ext_resource type="Texture2D" uid="uid://c6bveekvvs77k" path="res://player/exhausted/exhausted1.PNG" id="12_jmvq2"]
 [ext_resource type="Texture2D" uid="uid://b836df7xyh6y2" path="res://npc/angrella/jumptutorial.PNG" id="12_wcksl"]
-[ext_resource type="Texture2D" uid="uid://dig26kdfto1rn" path="res://player/search/shake1.PNG" id="13_d72hm"]
-[ext_resource type="Texture2D" uid="uid://batp6unuoga60" path="res://player/walkthat/walkthat1.PNG" id="13_l146d"]
 [ext_resource type="Script" path="res://sludgebutt.gd" id="13_ovjp5"]
 [ext_resource type="PackedScene" uid="uid://deofurri717ld" path="res://rock.tscn" id="13_tggde"]
 [ext_resource type="Texture2D" uid="uid://c5iulupedgkqn" path="res://npc/sludgebutt/sludgebutt1.PNG" id="13_y6jk6"]
-[ext_resource type="Texture2D" uid="uid://dv8arp8360vhf" path="res://player/exhausted/exhausted2.PNG" id="13_ywgca"]
-[ext_resource type="Texture2D" uid="uid://dvbhmkmluwfec" path="res://player/search/shake2.PNG" id="14_1ybuh"]
-[ext_resource type="Texture2D" uid="uid://d1vxqa6ylpcow" path="res://player/walkthat/walkthat2.PNG" id="14_ej8ob"]
 [ext_resource type="Texture2D" uid="uid://udigahkpj1ol" path="res://npc/sludgebutt/sludgebutt2.PNG" id="14_ns2el"]
-[ext_resource type="Texture2D" uid="uid://bm36g6tvngpks" path="res://player/exhausted/exhausted3.PNG" id="14_ui603"]
 [ext_resource type="Texture2D" uid="uid://drebx1jb1mlts" path="res://npc/sludgebutt/questcompletetext.PNG" id="15_2taxa"]
-[ext_resource type="Texture2D" uid="uid://2dytwx22luvo" path="res://player/walkbeg/walkbeg1.PNG" id="15_c7ear"]
-[ext_resource type="Texture2D" uid="uid://c70pp3in1qhcc" path="res://player/walkthat/walkthat3.PNG" id="15_f85wx"]
-[ext_resource type="Texture2D" uid="uid://dfs1jo344o6rr" path="res://player/search/shake3.PNG" id="15_tk3yi"]
 [ext_resource type="Texture2D" uid="uid://bjt4hai4ttkuk" path="res://npc/sludgebutt/questtext.PNG" id="16_7iadb"]
-[ext_resource type="Texture2D" uid="uid://dimoy7lqjoy7m" path="res://player/walkbeg/walkbeg2.PNG" id="16_sr6pj"]
 [ext_resource type="Texture2D" uid="uid://btao0ksax3aqi" path="res://location/home/front.PNG" id="17_7wont"]
 [ext_resource type="Script" path="res://gemna.gd" id="17_asgom"]
-[ext_resource type="Texture2D" uid="uid://bwvb4ieksh6dh" path="res://player/walkbeg/walkbeg3.PNG" id="17_p6770"]
-[ext_resource type="AudioStream" uid="uid://b5diaegodc4xu" path="res://sounds/die.mp3" id="18_cggrm"]
 [ext_resource type="PackedScene" uid="uid://dbooao61w5erw" path="res://pailface.tscn" id="18_dbl8f"]
-[ext_resource type="AudioStream" uid="uid://cbglxmkk1gbwe" path="res://sounds/punch1.mp3" id="18_oxidk"]
 [ext_resource type="Texture2D" uid="uid://ddk81jqy53xqf" path="res://npc/gemna/gemnatext.PNG" id="18_p5k4v"]
 [ext_resource type="Script" path="res://pailface.gd" id="19_prjnd"]
-[ext_resource type="Texture2D" uid="uid://yuepvxakb6is" path="res://player/exhaustedthat/exhaustedthat1.PNG" id="19_th3vs"]
-[ext_resource type="AudioStream" uid="uid://6dd0on15gn4i" path="res://sounds/trash.mp3.mp3" id="19_wak06"]
 [ext_resource type="Texture2D" uid="uid://coclpfsxscvc5" path="res://npc/gemna/gemnaCompleteText.PNG" id="19_xli40"]
-[ext_resource type="AudioStream" uid="uid://cts5mr5pidjys" path="res://sounds/jump2.mp3" id="20_6cbuf"]
-[ext_resource type="Texture2D" uid="uid://dn7eb870848fg" path="res://player/exhaustedthat/exhaustedthat2.PNG" id="20_8iq16"]
 [ext_resource type="Texture2D" uid="uid://biyloyknuao3b" path="res://npc/gemna/gemna1.PNG" id="20_334ox"]
-[ext_resource type="Texture2D" uid="uid://b6ootfv77ildd" path="res://player/puke/puke1.PNG" id="20_d3fqs"]
-[ext_resource type="Texture2D" uid="uid://chwomnyha5ggm" path="res://player/puke/puke2.PNG" id="21_m7lqc"]
-[ext_resource type="Texture2D" uid="uid://cyrega5atbfll" path="res://player/exhaustedthat/exhaustedthat3.PNG" id="21_n2oub"]
 [ext_resource type="Texture2D" uid="uid://bwglwr6oqc5fg" path="res://npc/gemna/gemna2.PNG" id="21_ws368"]
-[ext_resource type="Texture2D" uid="uid://darcp6a0fme6o" path="res://player/puke/puke3.PNG" id="22_gu85y"]
 [ext_resource type="Texture2D" uid="uid://dsmgx0kh82byh" path="res://npc/gemna/gemnacomplete1.PNG" id="22_wa8vn"]
 [ext_resource type="Texture2D" uid="uid://bimsw8oqu1xk8" path="res://npc/sludgebutt/questcomplete.PNG" id="23_7wcso"]
 [ext_resource type="Texture2D" uid="uid://dswtsk7j5ibfc" path="res://npc/gemna/gemnacomplete2.PNG" id="23_hrphj"]
 [ext_resource type="AudioStream" uid="uid://yotkhxff2mfd" path="res://music/Fallen Date.wav" id="23_kcqfy"]
-[ext_resource type="Texture2D" uid="uid://bb3qxm3k41yq7" path="res://player/puke/puke4.PNG" id="23_q1lkx"]
-[ext_resource type="Texture2D" uid="uid://c7kkd3t5lp7ox" path="res://player/exhaustedbeg/exhaustedbeg1.PNG" id="24_84teh"]
 [ext_resource type="PackedScene" uid="uid://bid0ue1i8kuhe" path="res://flavornpc.tscn" id="24_f2tfj"]
-[ext_resource type="Texture2D" uid="uid://c0bvasq6pqahv" path="res://player/puke/puke5.PNG" id="24_g1qg1"]
 [ext_resource type="Texture2D" uid="uid://x10nc4ufvaex" path="res://npc/sludgebutt/questcomplete2.PNG" id="24_rb1w3"]
-[ext_resource type="Texture2D" uid="uid://blytohpko7fyf" path="res://player/exhaustedbeg/exhaustedbeg2.PNG" id="25_8qxuw"]
 [ext_resource type="Texture2D" uid="uid://cn020rbt5e0ci" path="res://npc/snitchyjoe/snitchyjoe1.PNG" id="25_dow64"]
 [ext_resource type="Texture2D" uid="uid://ddjiojmxk0u1" path="res://npc/snitchyjoe/snitchyjoe2.PNG" id="26_bts4l"]
-[ext_resource type="Texture2D" uid="uid://cclgjls2yokjr" path="res://player/exhaustedbeg/exhaustedbeg3.PNG" id="26_vta3l"]
 [ext_resource type="Texture2D" uid="uid://d0r6u85iha5nu" path="res://npc/snitchyjoe/text.PNG" id="27_ku1u7"]
-[ext_resource type="Texture2D" uid="uid://juo8bc6nvb64" path="res://player/fightthat/fightthat1.PNG" id="27_m0ihu"]
-[ext_resource type="Texture2D" uid="uid://dj7pr8fpv6t7k" path="res://player/fightthat/fightthat2.PNG" id="28_fbnkp"]
 [ext_resource type="Texture2D" uid="uid://dgctyurakgpyd" path="res://npc/forlorna/forlorna1.PNG" id="28_yunte"]
-[ext_resource type="Texture2D" uid="uid://cmjbxbwjca6jp" path="res://player/fightthat/fightthat3.PNG" id="29_eqbb5"]
 [ext_resource type="Texture2D" uid="uid://cf86hcxguoq05" path="res://npc/forlorna/forlorna2.PNG" id="29_q4gt8"]
-[ext_resource type="Texture2D" uid="uid://bb4ngdr08p55w" path="res://player/fightthat/fightthat4.PNG" id="30_0v8nd"]
-[ext_resource type="PackedScene" path="res://stats.tscn" id="30_mddu5"]
+[ext_resource type="PackedScene" uid="uid://dywaphievidhc" path="res://stats.tscn" id="30_mddu5"]
 [ext_resource type="Texture2D" uid="uid://cahmxptlo6w4x" path="res://npc/forlorna/text.PNG" id="30_p0b63"]
 [ext_resource type="Texture2D" uid="uid://dq2008dtan2m7" path="res://npc/lilHype/lilhype1.PNG" id="31_r56fl"]
-[ext_resource type="Texture2D" uid="uid://wequwctjw2da" path="res://player/mesmerized/mesmerized1.PNG" id="31_v75h5"]
-[ext_resource type="Texture2D" uid="uid://cpllfmuvxgems" path="res://player/mesmerized/mesmerized2.PNG" id="32_52jr6"]
 [ext_resource type="Texture2D" uid="uid://cd7xyh5ka8cof" path="res://npc/lilHype/lilhype2.PNG" id="32_w7imu"]
 [ext_resource type="Texture2D" uid="uid://o5u8nhsslrlf" path="res://npc/lilHype/text.PNG" id="33_87cpu"]
-[ext_resource type="Texture2D" uid="uid://b8wqhflwmsr1s" path="res://player/mesmerized/mesmerized3.PNG" id="33_fa4mq"]
-[ext_resource type="Texture2D" uid="uid://dgn1tgtg5byj" path="res://player/fightbeg/fightbeg1.PNG" id="35_s3fyc"]
-[ext_resource type="Texture2D" uid="uid://b4it0qhp5ible" path="res://player/fightbeg/fightbeg2.PNG" id="36_gopek"]
-[ext_resource type="Texture2D" uid="uid://c87jx3a68ecyn" path="res://player/pukethat/pukethat1.PNG" id="36_mhm2f"]
-[ext_resource type="Texture2D" uid="uid://cv0ehvshujioq" path="res://player/fightbeg/fightbeg3.PNG" id="37_jw5tg"]
-[ext_resource type="Texture2D" uid="uid://be7vmpnn3wkfp" path="res://player/pukethat/pukethat2.PNG" id="37_rfw08"]
-[ext_resource type="Texture2D" uid="uid://cc6eicg8vmbns" path="res://player/fightbeg/fightbeg4.PNG" id="38_43ntl"]
-[ext_resource type="Texture2D" uid="uid://cqokxyh3jmx8o" path="res://player/pukethat/pukethat3.PNG" id="38_isnyl"]
-[ext_resource type="Texture2D" uid="uid://crisxc8skaiqb" path="res://player/pukethat/pukethat4.PNG" id="39_lcv5l"]
-[ext_resource type="Texture2D" uid="uid://dkxsni0n57ow2" path="res://player/fightbeg/fightbeg5.PNG" id="39_qkmwc"]
-[ext_resource type="Texture2D" uid="uid://43ckm7nq05wq" path="res://player/pukethat/pukethat5.PNG" id="40_jsmi2"]
-[ext_resource type="Texture2D" uid="uid://bogwowocg1r48" path="res://player/searchthat/searchthat1.PNG" id="44_0rqos"]
-[ext_resource type="Texture2D" uid="uid://iays8cfpuhct" path="res://player/searchthat/searchthat2.PNG" id="45_g4nc3"]
-[ext_resource type="Texture2D" uid="uid://digrdjfqd0u1j" path="res://player/searchthat/searchthat3.PNG" id="46_mbeyk"]
-[ext_resource type="Texture2D" uid="uid://cld4ru5qdd0n5" path="res://player/mesmerizedbeg/mesmerizedbeg1.PNG" id="47_ga8gr"]
-[ext_resource type="Texture2D" uid="uid://cl0jo85fviqgj" path="res://player/mesmerizedbeg/mesmerizedbeg3.PNG" id="48_gicr6"]
-[ext_resource type="Texture2D" uid="uid://cl0npj4oy3r2v" path="res://player/mesmerizedbeg/mesmerizzedbeg2.PNG" id="49_25v3p"]
-[ext_resource type="Texture2D" uid="uid://b6ohmp4cv1i2w" path="res://player/pukebeg/pukebeg1.PNG" id="55_qcon0"]
-[ext_resource type="Texture2D" uid="uid://bshibitw2i3r6" path="res://player/pukebeg/pukebeg2.PNG" id="56_vj7ye"]
-[ext_resource type="Texture2D" uid="uid://bun670mjly8l" path="res://player/pukebeg/pukebeg3.PNG" id="57_14531"]
+[ext_resource type="PackedScene" uid="uid://cdj8g8hh6wurl" path="res://player.tscn" id="46_sbt76"]
 [ext_resource type="PackedScene" uid="uid://vm41mkvar7g0" path="res://expander.tscn" id="57_a6jor"]
-[ext_resource type="Texture2D" uid="uid://dunw4h3rxhovi" path="res://player/pukebeg/pukebeg4.PNG" id="58_mfc70"]
-[ext_resource type="Texture2D" uid="uid://bbpae3lg3jfa6" path="res://player/pukebeg/pukebeg5.PNG" id="59_ucehp"]
-[ext_resource type="Texture2D" uid="uid://c0bsyaqhxcvc4" path="res://player/searchbeg/searchbeg1.PNG" id="68_ed1iq"]
-[ext_resource type="Texture2D" uid="uid://dxog0jsddlb1h" path="res://player/searchbeg/searchbeg2.PNG" id="69_tqirq"]
-[ext_resource type="Texture2D" uid="uid://dk8fctv3offgf" path="res://player/searchbeg/searchbeg3.PNG" id="70_vrnn3"]
-[ext_resource type="Texture2D" uid="uid://bhrbh5bfn04xq" path="res://player/forward/forward1.PNG" id="71_cg1a6"]
-[ext_resource type="Texture2D" uid="uid://dbkyrrxyhngsl" path="res://player/forward/forward2.PNG" id="72_pwvgq"]
-[ext_resource type="Texture2D" uid="uid://c538auj77juw0" path="res://player/forward/forward3.PNG" id="73_vh3e1"]
 [ext_resource type="Script" path="res://tutorial.gd" id="81_bqg1q"]
 [ext_resource type="Texture2D" uid="uid://b0x7w52xctc7x" path="res://location/tutorial/tutorialback.PNG" id="82_8p1p5"]
 [ext_resource type="Texture2D" uid="uid://driq162ck5stl" path="res://location/tutorial/tutorialfront.PNG" id="83_4r3hh"]
@@ -307,322 +235,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_602p8"]
-radius = 29.5
-height = 127.11
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qc2jh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_2ul28")
-}],
-"loop": true,
-"name": &"dead",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_6deas")
-}],
-"loop": true,
-"name": &"deadbeg",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("9_x8nb5")
-}],
-"loop": true,
-"name": &"deadthat",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_cl57f")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_usucn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_ffkg2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("15_c7ear")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_sr6pj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_p6770")
-}],
-"loop": true,
-"name": &"defaultbeg",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("13_l146d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_ej8ob")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_f85wx")
-}],
-"loop": true,
-"name": &"defaultthat",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_jmvq2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_ywgca")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_ui603")
-}],
-"loop": true,
-"name": &"exhausted",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("24_84teh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_8qxuw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_vta3l")
-}],
-"loop": true,
-"name": &"exhaustedbeg",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("19_th3vs")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_8iq16")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_n2oub")
-}],
-"loop": true,
-"name": &"exhaustedthat",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_mqtj6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_kv877")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_1fosa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_c3itr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_qqygd")
-}],
-"loop": true,
-"name": &"fight",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("35_s3fyc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("36_gopek")
-}, {
-"duration": 1.0,
-"texture": ExtResource("37_jw5tg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("38_43ntl")
-}, {
-"duration": 1.0,
-"texture": ExtResource("39_qkmwc")
-}],
-"loop": true,
-"name": &"fightbeg",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("27_m0ihu")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_fbnkp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_eqbb5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_0v8nd")
-}],
-"loop": true,
-"name": &"fightthat",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("71_cg1a6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("72_pwvgq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("73_vh3e1")
-}],
-"loop": true,
-"name": &"forward",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("31_v75h5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("32_52jr6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("33_fa4mq")
-}],
-"loop": true,
-"name": &"mesmerized",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("47_ga8gr")
-}, {
-"duration": 1.0,
-"texture": ExtResource("48_gicr6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("49_25v3p")
-}],
-"loop": true,
-"name": &"mesmerizedbeg",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("20_d3fqs")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_m7lqc")
-}, {
-"duration": 1.0,
-"texture": ExtResource("22_gu85y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_q1lkx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("24_g1qg1")
-}],
-"loop": true,
-"name": &"puke",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 2.0,
-"texture": ExtResource("55_qcon0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("56_vj7ye")
-}, {
-"duration": 1.0,
-"texture": ExtResource("57_14531")
-}, {
-"duration": 1.0,
-"texture": ExtResource("58_mfc70")
-}, {
-"duration": 1.0,
-"texture": ExtResource("59_ucehp")
-}],
-"loop": true,
-"name": &"pukebeg",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("36_mhm2f")
-}, {
-"duration": 1.0,
-"texture": ExtResource("37_rfw08")
-}, {
-"duration": 1.0,
-"texture": ExtResource("38_isnyl")
-}, {
-"duration": 1.0,
-"texture": ExtResource("39_lcv5l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("40_jsmi2")
-}],
-"loop": true,
-"name": &"pukethat",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("13_d72hm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_1ybuh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_tk3yi")
-}],
-"loop": true,
-"name": &"search",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("68_ed1iq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("69_tqirq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("70_vrnn3")
-}],
-"loop": true,
-"name": &"searchbeg",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("44_0rqos")
-}, {
-"duration": 1.0,
-"texture": ExtResource("45_g4nc3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("46_mbeyk")
-}],
-"loop": true,
-"name": &"searchthat",
 "speed": 5.0
 }]
 
@@ -906,41 +518,7 @@ autoplay = "default"
 position = Vector2(-4350, 204)
 texture = ExtResource("33_87cpu")
 
-[node name="player" type="CharacterBody2D" parent="."]
-position = Vector2(671, 423)
-scale = Vector2(2, 2)
-collision_layer = 2
-collision_mask = 5260
-script = ExtResource("2_dlod8")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
-position = Vector2(-68, -16)
-shape = SubResource("CapsuleShape2D_602p8")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player"]
-position = Vector2(-25.5, -7)
-scale = Vector2(0.826667, 0.715)
-sprite_frames = SubResource("SpriteFrames_qc2jh")
-animation = &"forward"
-autoplay = "default"
-
-[node name="dead" type="AudioStreamPlayer2D" parent="player"]
-position = Vector2(-335.5, -211.5)
-scale = Vector2(0.5, 0.5)
-stream = ExtResource("18_cggrm")
-volume_db = 24.0
-
-[node name="punch" type="AudioStreamPlayer2D" parent="player"]
-stream = ExtResource("18_oxidk")
-volume_db = 24.0
-
-[node name="search" type="AudioStreamPlayer2D" parent="player"]
-stream = ExtResource("19_wak06")
-volume_db = 24.0
-
-[node name="jump" type="AudioStreamPlayer2D" parent="player"]
-stream = ExtResource("20_6cbuf")
-volume_db = -8.117
+[node name="player" parent="." instance=ExtResource("46_sbt76")]
 
 [node name="locationfront" type="Node2D" parent="."]
 
@@ -1009,7 +587,6 @@ stream = ExtResource("23_kcqfy")
 autoplay = true
 
 [node name="stats" parent="." instance=ExtResource("30_mddu5")]
-metadata/_edit_lock_ = true
 
 [node name="tutorialmusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("116_lqqny")
@@ -1078,15 +655,11 @@ position = Vector2(586, -2196)
 [connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]
 [connection signal="hit" from="interactive/missle" to="." method="_on_missle_hit"]
-[connection signal="trashable" from="interactive/interact" to="player" method="_on_interact_trashable"]
 [connection signal="body_entered" from="npcs/npc" to="npcs/npc" method="_on_body_entered"]
-[connection signal="body_entered" from="npcs/npc" to="player" method="_on_npc_body_entered"]
 [connection signal="body_entered" from="npcs/npc/gemna" to="npcs/npc/gemna" method="_on_body_entered"]
 [connection signal="body_exited" from="npcs/npc/gemna" to="npcs/npc/gemna" method="_on_body_exited"]
 [connection signal="body_entered" from="npcs/sludgebutt" to="npcs/sludgebutt" method="_on_body_entered"]
 [connection signal="body_entered" from="npcs/pailface" to="." method="_on_pailface_body_entered"]
-[connection signal="trashable" from="player" to="interactive/interact" method="_on_player_trashable"]
 [connection signal="body_entered" from="locationfront/tutorial" to="." method="_on_tutorial_body_entered"]
 [connection signal="body_entered" from="rocks/rock" to="." method="_on_rock_body_entered"]
-[connection signal="body_entered" from="rocks/rock" to="player" method="_on_rock_body_entered"]
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

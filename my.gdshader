@@ -21,9 +21,9 @@ void fragment() {
 	c.rgb = mix(vec3(0.5),c.rgb,contrast);
 	c.rgb=mix(vec3(dot(vec3(1.0),c.rgb)*0.333333),c.rgb,saturation);
 	COLOR.rgb=c;
-	
-	
-	
+
+
+
 	// Called for every pixel the material is visible on.
 }
 

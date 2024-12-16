@@ -13,15 +13,17 @@ var playerchoice=[{"button":"jump","ingredient":"eye","scene":"","px":100,"py":2
 var recipeScene:PackedScene=load("res://recipe.tscn")
 var ingScene:PackedScene=load("res://ingredient.tscn")
 var inpScene:PackedScene=load("res://inputbutton.tscn")
+var gemScene:PackedScene=load("res://gemmonster.tscn")
 var ouch=false
-
+var timetext=30
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	start(self)
+	#start(self)
 	pass # Replace with function body.
 
-
+func hidegems():
+	$gems.visible=false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Flags.mode!="witchhut" or playerdead:
@@ -38,28 +40,39 @@ func _process(delta: float) -> void:
 		"newrecipe":
 			createrecipe()
 			playerchoices()
+		"gemmonster":
+			var gm=gemScene.instantiate()
+			gm.position=Vector2(600,550)
+			$monsters.add_child(gm)
+			$gems/Label.text="+"+str(stage)
+			$gems.visible=true
+			Flags.dotime(hidegems,1.0)
+		"gemcaught":
+			Flags.megaStats.gems+=stage	
+			stage+=1
 			
+			createrecipe()
 	Flags.witchevents=""
 	pass
 
 
-func poorchoice():
+func poorchoice(ingredient):
 	var ing=ingScene.instantiate()
-	ing.position.x=700
-	ing.settype(getrandomingredient())
+	ing.position.x=650
+	ing.settype(ingredient)
 	ing.drop()
 	$ingredients.add_child(ing)
 	ouch=true	
 	
 
 func goodchoice(pc):
-	print("congrats");
+	#print("congrats");
 	var ing=ingScene.instantiate()
-	ing.position.x=700
+	ing.position.x=650
 	ing.settype(pc.ingredient)
 	ing.drop()
 	$ingredients.add_child(ing)
-	Flags.megaStats.gems+=1
+	#Flags.megaStats.gems+=1
 
 func commit(pc):
 	pc.buttonscene.press()
@@ -77,17 +90,20 @@ func commit(pc):
 			break
 		count+=1
 	if !found:
-		poorchoice()
+		poorchoice(pc.ingredient)
 
 
 func recipecomplete():
-	
-	Flags.megaStats.gems+=stage	
-	stage+=1
-	createrecipe()
-	
+	$time.visible=false
+	$soup.complete()
 
-
+	
+func clearinput():
+	for i in playerchoice:
+		if is_instance_valid(i.scene):
+			i.scene.queue_free()
+		if is_instance_valid(i.buttonscene):
+			i.buttonscene.queue_free()
 func resetinput():
 	if freshstart:
 		return
@@ -106,28 +122,53 @@ func createrecipe():
 			count=0
 		var rx=860+(100*count)
 		var ry=200 +floor(i/3)*100
-#		reciperender.scale.x=.01
-#		reciperender.scale.y=.01
-		#reciperender.position.x=1080
-		#reciperender.position.y=640
 		reciperender.position.x=rx
 		reciperender.position.y=ry
-		#var tween=get_tree().create_tween()
-		#tween.tween_property(reciperender,"position.x",rx,1)
-		#tween.tween_property(reciperender,"position.y",ry,1)
 		reciperender.settype(ingredients[choice])
-		count+=1
-				
+		count+=1		
 		recipe.append(reciperender)
-		
-#		tween.parallel().tween_property(reciperender,"scale.x",1,.5)
-#		tween.parallel().tween_property(reciperender,"scale.y",1,.5)
+		$recipes.add_child(reciperender)
+		dotweens(rx,ry,reciperender)
 
+	timetext=30+(stage*3)
+	$time/Label.text=str(timetext)
+	$time.visible=true
+	Flags.dotime(counter,1.0)
 	Flags.dotime(witchread,0.5)
 
+
+func clearrecipe():
+
+	for i in recipe:
+		if is_instance_valid(i):
+			i.queue_free()
+	for i in recipe:
+		recipe.remove_at(0)
+	$time.visible=false
+
+
+func counter():
+	timetext-=1
+	$time/Label.text=str(timetext)
+	if timetext<1 && $time.visible==true:
+		poorchoice(getrandomingredient())
+		clearrecipe()
+		createrecipe()
+		return
+	if $witchplayer.engaged:
+		Flags.dotime(counter,1.0)
+	
+func dotweens(px,py,reciperender):
+		var tween=get_tree().create_tween()
+		reciperender.scale=Vector2(0.1,0.1)
+		reciperender.position.x=1080
+		reciperender.position.y=640
+		tween.parallel().tween_property(reciperender,"position",Vector2(px,py),1)
+		tween.parallel().tween_property(reciperender,"scale",Vector2(1,1),1)
+
 func witchread():
-		for i in recipe:
-			$recipes.add_child(i)
+		
+
 		$necrowitch/AnimatedSprite2D.animation="read"
 
 
@@ -163,10 +204,14 @@ func start(callee):
 	Flags.mode="witchhut"
 	home=callee
 	$music.play()
+	recipe=[]
 
 func exit():
+	clearrecipe()
+	clearinput()
+	freshstart=true
 	$music.stop()
-	#home.exit()
+	home.exit()
 
 func _on_exit_body_entered(body: Node2D) -> void:
 	exit()
@@ -191,3 +236,9 @@ func _on_cauldrenfront_body_entered(body: Node2D) -> void:
 			playerdead=true
 		pass
 	 # Replace with function body.
+
+
+func _on_button_body_exited(body: Node2D) -> void:
+	clearrecipe()
+	clearinput()
+	pass # Replace with function body.

@@ -1,8 +1,9 @@
-[gd_scene load_steps=57 format=3 uid="uid://bmq0wbqe1b72p"]
+[gd_scene load_steps=68 format=3 uid="uid://bmq0wbqe1b72p"]
 
 [ext_resource type="Script" path="res://witchhut.gd" id="1_segje"]
 [ext_resource type="Texture2D" uid="uid://bvlmeil7lqiyx" path="res://enterable/witchhut/assets/witchplayer/button.PNG" id="2_cgy88"]
 [ext_resource type="Script" path="res://button.gd" id="2_db37q"]
+[ext_resource type="Texture2D" uid="uid://cspougstu5em4" path="res://enterable/witchhut/assets/background/shelf.PNG" id="2_i7r4y"]
 [ext_resource type="PackedScene" uid="uid://ddyrim015boa1" path="res://ingredient.tscn" id="2_jbqsg"]
 [ext_resource type="Texture2D" uid="uid://bnfabr4tmmrq5" path="res://enterable/witchhut/assets/cauldren/front.PNG" id="3_6jq55"]
 [ext_resource type="Texture2D" uid="uid://dh5m4yt62ytf0" path="res://enterable/witchhut/assets/cauldren/calm2.PNG" id="4_su37m"]
@@ -30,9 +31,16 @@
 [ext_resource type="Texture2D" uid="uid://djbp8dgc0jl2e" path="res://enterable/witchhut/assets/witchplayer/look1.PNG" id="16_fbroc"]
 [ext_resource type="Texture2D" uid="uid://dt7nihx6nwn8c" path="res://enterable/witchhut/assets/witchplayer/look2.PNG" id="17_qufnt"]
 [ext_resource type="Texture2D" uid="uid://djoajs5n503ux" path="res://enterable/witchhut/assets/witchplayer/press1.PNG" id="18_oagdm"]
+[ext_resource type="Texture2D" uid="uid://4druwfi0d8jr" path="res://enterable/witchhut/assets/cauldren/gem1.PNG" id="18_r1whe"]
+[ext_resource type="Texture2D" uid="uid://ctcuj8py5xf36" path="res://enterable/witchhut/assets/cauldren/gem2.PNG" id="19_ndxc1"]
 [ext_resource type="Texture2D" uid="uid://i6xwxak42ato" path="res://enterable/witchhut/assets/witchplayer/press2.PNG" id="19_nemt2"]
+[ext_resource type="Texture2D" uid="uid://csd3or62fn27a" path="res://enterable/witchhut/assets/cauldren/gem3.PNG" id="20_g33kt"]
 [ext_resource type="Texture2D" uid="uid://uwkd75312gh6" path="res://enterable/witchhut/assets/witchplayer/press3.PNG" id="20_qvyoj"]
+[ext_resource type="Texture2D" uid="uid://c72vs7y4wooaj" path="res://enterable/witchhut/assets/cauldren/gem4.PNG" id="21_yq5q6"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="22_q8wkn"]
+[ext_resource type="Texture2D" uid="uid://jt475ck0ec62" path="res://enterable/witchhut/assets/cauldren/gem5.PNG" id="22_qg75t"]
+[ext_resource type="Texture2D" uid="uid://e1vjomoc5eak" path="res://enterable/witchhut/assets/cauldren/gem6.PNG" id="23_gt8uh"]
+[ext_resource type="Texture2D" uid="uid://blj3ayxxkxkl1" path="res://enterable/witchhut/assets/cauldren/gem7.PNG" id="24_lfr73"]
 [ext_resource type="AudioStream" uid="uid://bv3qpfv21xy3y" path="res://music/Prosperous Camp.wav" id="24_tdb3s"]
 [ext_resource type="Texture2D" uid="uid://nerkrrrh8oea" path="res://enterable/witchhut/assets/pipe/pipe1.PNG" id="25_fqkcs"]
 [ext_resource type="Texture2D" uid="uid://ocavrd1udw7j" path="res://enterable/temple/assets/hit1.PNG" id="25_x4rpi"]
@@ -45,6 +53,7 @@
 [ext_resource type="Texture2D" uid="uid://bvgpijmssqiqh" path="res://enterable/witchhut/assets/necrowitch/read2.PNG" id="29_plg3v"]
 [ext_resource type="Texture2D" uid="uid://dlen1q6qb3fvp" path="res://enterable/witchhut/assets/necrowitch/rip1.PNG" id="30_g06gc"]
 [ext_resource type="Texture2D" uid="uid://dxlh27hoeh35v" path="res://enterable/witchhut/assets/necrowitch/rip2.PNG" id="31_ja5ul"]
+[ext_resource type="Texture2D" uid="uid://blkqb3cqavfs4" path="res://items/fancy/fancy2.PNG" id="55_m7veu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tp0ad"]
 radius = 32.0
@@ -99,6 +108,32 @@ animations = [{
 }],
 "loop": true,
 "name": &"calm",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_r1whe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ndxc1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_g33kt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_yq5q6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_qg75t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_gt8uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_lfr73")
+}],
+"loop": true,
+"name": &"gem",
 "speed": 5.0
 }, {
 "frames": [],
@@ -249,8 +284,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Theme" id="Theme_svscm"]
+default_font_size = 30
+
+[sub_resource type="Theme" id="Theme_vkwoo"]
+default_font_size = 33
+
 [node name="witchhut" type="Node2D"]
 script = ExtResource("1_segje")
+
+[node name="background" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="background"]
+position = Vector2(664, 344)
+scale = Vector2(1.35333, 1.38)
+texture = ExtResource("2_i7r4y")
 
 [node name="button" type="Area2D" parent="."]
 position = Vector2(0, 10)
@@ -309,9 +357,10 @@ shape = SubResource("RectangleShape2D_tkdag")
 script = ExtResource("6_1mlgs")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="soup"]
+z_index = 2
 position = Vector2(656, 560)
 sprite_frames = SubResource("SpriteFrames_ic8k5")
-animation = &"ouch"
+animation = &"gem"
 autoplay = "calm"
 
 [node name="exit" type="Area2D" parent="."]
@@ -356,7 +405,7 @@ metadata/_edit_lock_ = true
 script = ExtResource("29_78k5f")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="necrowitch"]
-position = Vector2(1088, 504)
+position = Vector2(1088, 480)
 scale = Vector2(0.713333, 0.74)
 sprite_frames = SubResource("SpriteFrames_aadka")
 animation = &"rip"
@@ -366,7 +415,42 @@ frame_progress = 0.590239
 
 [node name="playerinput" type="Node2D" parent="."]
 
+[node name="monsters" type="Node2D" parent="."]
+
+[node name="time" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="time"]
+offset_left = 952.0
+offset_top = 392.0
+offset_right = 992.0
+offset_bottom = 417.0
+theme = SubResource("Theme_svscm")
+text = "0"
+
+[node name="gems" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="gems"]
+offset_left = 272.0
+offset_top = 360.0
+offset_right = 352.0
+offset_bottom = 406.0
+theme = SubResource("Theme_vkwoo")
+text = "1"
+
+[node name="Sprite2D" type="Sprite2D" parent="gems"]
+visible = false
+
+[node name="Fancy2" type="Sprite2D" parent="gems"]
+position = Vector2(344, 392)
+scale = Vector2(0.516667, 0.316667)
+texture = ExtResource("55_m7veu")
+
 [connection signal="body_entered" from="button" to="witchplayer" method="_on_button_body_entered"]
+[connection signal="body_exited" from="button" to="." method="_on_button_body_exited"]
 [connection signal="body_entered" from="cauldrenfront" to="." method="_on_cauldrenfront_body_entered"]
+[connection signal="animation_finished" from="soup/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="animation_finished" from="soup/AnimatedSprite2D" to="soup" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
 [connection signal="finished" from="music" to="." method="_on_music_finished"]

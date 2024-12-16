@@ -27,12 +27,19 @@ func fight():
 func revert():
 	walkani()
 
-
+func stat(mth,ptype,amount):
+	$stat/Label.text=mth+" "+str(amount)
+	$stat/AnimatedSprite2D.animation=ptype
+	$stat.visible=true
+	Flags.dotime(unstat,1.0)
+	
+func unstat():
+	$stat.visible=false
 
 func hit():
 	if inHit!=true:
 		inHit=true
-		
+		stat("-","health",1)
 		Flags.playerStats.health-=1
 		if Flags.playerStats.health<1:
 			kill()

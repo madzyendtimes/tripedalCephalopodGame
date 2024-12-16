@@ -122,8 +122,8 @@ var questpc:=[
 	{"name":"gemna","mode":"trader"}
 ]
 
-#var percentageMap=[10,10,10,10,10,10,10,5,5,5,5,5,5]
-var percentageMap=[0,0,0,0,0,0,100,0,0,0,0,0,0] #enterable
+#var percentageMap=[10,10,10,10,10,10,10,5,5,5,5,5,2,3]
+var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0] #enterable
 var rng=RandomNumberGenerator.new()
 var witchevents=""
 
@@ -242,7 +242,7 @@ func refreshPlayer():
 		"stanimaRate":megaStats.stanimaRate,
 		"stanimaRecharge":megaStats.stanimaRecharge
 	}
-	print(megaStats)
+	#print(megaStats)
 	credit=megaStats.credit		
 		
 func clearnode(danode):

@@ -20,6 +20,7 @@ var enterScene:PackedScene=load("res://enterable.tscn")
 var flavorScene:PackedScene=load("res://flavornpc.tscn")
 var flyerScene:PackedScene=load("res://flyer.tscn")
 var multiScene:PackedScene=load("res://multistage.tscn")
+var gemScene:PackedScene=load("res://gemmonster.tscn")
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
 var speed=baseSpeed
@@ -159,12 +160,18 @@ func doEffect():
 		sEff=aSel[rng.randi_range(0,aSel.size()-1)]		
 	print(sEff)
 	match sEff:
+		"addgems":
+			var g=rng.randi_range(1,5)
+			Flags.megaStats.gems+=g
+			$player.stat("+","gem",g)
 		"changeweather":
 			changeweather()
 		"spendingspree":
 			Flags.credit=true
 		"getgems":
-			Flags.megaStats.gems+=rng.randi_range(1,3)
+			var g=rng.randi_range(1,5)
+			Flags.megaStats.gems+=g
+			$player.stat("+","gem",g)
 		"radiation":
 			Flags.radiation=true;
 			randpuke()
@@ -182,8 +189,9 @@ func doEffect():
 		"puke":
 			dopuke()
 		"restorehp":
-		
+			var h=1
 			Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
+			$player.stat("+","health",h)
 		"that":
 			Flags.hat="that"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
@@ -430,7 +438,6 @@ func _process(delta):
 		tween.tween_callback(reset_player)
 		
 	if Input.is_action_just_pressed("search") && canJump==true:
-		print("what",Flags.interactablenpc)
 		if Flags.interactablenpc!=null:
 			interact()
 			return
@@ -623,6 +630,9 @@ func dochances(val):
 		createchoice($enemy,multiScene,1400,false,1,400,false)
 		return
 	if val<13:
+		createchoice($enemy,gemScene,1400,false,1,400,false)
+		return
+	if val<14:
 		if questDistributed==false:
 			var trash=trashScene.instantiate()
 			trash.position.x=(($interactive.position.x)*-1)+1400
@@ -645,10 +655,10 @@ func dospawns():
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
-			var upchoice=12
+			var upchoice=13
 
 			if $interactive.position.x>-5000 && questDistributed==false:
-				upchoice=13
+				upchoice=14
 			
 			var chance=rng.randi_range(0,upchoice)
 			var newchance=rng.randi_range(1,100)

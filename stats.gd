@@ -13,7 +13,7 @@ func showpop():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(Flags.paused,Flags.entered,Flags.mode)
+	#print(Flags.paused,Flags.entered,Flags.mode)
 	if Flags.paused==false || Flags.entered.active==true||Flags.mode!="statsScreen":		
 		update()
 	else:
@@ -29,7 +29,7 @@ func _process(delta):
 
 			if Flags.selectedItem<=Flags.playerInventory.size():
 				var pi=Flags.playerInventory[Flags.selectedItem-1]
-				print(pi)
+				#print(pi)
 				Flags.effect=pi.effect
 				if pi.consumable==true:
 					Flags.playerInventory.remove_at(Flags.selectedItem-1)
