@@ -59,10 +59,13 @@ func fight():
 	
 	
 func warn():
+	$AnimatedSprite2D.material.set_shader_parameter("rate",2.5)
+	$AnimatedSprite2D.material.set_shader_parameter("doblink",true)
 	#$AnimatedSprite2D.get_material().set_shader_param("rate",2.2)
 	pass
 	
 func unwarn():
+	$AnimatedSprite2D.material.set_shader_parameter("doblink",false)
 	#$AnimatedSprite2D.get_material().set_shader_param("rate",0.0)
 	pass
 

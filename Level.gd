@@ -243,7 +243,7 @@ func doEffect():
 		"beg":
 			Flags.hat="beg"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
-			Flags.dotime(returnbeg,30.0)
+			Flags.dotime(warnbeg,27.0)
 				
 		"stanima":
 			Flags.playerStats.bonusStanima=Flags.playerStats.maxStanima
@@ -273,19 +273,25 @@ func exit():
 func returnBonus(skey):
 	Flags.playerStats.bonusStanima=0
 
+func warnbeg():
+	$player.warn()
+	Flags.dotime(returnbeg,3.0)
+
 func warnhat():
 	$player.warn()
-	Flags.dotime(returnhat,1.0)
+	Flags.dotime(returnhat,3.0)
 
 func returnhat():
 	$player.unwarn()
 	if Flags.hat=="that":
 		Flags.hat=""
+		$player.walkani()
 
 func returnbeg():
+	$player.unwarn()
 	if Flags.hat=="beg":
 		Flags.hat=""
-
+		$player.walkani()
 
 
 func missleHit(body):
@@ -704,7 +710,7 @@ func dospawns():
 				upchoice=15
 			
 			var chance=rng.randi_range(0,upchoice)
-			var newchance=rng.randi_range(1,Flags.percentageAgg)
+			var newchance=rng.randi_range(0,Flags.percentageAgg)
 			var agg=0
 			var count=0
 			for i in Flags.percentageMap:

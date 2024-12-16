@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://cdj8g8hh6wurl"]
+[gd_scene load_steps=88 format=3 uid="uid://cdj8g8hh6wurl"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ohfo4"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="2_akx6h"]
@@ -73,6 +73,7 @@
 [ext_resource type="AudioStream" uid="uid://cbglxmkk1gbwe" path="res://sounds/punch1.mp3" id="71_a8c0g"]
 [ext_resource type="AudioStream" uid="uid://6dd0on15gn4i" path="res://sounds/trash.mp3.mp3" id="72_blwuk"]
 [ext_resource type="AudioStream" uid="uid://cts5mr5pidjys" path="res://sounds/jump2.mp3" id="73_2xexk"]
+[ext_resource type="Shader" path="res://player.gdshader" id="74_00no5"]
 [ext_resource type="Texture2D" uid="uid://blkqb3cqavfs4" path="res://items/fancy/fancy2.PNG" id="74_chbwn"]
 [ext_resource type="Texture2D" uid="uid://c4tmddighkeex" path="res://items/icons/health.PNG" id="75_dx6gm"]
 [ext_resource type="Texture2D" uid="uid://du1aheyjbqop0" path="res://items/icons/power.PNG" id="76_fmk2e"]
@@ -91,6 +92,11 @@ height = 128.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_602p8"]
 radius = 29.5
 height = 127.11
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2euv4"]
+shader = ExtResource("74_00no5")
+shader_parameter/rate = 2.5
+shader_parameter/doblink = false
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qc2jh"]
 animations = [{
@@ -482,12 +488,13 @@ position = Vector2(-68, -16)
 shape = SubResource("CapsuleShape2D_602p8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_2euv4")
 position = Vector2(-25.5, -7)
 scale = Vector2(0.826667, 0.715)
 sprite_frames = SubResource("SpriteFrames_qc2jh")
 animation = &"exhaustedbeg"
 autoplay = "default"
-frame_progress = 0.22956
+frame_progress = 0.465698
 
 [node name="dead" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-335.5, -211.5)

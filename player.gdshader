@@ -1,14 +1,20 @@
 shader_type canvas_item;
 
- uniform float rate=0.0;
+uniform float rate=2.0;
+uniform bool doblink=false;
 
 void vertex() {
-	float pi=3.141592563589793;
-	VERTEX *= 1.0 + (sin(fract(TIME*rate)*pi *1.0)+1.0)/4.0;
+	//float pi=3.141592563589793;
+	//VERTEX *= 0.75 + (sin(fract(TIME*rate)*pi *1.0)+1.0)/4.0;
 }
 
 void fragment() {
-	// Called for every pixel the material is visible on.
+	if (doblink){
+	float pi=3.141592563589793;
+	COLOR.b*= 0.75 + (sin(fract(TIME*rate)*pi *1.0)+1.0)/2.0;
+	COLOR.r*= 0.75 + (sin(fract(TIME*rate)*pi *1.0)+1.0)/4.0;
+	COLOR.g*= 0.05 + (sin(fract(TIME*rate)*pi *1.0)+1.0)/3.0;
+	}
 }
 
 //void light() {
