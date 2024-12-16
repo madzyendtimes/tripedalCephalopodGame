@@ -121,8 +121,12 @@ var questpc:=[
 	{"name":"gemna","mode":"trader"}
 ]
 
-var percentageMap=[10,10,10,10,10,10,10,5,5,5,5,5,2,3]
-#var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0] #enterable
+var percentageMap=[10,10,10,10,10,10,10,5,5,3,5,5,2,2,3]
+#var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable
+var percentageAgg=100
+
+
+
 var rng=RandomNumberGenerator.new()
 var witchevents=""
 var cryptoeffects=""
@@ -135,7 +139,9 @@ func weatheroff():
 
 
 func reset():
-
+	percentageAgg=0
+	for i in percentageMap:
+		percentageAgg+=i
 	controlled=false
 	radiation=false
 	flavornpc={"npc":[

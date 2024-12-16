@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://cdj8g8hh6wurl"]
+[gd_scene load_steps=85 format=3 uid="uid://cdj8g8hh6wurl"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ohfo4"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="2_akx6h"]
@@ -78,6 +78,14 @@
 [ext_resource type="Texture2D" uid="uid://du1aheyjbqop0" path="res://items/icons/power.PNG" id="76_fmk2e"]
 [ext_resource type="Texture2D" uid="uid://dl1jcqtkgjwh3" path="res://items/icons/speed.PNG" id="77_ptf6o"]
 [ext_resource type="Texture2D" uid="uid://b676airl7nrfy" path="res://items/icons/stanima.PNG" id="78_npyn3"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2uxv"]
+radius = 48.0
+height = 128.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fdhwt"]
+radius = 32.0
+height = 128.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_602p8"]
 radius = 29.5
@@ -448,7 +456,19 @@ collision_layer = 2
 collision_mask = 5260
 script = ExtResource("1_ohfo4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="fight" type="CollisionShape2D" parent="."]
+position = Vector2(12.5, -15.5)
+shape = SubResource("CapsuleShape2D_r2uxv")
+
+[node name="fightoffset" type="CollisionShape2D" parent="."]
+position = Vector2(-147.5, -15.5)
+shape = SubResource("CapsuleShape2D_r2uxv")
+
+[node name="offset" type="CollisionShape2D" parent="."]
+position = Vector2(-147.5, -15.5)
+shape = SubResource("CapsuleShape2D_fdhwt")
+
+[node name="normal" type="CollisionShape2D" parent="."]
 position = Vector2(-68, -16)
 shape = SubResource("CapsuleShape2D_602p8")
 
@@ -456,6 +476,7 @@ shape = SubResource("CapsuleShape2D_602p8")
 position = Vector2(-25.5, -7)
 scale = Vector2(0.826667, 0.715)
 sprite_frames = SubResource("SpriteFrames_qc2jh")
+animation = &"fight"
 autoplay = "default"
 
 [node name="dead" type="AudioStreamPlayer2D" parent="."]
@@ -473,6 +494,7 @@ stream = ExtResource("72_blwuk")
 volume_db = 24.0
 
 [node name="jump" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0.5, 4.5)
 stream = ExtResource("73_2xexk")
 volume_db = -8.117
 

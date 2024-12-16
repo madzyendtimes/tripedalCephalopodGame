@@ -14,7 +14,7 @@ func showpop():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#print(Flags.paused,Flags.entered,Flags.mode)
-	if Flags.paused==false || Flags.entered.active==true||Flags.mode!="statsScreen":		
+	if Flags.mode!="statsScreen":		
 		update()
 	else:
 		if Input.is_action_just_pressed("right"):

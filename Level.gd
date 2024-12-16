@@ -83,8 +83,6 @@ func _ready():
 			else:
 				$treeholder3.add_child(ts)
 	
-#	statScene=statloader.instantiate()
-#	add_child(statScene)
 	var welcome=welcomeScene.instantiate()
 	$locationfront.add_child(welcome)
 	welcome.position=Vector2(min(301+(301*.6189),301*3)*100,400)
@@ -350,13 +348,10 @@ func _process(delta):
 	if Flags.paused==true:
 		return
 	if Flags.controlled==true && canrandom==true:
-		dorandaction()
-		
-		
+		dorandaction()		
 		
 	if Input.is_action_just_released("run"):
 		stopRun()
-	
 	
 	if Flags.effect!="":
 		doEffect()
@@ -512,13 +507,17 @@ func moveDir(base,flip,dir,offS):
 	$locationback.position.x+=dir*(base+0.6)*gospeed
 	$locationfront.position.x+=dir*(base+0.6)*gospeed
 	if flip:
-			$player/AnimatedSprite2D.flip_h=(dir==1)
+		$player.flip(dir==1)
+		
+			#$player/CollisionShape2D.flip_h=(dir==1)
 	if dir!=1:
-		$player/AnimatedSprite2D.offset=Vector2(0,0)
+		$player.dooffset(false)
+		#$player/AnimatedSprite2D.offset=Vector2(0,0)
+		#$player/CollisionShape2D.offset=Vector2(0,0)
 	else:
 		if offS==true:
-			$player/AnimatedSprite2D.offset=Vector2(-100,0)
-
+			$player.dooffset(true)
+			
 
 func warpto(base):
 		base*=-1
@@ -586,6 +585,9 @@ var spawnulator:=[
 
 ]
 
+			
+
+
 func dochances(val):
 	if val<1:
 		createchoice($interactive,trashScene,1400,false,1,0,false)
@@ -628,6 +630,9 @@ func dochances(val):
 		createchoice($enemy,gemScene,1400,false,1,400,false)
 		return
 	if val<14:
+		dohoarde()
+		return
+	if val<15:
 		if questDistributed==false:
 			var trash=trashScene.instantiate()
 			trash.position.x=(($interactive.position.x)*-1)+1400
@@ -635,6 +640,27 @@ func dochances(val):
 			questDistributed=true
 			$interactive.add_child(trash)	
 			return	
+
+var monsters=[
+	{"scene":enemyScene,"height":500},
+	{"scene":tallmScene,"height":450},
+	{"scene":flyerScene,"height":0},
+	{"scene":multiScene,"height":400},
+	{"scene":gemScene,"height":400}
+	
+	]
+
+
+func createrandommonster():
+	var mob=rng.randi_range(0,monsters.size()-1)
+	createchoice($enemy,monsters[mob].scene,1400,false,1,monsters[mob].height,false)
+
+
+
+func dohoarde():
+	for i in range(1,rng.randi_range(5,30)):
+		Flags.dotime(createrandommonster,rng.randf_range(0.1,2.5))
+
 
 	
 func _on_enemy_generator_timeout():
@@ -650,13 +676,13 @@ func dospawns():
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
-			var upchoice=13
+			var upchoice=14
 
 			if $interactive.position.x>-5000 && questDistributed==false:
-				upchoice=14
+				upchoice=15
 			
 			var chance=rng.randi_range(0,upchoice)
-			var newchance=rng.randi_range(1,100)
+			var newchance=rng.randi_range(1,Flags.percentageAgg)
 			var agg=0
 			var count=0
 			for i in Flags.percentageMap:

@@ -3,28 +3,63 @@ extends CharacterBody2D
 signal trashable
 signal punch
 
+var isinoffset=false
 var oldmod
 var oldy
 var inHit:=false
+var colcollect=[
+	{"name":"fight","offset":false,"flip":false,"scene":$fight},
+	{"name":"fightoffset","offset":true,"flip":false,"scene":$fightoffset},
+	{"name":"offset","offset":true,"flip":false,"scene":$offset},
+	{"name":"normal","offset":false,"flip":false,"scene":$normal}
+]
+
 
 func _ready():
+	setCollision("normal")
 	Flags.playerposition=self.position
 	Flags.playerscale=self.scale
 	oldmod = $AnimatedSprite2D.modulate
 	inHit=false
 
+func setCollision(type):
+		for i in colcollect:
+			if i.name==type:
+				get_node(i.name).disabled=false
+			else:
+				get_node(i.name).disabled=true
+
+
+
 func _process(delta):
 	if Flags.pukestate==true:
 		puke()
 
-		
+func dooffset(boff):
+	isinoffset=boff
+	if boff:
+		$AnimatedSprite2D.offset=Vector2(-100,0)
+		#setCollision("offset")
+
+	else:
+		$AnimatedSprite2D.offset=Vector2(0,0)
+		#setCollision("normal")
+
+func flip(bflip):
+	$AnimatedSprite2D.flip_h=bflip
 
 func fight():
 	$AnimatedSprite2D.animation="fight"+Flags.hat
 	$AnimatedSprite2D.play()
 	$punch.play()
+	if isinoffset:
+		setCollision("fightoffset")
+	else:
+		setCollision("fight")
+	
 
 func revert():
+	setCollision("normal")
 	walkani()
 
 func stat(mth,ptype,amount):
