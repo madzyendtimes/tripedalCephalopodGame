@@ -9,6 +9,8 @@ var choices:=[
 	{"price":8,"effect":"addspeed","instock":Flags.megaStats.speed<(Flags.megaStats.capSpeed+1),"text":"adhd","implemented":true},
 	{"price":5,"effect":"moneybags","instock":Flags.megaStats.credit!=true,"text":"unlimited credit","implemented":true},
 	{"price":8,"effect":"addstanima","instock":Flags.megaStats.stanima<(Flags.megaStats.capStanima+1),"text":"coffee iv","implemented":true},
+	{"price":8,"effect":"addrizz","instock":Flags.megaStats.rizz<(Flags.megaStats.capRizz+1),"text":"mouthwash","implemented":true},
+	{"price":8,"effect":"addsmarts","instock":Flags.megaStats.smarts<(Flags.megaStats.capSmarts+1),"text":"a skeptic's guide to logic","implemented":true},
 	{"price":999,"effect":"nocap","instock":Flags.megaStats.capPower<1000,"text":"no cap","implemented":true},
 	{"price":15,"effect":"slowspeed","instock":Flags.megaStats.speed>1,"text":"adhd meds","implemented":true},
 	{"price":35,"effect":"doublejump","instock":true,"text":"extra air friction","implemented":false},
@@ -114,6 +116,16 @@ func purchase():
 				Flags.playerStats.maxSpeed=Flags.megaStats.speed
 				Flags.playerStats.speed=Flags.megaStats.speed
 				
+			"addrizz":
+				Flags.megaStats.rizz+=1
+				Flags.playerStats.maxRizz=Flags.megaStats.rizz
+				Flags.playerStats.rizz=Flags.megaStats.rizz
+				
+			"addsmarts":
+				Flags.megaStats.smarts+=1
+				Flags.playerStats.maxSmarts=Flags.megaStats.smarts
+				Flags.playerStats.smarts=Flags.megaStats.smarts
+								
 			"addstanima":
 				Flags.megaStats.stanima+=100
 				Flags.playerStats.maxStanima=Flags.megaStats.stanima

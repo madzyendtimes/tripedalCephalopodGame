@@ -4,9 +4,14 @@ var path="res://enemies/groundling/"
 var dead=false
 var runningaway:=false
 var dir=1
+var hp=1
+var begchance=25
 
 func _on_body_entered(body):
-	if dead==true || Flags.hat=="beg":
+	if dead:
+		return
+	if Flags.hat=="beg":
+		var begsuccess=Flags.beg(begchance)
 		return
 	if Flags.inFight==true:
 		$AnimatedSprite2D.animation="dead"
@@ -29,9 +34,11 @@ func recourage():
 	$AnimatedSprite2D.flip_h=false
 	
 func hit():
-	$AnimatedSprite2D.animation="dead"
-	dead=true
-	$hit.play()
+	hp=Flags.calchits(hp)
+	if hp<1:
+		$AnimatedSprite2D.animation="dead"
+		dead=true
+		$hit.play()
 	
 func _process(delta):
 	
@@ -39,4 +46,4 @@ func _process(delta):
 		return
 	
 	if dead==false && Flags.horror==false:
-		position.x-=.5*dir
+		position.x-=.7*dir

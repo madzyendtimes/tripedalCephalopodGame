@@ -4,6 +4,8 @@ var dead:=false
 var speed=1.8
 var dir:=1
 var runningaway:=false
+var begchance=50 #add new playerstat charisma to improve chances
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,7 +33,10 @@ func recourage():
 	$AnimatedSprite2D.flip_h=false
 
 func _on_body_entered(body: Node2D) -> void:
-	if dead==true || Flags.hat=="beg":
+	if dead:
+		return
+	if Flags.hat=="beg":
+		var begsuccess=Flags.beg(begchance)
 		return
 	if Flags.inFight==true:
 		hit()
@@ -40,7 +45,7 @@ func _on_body_entered(body: Node2D) -> void:
 		
 	
 func hit():
-	hp-=Flags.playerStats.power
+	hp=Flags.calchits(hp)
 	if hp<1:
 		$AnimatedSprite2D.animation="diapertoothdead"
 		dead=true	

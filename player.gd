@@ -62,6 +62,13 @@ func revert():
 	setCollision("normal")
 	walkani()
 
+func resisted():
+	$stat/Label.text="RESISTED "
+	$stat/AnimatedSprite2D.animation="tv"
+	$stat.visible=true
+	Flags.dotime(unstat,1.5)
+
+
 func stat(mth,ptype,amount):
 	$stat/Label.text=mth+" "+str(amount)
 	$stat/AnimatedSprite2D.animation=ptype

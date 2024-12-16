@@ -37,6 +37,7 @@ var missle
 var dangerZone
 var canrandom=true
 var randopercents=false
+var newsave=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Flags.mode="level"
@@ -95,11 +96,14 @@ func _ready():
 	warpS.position.x=Flags.warploc;
 	$interactive.add_child(warpS)
 	warpS.play()
+	if newsave:
+		Flags.save()
 	#uncomment to test gemna
 	#speed=1
 	#warpto(34000)
 	#this sets off the spawntimer testing before removing old static enemyGeneraator
 	dospawns()
+	#Flags.addToInventory(1,4)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func horrorend():
@@ -157,17 +161,19 @@ func doEffect():
 	print(sEff)
 	match sEff:
 		"addgems":
-			var g=rng.randi_range(1,5)
+			var g=rng.randi_range(1,5)+Flags.playerStats.rizz
 			Flags.megaStats.gems+=g
 			$player.stat("+","gem",g)
+			Flags.save()
 		"changeweather":
 			changeweather()
 		"spendingspree":
 			Flags.credit=true
 		"getgems":
-			var g=rng.randi_range(1,5)
+			var g=rng.randi_range(1,5)+Flags.playerStats.rizz
 			Flags.megaStats.gems+=g
 			$player.stat("+","gem",g)
+			Flags.save()
 		"radiation":
 			Flags.radiation=true;
 			randpuke()
@@ -195,11 +201,19 @@ func doEffect():
 			$player.walkani()
 			Flags.dotime(returnhat,30.0)
 		"controlled":
-			Flags.controlled=true
-			$player.walkani()
+			var resistChance=Flags.playerStats.smarts*10
+			if rng.randi_range(0,100)>resistChance:
+				Flags.controlled=true
+				$player.walkani()
+			else:
+				$player.resisted()
 		"mesmerized":
-			Flags.mesmerized=true
-			$player.walkani()
+			var resistChance=Flags.playerStats.smarts*10
+			if rng.randi_range(0,100)>resistChance:
+				Flags.mesmerized=true
+				$player.walkani()
+			else:
+				$player.resisted()
 		"normal":
 			Flags.mesmerized=false
 			Flags.controlled=false
@@ -405,7 +419,8 @@ func _process(delta):
 		return
 
 		
-	if Input.is_action_just_pressed("fight")&& canJump==true:
+	if Input.is_action_just_pressed("fight")&& canJump==true && !Flags.inFight:
+		Flags.playerHits=Flags.playerStats.power
 		canJump=false
 		Flags.inFight=true
 		$player.fight()
@@ -533,6 +548,7 @@ func warpto(base):
 		$player/AnimatedSprite2D.offset=Vector2(0,0)
 
 func stop_fight():
+		#Flags.playerHits=Flags.playerStats.power
 		$player.revert()
 		$player.modulate=oldmod;
 		canJump=true

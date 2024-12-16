@@ -32,9 +32,9 @@ var inFight:=false
 var playerDead:=false
 var playerInventory:=[]
 var interactablenpc=null
-var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"inventory":[],"inventorycapacity":0,"credit":false}
+var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false}
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
-var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"inventory":[],"inventorycapacity":0,"credit":false}
+var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false}
 var entered:={
 	"ready":false,
 	"active":false,
@@ -54,7 +54,7 @@ var playerStats=stats.new()
 
 var credit=megaStats.credit
 var baseStats=playerStats
-var bonus:={"stanima":0,"health":0,"power":0,"speed":0}
+var bonus:={"stanima":0,"health":0,"power":0,"speed":0,"rizz":0,"smarts":0}
 var playerSearch:=false
 var inSearch:=false
 var dir:=1
@@ -120,8 +120,24 @@ var questpc:=[
 	{"name":"epsilon","mode":"jobboard"},
 	{"name":"gemna","mode":"trader"}
 ]
-
-var percentageMap=[10,10,10,10,10,10,10,5,5,3,5,5,2,2,3]
+var playerHits=1
+var percentageMap=[
+10, #trash
+10, #rock
+10, #groundling
+5, #tv
+10, #expander
+10, #tall monster (diapertooth)
+10, #minigame
+5, #weather effects
+5, #fair weather
+3, #flavor npcs
+8, #flying enemy
+7, #multistage enemy
+2, #gemmonster
+5, #hoarde
+5 #quest
+]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable
 var percentageAgg=100
 
@@ -172,6 +188,24 @@ func reset():
 	mode="level"
 	refreshPlayer()
 	credit=megaStats.credit
+	playerHits=megaStats.power
+	
+	
+func calchits(hp):
+	print("playerhits:",playerHits)
+	var tmphit=hp
+	if playerHits>0:
+		hp-=playerHits
+		playerHits=max(0,playerHits-tmphit)
+	return hp
+
+func beg(begchance):
+	if rng.randi_range(0,100)<(begchance+(playerStats.rizz*10)):
+		effect="addgems"
+		return true
+	return false
+
+	
 	
 func addToInventory(type,numvarient):
 	print("addtoinventory")
@@ -209,7 +243,7 @@ func save():
 	save_file.store_line(json_string)
 	print(megaStats)
 func defaultmegastats():
-	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"inventory":[],"inventorycapacity":0,"credit":false}
+	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false}
 	
 func loader():
 	if not FileAccess.file_exists("user://tcv1.save")|| freshstart==true:
@@ -237,7 +271,9 @@ func refreshPlayer():
 		"power":megaStats.power,
 		"speed":megaStats.speed,
 		"stanimaRate":megaStats.stanimaRate,
-		"stanimaRecharge":megaStats.stanimaRecharge
+		"stanimaRecharge":megaStats.stanimaRecharge,
+		"rizz":megaStats.rizz,
+		"smarts":megaStats.smarts
 	}
 	playerStats.maximum={
 		"health":megaStats.health,
@@ -245,7 +281,9 @@ func refreshPlayer():
 		"power":megaStats.power,
 		"speed":megaStats.speed,
 		"stanimaRate":megaStats.stanimaRate,
-		"stanimaRecharge":megaStats.stanimaRecharge
+		"stanimaRecharge":megaStats.stanimaRecharge,
+		"rizz":megaStats.rizz,
+		"smarts":megaStats.smarts
 	}
 	#print(megaStats)
 	credit=megaStats.credit		

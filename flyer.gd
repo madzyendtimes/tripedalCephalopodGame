@@ -13,6 +13,7 @@ var type:="default"
 var crashed:=false
 var runningaway:=false
 var freefall:=false
+var begchance=40
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	selectType()
@@ -111,6 +112,7 @@ func getpackage():
 
 func _on_body_entered(body: Node2D) -> void:
 	if Flags.hat=="beg":
+		var begsuccess=Flags.beg(begchance)
 		return
 	if Flags.credit==true and type=="drone":
 		getpackage()

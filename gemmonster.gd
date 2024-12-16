@@ -1,5 +1,6 @@
 extends Area2D
 
+var hp=1
 var dir=-1
 var runningaway=false
 var speed=3
@@ -32,14 +33,23 @@ func recourage():
 	dir=dir*-1
 	$AnimatedSprite2D.flip_h=false
 
-
+func knockback():
+	pass
 
 func _on_body_entered(body: Node2D) -> void:
 	if Flags.mode=="level":
-			if Flags.inFight==true:
-				Flags.effect="addgems"
-				queue_free()
-			else:
+		if Flags.hat=="beg":
+			var begsuccess=Flags.beg(101)
+			queue_free()
+			return	
+		if Flags.inFight==true && Flags.playerHits>0:
+				hp=Flags.calchits(hp)
+				if hp<1:
+					Flags.effect="addgems"
+					queue_free()
+				else:
+					knockback()
+		else:
 				Flags.effect="hit"
 
 		

@@ -4,6 +4,7 @@ var runningaway=false
 var speed=2.5
 var dir=1
 var dead=false
+var begchance=75
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,7 +33,10 @@ func recourage():
 	$AnimatedSprite2D.flip_h=false
 
 func _on_body_entered(body: Node2D) -> void:
-	if dead==true || Flags.hat=="beg":
+	if dead==true:
+		return
+	if Flags.hat=="beg":
+		var begsuccess=Flags.beg(begchance)
 		return
 	if Flags.inFight==true:
 		hit()
@@ -46,8 +50,7 @@ func hit():
 	var oldy=position.y
 	tween.tween_property($".", "position", Vector2( position.x+(300*Flags.dir*-1),position.y-100), .3)
 	tween.tween_property($".", "position", Vector2( position.x+(300*Flags.dir*-1),oldy), .3)
-
-	hp-=Flags.playerStats.power
+	hp=Flags.calchits(hp)
 	if hp<1:
 		$AnimatedSprite2D.animation="dead"
 		dead=true	

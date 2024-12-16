@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://cdj8g8hh6wurl"]
+[gd_scene load_steps=86 format=3 uid="uid://cdj8g8hh6wurl"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ohfo4"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="2_akx6h"]
@@ -78,6 +78,7 @@
 [ext_resource type="Texture2D" uid="uid://du1aheyjbqop0" path="res://items/icons/power.PNG" id="76_fmk2e"]
 [ext_resource type="Texture2D" uid="uid://dl1jcqtkgjwh3" path="res://items/icons/speed.PNG" id="77_ptf6o"]
 [ext_resource type="Texture2D" uid="uid://b676airl7nrfy" path="res://items/icons/stanima.PNG" id="78_npyn3"]
+[ext_resource type="Texture2D" uid="uid://ctixitctvmitk" path="res://enemies/tv/tv1.PNG" id="79_ihcod"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2uxv"]
 radius = 48.0
@@ -403,9 +404,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Theme" id="Theme_j4j25"]
-default_font_size = 36
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_gqrl6"]
 animations = [{
 "frames": [{
@@ -447,7 +445,18 @@ animations = [{
 "loop": true,
 "name": &"stanima",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("79_ihcod")
+}],
+"loop": true,
+"name": &"tv",
+"speed": 5.0
 }]
+
+[sub_resource type="Theme" id="Theme_j4j25"]
+default_font_size = 36
 
 [node name="player" type="CharacterBody2D"]
 position = Vector2(671, 423)
@@ -501,16 +510,16 @@ volume_db = -8.117
 [node name="stat" type="CanvasLayer" parent="."]
 visible = false
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="stat"]
+position = Vector2(600, 208)
+scale = Vector2(0.446667, 0.34)
+sprite_frames = SubResource("SpriteFrames_gqrl6")
+animation = &"tv"
+
 [node name="Label" type="Label" parent="stat"]
 offset_left = 496.0
 offset_top = 168.0
 offset_right = 536.0
 offset_bottom = 191.0
 theme = SubResource("Theme_j4j25")
-text = "+"
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="stat"]
-position = Vector2(600, 208)
-scale = Vector2(0.446667, 0.34)
-sprite_frames = SubResource("SpriteFrames_gqrl6")
-animation = &"gem"
+text = "RESISTED"
