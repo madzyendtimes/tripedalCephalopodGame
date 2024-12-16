@@ -62,7 +62,6 @@ func press():
 	
 
 func _on_button_body_entered(body: Node2D) -> void:
-	print("buttoned")
 	if firsttime:
 		firsttime=false
 		return

@@ -29,7 +29,7 @@ func _process(delta):
 
 			if Flags.selectedItem<=Flags.playerInventory.size():
 				var pi=Flags.playerInventory[Flags.selectedItem-1]
-				#print(pi)
+				print(pi)
 				Flags.effect=pi.effect
 				if pi.consumable==true:
 					Flags.playerInventory.remove_at(Flags.selectedItem-1)
@@ -41,10 +41,9 @@ func _process(delta):
 				Flags.effect=""
 			contract()
 		
+
 			
-		if Input.is_action_just_pressed("reset")&&Flags.resetOnce==true:
-			
-			contract()
+
 		
 func doswap(obj):
 	Flags.addToInventory(obj.type,obj.varient)
@@ -80,12 +79,13 @@ func update():
 	#"loc:"+str(Flags.l)
 	
 func contract():
-	update()
+	print("contract")
 	$PopupPanel2.visible=false
 	Flags.paused=false
 	Flags.mode="level"
 	
 func expand():
+	print("expand")
 #	$PopupPanel.size.y=100
 	Flags.mode="statsScreen"
 	$PopupPanel2.visible=true

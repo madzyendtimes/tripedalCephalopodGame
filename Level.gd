@@ -30,7 +30,6 @@ var gx:=0
 var oldmod
 var questDistributed:=false
 var statScene
-var viewStat:=false
 var types=[{"name":"trees/tree","num":5},{"name":"trees/buildings/sky","num":4}]
 var stanimaAction:=false
 var warpS
@@ -47,7 +46,6 @@ func _ready():
 	
 	
 	Flags.titlescreen="title"
-	viewStat=false
 	$trader.visible=false	
 	Flags.reset()
 	baseSpeed=Flags.megaStats.speed
@@ -334,11 +332,22 @@ func rando():
 
 func _process(delta):
 	
+	if Input.is_action_just_pressed("reset"):
+		if Flags.mode=="statsScreen":
+			$stats.contract()
+		elif Flags.mode=="level":
+			$stats.expand()
+			$stats.clear()
+			var count:=0
+			for i in Flags.playerInventory:
+				count+=1
+				$stats.addInventory(i,count)
+	
+	
 	if Flags.mode!="level":
 		return
 	
 	if Flags.paused==true:
-		Flags.resetOnce=true
 		return
 	if Flags.controlled==true && canrandom==true:
 		dorandaction()
@@ -377,21 +386,7 @@ func _process(delta):
 			stop_fight()
 		return
 	
-	if Input.is_action_just_pressed("reset"):
-		if viewStat==true:
-			viewStat=false
-			Flags.resetOnce=true
-			statScene.contract()
-
-		else:
-			viewStat=true
-			statScene.expand()
-			statScene.clear()
-			var count:=0
-			for i in Flags.playerInventory:
-				count+=1
-				statScene.addInventory(i,count)
-			Flags.resetOnce=false
+	
 	
 	if Input.is_action_pressed("right"):
 		Flags.dir=-1

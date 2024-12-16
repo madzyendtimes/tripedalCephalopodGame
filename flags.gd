@@ -104,7 +104,6 @@ var flavornpc:={"npc":[
 ]}
 var paused:=false
 var mode:="level"
-var resetOnce:=false
 var selectedItem:=-1
 var exhausted=false
 var pukestate=false
@@ -122,11 +121,11 @@ var questpc:=[
 	{"name":"gemna","mode":"trader"}
 ]
 
-#var percentageMap=[10,10,10,10,10,10,10,5,5,5,5,5,2,3]
-var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0] #enterable
+var percentageMap=[10,10,10,10,10,10,10,5,5,5,5,5,2,3]
+#var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0] #enterable
 var rng=RandomNumberGenerator.new()
 var witchevents=""
-
+var cryptoeffects=""
 
 var questDistributed=false
 
