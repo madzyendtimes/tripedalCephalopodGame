@@ -54,7 +54,7 @@ func SelectItem(selx,sely):
 	var sz=Flags.playerInventory.size();
 	if (sz>0):
 		var oldSelect=Flags.selectedItem;
-		if oldSelect>=sz:
+		if oldSelect>sz:
 			oldSelect=0
 		Flags.selectedItem+=min(selx,sz)
 		Flags.selectedItem+=min(sely*11,sz)

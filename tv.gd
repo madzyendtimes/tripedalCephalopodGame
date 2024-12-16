@@ -39,7 +39,9 @@ func _on_active_body_entered(body: Node2D) -> void:
 		if type=="tv":
 			Flags.effect="mesmerized"
 		if type=="eyes":
-			Flags.effect="controlled"	
+			Flags.effect="controlled"
+	else:
+		Flags.effect="resisted"	
 
 
 func _on_active_body_exited(body: Node2D) -> void:

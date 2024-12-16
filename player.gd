@@ -57,6 +57,14 @@ func fight():
 	else:
 		setCollision("fight")
 	
+	
+func warn():
+	#$AnimatedSprite2D.get_material().set_shader_param("rate",2.2)
+	pass
+	
+func unwarn():
+	#$AnimatedSprite2D.get_material().set_shader_param("rate",0.0)
+	pass
 
 func revert():
 	setCollision("normal")

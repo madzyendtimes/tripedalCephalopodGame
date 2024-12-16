@@ -485,8 +485,9 @@ shape = SubResource("CapsuleShape2D_602p8")
 position = Vector2(-25.5, -7)
 scale = Vector2(0.826667, 0.715)
 sprite_frames = SubResource("SpriteFrames_qc2jh")
-animation = &"fight"
+animation = &"exhaustedbeg"
 autoplay = "default"
+frame_progress = 0.22956
 
 [node name="dead" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-335.5, -211.5)

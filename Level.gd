@@ -199,7 +199,7 @@ func doEffect():
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
 			Flags.mesmerized=false
 			$player.walkani()
-			Flags.dotime(returnhat,30.0)
+			Flags.dotime(warnhat,27.0)
 		"controlled":
 			var resistChance=Flags.playerStats.smarts*10
 			if rng.randi_range(0,100)>resistChance:
@@ -214,6 +214,8 @@ func doEffect():
 				$player.walkani()
 			else:
 				$player.resisted()
+		"resisted":
+			$player.resisted()		
 		"normal":
 			Flags.mesmerized=false
 			Flags.controlled=false
@@ -271,8 +273,12 @@ func exit():
 func returnBonus(skey):
 	Flags.playerStats.bonusStanima=0
 
+func warnhat():
+	$player.warn()
+	Flags.dotime(returnhat,1.0)
 
 func returnhat():
+	$player.unwarn()
 	if Flags.hat=="that":
 		Flags.hat=""
 
