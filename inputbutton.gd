@@ -11,6 +11,8 @@ func _process(delta: float) -> void:
 	pass
 
 func settype(ptype):
+	if Flags.controlScheme=="keyboard":
+		ptype+="keyboard"
 	type=ptype
 	$AnimatedSprite2D.animation=ptype
 	

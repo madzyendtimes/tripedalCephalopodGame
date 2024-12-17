@@ -19,7 +19,8 @@ var multiScene:PackedScene=load("res://multistage.tscn")
 
 
 
-
+var controlScheme="keyboard"
+#var controlScheme="controller"
 var freshstart=false
 var weather=""
 const stats=preload("res://playerstats.gd")

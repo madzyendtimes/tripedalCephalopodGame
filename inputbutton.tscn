@@ -1,14 +1,21 @@
-[gd_scene load_steps=11 format=3 uid="uid://biglriot8avek"]
+[gd_scene load_steps=18 format=3 uid="uid://biglriot8avek"]
 
 [ext_resource type="Script" path="res://inputbutton.gd" id="1_4omwg"]
 [ext_resource type="Texture2D" uid="uid://cv8egekpw3ybr" path="res://input/controller/fight.PNG" id="1_iurmk"]
 [ext_resource type="Texture2D" uid="uid://w1s1wqw7a7ef" path="res://input/controller/fightpressed.PNG" id="2_alvn6"]
 [ext_resource type="Texture2D" uid="uid://cl15jged6rdd1" path="res://input/controller/jump.PNG" id="3_bjfeh"]
+[ext_resource type="Texture2D" uid="uid://bgh2fo7h4js52" path="res://input/key/IMG_6379.PNG" id="3_mo1rt"]
+[ext_resource type="Texture2D" uid="uid://dtcu263s6oxce" path="res://input/key/IMG_6397.PNG" id="4_lxv4d"]
 [ext_resource type="Texture2D" uid="uid://brmvng0qdawlf" path="res://input/controller/jumppressed.PNG" id="4_sugjl"]
 [ext_resource type="Texture2D" uid="uid://cmui6mgesdgpb" path="res://input/controller/run.PNG" id="5_3y5ti"]
 [ext_resource type="Texture2D" uid="uid://bm2lkuhkemnst" path="res://input/controller/runpressed.PNG" id="6_jpb7n"]
+[ext_resource type="Texture2D" uid="uid://gpg34ow76cco" path="res://input/key/IMG_6386.PNG" id="7_ew05e"]
 [ext_resource type="Texture2D" uid="uid://by0rd5gunei0l" path="res://input/controller/search.PNG" id="7_ftnwn"]
 [ext_resource type="Texture2D" uid="uid://w4gssd7bohjn" path="res://input/controller/searchpressed.PNG" id="8_5padr"]
+[ext_resource type="Texture2D" uid="uid://ibe1k2v0coi6" path="res://input/key/IMG_6383.PNG" id="10_l5m7k"]
+[ext_resource type="Texture2D" uid="uid://do2wg7oi3iqmv" path="res://input/key/IMG_6382.PNG" id="11_6qhuq"]
+[ext_resource type="Texture2D" uid="uid://dqit7xjgn7mky" path="res://input/key/IMG_6381.PNG" id="14_fpym5"]
+[ext_resource type="Texture2D" uid="uid://btgb6ra2memj6" path="res://input/key/IMG_6380.PNG" id="15_0av8k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qt6js"]
 animations = [{
@@ -18,6 +25,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"fight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mo1rt")
+}],
+"loop": true,
+"name": &"fightkeyboard",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_lxv4d")
+}],
+"loop": true,
+"name": &"fightkeyboardpressed",
 "speed": 5.0
 }, {
 "frames": [{
@@ -38,6 +61,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("7_ew05e")
+}],
+"loop": true,
+"name": &"jumpkeyboard",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"jumpkeyboardpressed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("4_sugjl")
 }],
 "loop": true,
@@ -50,6 +86,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_l5m7k")
+}],
+"loop": true,
+"name": &"runkeyboard",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_6qhuq")
+}],
+"loop": true,
+"name": &"runkeyboardpressed",
 "speed": 5.0
 }, {
 "frames": [{
@@ -70,6 +122,22 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("14_fpym5")
+}],
+"loop": true,
+"name": &"searchkeyboard",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_0av8k")
+}],
+"loop": true,
+"name": &"searchkeyboardpressed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("8_5padr")
 }],
 "loop": true,
@@ -84,4 +152,4 @@ script = ExtResource("1_4omwg")
 position = Vector2(0, -1.43051e-06)
 scale = Vector2(0.73, 0.61)
 sprite_frames = SubResource("SpriteFrames_qt6js")
-animation = &"searchpressed"
+animation = &"searchkeyboardpressed"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=3 uid="uid://bjlg8hhdf4x7l"]
+[gd_scene load_steps=106 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -25,12 +25,13 @@
 [ext_resource type="Texture2D" uid="uid://c5iulupedgkqn" path="res://npc/sludgebutt/sludgebutt1.PNG" id="13_y6jk6"]
 [ext_resource type="Texture2D" uid="uid://udigahkpj1ol" path="res://npc/sludgebutt/sludgebutt2.PNG" id="14_ns2el"]
 [ext_resource type="Texture2D" uid="uid://drebx1jb1mlts" path="res://npc/sludgebutt/questcompletetext.PNG" id="15_2taxa"]
+[ext_resource type="Script" path="res://npcs.gd" id="15_vuva8"]
 [ext_resource type="Texture2D" uid="uid://bjt4hai4ttkuk" path="res://npc/sludgebutt/questtext.PNG" id="16_7iadb"]
 [ext_resource type="Texture2D" uid="uid://btao0ksax3aqi" path="res://location/home/front.PNG" id="17_7wont"]
 [ext_resource type="Script" path="res://gemna.gd" id="17_asgom"]
 [ext_resource type="PackedScene" uid="uid://dbooao61w5erw" path="res://pailface.tscn" id="18_dbl8f"]
-[ext_resource type="Texture2D" uid="uid://ddk81jqy53xqf" path="res://npc/gemna/gemnatext.PNG" id="18_p5k4v"]
-[ext_resource type="Script" path="res://pailface.gd" id="19_prjnd"]
+[ext_resource type="Texture2D" uid="uid://jdrd53ln0qj1" path="res://npc/gemna/keygemnaquest.PNG" id="18_vq4ee"]
+[ext_resource type="Texture2D" uid="uid://bcle7v2w4qvif" path="res://npc/gemna/gemnaquestfixed.PNG" id="19_ord6d"]
 [ext_resource type="Texture2D" uid="uid://coclpfsxscvc5" path="res://npc/gemna/gemnaCompleteText.PNG" id="19_xli40"]
 [ext_resource type="Texture2D" uid="uid://biyloyknuao3b" path="res://npc/gemna/gemna1.PNG" id="20_334ox"]
 [ext_resource type="Texture2D" uid="uid://bwglwr6oqc5fg" path="res://npc/gemna/gemna2.PNG" id="21_ws368"]
@@ -47,10 +48,16 @@
 [ext_resource type="Texture2D" uid="uid://cf86hcxguoq05" path="res://npc/forlorna/forlorna2.PNG" id="29_q4gt8"]
 [ext_resource type="PackedScene" uid="uid://dywaphievidhc" path="res://stats.tscn" id="30_mddu5"]
 [ext_resource type="Texture2D" uid="uid://cahmxptlo6w4x" path="res://npc/forlorna/text.PNG" id="30_p0b63"]
+[ext_resource type="Texture2D" uid="uid://j6f08grnuq2g" path="res://npc/angrella/keyjumptutorial.PNG" id="30_pc2jj"]
 [ext_resource type="Texture2D" uid="uid://dq2008dtan2m7" path="res://npc/lilHype/lilhype1.PNG" id="31_r56fl"]
 [ext_resource type="Texture2D" uid="uid://cd7xyh5ka8cof" path="res://npc/lilHype/lilhype2.PNG" id="32_w7imu"]
 [ext_resource type="Texture2D" uid="uid://o5u8nhsslrlf" path="res://npc/lilHype/text.PNG" id="33_87cpu"]
+[ext_resource type="Texture2D" uid="uid://mwdwnoqgi36n" path="res://npc/sludgebutt/keyquesttext.PNG" id="36_515tg"]
+[ext_resource type="Script" path="res://snitchy_joe.gd" id="39_n802l"]
+[ext_resource type="Script" path="res://forlorna.gd" id="43_jy4kp"]
+[ext_resource type="Texture2D" uid="uid://bjc0ghvstrf3d" path="res://npc/snitchyjoe/keytext.PNG" id="44_4xwss"]
 [ext_resource type="PackedScene" uid="uid://cdj8g8hh6wurl" path="res://player.tscn" id="46_sbt76"]
+[ext_resource type="Texture2D" uid="uid://dhsfgd4rti7i6" path="res://npc/forlorna/keytext.PNG" id="49_asice"]
 [ext_resource type="PackedScene" uid="uid://vm41mkvar7g0" path="res://expander.tscn" id="57_a6jor"]
 [ext_resource type="Script" path="res://tutorial.gd" id="81_bqg1q"]
 [ext_resource type="Texture2D" uid="uid://b0x7w52xctc7x" path="res://location/tutorial/tutorialback.PNG" id="82_8p1p5"]
@@ -91,7 +98,15 @@ radius = 339.411
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("18_p5k4v")
+"texture": ExtResource("18_vq4ee")
+}],
+"loop": true,
+"name": &"keyboardtext",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_ord6d")
 }],
 "loop": true,
 "name": &"text",
@@ -149,6 +164,25 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_gskko"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_wcksl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_pc2jj")
+}],
+"loop": true,
+"name": &"keyboardtext",
+"speed": 5.0
+}]
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_see4a"]
 animations = [{
 "frames": [{
@@ -194,6 +228,14 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_515tg")
+}],
+"loop": true,
+"name": &"keyboardtext",
+"speed": 5.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8lftt"]
@@ -210,6 +252,25 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_om83t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_ku1u7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("44_4xwss")
+}],
+"loop": true,
+"name": &"keyboardtext",
+"speed": 5.0
+}]
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_cf8fk"]
 animations = [{
 "frames": [{
@@ -221,6 +282,25 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sjy1b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_p0b63")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("49_asice")
+}],
+"loop": true,
+"name": &"keyboardtext",
 "speed": 5.0
 }]
 
@@ -416,6 +496,7 @@ position = Vector2(-127, -44)
 [node name="interact" parent="interactive" instance=ExtResource("3_wwvka")]
 
 [node name="npcs" type="Node2D" parent="."]
+script = ExtResource("15_vuva8")
 
 [node name="npc" parent="npcs" instance=ExtResource("2_q0aer")]
 script = ExtResource("5_3jyy4")
@@ -453,10 +534,12 @@ sprite_frames = SubResource("SpriteFrames_e2jih")
 autoplay = "default"
 frame_progress = 0.491663
 
-[node name="Jumptutorial" type="Sprite2D" parent="npcs"]
+[node name="Jumptutorial" type="AnimatedSprite2D" parent="npcs"]
 position = Vector2(-15118, 162)
 scale = Vector2(0.932, 0.79)
-texture = ExtResource("12_wcksl")
+sprite_frames = SubResource("SpriteFrames_gskko")
+animation = &"keyboardtext"
+autoplay = "default"
 
 [node name="sludgebutt" type="Area2D" parent="npcs"]
 collision_layer = 1024
@@ -478,13 +561,14 @@ shape = SubResource("RectangleShape2D_dl0sn")
 position = Vector2(-14210, 212)
 scale = Vector2(1.04, 0.92)
 sprite_frames = SubResource("SpriteFrames_fibwg")
+animation = &"keyboardtext"
 autoplay = "default"
 
 [node name="pailface" parent="npcs" instance=ExtResource("18_dbl8f")]
 position = Vector2(-13174, 292)
-script = ExtResource("19_prjnd")
 
 [node name="snitchyJoe" type="Node2D" parent="npcs"]
+script = ExtResource("39_n802l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs/snitchyJoe"]
 position = Vector2(-11838, 260)
@@ -492,22 +576,27 @@ scale = Vector2(1, 1.076)
 sprite_frames = SubResource("SpriteFrames_8lftt")
 autoplay = "default"
 
-[node name="Sprite2D" type="Sprite2D" parent="npcs/snitchyJoe"]
+[node name="text" type="AnimatedSprite2D" parent="npcs/snitchyJoe"]
 position = Vector2(-11574, 140)
 scale = Vector2(0.916, 0.86)
-texture = ExtResource("27_ku1u7")
+sprite_frames = SubResource("SpriteFrames_om83t")
+animation = &"keyboardtext"
+autoplay = "default"
 
 [node name="forlorna" type="Node2D" parent="npcs"]
+script = ExtResource("43_jy4kp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs/forlorna"]
 position = Vector2(-7222, 324)
 sprite_frames = SubResource("SpriteFrames_cf8fk")
 autoplay = "default"
 
-[node name="Text" type="Sprite2D" parent="npcs/forlorna"]
+[node name="Text" type="AnimatedSprite2D" parent="npcs/forlorna"]
 position = Vector2(-6926, 180)
 scale = Vector2(1.296, 0.85)
-texture = ExtResource("30_p0b63")
+sprite_frames = SubResource("SpriteFrames_sjy1b")
+animation = &"keyboardtext"
+autoplay = "default"
 
 [node name="lilhype" type="AnimatedSprite2D" parent="npcs"]
 position = Vector2(-4662, 332)
