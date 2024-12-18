@@ -21,6 +21,10 @@ func _ready():
 	Flags.playerscale=self.scale
 	oldmod = $AnimatedSprite2D.modulate
 	inHit=false
+	$dead.volume_db=Flags.options.fx
+	$punch.volume_db=Flags.options.fx
+	$search.volume_db=Flags.options.fx
+	$jump.volume_db=Flags.options.fx
 
 func setCollision(type):
 		for i in colcollect:

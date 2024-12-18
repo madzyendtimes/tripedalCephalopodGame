@@ -7,7 +7,7 @@ var level1Scene
 var inStart:=true
 var instantiated:=false
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	Flags.loader()
 	dostart()
@@ -17,13 +17,13 @@ func _ready():
 func dostart():
 	startScreen=start.instantiate()
 	inStart=true
-	add_child(startScreen)		
+	add_child(startScreen)
+	startScreen.start(self)	
 
 func restart():
 	dostart()
-	var tween = get_tree().create_tween()
-	tween.tween_property(startScreen, "position", Vector2(0,0), .5)
-	tween.tween_callback(removeScene)
+	Flags.dotime(removeScene,.1)
+
 
 func removeScene():
 	remove_child(level1Scene)	
@@ -31,25 +31,19 @@ func removeScene():
 
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if inStart==true:
+func playgame():
+	inStart=false
+	instantiated=true
+	level1Scene=level1.instantiate()
+	Flags.dotime(treeUpdate,.5)
 
-		if Input.is_action_just_pressed("jump"):
-			startScreen.loading()
-			inStart=false
-			instantiated=true
-			level1Scene=level1.instantiate()
-			var tween = get_tree().create_tween()
-			tween.tween_property(startScreen, "position", Vector2(0,0), .5)
-			tween.tween_callback(treeUpdate)
+
 
 func treeUpdate():
 	killStart()
 	add_child(level1Scene)
-	var tween = get_tree().create_tween()
-	tween.tween_property(startScreen, "position", Vector2(0,0), .5)
-	tween.tween_callback(killStart)	
+	Flags.dotime(killStart,.5)
+
 
 
 

@@ -26,8 +26,10 @@ var stock:=[]
 var home=""
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$CanvasLayer/music.volume_db=Flags.options.music
+	$CanvasLayer/purchase.volume_db=Flags.options.fx
+	$CanvasLayer/invalid.volume_db=Flags.options.fx
 	$CanvasLayer.visible=false
-
 #uncomment to test locally
 	#Flags.load() 
 	#start(self)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dos1618drl4dc"]
+[gd_scene load_steps=19 format=3 uid="uid://dos1618drl4dc"]
 
 [ext_resource type="Script" path="res://cryptominos.gd" id="1_7jtwu"]
 [ext_resource type="Texture2D" uid="uid://bhrbh5bfn04xq" path="res://player/forward/forward1.PNG" id="1_ubthq"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dd3ek8osevi1x" path="res://cryptominoswscenes/comrock.tscn" id="8_ac0yy"]
 [ext_resource type="Texture2D" uid="uid://bpffw0lif2h8w" path="res://enterable/cryptominos/assets/IMG_6155.PNG" id="9_5bixw"]
 [ext_resource type="Texture2D" uid="uid://dkgyyqiavos5" path="res://enterable/cryptominos/assets/IMG_6156.PNG" id="10_5clmj"]
+[ext_resource type="AudioStream" uid="uid://bnlttjgnqg5ek" path="res://music/Brilliant Charles.wav" id="11_b68a7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3hv1"]
 size = Vector2(1680, 50)
@@ -136,5 +137,9 @@ autoplay = "forward"
 position = Vector2(216, 608)
 shape = SubResource("RectangleShape2D_xh6wk")
 
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_b68a7")
+
 [connection signal="body_entered" from="boundary/floor" to="boundary/floor" method="_on_body_entered"]
 [connection signal="body_entered" from="exit" to="exit" method="_on_body_entered"]
+[connection signal="finished" from="music" to="." method="_on_music_finished"]

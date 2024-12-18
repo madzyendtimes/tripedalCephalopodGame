@@ -7,6 +7,10 @@ var dir=1
 var hp=1
 var begchance=25
 
+func _ready() -> void:
+	$hit.volume_db=Flags.options.fx
+	$die.volume_db=Flags.options.fx
+
 func _on_body_entered(body):
 	if dead:
 		return

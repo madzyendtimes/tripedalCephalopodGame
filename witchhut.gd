@@ -19,6 +19,7 @@ var timetext=30
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$music.volume_db=Flags.options.music
 	#start(self)
 	pass
 

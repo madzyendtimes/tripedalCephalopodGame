@@ -6,7 +6,7 @@ var home=self
 var offtimers=true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
+	$music.volume_db=Flags.options.music
 #	devstart()
 	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.

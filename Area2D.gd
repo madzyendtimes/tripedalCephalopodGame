@@ -12,6 +12,8 @@ var deterministic:=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimatedSprite2D.animation=chesttype+"closed"	
+	$questfound.volume_db=Flags.options.fx
+	$trash.volume_db=Flags.options.fx
 	pass # Replace with function body.
 
 

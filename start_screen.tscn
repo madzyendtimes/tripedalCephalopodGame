@@ -1,24 +1,27 @@
-[gd_scene load_steps=17 format=3 uid="uid://ce5otkim284u4"]
+[gd_scene load_steps=22 format=3 uid="uid://y8woy4ym2t3i"]
 
 [ext_resource type="Script" path="res://start_screen.gd" id="1_dvlgs"]
-[ext_resource type="Texture2D" uid="uid://weetn2s8jmqy" path="res://screen/title.JPG" id="1_pv4mg"]
 [ext_resource type="AudioStream" uid="uid://cnh3vntu44grh" path="res://music/Single Base.wav" id="2_f22xb"]
+[ext_resource type="Texture2D" uid="uid://dp75waqmd0mss" path="res://screen/titleclean.PNG" id="2_wqcsn"]
 [ext_resource type="Texture2D" uid="uid://bmayb6btgscc2" path="res://screen/loading/load1.PNG" id="3_74whf"]
 [ext_resource type="Texture2D" uid="uid://c3s5dv48juvup" path="res://screen/completed.PNG" id="3_p7bne"]
 [ext_resource type="Texture2D" uid="uid://dffiaracpfpqj" path="res://screen/loading/load2.PNG" id="4_dfguy"]
 [ext_resource type="Texture2D" uid="uid://bma7xyio1pdud" path="res://screen/loading/load3.PNG" id="5_e8m0s"]
+[ext_resource type="Theme" uid="uid://cyftuw3dg8645" path="res://new_theme.tres" id="5_sj1vq"]
 [ext_resource type="Texture2D" uid="uid://dc1t2p5xdoqht" path="res://screen/loading/load4(1).PNG" id="6_yq5nt"]
 [ext_resource type="Texture2D" uid="uid://52yito3xxmea" path="res://screen/loading/load4.PNG" id="7_iq77d"]
 [ext_resource type="Texture2D" uid="uid://b3jw6cqoijv4m" path="res://screen/loading/load5.PNG" id="8_cdldb"]
 [ext_resource type="Texture2D" uid="uid://c4ffk17bupkmj" path="res://screen/loading/load6.PNG" id="9_4bw12"]
 [ext_resource type="Texture2D" uid="uid://lejoest4tbyk" path="res://screen/loading/load7.PNG" id="10_l842t"]
 [ext_resource type="Texture2D" uid="uid://eslu6xkm5e3h" path="res://screen/loading/load8.PNG" id="11_cqkcl"]
+[ext_resource type="ButtonGroup" uid="uid://csc6ihjsw8tn8" path="res://controllerbuttongroup.tres" id="15_0ey3f"]
+[ext_resource type="ButtonGroup" uid="uid://vdice6tksn80" path="res://graphicsbuttongroup.tres" id="16_7s48n"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yaxfw"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_pv4mg")
+"texture": ExtResource("2_wqcsn")
 }],
 "loop": false,
 "name": &"title",
@@ -35,7 +38,7 @@ animations = [{
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_ld20p"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_n2kwb"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ran4f"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -70,14 +73,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Theme" id="Theme_lxu6w"]
+Label/font_sizes/font_size = 30
+
+[sub_resource type="Theme" id="Theme_djde2"]
+Label/font_sizes/font_size = 28
+
 [node name="startScreen" type="Node2D"]
 script = ExtResource("1_dvlgs")
 
 [node name="Title" type="AnimatedSprite2D" parent="."]
+z_index = -1
 position = Vector2(601.625, 317)
 scale = Vector2(0.623568, 0.6)
 sprite_frames = SubResource("SpriteFrames_yaxfw")
-animation = &"win"
+animation = &"title"
 autoplay = "title"
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Title"]
@@ -85,14 +95,254 @@ offset_right = 40.0
 offset_bottom = 40.0
 stream = SubResource("VideoStreamTheora_ld20p")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_f22xb")
 autoplay = true
+
+[node name="ui" type="CanvasLayer" parent="."]
+offset = Vector2(600, 460)
+transform = Transform2D(1, 0, 0, 1, 600, 460)
+
+[node name="ColorRect" type="ColorRect" parent="ui"]
+visible = false
+modulate = Color(2.11775e-06, 0.811876, 0.825581, 1)
+custom_minimum_size = Vector2(400, 300)
+offset_left = -100.0
+offset_right = 600.0
+offset_bottom = 300.0
+color = Color(0.231319, 0.683646, 0.73924, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -952.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.59955, 1.00837)
+size_flags_horizontal = 3
+focus_mode = 2
+theme = ExtResource("5_sj1vq")
+theme_override_constants/separation = 20
+
+[node name="MenuButton" type="Button" parent="ui/VBoxContainer"]
+layout_mode = 2
+keep_pressed_outside = true
+text = "Options"
+
+[node name="MenuButton2" type="Button" parent="ui/VBoxContainer"]
+layout_mode = 2
+text = "START"
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+offset_left = 650.0
+offset_top = 550.0
+offset_right = 1150.0
+offset_bottom = 750.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="loading" type="Node2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="loading"]
-position = Vector2(342, 536)
-sprite_frames = SubResource("SpriteFrames_n2kwb")
+position = Vector2(325, 573)
+sprite_frames = SubResource("SpriteFrames_ran4f")
 autoplay = "default"
-frame_progress = 0.572919
+frame_progress = 0.00387774
+
+[node name="optionmenu" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="optionmenu"]
+offset_right = 1163.0
+offset_bottom = 662.0
+color = Color(0.805426, 0.00451678, 0.66115, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="optionmenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+theme = ExtResource("5_sj1vq")
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="optionmenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="optionmenu/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "controls"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="controller" type="Button" parent="optionmenu/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_sj1vq")
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("15_0ey3f")
+text = "controller"
+
+[node name="VSeparator2" type="VSeparator" parent="optionmenu/VBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="keyboard" type="Button" parent="optionmenu/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_sj1vq")
+toggle_mode = true
+button_group = ExtResource("15_0ey3f")
+text = "keyboard"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="optionmenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="optionmenu/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "sound"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="music" type="HSlider" parent="optionmenu/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("5_sj1vq")
+min_value = -100.0
+max_value = 5.0
+step = 10.0
+
+[node name="Label3" type="Label" parent="optionmenu/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = SubResource("Theme_lxu6w")
+text = "music"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="fx" type="HSlider" parent="optionmenu/VBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+min_value = -100.0
+max_value = 5.0
+step = 10.0
+
+[node name="Label" type="Label" parent="optionmenu/VBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_djde2")
+text = "fx"
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="optionmenu/VBoxContainer"]
+layout_mode = 2
+
+[node name="graphics" type="Label" parent="optionmenu/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "graphics"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="low" type="Button" parent="optionmenu/VBoxContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+toggle_mode = true
+button_group = ExtResource("16_7s48n")
+text = "low"
+
+[node name="VSeparator" type="VSeparator" parent="optionmenu/VBoxContainer/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="high" type="Button" parent="optionmenu/VBoxContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("16_7s48n")
+text = "normal"
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="optionmenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="optionmenu/VBoxContainer/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "gameplay"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="freshstart" type="CheckBox" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "Fresh Start"
+
+[node name="Label" type="Label" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "WARNING: THIS WILL DELETE PROGRESS"
+
+[node name="VSeparator2" type="VSeparator" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="randomizeDistribution" type="CheckBox" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "randomize distribution"
+
+[node name="backtogame" type="Button" parent="optionmenu/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "BACK TO GAME"
+
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
+[connection signal="pressed" from="ui/VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="ui/VBoxContainer/MenuButton2" to="." method="_on_menu_button_2_pressed"]
+[connection signal="pressed" from="optionmenu/VBoxContainer/VBoxContainer/HBoxContainer/controller" to="." method="_on_controller_pressed"]
+[connection signal="pressed" from="optionmenu/VBoxContainer/VBoxContainer/HBoxContainer/keyboard" to="." method="_on_keyboard_pressed"]
+[connection signal="value_changed" from="optionmenu/VBoxContainer/VBoxContainer2/VBoxContainer/HBoxContainer2/music" to="." method="_on_music_value_changed"]
+[connection signal="value_changed" from="optionmenu/VBoxContainer/VBoxContainer2/HBoxContainer/fx" to="." method="_on_fx_value_changed"]
+[connection signal="pressed" from="optionmenu/VBoxContainer/VBoxContainer3/HBoxContainer/low" to="." method="_on_low_pressed"]
+[connection signal="pressed" from="optionmenu/VBoxContainer/VBoxContainer3/HBoxContainer/high" to="." method="_on_high_pressed"]
+[connection signal="toggled" from="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/VBoxContainer/HBoxContainer/freshstart" to="." method="_on_freshstart_toggled"]
+[connection signal="toggled" from="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/HBoxContainer/randomizeDistribution" to="." method="_on_randomize_distribution_toggled"]
+[connection signal="pressed" from="optionmenu/VBoxContainer/backtogame" to="." method="_on_backtogame_pressed"]

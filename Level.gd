@@ -36,16 +36,17 @@ var warpS
 var missle
 var dangerZone
 var canrandom=true
-var randopercents=false
+#var randopercents=false
 var newsave=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Flags.mode="level"
 	$Camera2D.make_current()
-	if randopercents:
+	if Flags.options.randomizeDistribution:
 		Flags.percentageMap.sort_custom(func(a, b): return rng.randi_range(0,1)>0)
 	
-	
+	$AudioStreamPlayer.volume_db=Flags.options.music
+	$tutorialmusic.volume_db=Flags.options.music
 	Flags.titlescreen="title"
 	$trader.visible=false	
 	Flags.reset()
@@ -689,11 +690,6 @@ func dohoarde():
 	for i in range(1,rng.randi_range(5,30)):
 		Flags.dotime(createrandommonster,rng.randf_range(0.1,2.5))
 
-
-	
-func _on_enemy_generator_timeout():
-	#dospawns()
-	pass
 
 func dospawns():
 	if Flags.mode!="level":

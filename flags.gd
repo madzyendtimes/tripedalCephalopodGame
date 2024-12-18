@@ -18,7 +18,8 @@ var flyerScene:PackedScene=load("res://flyer.tscn")
 var multiScene:PackedScene=load("res://multistage.tscn")
 
 
-
+var options={"controls":"controller","music":100,"fx":100,"randomizeDistribution":false,"seed":{"active":false,"value":"fun"},"startfresh":false,"graphics":"high"}
+var defoptions={"controls":"controller","music":100,"fx":100,"randomizeDistribution":false,"seed":{"active":false,"value":"fun"},"startfresh":false,"graphics":"high"}
 var controlScheme="keyboard"
 #var controlScheme="controller"
 var freshstart=false
@@ -228,6 +229,12 @@ func addToInventory(type,numvarient):
 	playerInventory.append(invitem)
 
 
+
+func refreshoptions():
+	controlScheme=options.controls
+
+
+
 func dotime(timefunc,ntime):
 	var gt:Timer=Timer.new()
 	add_child(gt)
@@ -236,7 +243,41 @@ func dotime(timefunc,ntime):
 	gt.timeout.connect(timefunc)
 	gt.start()
 	
+func saveoptions():
+	var save_file = FileAccess.open("user://tcoptionsv2.save", FileAccess.WRITE)
+	var json_string = JSON.stringify(options)
+	save_file.store_line(json_string)
+	refreshoptions()
+
+func defaultoptions():
+	print("poroblem with options file, loading defaults")
+	options=defoptions
+	pass
 	
+
+func loadoptions():
+	print("load optionn function")
+	if not FileAccess.file_exists("user://tcoptionsv2.save"):
+		print("error")
+		defaultoptions()
+		return
+	var save_file = FileAccess.open("user://tcoptionsv2.save", FileAccess.READ)
+
+	while save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		
+		if not parse_result == OK:
+			print("can't parse options")
+			defaultoptions()
+			continue
+
+		options=json.data
+		refreshoptions()
+		print(options)
+
+
 func save():
 	print(megaStats)
 	var save_file = FileAccess.open("user://tcv1.save", FileAccess.WRITE)
