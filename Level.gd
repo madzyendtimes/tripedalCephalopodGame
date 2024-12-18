@@ -21,6 +21,7 @@ var flavorScene:PackedScene=load("res://flavornpc.tscn")
 var flyerScene:PackedScene=load("res://flyer.tscn")
 var multiScene:PackedScene=load("res://multistage.tscn")
 var gemScene:PackedScene=load("res://gemmonster.tscn")
+var lowshader=preload("res://low.gdshader")
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
 var speed=baseSpeed
@@ -70,11 +71,11 @@ func _ready():
 			ypos=rng.randi_range(75,100)
 		ts.scale=Vector2(randf_range(.5,1),yscale)
 		ts.modulate=Color(rng.randf_range(0.0,1.0),rng.randf_range(0.0,1.0),rng.randf_range(0.0,1.0))
-
-		
-
+		applyshaders(ts)
 		if yscale<.55:
 			$treeholder.add_child(ts)
+
+			
 			#ts.material.shader.set("shader_parameter/lod",5.5)
 			ts.position.y-=ypos
 			
@@ -106,7 +107,11 @@ func _ready():
 	dospawns()
 	#Flags.addToInventory(1,4)
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func applyshaders(ts):
+	if Flags.options.graphics=="low":
+		ts.material=ShaderMaterial.new()		
+		ts.material.shader=lowshader	
+
 func horrorend():
 	Flags.horror=false
 func dohorror():

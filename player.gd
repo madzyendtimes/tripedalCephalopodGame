@@ -25,6 +25,7 @@ func _ready():
 	$punch.volume_db=Flags.options.fx
 	$search.volume_db=Flags.options.fx
 	$jump.volume_db=Flags.options.fx
+	$AnimatedSprite2D.material.set_shader_parameter("lowgraphic",Flags.options.graphics=="low")
 
 func setCollision(type):
 		for i in colcollect:

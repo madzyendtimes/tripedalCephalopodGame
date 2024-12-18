@@ -97,6 +97,7 @@ height = 127.11
 shader = ExtResource("74_00no5")
 shader_parameter/rate = 2.5
 shader_parameter/doblink = false
+shader_parameter/lowgraphic = false
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qc2jh"]
 animations = [{
