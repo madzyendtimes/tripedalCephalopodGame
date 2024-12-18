@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://ckp7d15fqsuqr"]
+
+[ext_resource type="Script" path="res://eggmissle.gd" id="1_wdbhj"]
+[ext_resource type="Texture2D" uid="uid://lx7fo5634j13" path="res://enemies/missles/egg/flat.PNG" id="2_f7ffk"]
+[ext_resource type="Texture2D" uid="uid://dci75ivyevf4l" path="res://enemies/missles/egg/egg1.PNG" id="3_mk2dq"]
+[ext_resource type="Texture2D" uid="uid://wssle0plwbnt" path="res://enemies/missles/egg/egg2.PNG" id="4_d8xll"]
+[ext_resource type="Texture2D" uid="uid://b5wft2bn8mynd" path="res://enemies/missles/egg/egg3.PNG" id="5_ggb4p"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e36gj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f7ffk")
+}],
+"loop": true,
+"name": &"aftermath",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mk2dq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d8xll")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ggb4p")
+}],
+"loop": true,
+"name": &"deployed",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_feirb"]
+radius = 13.0384
+
+[node name="eggmissle" type="Area2D"]
+z_index = -2
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_wdbhj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e36gj")
+animation = &"deployed"
+autoplay = "deployed"
+frame_progress = 0.729493
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_feirb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

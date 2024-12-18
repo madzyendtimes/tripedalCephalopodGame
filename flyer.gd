@@ -1,5 +1,6 @@
 extends Area2D
 var prizeScene:PackedScene=load("res://prize.tscn")
+var missle:PackedScene=load("res://eggmissle.tscn")
 var dir:=-1
 var spd:=2.5
 var ypos:=0
@@ -14,6 +15,7 @@ var crashed:=false
 var runningaway:=false
 var freefall:=false
 var begchance=40
+var hasmissle=true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	selectType()
@@ -32,6 +34,7 @@ func selectType():
 		minchange=0.5
 		maxchange=1.5
 		minspd=2.0
+		hasmissle=false
 	if choice==1:
 		$AnimatedSprite2D.animation="drone"
 		type="drone"
@@ -40,7 +43,18 @@ func selectType():
 		maxchange=2.0
 		minspd=1.0
 		canflip=false
+		hasmissle=false
 	Flags.dotime(changedirection,1.0)
+	if hasmissle:
+		Flags.dotime(dropmissle,rng.randf_range(0.5,5.0))
+
+
+func dropmissle():
+		var egg=missle.instantiate()
+		egg.position.y=position.y
+		egg.position.x=position.x
+		self.get_parent().add_child(egg)
+		Flags.dotime(dropmissle,rng.randf_range(0.5,5.0))
 
 func _process(delta):
 	

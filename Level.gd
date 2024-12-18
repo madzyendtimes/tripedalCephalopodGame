@@ -712,6 +712,7 @@ func dospawns():
 			
 			var chance=rng.randi_range(0,upchoice)
 			var newchance=rng.randi_range(0,Flags.percentageAgg)
+			print(newchance,Flags.percentageAgg)
 			var agg=0
 			var count=0
 			for i in Flags.percentageMap:

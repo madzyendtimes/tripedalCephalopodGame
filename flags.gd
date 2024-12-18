@@ -134,10 +134,10 @@ var percentageMap=[
 5, #weather effects
 5, #fair weather
 3, #flavor npcs
-8, #flying enemy
+8,#8, #flying enemy
 7, #multistage enemy
 2, #gemmonster
-5, #hoarde
+1, #hoarde
 5 #quest
 ]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable
