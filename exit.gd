@@ -12,9 +12,14 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print(body.name)
+
 	if Flags.entered.active==true:
+		if 	Flags.mode=="cryptominos":
+			Flags.cryptoeffects="exit"	
+
 		Flags.paused=false;
 		Flags.entered.active=false
-		Flags.effect="exitenterable"
-	pass # Replace with function body.
+	#	Flags.effect="exitenterable"
+
+
+			#Flags.cryptoeffects="exit"	

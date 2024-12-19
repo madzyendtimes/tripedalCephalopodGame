@@ -18,14 +18,20 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	match Flags.cryptoeffects:
 		"exit":
+			Flags.cryptoeffects=""
 			exit()
-	pass
+		"dead":
+			Flags.cryptoeffects=""
+			exit(true)
+		
+	Flags.cryptoeffects=""
 
-func exit():
+func exit(isdead=false):
 	$music.stop()
-	home.exit()
+	home.exit(isdead)
 
 func start(called):
+	Flags.cryptoeffects=""
 	$music.play()
 	home=called
 	print("cryptostarted")
@@ -43,4 +49,3 @@ func start(called):
 
 func _on_music_finished() -> void:
 	$music.play()
-	pass # Replace with function body.

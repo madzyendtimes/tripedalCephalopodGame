@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://dw8ngxov1xaxq"]
+
+[ext_resource type="Texture2D" uid="uid://xyerp8xabldb" path="res://statbars/IMG_6406.PNG" id="1_vy67e"]
+[ext_resource type="Texture2D" uid="uid://co8y726bk22gs" path="res://statbars/IMG_6407.PNG" id="2_als7n"]
+[ext_resource type="Texture2D" uid="uid://d32b1umcsupr8" path="res://statbars/IMG_6408.PNG" id="3_0apb0"]
+[ext_resource type="Texture2D" uid="uid://gy0xb1mct6oi" path="res://statbars/health.PNG" id="4_koh4x"]
+[ext_resource type="Texture2D" uid="uid://dxfnm8q8dxn1q" path="res://statbars/IMG_6409.PNG" id="5_5hl76"]
+[ext_resource type="Script" path="res://texture_progress_bar.gd" id="6_r557d"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_wwrqp"]
+frames = 3
+frame_0/texture = ExtResource("1_vy67e")
+frame_0/duration = 0.46
+frame_1/texture = ExtResource("2_als7n")
+frame_1/duration = 0.46
+frame_2/texture = ExtResource("3_0apb0")
+frame_2/duration = 0.57
+
+[node name="healthbar" type="TextureProgressBar"]
+texture_repeat = 2
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 1146.0
+offset_bottom = 54.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+value = 100.0
+texture_under = SubResource("AnimatedTexture_wwrqp")
+texture_over = ExtResource("4_koh4x")
+texture_progress = ExtResource("5_5hl76")
+script = ExtResource("6_r557d")

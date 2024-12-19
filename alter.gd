@@ -29,5 +29,6 @@ func inactive():
 func _on_body_entered(body: Node2D) -> void:
 	print("offering accepted")
 	$AnimatedSprite2D.animation=type+"active"
+	Flags.save()
 	Flags.dotime(inactive,1.5)
 	pass # Replace with function body.

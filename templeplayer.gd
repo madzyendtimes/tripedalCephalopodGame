@@ -20,6 +20,7 @@ var bag=0
 var inoffer=false
 var oldmod=modulate
 var inhit=false
+var home=self
 
 func _process(delta: float) -> void:
 	
@@ -65,7 +66,6 @@ func _process(delta: float) -> void:
 
 	velocity.y = diry * SPEED
 
-	#print(get_global_transform())
 	move_and_slide()	
 	var testy=floor(position.y/100)
 	if testy!=oldtest:
@@ -75,6 +75,10 @@ func _process(delta: float) -> void:
 		oldtest=testy
 		var tween=get_tree().create_tween()
 		tween.tween_property(self,"scale",Vector2(tempscale,tempscale),0.3).from_current()
+
+func start(callee):
+	home=callee
+
 
 func makeoffer():
 	if dead:
@@ -100,6 +104,7 @@ func hit():
 	if Flags.playerStats.health<1:
 		dead=true
 		$AnimatedSprite2D.animation="dead"
+		home.exit(true)
 		return	
 	Flags.dotime(outhit,1.4)
 

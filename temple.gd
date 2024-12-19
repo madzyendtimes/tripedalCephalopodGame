@@ -4,15 +4,15 @@ var ghostScene:PackedScene= load("res://ghost.tscn")
 var rng=RandomNumberGenerator.new()
 var home=self
 var offtimers=true
-# Called when the node enters the scene tree for the first time.
+
+
 func _ready() -> void:
 	$music.volume_db=Flags.options.music
 #	devstart()
-	pass
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+
+
+
 		
-	pass
 
 func start(called):
 	offtimers=false
@@ -23,6 +23,7 @@ func start(called):
 		createtrash()
 	Flags.dotime(starttrash,rng.randf_range(.2,2.5))
 	Flags.dotime(startghost,rng.randf_range(1.5,3.5))
+	$templeplayer.start(called)
 
 func devstart():
 	start(self)
@@ -66,17 +67,18 @@ func eliminateghosts(type):
 			i.dissapear(type)
 	$templeplayer.bag=0
 
-func exit():
+func exit(isdead=false):
 	reset()
 	$music.stop()
 	print("exit")
+	home.exit(isdead)
 
 
 func _on_alter_body_entered(body: Node2D) -> void:
-	print("game acknowledges")
+
 	$templeplayer.offer()
 	eliminateghosts($alter.type)
-	pass # Replace with function body.
+
 
 
 func _on_exit_body_entered(body: Node2D) -> void:

@@ -17,15 +17,15 @@ var gemScene:PackedScene=load("res://gemmonster.tscn")
 var ouch=false
 var timetext=30
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	$music.volume_db=Flags.options.music
 	#start(self)
-	pass
 
 func hidegems():
 	$gems.visible=false
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+
 func _process(delta: float) -> void:
 	if Flags.mode!="witchhut" or playerdead:
 		return
@@ -50,11 +50,12 @@ func _process(delta: float) -> void:
 			Flags.dotime(hidegems,1.0)
 		"gemcaught":
 			Flags.megaStats.gems+=stage	
+			Flags.save()
 			stage+=1
 			
 			createrecipe()
 	Flags.witchevents=""
-	pass
+
 
 
 func poorchoice(ingredient):
@@ -202,17 +203,18 @@ func playerchoices():
 
 		
 func start(callee):
+	Flags.witchevents=""
 	Flags.mode="witchhut"
 	home=callee
 	$music.play()
 	recipe=[]
 
-func exit():
+func exit(isdead=false):
 	clearrecipe()
 	clearinput()
 	freshstart=true
 	$music.stop()
-	home.exit()
+	home.exit(isdead)
 
 func _on_exit_body_entered(body: Node2D) -> void:
 	exit()
@@ -235,11 +237,10 @@ func _on_cauldrenfront_body_entered(body: Node2D) -> void:
 		$witchplayer.hit()
 		if Flags.playerStats.health<1:
 			playerdead=true
-		pass
-	 # Replace with function body.
+			exit(true)
+
 
 
 func _on_button_body_exited(body: Node2D) -> void:
 	clearrecipe()
 	clearinput()
-	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://bjlg8hhdf4x7l"]
+[gd_scene load_steps=108 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -62,6 +62,8 @@
 [ext_resource type="Script" path="res://tutorial.gd" id="81_bqg1q"]
 [ext_resource type="Texture2D" uid="uid://b0x7w52xctc7x" path="res://location/tutorial/tutorialback.PNG" id="82_8p1p5"]
 [ext_resource type="Texture2D" uid="uid://driq162ck5stl" path="res://location/tutorial/tutorialfront.PNG" id="83_4r3hh"]
+[ext_resource type="PackedScene" uid="uid://dw8ngxov1xaxq" path="res://healthbar.tscn" id="84_7qw28"]
+[ext_resource type="PackedScene" uid="uid://3gjeujea1ubj" path="res://stanimabar.tscn" id="84_to8ww"]
 [ext_resource type="PackedScene" uid="uid://bu7gmej612ogw" path="res://tv.tscn" id="107_57c1h"]
 [ext_resource type="PackedScene" uid="uid://ej35f8d30wde" path="res://enterable.tscn" id="108_lhqd7"]
 [ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="116_lqqny"]
@@ -740,6 +742,20 @@ position = Vector2(594, 4508)
 
 [node name="witchhutcamera" type="Camera2D" parent="."]
 position = Vector2(586, -2196)
+
+[node name="stanimabar" parent="." instance=ExtResource("84_to8ww")]
+offset_left = 18.0
+offset_top = 196.0
+offset_right = 90.0
+offset_bottom = 748.0
+scale = Vector2(1.5, 1.5)
+value = 100.0
+
+[node name="healthbar" parent="." instance=ExtResource("84_7qw28")]
+offset_left = 26.0
+offset_top = 580.0
+offset_right = 526.0
+offset_bottom = 630.0
 
 [connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]

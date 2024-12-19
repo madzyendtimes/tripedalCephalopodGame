@@ -5,7 +5,7 @@ var navDivide:=11
 func _ready():
 	update()
 	$PopupPanel2.visible=false
-
+	$PopupPanel.visible=false
 
 
 func showpop():
@@ -15,8 +15,9 @@ func showpop():
 func _process(delta):
 	#print(Flags.paused,Flags.entered,Flags.mode)
 	if Flags.mode!="statsScreen":		
-		update()
+		return
 	else:
+		update()
 		if Input.is_action_just_pressed("right"):
 			SelectItem(1,0)
 		if Input.is_action_just_pressed("left"):
@@ -74,18 +75,21 @@ func SelectItem(selx,sely):
 	
 
 func update():
-	$PopupPanel.visible=true
 	$PopupPanel/statbar/Label.text="health :"+str(Flags.playerStats.health)+" - stanima :"+str(Flags.playerStats.stanima)+" - speed : "+str(Flags.playerStats.speed)+ " - power : "+str(Flags.playerStats.power)+" - gems: "+str(Flags.megaStats.gems)
+	#$PopupPanel/TextureProgressBar.max_value=Flags.playerStats.maxHealth
+	#$PopupPanel/TextureProgressBar.value=Flags.playerStats.health
 	#"loc:"+str(Flags.l)
 	
 func contract():
 	print("contract")
+	$PopupPanel.visible=false
 	$PopupPanel2.visible=false
 	Flags.paused=false
 	Flags.mode="level"
 	
 func expand():
 	print("expand")
+	$PopupPanel.visible=true
 #	$PopupPanel.size.y=100
 	Flags.mode="statsScreen"
 	$PopupPanel2.visible=true

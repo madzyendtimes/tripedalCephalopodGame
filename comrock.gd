@@ -5,12 +5,11 @@ var hitAlready=false
 var staticly=true
 var id="rock"
 var hasHit=false
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Flags.entered.active==true:
 		if staticly:
@@ -21,12 +20,17 @@ func chooseType():
 	var rng=RandomNumberGenerator.new()
 	$AnimatedSprite2D.animation=type[rng.randi_range(0,2)]
 	id=$AnimatedSprite2D.animation
-func gameover():
-	if Flags.entered.active==true:
-		Flags.effect="exitenterable"
+func gameover(isdead=false):
+	if Flags.mode=="cryptominos":
+		#Flags.effect="exitenterable"
 		Flags.paused=false;
 		Flags.entered.active=false
 		print("gameover")
+	if isdead:
+		Flags.cryptoeffects="dead"
+	else:
+		Flags.cryptoeffects="exit"		
+	
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -42,15 +46,15 @@ func _on_body_entered(body: Node2D) -> void:
 			match id:
 				"gem":
 					Flags.megaStats.gems+=1
+					Flags.save()
 					print("gems=",Flags.megaStats.gems)
 				"rock":
 					Flags.playerStats.health-=1
 					print("hitwith rock")
 					if Flags.playerStats.health<1:
-						gameover()
+						gameover(true)
 				"skull":				
 					print("hit with skull")
 					gameover()
 		if $"..":
 			queue_free()
-	pass # Replace with function body.

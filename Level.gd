@@ -45,7 +45,10 @@ func _ready():
 	$Camera2D.make_current()
 	if Flags.options.randomizeDistribution:
 		Flags.percentageMap.sort_custom(func(a, b): return rng.randi_range(0,1)>0)
-	
+	$healthbar.max_value=Flags.playerStats.maxHealth
+	$stanimabar.max_value=Flags.playerStats.maxStanima
+	$healthbar.value=Flags.playerStats.health
+	$stanimabar.value=Flags.playerStats.stanima
 	$AudioStreamPlayer.volume_db=Flags.options.music
 	$tutorialmusic.volume_db=Flags.options.music
 	Flags.titlescreen="title"
@@ -193,13 +196,15 @@ func doEffect():
 			triggerhorror()
 		"exitenterable":
 			exit()
-					
+		"updatehealth":
+			$healthbar.value=Flags.playerStats.health
 		"puke":
 			dopuke()
 		"restorehp":
 			var h=1
 			Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
 			$player.stat("+","health",h)
+			$healthbar.value=Flags.playerStats.health
 		"that":
 			Flags.hat="that"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
@@ -264,15 +269,18 @@ func doEffect():
 	Flags.effect=""	
 
 
-func exit():
+func exit(isdead=false):
 	$Camera2D.make_current()			
 	Flags.paused=false
 	Flags.mode="level"
-	$player/AnimatedSprite2D.play()
-	$AudioStreamPlayer.play()
 	var tween=get_tree().create_tween()
 	tween.parallel().tween_property($player,"scale",Flags.playerscale,.5)
 	tween.parallel().tween_property($player,"position",Flags.playerposition,.5)
+	if isdead:
+		$player.kill()
+		return
+	$player/AnimatedSprite2D.play()
+	$AudioStreamPlayer.play()
 	$player.walkani()
 
 
@@ -393,6 +401,7 @@ func _process(delta):
 		if Flags.weather=="sun":
 			rate=5
 		Flags.playerStats.stanima-=rate
+		$stanimabar.value=Flags.playerStats.stanima
 
 	if Flags.playerStats.stanima<1:
 		stanimaAction=false
@@ -402,6 +411,8 @@ func _process(delta):
 	if stanimaAction==false:
 		
 		Flags.playerStats.stanima=min(Flags.playerStats.stanima+Flags.playerStats.stanimaRecharge,Flags.playerStats.maxStanima)
+		if Flags.playerStats.stanima!=Flags.playerStats.maxStanima:
+			$stanimabar.value=Flags.playerStats.stanima
 		if Flags.exhausted==true && Flags.playerStats.stanima>(Flags.playerStats.maxStanima/2):
 			speed=currSpeed
 			Flags.exhausted=false

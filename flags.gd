@@ -130,7 +130,7 @@ var percentageMap=[
 5, #tv
 10, #expander
 10, #tall monster (diapertooth)
-10, #minigame
+900, #minigame
 5, #weather effects
 5, #fair weather
 3, #flavor npcs
