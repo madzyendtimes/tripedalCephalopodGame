@@ -1,5 +1,6 @@
 extends Control
 var navDivide:=11
+var eventq
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

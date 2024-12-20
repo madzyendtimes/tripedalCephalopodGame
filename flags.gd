@@ -25,6 +25,7 @@ var controlScheme="keyboard"
 var freshstart=false
 var weather=""
 const stats=preload("res://playerstats.gd")
+const eq=preload("res://event_q.gd")
 var l=0
 var playerposition
 var playerscale
@@ -52,7 +53,9 @@ var Quests:={
 			}
 		}
 #var playerStats:={"health":1,"maxHealth":3,"stanima":600,"maxStanima":600,"stanimaRate":1,"speed":1,"maxSpeed":1,"power":1,"maxPower":1}
-var playerStats=stats.new()
+
+var tne=eq.new()
+var playerStats=stats.new()#playerstats references tne always place after instatiating eq
 
 var credit=megaStats.credit
 var baseStats=playerStats
@@ -130,7 +133,7 @@ var percentageMap=[
 5, #tv
 10, #expander
 10, #tall monster (diapertooth)
-900, #minigame
+9, #minigame
 5, #weather effects
 5, #fair weather
 3, #flavor npcs
@@ -142,7 +145,7 @@ var percentageMap=[
 ]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable
 var percentageAgg=100
-
+var eventQ=[]
 
 
 var rng=RandomNumberGenerator.new()

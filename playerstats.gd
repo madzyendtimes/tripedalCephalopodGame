@@ -38,15 +38,18 @@ var health: int :
 	get:
 		return actual.health+bonus.health
 	set(val):
-		setStat("health",val)			
+		setStat("health",val)
+		if Flags.tne!=null:
+			Flags.tne.addEvent("update","health",true,{"params":[val]})
 	
 var stanima: int :
 	get:
 		return actual.stanima+bonus.stanima
 
 	set(val):
-		setStat("stanima",val)			
-
+		setStat("stanima",val)
+		if Flags.tne!=null:			
+			Flags.tne.addEvent("update","stanima",true,{"params":[val]})
 var stanimaRecharge: int :
 	get:
 		return actual.stanimaRecharge+bonus.stanimaRecharge
@@ -89,12 +92,16 @@ var maxHealth:int:
 		return maximum.health
 	set(val):
 		maximum.health=val
+		if Flags.tne!=null:
+			Flags.tne.addEvent("max","health",true,{"params":[val]})
 		
 var maxStanima:int:
 	get:
 		return maximum.stanima
 	set(val):
 		maximum.stanima=val
+		if Flags.tne!=null:
+			Flags.tne.addEvent("max","stanima",true,{"params":[val]})
 
 var maxStanimaRecharge:int:
 	get:

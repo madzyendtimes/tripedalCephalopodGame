@@ -10,11 +10,11 @@
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_wwrqp"]
 frames = 3
 frame_0/texture = ExtResource("1_vy67e")
-frame_0/duration = 0.46
+frame_0/duration = 0.14
 frame_1/texture = ExtResource("2_als7n")
-frame_1/duration = 0.46
+frame_1/duration = 0.14
 frame_2/texture = ExtResource("3_0apb0")
-frame_2/duration = 0.57
+frame_2/duration = 0.14
 
 [node name="healthbar" type="TextureProgressBar"]
 texture_repeat = 2

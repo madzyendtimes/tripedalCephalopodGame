@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://3gjeujea1ubj"]
+[gd_scene load_steps=8 format=3 uid="uid://3gjeujea1ubj"]
 
 [ext_resource type="Texture2D" uid="uid://b5kecuc8x6lp5" path="res://statbars/stanimaover.PNG" id="1_rfla0"]
 [ext_resource type="Texture2D" uid="uid://dijvxhny4a5jv" path="res://statbars/stanimaprog1.PNG" id="2_xyar5"]
 [ext_resource type="Texture2D" uid="uid://clatwx82tnc72" path="res://statbars/stanimaprog2.PNG" id="3_go2gh"]
 [ext_resource type="Texture2D" uid="uid://cmcw4t0tq4b2n" path="res://statbars/stanimaprog3.PNG" id="4_3ybvy"]
 [ext_resource type="Texture2D" uid="uid://b28nauxm2cnnc" path="res://statbars/stanimaprog4.PNG" id="5_wxfa8"]
+[ext_resource type="Script" path="res://stanimabar.gd" id="6_xxpvh"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_ih8it"]
 frames = 4
@@ -25,3 +26,4 @@ offset_bottom = 208.0
 fill_mode = 3
 texture_over = ExtResource("1_rfla0")
 texture_progress = SubResource("AnimatedTexture_ih8it")
+script = ExtResource("6_xxpvh")

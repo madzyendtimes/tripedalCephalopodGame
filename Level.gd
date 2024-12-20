@@ -45,10 +45,9 @@ func _ready():
 	$Camera2D.make_current()
 	if Flags.options.randomizeDistribution:
 		Flags.percentageMap.sort_custom(func(a, b): return rng.randi_range(0,1)>0)
-	$healthbar.max_value=Flags.playerStats.maxHealth
-	$stanimabar.max_value=Flags.playerStats.maxStanima
-	$healthbar.value=Flags.playerStats.health
-	$stanimabar.value=Flags.playerStats.stanima
+	Flags.playerStats.maxHealth=Flags.playerStats.maxHealth
+	Flags.playerStats.maxStanima=Flags.playerStats.maxStanima
+	#triggers events to ensure listeners will update,namely the stat bars, I know it's wonky, I like it better than alternatives :p
 	$AudioStreamPlayer.volume_db=Flags.options.music
 	$tutorialmusic.volume_db=Flags.options.music
 	Flags.titlescreen="title"
@@ -56,7 +55,7 @@ func _ready():
 	Flags.reset()
 	baseSpeed=Flags.megaStats.speed
 	speed=baseSpeed
-	$"..".killStart()
+	$"..".killStart() #this needs to change
 	$treeholder.position.y=-175
 	$treeholder2.position.y=-150
 	for i in range(0,300):
@@ -77,9 +76,6 @@ func _ready():
 		applyshaders(ts)
 		if yscale<.55:
 			$treeholder.add_child(ts)
-
-			
-			#ts.material.shader.set("shader_parameter/lod",5.5)
 			ts.position.y-=ypos
 			
 		else: 
@@ -118,7 +114,8 @@ func applyshaders(ts):
 func horrorend():
 	Flags.horror=false
 func dohorror():
-	var timer=get_tree().create_timer(rng.randf_range(0.5,2)).timeout
+#	var timer=get_tree().create_timer(rng.randf_range(0.5,2)).timeout
+	#this timer is now defunct considering dotime, will test before uncomment
 	Flags.horror=true
 	$random.position.y=-1500
 	var tween=get_tree().create_tween()
@@ -133,7 +130,8 @@ func horrorflash():
 	tween.tween_property($random,"modulate",Color(1,1,1,1),.5)		
 
 func triggerhorror():
-	Flags.dotime(dohorror,rng.randf_range(0.5,5.0))
+	Flags.tne.dotime(self,[dohorror],rng.randf_range(0.5,5.0),"horror",true,"level")
+#	Flags.dotime(dohorror,rng.randf_range(0.5,5.0))
 	
 
 func setShaderParam(parm,val):
@@ -204,7 +202,6 @@ func doEffect():
 			var h=1
 			Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
 			$player.stat("+","health",h)
-			$healthbar.value=Flags.playerStats.health
 		"that":
 			Flags.hat="that"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
@@ -254,7 +251,10 @@ func doEffect():
 		"beg":
 			Flags.hat="beg"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
-			Flags.dotime(warnbeg,27.0)
+			
+			#Flags.dotime(warnbeg,27.0)
+			
+			Flags.tne.dotime(self,[warnbeg],27.0,"warnbeg",true,"level")
 				
 		"stanima":
 			Flags.playerStats.bonusStanima=Flags.playerStats.maxStanima
@@ -289,12 +289,16 @@ func returnBonus(skey):
 
 func warnbeg():
 	$player.warn()
-	Flags.dotime(returnbeg,3.0)
+	#Flags.dotime(returnbeg,3.0)
+	
+	Flags.tne.dotime(self,[returnbeg],3.0,"returnbeg",true,"level")
 
 func warnhat():
 	$player.warn()
-	Flags.dotime(returnhat,3.0)
-
+#	Flags.dotime(returnhat,3.0)
+	
+	Flags.tne.dotime(self,[returnhat],3.0,"returnhat",true,"level")
+	
 func returnhat():
 	$player.unwarn()
 	if Flags.hat=="that":
@@ -401,7 +405,7 @@ func _process(delta):
 		if Flags.weather=="sun":
 			rate=5
 		Flags.playerStats.stanima-=rate
-		$stanimabar.value=Flags.playerStats.stanima
+	#	$stanimabar.value=Flags.playerStats.stanima
 
 	if Flags.playerStats.stanima<1:
 		stanimaAction=false
@@ -411,8 +415,8 @@ func _process(delta):
 	if stanimaAction==false:
 		
 		Flags.playerStats.stanima=min(Flags.playerStats.stanima+Flags.playerStats.stanimaRecharge,Flags.playerStats.maxStanima)
-		if Flags.playerStats.stanima!=Flags.playerStats.maxStanima:
-			$stanimabar.value=Flags.playerStats.stanima
+	#	if Flags.playerStats.stanima!=Flags.playerStats.maxStanima:
+	#		$stanimabar.value=Flags.playerStats.stanima
 		if Flags.exhausted==true && Flags.playerStats.stanima>(Flags.playerStats.maxStanima/2):
 			speed=currSpeed
 			Flags.exhausted=false
@@ -587,10 +591,10 @@ func stop_fight():
 			
 func reset_player():
 	speed=currSpeed
-	var tween = get_tree().create_tween()
-	tween.tween_property($player, "position", Vector2(gx,gy), .5).from(Vector2(gx,gy-300))
-	tween.tween_callback(reset_flags)
-# type=
+	if get_tree()!=null:
+		var tween = get_tree().create_tween()
+		tween.tween_property($player, "position", Vector2(gx,gy), .5).from(Vector2(gx,gy-300))
+		tween.tween_callback(reset_flags)
 
 func reset_flags():
 		canJump=true
@@ -704,13 +708,17 @@ func createrandommonster():
 
 func dohoarde():
 	for i in range(1,rng.randi_range(5,30)):
-		Flags.dotime(createrandommonster,rng.randf_range(0.1,2.5))
-
+	
+	#	Flags.dotime(createrandommonster,rng.randf_range(0.1,2.5))
+		
+		Flags.tne.dotime(self,[createrandommonster],rng.randf_range(0.1,3.5),"hoarde",false,"level")
 
 func dospawns():
 	if Flags.mode!="level":
 		#checkspawn in 5 seconds
-		Flags.dotime(dospawns,3.0)
+		#Flags.dotime(dospawns,3.0)
+		
+		Flags.tne.dotime(self,[dospawns],3.0,"spawns",true,"level")
 		return
 		
 	if (dangerZone.less*-1>$enemy.position.x):
@@ -735,12 +743,17 @@ func dospawns():
 				count+=1									
 	
 			var nextSpawn=rng.randf_range(3.5,7.0)
-			Flags.dotime(dospawns,nextSpawn)
+			#Flags.dotime(dospawns,nextSpawn)
+			
+			Flags.tne.dotime(self,[dospawns],nextSpawn,"spawns",true,"level")
+			
 			return
 			
 			#chance=11 #force spawns here
 
-	Flags.dotime(dospawns,3.0)
+	#Flags.dotime(dospawns,3.0)
+	
+	Flags.tne.dotime(self,[dospawns],3.0,"spawns",true,"level")
 	#move to own generator
 func changeweather():
 	$weather.changeweatherforce()
