@@ -122,7 +122,7 @@ func dohorror():
 	tween.tween_property($random,"modulate",Color(1,1,1,0),.5)
 	tween.tween_callback(horrorflash)
 	
-	Flags.tne.dotime(self,[horrorend],"horrorend",5.0,true,"level")
+	Flags.tne.dotime(self,[horrorend],5.0,"horrorend",true,"level")
 
 
 func horrorflash():

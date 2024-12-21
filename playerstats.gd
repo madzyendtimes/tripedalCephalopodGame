@@ -50,9 +50,9 @@ var stanima: int :
 		return actual.stanima+bonus.stanima
 
 	set(val):
-		var last=actual.stanima
+		var laststanima=actual.stanima
 		setStat("stanima",val)
-		if last!=val:
+		if laststanima!=val:
 			if Flags.tne!=null:			
 				Flags.tne.addEvent("update","stanima",true,{"params":[val]})
 var stanimaRecharge: int :
