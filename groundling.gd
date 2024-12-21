@@ -30,7 +30,8 @@ func runaway():
 		runningaway=true
 		dir=dir*-1	
 		$AnimatedSprite2D.flip_h=true
-		Flags.dotime(recourage,3.0)
+
+		Flags.tne.dotime(self,[recourage],3.0,"recourage"+str(self.get_instance_id()),true,"level")
 
 func recourage():
 	runningaway=true

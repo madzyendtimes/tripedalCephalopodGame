@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 			$monsters.add_child(gm)
 			$gems/Label.text="+"+str(stage)
 			$gems.visible=true
-			Flags.dotime(hidegems,1.0)
+			Flags.tne.dotime(self,[hidegems],1.0,"hidegems",true,"witchhut")
 		"gemcaught":
 			Flags.megaStats.gems+=stage	
 			Flags.save()
@@ -135,9 +135,8 @@ func createrecipe():
 	timetext=30+(stage*3)
 	$time/Label.text=str(timetext)
 	$time.visible=true
-	Flags.dotime(counter,1.0)
-	Flags.dotime(witchread,0.5)
-
+	Flags.tne.dotime(self,[counter],1.0,"counter",true,"witchhut")
+	Flags.tne.dotime(self,[witchread],0.5,"witchread",true,"witchhut")
 
 func clearrecipe():
 
@@ -158,8 +157,7 @@ func counter():
 		createrecipe()
 		return
 	if $witchplayer.engaged:
-		Flags.dotime(counter,1.0)
-	
+		Flags.tne.dotime(self,[counter],1.0,"counter",true,"witchhut")
 func dotweens(px,py,reciperender):
 		var tween=get_tree().create_tween()
 		reciperender.scale=Vector2(0.1,0.1)

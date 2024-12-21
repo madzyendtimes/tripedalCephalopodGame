@@ -151,7 +151,7 @@ func purchase():
 		$CanvasLayer/AnimatedSprite2D.animation="eat"
 		Flags.save()
 		$CanvasLayer/purchase.play()
-		Flags.dotime(backtonormal,3.0)		
+		Flags.tne.dotime(self,[backtonormal],3.6,"backtonormal")
 	else:
 		$CanvasLayer/invalid.play()
 

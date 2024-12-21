@@ -121,7 +121,8 @@ func dohorror():
 	var tween=get_tree().create_tween()
 	tween.tween_property($random,"modulate",Color(1,1,1,0),.5)
 	tween.tween_callback(horrorflash)
-	Flags.dotime(horrorend,5)
+	
+	Flags.tne.dotime(self,[horrorend],"horrorend",5.0,true,"level")
 
 
 func horrorflash():
@@ -131,7 +132,6 @@ func horrorflash():
 
 func triggerhorror():
 	Flags.tne.dotime(self,[dohorror],rng.randf_range(0.5,5.0),"horror",true,"level")
-#	Flags.dotime(dohorror,rng.randf_range(0.5,5.0))
 	
 
 func setShaderParam(parm,val):
@@ -146,10 +146,9 @@ func dopuke():
 	renderPuke()
 
 func randpuke():	
-	Flags.dotime(dopuke,rng.randf_range(0.0,2.0));			
+	Flags.tne.dotime(self,[dopuke],rng.randf_range(0.1,2.0),"dopuke",true,"level")	
 	if Flags.radiation==true:
-		Flags.dotime(randpuke,1.0)
-
+		Flags.tne.dotime(self,[randpuke],rng.randf_range(0.5,2.0),"randpuke",true,"level")	
 func radiationend():
 	Flags.radiation=false
 	var tween=get_tree().create_tween()
@@ -207,7 +206,8 @@ func doEffect():
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
 			Flags.mesmerized=false
 			$player.walkani()
-			Flags.dotime(warnhat,27.0)
+			Flags.tne.dotime(self,[warnhat],27.0,"warnhat",true,"level")
+			
 		"controlled":
 			var resistChance=Flags.playerStats.smarts*10
 			if rng.randi_range(0,100)>resistChance:
@@ -252,14 +252,14 @@ func doEffect():
 			Flags.hat="beg"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
 			
-			#Flags.dotime(warnbeg,27.0)
-			
 			Flags.tne.dotime(self,[warnbeg],27.0,"warnbeg",true,"level")
 				
 		"stanima":
 			Flags.playerStats.bonusStanima=Flags.playerStats.maxStanima
 			Flags.playerStats.stanima=Flags.playerStats.maxStanima
-			Flags.dotime(returnBonus.bind("stanima"),10.0)
+			
+			Flags.tne.dotime(self,[returnBonus.bind("stanima")],10.0,"returnstanimabonus",true,"level")
+
 		"quest":
 			pass
 		"hit":
@@ -289,13 +289,12 @@ func returnBonus(skey):
 
 func warnbeg():
 	$player.warn()
-	#Flags.dotime(returnbeg,3.0)
 	
 	Flags.tne.dotime(self,[returnbeg],3.0,"returnbeg",true,"level")
 
 func warnhat():
 	$player.warn()
-#	Flags.dotime(returnhat,3.0)
+
 	
 	Flags.tne.dotime(self,[returnhat],3.0,"returnhat",true,"level")
 	
@@ -365,8 +364,8 @@ func dorandaction():
 	if randaction==4 && canJump==true:
 		$player.search()
 	canrandom=false	
-	Flags.dotime(rando,rng.randi_range(1.0,4.0))
-		
+	
+	Flags.tne.dotime(self,[rando],rng.randi_range(1.0,4.0),"rando",true,"level")	
 
 
 func rando():
@@ -708,15 +707,12 @@ func createrandommonster():
 
 func dohoarde():
 	for i in range(1,rng.randi_range(5,30)):
-	
-	#	Flags.dotime(createrandommonster,rng.randf_range(0.1,2.5))
 		
 		Flags.tne.dotime(self,[createrandommonster],rng.randf_range(0.1,3.5),"hoarde",false,"level")
 
 func dospawns():
 	if Flags.mode!="level":
 		#checkspawn in 5 seconds
-		#Flags.dotime(dospawns,3.0)
 		
 		Flags.tne.dotime(self,[dospawns],3.0,"spawns",true,"level")
 		return
@@ -743,7 +739,6 @@ func dospawns():
 				count+=1									
 	
 			var nextSpawn=rng.randf_range(3.5,7.0)
-			#Flags.dotime(dospawns,nextSpawn)
 			
 			Flags.tne.dotime(self,[dospawns],nextSpawn,"spawns",true,"level")
 			
@@ -751,7 +746,6 @@ func dospawns():
 			
 			#chance=11 #force spawns here
 
-	#Flags.dotime(dospawns,3.0)
 	
 	Flags.tne.dotime(self,[dospawns],3.0,"spawns",true,"level")
 	#move to own generator

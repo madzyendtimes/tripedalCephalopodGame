@@ -1,20 +1,13 @@
 extends CanvasLayer
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 func punish():
 	visible=true
 	$AnimatedSprite2D.play()
-	Flags.dotime(calm,1.0)
+	Flags.tne.dotime(self,[calm],1.0,"calm"+str(self.get_instance_id()),true,"temple")
 
 func calm():
 	visible=false

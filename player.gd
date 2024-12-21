@@ -82,23 +82,24 @@ func resisted():
 	$stat/Label.text="RESISTED "
 	$stat/AnimatedSprite2D.animation="tv"
 	$stat.visible=true
-	Flags.dotime(unstat,1.5)
-
+	Flags.tne.dotime(self,[unstat],1.5,"unstat",true,"level")
 
 func stat(mth,ptype,amount):
 	$stat/Label.text=mth+" "+str(amount)
 	$stat/AnimatedSprite2D.animation=ptype
 	$stat.visible=true
-	Flags.dotime(unstat,1.0)
-	
+	Flags.tne.dotime(self,[unstat],1.5,"unstat",true,"level")
+
 func unstat():
 	$stat.visible=false
 
-func hit():
+func hit(dmg=1):
+	
 	if inHit!=true:
 		inHit=true
-		stat("-","health",1)
-		Flags.playerStats.health-=1
+		stat("-","health",dmg)
+		Flags.playerStats.health-=dmg
+		Flags.effect="updatehealth"
 		if Flags.playerStats.health<1:
 			kill()
 

@@ -2,12 +2,6 @@ extends Area2D
 var flat=false
 var speed=3
 
-func _ready() -> void:
-	pass
-
-
-
-
 
 func _process(delta: float) -> void:
 	if flat:

@@ -87,26 +87,25 @@ func makeoffer():
 		
 	$AnimatedSprite2D.animation="front"
 	inoffer=true
-	Flags.dotime(walk,1.6)	
-
+	
+	Flags.tne.dotime(self,[walk],1.6,"walk",true,"temple")
+	
 func offer():
-	Flags.dotime(makeoffer,0.5)
+	Flags.tne.dotime(self,[makeoffer],0.5,"makeoffer",true,"temple")
+
 
 func hit():
 	inhit=true
 	$AnimatedSprite2D.animation="hit"
-	#var tween=get_tree().create_tween()
-	#tween.tween_property(self,"modulate",Color.RED,0.5)
-#
 
 	Flags.playerStats.health-=1
-#	tween.tween_property(self,"modulate",oldmod,0.5)
 	if Flags.playerStats.health<1:
 		dead=true
 		$AnimatedSprite2D.animation="dead"
 		home.exit(true)
 		return	
-	Flags.dotime(outhit,1.4)
+	Flags.tne.dotime(self,[outhit],1.4,"outhit",true,"temple")
+
 
 
 func outhit():
@@ -132,7 +131,7 @@ func clean():
 		return	
 	$AnimatedSprite2D.animation="pickup"
 	bag+=1
-	Flags.dotime(walk,0.6)
+	Flags.tne.dotime(self,[walk],0.6,"walk",true,"temple")
 
 func revert():
 

@@ -38,18 +38,23 @@ var health: int :
 	get:
 		return actual.health+bonus.health
 	set(val):
-		setStat("health",val)
-		if Flags.tne!=null:
-			Flags.tne.addEvent("update","health",true,{"params":[val]})
+		var last=actual.health
+
+		setStat("health",val)		
+		if val!=actual.health:
+			if Flags.tne!=null:				
+				Flags.tne.addEvent("update","health",true,{"params":[val]})
 	
 var stanima: int :
 	get:
 		return actual.stanima+bonus.stanima
 
 	set(val):
+		var last=actual.stanima
 		setStat("stanima",val)
-		if Flags.tne!=null:			
-			Flags.tne.addEvent("update","stanima",true,{"params":[val]})
+		if last!=val:
+			if Flags.tne!=null:			
+				Flags.tne.addEvent("update","stanima",true,{"params":[val]})
 var stanimaRecharge: int :
 	get:
 		return actual.stanimaRecharge+bonus.stanimaRecharge
@@ -153,8 +158,6 @@ var bonusStanima:int:
 		return bonus.stanima
 	set(val):
 		bonus.stanima=val
-		
-		#dotime(resetBonus,10.0,"stanima",val), can't get timer to work in class
 
 var bonusSpeed:int:
 	get:
@@ -195,23 +198,6 @@ func resetBonus():
 	var key="stanima"
 	print("reset",key)
 	bonus[key]=0
-
-func dotime(timefunc,ntime,skey,val):
-	print("dotime")
-	if val<1:
-		return
-	var gt:Timer=Timer.new()
-	add_child(gt)
-	gt.wait_time=30.0
-	gt.one_shot=true			
-	gt.timeout.connect(timefunc)
-
-	add_child(gt)
-	gt.start()			
-
-	
-
-
 
 func setStat(key,val):
 		var diff=0

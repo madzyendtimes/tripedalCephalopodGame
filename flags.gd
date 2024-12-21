@@ -137,7 +137,7 @@ var percentageMap=[
 5, #weather effects
 5, #fair weather
 3, #flavor npcs
-8,#8, #flying enemy
+800,#8, #flying enemy
 7, #multistage enemy
 2, #gemmonster
 1, #hoarde
@@ -235,16 +235,6 @@ func addToInventory(type,numvarient):
 
 func refreshoptions():
 	controlScheme=options.controls
-
-
-
-func dotime(timefunc,ntime):
-	var gt:Timer=Timer.new()
-	add_child(gt)
-	gt.wait_time=ntime
-	gt.one_shot=true			
-	gt.timeout.connect(timefunc)
-	gt.start()
 	
 func saveoptions():
 	var save_file = FileAccess.open("user://tcoptionsv2.save", FileAccess.WRITE)

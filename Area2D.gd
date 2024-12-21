@@ -9,19 +9,15 @@ var chesttype=""
 var ptype:=0
 var pvar:=0
 var deterministic:=false
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	$AnimatedSprite2D.animation=chesttype+"closed"	
 	$questfound.volume_db=Flags.options.fx
 	$trash.volume_db=Flags.options.fx
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Flags.paused==true:
-		return
-	
+		return	
 	if searchable==true && Flags.inSearch==true && notSearched==true:
 		do_search();
 	
@@ -52,9 +48,6 @@ func do_search():
 
 func _on_body_exited(body):
 	searchable=false
-	
-	
-	pass # Replace with function body.
 
 func show_prize():
 	var rng=RandomNumberGenerator.new()

@@ -6,10 +6,6 @@ var staticly=true
 var id="rock"
 var hasHit=false
 
-func _ready() -> void:
-	pass # Replace with function body.
-
-
 func _process(delta: float) -> void:
 	if Flags.entered.active==true:
 		if staticly:

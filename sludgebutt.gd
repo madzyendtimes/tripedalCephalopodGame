@@ -5,12 +5,6 @@ extends Area2D
 func _ready() -> void:
 	if Flags.controlScheme=="keyboard":
 		$text.animation="keyboardtext"
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 
 
@@ -25,4 +19,3 @@ func _on_body_entered(body: Node2D) -> void:
 			Flags.playerInventory.remove_at(count)
 		count+=1	
 	
-	pass # Replace with function body.

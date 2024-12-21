@@ -21,8 +21,9 @@ func start(called):
 	$music.play()
 	for i in range(1,30):
 		createtrash()
-	Flags.dotime(starttrash,rng.randf_range(.2,2.5))
-	Flags.dotime(startghost,rng.randf_range(1.5,3.5))
+	Flags.tne.dotime(self,[starttrash],rng.randf_range(.2,2.5),"starttrash",true,"temple")
+
+	Flags.tne.dotime(self,[startghost],rng.randf_range(1.5,3.5),"startghost",true,"temple")
 	$templeplayer.start(called)
 
 func devstart():
@@ -30,6 +31,8 @@ func devstart():
 	
 func reset():
 	offtimers=true
+	Flags.tne.killTimer("startghost","temple")
+	Flags.tne.killTimer("starttrash","temple")
 	Flags.clearnode($ghostholder)
 	Flags.clearnode($trashlayer)
 	
@@ -45,13 +48,11 @@ func createtrash():
 		
 func starttrash():
 		createtrash()
-		if offtimers==false:
-			Flags.dotime(starttrash,rng.randf_range(.2,2.5))
+		Flags.tne.dotime(self,[starttrash],rng.randf_range(.2,2.5),"starttrash",true,"temple")
 		
 func startghost():
 	createghost()
-	if offtimers==false:
-		Flags.dotime(startghost,rng.randf_range(1.5,3.5))
+	Flags.tne.dotime(self,[startghost],rng.randf_range(1.5,3.5),"startghost",true,"temple")
 	
 func createghost():
 		var tx=rng.randi_range(-1000,1500)

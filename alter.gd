@@ -5,7 +5,6 @@ var type=""
 func _ready() -> void:
 	gettype()
 
-	pass # Replace with function body.
 func gettype():
 	var rng=RandomNumberGenerator.new()
 	var tempt=rng.randi_range(1,3)
@@ -17,18 +16,13 @@ func gettype():
 		type="peace"
 	$AnimatedSprite2D.animation=type
 	$AnimatedSprite2D.play()
-	Flags.dotime(gettype,rng.randi_range(0.9,2.8))
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	Flags.tne.dotime(self,[gettype],rng.randi_range(0.9,2.8),"gettype",true,"temple")
 
 func inactive():
 	$AnimatedSprite2D.animation=type
 
 func _on_body_entered(body: Node2D) -> void:
-	print("offering accepted")
 	$AnimatedSprite2D.animation=type+"active"
 	Flags.save()
-	Flags.dotime(inactive,1.5)
-	pass # Replace with function body.
+	Flags.tne.dotime(self,[inactive],1.5,"inactive",true,"temple")

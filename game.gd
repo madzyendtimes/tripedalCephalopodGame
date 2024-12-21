@@ -22,8 +22,7 @@ func dostart():
 
 func restart():
 	dostart()
-	Flags.dotime(removeScene,.1)
-
+	Flags.tne.dotime(self,[removeScene],.1,"removeScene",true)
 
 func removeScene():
 	remove_child(level1Scene)	
@@ -35,16 +34,14 @@ func playgame():
 	inStart=false
 	instantiated=true
 	level1Scene=level1.instantiate()
-	Flags.dotime(treeUpdate,.5)
 
-
+	Flags.tne.dotime(self,[treeUpdate],.5,"treeupdate",true)
 
 func treeUpdate():
 	killStart()
 	add_child(level1Scene)
-	Flags.dotime(killStart,.5)
 
-
+	Flags.tne.dotime(self,[killStart],.5,"killstart",true)
 
 
 func killStart():

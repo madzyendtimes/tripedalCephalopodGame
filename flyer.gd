@@ -16,13 +16,9 @@ var runningaway:=false
 var freefall:=false
 var begchance=40
 var hasmissle=true
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	selectType()
-
-	pass # Replace with function body.
-
-
 
 
 func selectType():
@@ -44,17 +40,21 @@ func selectType():
 		minspd=1.0
 		canflip=false
 		hasmissle=false
-	Flags.dotime(changedirection,1.0)
+	Flags.tne.dotime(self,[changedirection],1.0,"changedirection"+str(self.get_instance_id()),true,"level")
+	
 	if hasmissle:
-		Flags.dotime(dropmissle,rng.randf_range(0.5,5.0))
-
+		
+		Flags.tne.dotime(self,[dropmissle],rng.randf_range(0.5,5.0),"dropmissle"+str(self.get_instance_id()),true,"level")
 
 func dropmissle():
 		var egg=missle.instantiate()
 		egg.position.y=position.y
 		egg.position.x=position.x
 		self.get_parent().add_child(egg)
-		Flags.dotime(dropmissle,rng.randf_range(0.5,5.0))
+#	
+
+		Flags.tne.dotime(self,[dropmissle],rng.randf_range(0.5,5.0),"dropmissle"+str(self.get_instance_id()),true,"level")
+
 
 func _process(delta):
 	
@@ -80,14 +80,8 @@ func showprize():
 	prize.animation="collectable"+str(version)
 	Flags.addToInventory(4,version)
 	add_child(prize)
-	pass
-
-
-
-
 
 func changedirection():
-
 	var tdir=rng.randi_range(0,1)
 	if tdir==0:
 		tdir=-1
@@ -100,14 +94,18 @@ func changedirection():
 	spd=rng.randf_range(minspd,maxspd)
 	ypos=rng.randi_range(-5,5)
 	var nxtchange=rng.randf_range(minchange,maxchange)
-	Flags.dotime(changedirection,nxtchange)
+
+
+	Flags.tne.dotime(self,[changedirection],nxtchange,"changedirection"+str(self.get_instance_id()),true,"level")
 
 
 func runaway():
 	if runningaway==false:
 		runningaway=true
 		dir=dir*-1
-		Flags.dotime(recourage,3.0)
+
+
+		Flags.tne.dotime(self,[recourage],3.0,"recourage"+str(self.get_instance_id()),true,"level")
 		$AnimatedSprite2D.flip_h=true
 
 func recourage():
@@ -120,9 +118,6 @@ func getpackage():
 	freefall=true
 	$AnimatedSprite2D.animation=type+"crashed"
 	
-#	self.queue_free()
-	#Flags.effect="prize"
-
 
 func _on_body_entered(body: Node2D) -> void:
 	if Flags.hat=="beg":

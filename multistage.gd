@@ -6,12 +6,6 @@ var dir=1
 var dead=false
 var begchance=75
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(delta: float) -> void:
 	if Flags.paused==true:
@@ -24,7 +18,7 @@ func runaway():
 	if runningaway==false:
 		runningaway=true
 		dir=dir*-1
-		Flags.dotime(recourage,3.0)
+		Flags.tne.dotime(self,[recourage],3.0,"recourage"+str(self.get_instance_id()),true,"level")
 		$AnimatedSprite2D.flip_h=true
 
 func recourage():

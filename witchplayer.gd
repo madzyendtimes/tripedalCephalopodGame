@@ -51,15 +51,11 @@ func hit():
 		playerdead=true
 		return
 		
-
-	Flags.dotime(unhit,1.5)
-	#var tweener=get_tree().create_tween()
-	#tweener.
+	Flags.tne.dotime(self,[unhit],1.5,"witchplayerunhit",true,"witchhut")
 	
 func press():
 	$AnimatedSprite2D.animation="press"
-	Flags.dotime(unpress,.5)
-	
+	Flags.tne.dotime(self,[unpress],1.0,"witchplayerunpress",true,"witchhut")
 
 func _on_button_body_entered(body: Node2D) -> void:
 	if firsttime:
