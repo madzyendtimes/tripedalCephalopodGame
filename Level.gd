@@ -20,6 +20,7 @@ var flavorScene:PackedScene=load("res://flavornpc.tscn")
 var flyerScene:PackedScene=load("res://flyer.tscn")
 var multiScene:PackedScene=load("res://multistage.tscn")
 var gemScene:PackedScene=load("res://gemmonster.tscn")
+var graveScene:PackedScene=load("res://gravestone.tscn")
 var lowshader=preload("res://low.gdshader")
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
@@ -679,6 +680,10 @@ func dochances(val):
 		dohoarde()
 		return
 	if val<15:
+		createchoice($enemy,graveScene,1400,false,1,400,false)
+		return
+		
+	if val<16:
 		if questDistributed==false:
 			var trash=trashScene.instantiate()
 			trash.position.x=(($interactive.position.x)*-1)+1400
@@ -718,10 +723,10 @@ func dospawns():
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
-			var upchoice=14
+			var upchoice=15
 
 			if $interactive.position.x>-5000 && questDistributed==false:
-				upchoice=15
+				upchoice=16
 			
 			var chance=Flags.rng.randi_range(0,upchoice)
 			var newchance=Flags.rng.randi_range(0,Flags.percentageAgg)

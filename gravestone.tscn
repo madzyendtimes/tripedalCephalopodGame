@@ -1,0 +1,164 @@
+[gd_scene load_steps=22 format=3 uid="uid://cdl0d4ifiqq6c"]
+
+[ext_resource type="Script" path="res://gravestone.gd" id="1_rdm4l"]
+[ext_resource type="Texture2D" uid="uid://c7fvw42iifmge" path="res://decorations/atmosphere/dmg4.PNG" id="2_trkog"]
+[ext_resource type="Texture2D" uid="uid://bvnkf1ucmlv6s" path="res://decorations/atmosphere/dmg3.PNG" id="3_2m1tp"]
+[ext_resource type="Texture2D" uid="uid://bt855jc6cevmv" path="res://decorations/atmosphere/dmg2.PNG" id="4_2raxf"]
+[ext_resource type="Texture2D" uid="uid://fqof6h61wp60" path="res://decorations/atmosphere/dmg1.PNG" id="5_tvaul"]
+[ext_resource type="Texture2D" uid="uid://dpb207qppbuf2" path="res://decorations/atmosphere/gravestone.PNG" id="6_xyi42"]
+[ext_resource type="Texture2D" uid="uid://nt03jaa70cd6" path="res://decorations/atmosphere/action1.PNG" id="7_k3uun"]
+[ext_resource type="Texture2D" uid="uid://bsa8w30g18ol6" path="res://decorations/atmosphere/action2.PNG" id="8_72d3v"]
+[ext_resource type="Texture2D" uid="uid://2ejrnpab5vle" path="res://decorations/atmosphere/action3.PNG" id="9_y15xe"]
+[ext_resource type="Script" path="res://levelghost.gd" id="10_r4ovy"]
+[ext_resource type="Texture2D" uid="uid://c8u0yg2c63htg" path="res://enterable/temple/assets/demonghost1.PNG" id="11_m7l4n"]
+[ext_resource type="Texture2D" uid="uid://bj5tglf4mojyl" path="res://enterable/temple/assets/demonghost2.PNG" id="12_sqvio"]
+[ext_resource type="Texture2D" uid="uid://bleoosf2fllbl" path="res://enterable/temple/assets/holyghost1.PNG" id="13_2dbke"]
+[ext_resource type="Texture2D" uid="uid://swpebbglm4ua" path="res://enterable/temple/assets/holyghost2.PNG" id="14_wsavh"]
+[ext_resource type="Texture2D" uid="uid://cxjbfjvkyb246" path="res://enterable/temple/assets/peaceghost1.PNG" id="15_npqoi"]
+[ext_resource type="Texture2D" uid="uid://dhfpfivqs2a5y" path="res://enterable/temple/assets/peaceghost2.PNG" id="16_1wi7i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4hd2o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_trkog")
+}],
+"loop": true,
+"name": &"dmg1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2m1tp")
+}],
+"loop": true,
+"name": &"dmg2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2raxf")
+}],
+"loop": true,
+"name": &"dmg3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_tvaul")
+}],
+"loop": true,
+"name": &"dmg4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_xyi42")
+}],
+"loop": true,
+"name": &"grave",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nxrf6"]
+radius = 56.0
+height = 256.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8tb8h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_k3uun")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_72d3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_y15xe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qp0ij"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_m7l4n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_sqvio")
+}],
+"loop": true,
+"name": &"demon",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_2dbke")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_wsavh")
+}],
+"loop": true,
+"name": &"holy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_npqoi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_1wi7i")
+}],
+"loop": true,
+"name": &"peace",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4u155"]
+radius = 40.0
+height = 160.0
+
+[node name="gravestone" type="Node2D"]
+script = ExtResource("1_rdm4l")
+
+[node name="stone" type="Area2D" parent="."]
+collision_layer = 32768
+collision_mask = 2
+
+[node name="grave" type="AnimatedSprite2D" parent="stone"]
+z_index = -1
+position = Vector2(8, -32)
+sprite_frames = SubResource("SpriteFrames_4hd2o")
+animation = &"grave"
+autoplay = "grave"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="stone"]
+position = Vector2(8, -16)
+shape = SubResource("CapsuleShape2D_nxrf6")
+
+[node name="debri" type="AnimatedSprite2D" parent="stone"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_8tb8h")
+autoplay = "default"
+frame_progress = 0.402023
+
+[node name="levelghost" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("10_r4ovy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="levelghost"]
+position = Vector2(64, -104)
+sprite_frames = SubResource("SpriteFrames_qp0ij")
+animation = &"demon"
+autoplay = "demon"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="levelghost"]
+position = Vector2(64, -104)
+shape = SubResource("CapsuleShape2D_4u155")
+
+[connection signal="body_entered" from="stone" to="." method="_on_stone_body_entered"]
+[connection signal="body_entered" from="levelghost" to="levelghost" method="_on_body_entered"]

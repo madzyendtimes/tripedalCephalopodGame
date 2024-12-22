@@ -139,6 +139,7 @@ var percentageMap=[
 7, #multistage enemy
 2, #gemmonster
 1, #hoarde
+999, #gravestone
 5 #quest
 ]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable
