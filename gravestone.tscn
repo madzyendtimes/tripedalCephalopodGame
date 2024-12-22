@@ -119,7 +119,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4u155"]
 radius = 40.0
-height = 160.0
+height = 240.0
 
 [node name="gravestone" type="Node2D"]
 script = ExtResource("1_rdm4l")
@@ -143,7 +143,7 @@ shape = SubResource("CapsuleShape2D_nxrf6")
 visible = false
 sprite_frames = SubResource("SpriteFrames_8tb8h")
 autoplay = "default"
-frame_progress = 0.402023
+frame_progress = 0.895196
 
 [node name="levelghost" type="Area2D" parent="."]
 collision_layer = 8
@@ -151,13 +151,14 @@ collision_mask = 2
 script = ExtResource("10_r4ovy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="levelghost"]
-position = Vector2(64, -104)
+position = Vector2(160, -136)
+scale = Vector2(1.40667, 1.32667)
 sprite_frames = SubResource("SpriteFrames_qp0ij")
 animation = &"demon"
 autoplay = "demon"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="levelghost"]
-position = Vector2(64, -104)
+position = Vector2(168, -144)
 shape = SubResource("CapsuleShape2D_4u155")
 
 [connection signal="body_entered" from="stone" to="." method="_on_stone_body_entered"]

@@ -37,26 +37,11 @@ var q={
 	}
 var guid=0	
 
-#uid version has issues need to rethink approach... consider passing in on call, will live with current version for now 
-func dotimenew(callee,timefunc,ntime,name="generic",unique=false,type="main"):
-	print("dotime")
-	var gt:Timer=Timer.new()
-	callee.add_child(gt)
-	gt.wait_time=ntime
-	gt.one_shot=true			
-	#gt.timeout.connect(timefunc)
-	#addTimer(name,type,unique,{"timer":gt, "push":timefunc,"uid":self.name})
-	addTimernew(name,type,unique,{"timer":gt, "push":timefunc,"uid":callee.get_instance_id()})
-
-
 func dotime(callee,timefunc,ntime,name="generic",unique=false,type="main"):
-	print("dotime")
 	var gt:Timer=Timer.new()
 	callee.add_child(gt)
 	gt.wait_time=ntime
 	gt.one_shot=true			
-	#gt.timeout.connect(timefunc)
-	#addTimer(name,type,unique,{"timer":gt, "push":timefunc,"uid":self.name})
 	addTimer(name,type,unique,{"timer":gt, "push":timefunc,"uid":callee.get_instance_id()})
 
 
@@ -88,30 +73,8 @@ func addTimer(value="",type="main",unique=false,param={}):
 	q[type].timers[tm.id]=tm
 	tm.timer.start()
 	
-	
-func addTimernew(value="",type="main",unique=false,param={}):
-	if value=="":
-		return
-
-	if unique:
-		killTimernew(value,type,param.uid)
-		#killTimer(value,type)
-	var tm={"type":type,"name":value,"timer":param.timer,"alert":param.push,"id":guid,"uid":param.uid}
-	guid+=1
-	tm.timer.timeout.connect(handletimeoutnew.bind(tm))	
-	q[type].timers[tm.uid]={tm.id:tm}
-	tm.timer.start()
-	
-	
-func handletimeoutnew(tm):
-	print("handled")
-	for i in q[tm.type].timers[tm.uid][tm.id].alert:
-		i.call()
-	q[tm.type].timers[tm.uid].erase(tm.id)
-
 
 func handletimeout(tm):
-	print("handled")
 	for i in q[tm.type].timers[tm.id].alert:
 		i.call()
 	q[tm.type].timers.erase(tm.id)
@@ -123,36 +86,6 @@ func timerkillemall(type=""):
 	else:
 		timerkilltype(type)
 
-
-func timerkillemallnew(type="",uid=""):
-	if type=="":
-		for i in q.keys():
-			timerkilltypenew(i)
-	else:
-		timerkilltypenew(type,uid)
-
-func timerkilltypenew(type="main",uid=""):
-	var kill=[]
-	if uid=="":
-		for i in q[type].timers.values():
-			for x in i.values():
-				x.timer.stop()
-				x.timer.queue_free()
-				kill.append(i.id)
-				
-			for x in kill:
-				q[type].timers.erase(x)
-	else:
-		for i in q[type].timers[uid].values():
-			for x in i.values():
-				x.timer.stop()
-				x.timer.queue_free()
-				kill.append(i.id)
-				
-			for x in kill:
-				q[type].timers[uid].erase(x)
-				
-							
 
 func timerkilltype(type="main"):
 	var kill=[]
@@ -195,33 +128,8 @@ func killTimer(wtk="",type="main"):
 				value.timer.stop()
 				value.timer.queue_free()
 				kill.append(value.id)
-				#q[type].timers.pop(i.id)
-
 		for i in kill:
 			q[type].timers.erase(i)
-			#q[type].timers.remove_at(count)
-			
-
-			
-func killTimernew(wtk="",type="main",uid=""):
-	if wtk!="":
-		var kill=[]
-		if q[type].timers.has(uid):
-			for value in q[type].timers[uid].values():
-				if value.name==wtk:
-					value.timer.stop()
-					value.timer.queue_free()
-					kill.append(value.id)
-					#q[type].timers.pop(i.id)
-
-			for i in kill:
-				q[type].timers[uid].erase(i)
-				#q[type].timers.remove_at(count)
-
-
-
-
-
 
 			
 func consumeEvent(type="main"):

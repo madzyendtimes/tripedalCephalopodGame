@@ -41,7 +41,7 @@ var health: int :
 		var last=actual.health
 
 		setStat("health",val)		
-		if val!=actual.health:
+		if val!=last:
 			if Flags.tne!=null:				
 				Flags.tne.addEvent("update","health",true,{"params":[val]})
 	

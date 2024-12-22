@@ -37,7 +37,7 @@ func start(callee):
 func _process(delta: float) -> void:
 	if active==true:
 		position.x=clamp(-600,600,position.x+speed*xdir)
-		position.y=clamp(-100,+700,position.y+speed*ydir)
+		position.y=clamp(-10,+750,position.y+speed*ydir)
 	
 
 func changedir():
