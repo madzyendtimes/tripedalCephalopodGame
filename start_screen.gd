@@ -2,7 +2,6 @@ extends Node2D
 var selected=1
 var home=self
 #var options={"controls":"controller","music":100,"fx":100,"randomizeDistribution":false,"seed":{"active":false,"value":"fun"},"startfresh":false,"graphics":"high"}
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	Flags.loadoptions()
 	print("load options")

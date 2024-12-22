@@ -13,20 +13,17 @@ func _process(delta: float) -> void:
 		position.y+=175*delta
 
 func chooseType():
-	var rng=RandomNumberGenerator.new()
-	$AnimatedSprite2D.animation=type[rng.randi_range(0,2)]
+	$AnimatedSprite2D.animation=type[Flags.rng.randi_range(0,2)]
 	id=$AnimatedSprite2D.animation
 func gameover(isdead=false):
 	if Flags.mode=="cryptominos":
-		#Flags.effect="exitenterable"
 		Flags.paused=false;
 		Flags.entered.active=false
 		print("gameover")
 	if isdead:
-		Flags.cryptoeffects="dead"
-	else:
-		Flags.cryptoeffects="exit"		
-	
+		Flags.tne.addEvent("dead","cryptominos",true)
+	else:	
+		Flags.tne.addEvent("dead","cryptominos",true)
 
 
 func _on_body_entered(body: Node2D) -> void:

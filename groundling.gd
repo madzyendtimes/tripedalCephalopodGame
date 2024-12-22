@@ -23,7 +23,7 @@ func _on_body_entered(body):
 		$hit.play()
 	else:
 		$die.play()
-		$"../../player".hit()
+		body.hit()
 	
 func runaway():
 	if runningaway==false:

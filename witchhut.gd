@@ -3,7 +3,6 @@ var freshstart=true
 var playerdead=false
 var home=self
 var ingredients=["eye","mouth","hair","face","torso","arm","leg","clothes","tongue"]
-var rng=RandomNumberGenerator.new()
 var stage=4
 var recipe=[]
 var playerchoice=[{"button":"jump","ingredient":"eye","scene":"","px":100,"py":220,"buttonscene":""},
@@ -118,7 +117,7 @@ func createrecipe():
 	$necrowitch/AnimatedSprite2D.animation="rip"
 	var count=0
 	for i in range(0,stage):
-		var choice=rng.randi_range(0,8)
+		var choice=Flags.rng.randi_range(0,8)
 		var reciperender=recipeScene.instantiate()
 		if i%3==0:
 			count=0
@@ -173,7 +172,7 @@ func witchread():
 
 
 func getrandomingredient():
-	return ingredients[rng.randi_range(0,ingredients.size()-1)]	
+	return ingredients[Flags.rng.randi_range(0,ingredients.size()-1)]	
 
 func randomizechoices():
 	for i in playerchoice:

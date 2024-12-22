@@ -35,7 +35,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if Flags.inFight==true:
 		hit()
 	else:
-		Flags.effect="hit"
+		body.hit()
 		
 	
 func hit():

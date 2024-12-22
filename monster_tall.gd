@@ -6,13 +6,6 @@ var dir:=1
 var runningaway:=false
 var begchance=50 #add new playerstat charisma to improve chances
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Flags.paused==true:
 		return
@@ -41,7 +34,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if Flags.inFight==true:
 		hit()
 	else:
-		Flags.effect="hit"
+		body.hit()
 		
 	
 func hit():
@@ -49,7 +42,6 @@ func hit():
 	if hp<1:
 		$AnimatedSprite2D.animation="diapertoothdead"
 		dead=true	
-		#$hit.play()
 	var tween:=get_tree().create_tween()
 	var oldy=position.y
 	tween.tween_property($".", "position", Vector2( position.x+(100*Flags.dir*-1),position.y-100), .3)

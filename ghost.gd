@@ -1,6 +1,5 @@
 extends Area2D
 var type="peace"
-var rng=RandomNumberGenerator.new()
 var speed=1
 var tx=0
 var ty=0
@@ -13,7 +12,7 @@ var oldx=0
 var oldy=0
 
 func _ready() -> void:
-	var tempt=rng.randi_range(1,3)
+	var tempt=Flags.rng.randi_range(1,3)
 	if tempt==1:
 		type="holy"
 	if tempt==2:
@@ -29,17 +28,17 @@ func dissapear(variant):
 		kill()
 
 func getdir():
-	tx=rng.randi_range(-1,1)
+	tx=Flags.rng.randi_range(-1,1)
 
-	ty=rng.randi_range(-1,1)
+	ty=Flags.rng.randi_range(-1,1)
 
-	Flags.tne.dotime(self,[getdir],rng.randf_range(.2,1.5),"getdir"+str(self.get_instance_id()),true,"temple")
+	Flags.tne.dotime(self,[getdir],Flags.rng.randf_range(.2,1.5),"getdir"+str(self.get_instance_id()),true,"temple")
 
 
 func _process(delta: float) -> void:
 	position.y=clamp(position.y+ty*speed,yboundo,ybound)
 	position.x=clamp(position.x+tx*speed,xboundo,xbound)
-	pass
+
 
 func kill():
 	Flags.tne.killTimer("getdir"+str(self.get_instance_id()),"temple")

@@ -12,21 +12,20 @@ func _ready() -> void:
 			$playarea.add_child(rocky)
 
 func _process(delta: float) -> void:
-	match Flags.cryptoeffects:
-		"exit":
-			Flags.cryptoeffects=""
-			exit()
-		"dead":
-			Flags.cryptoeffects=""
-			exit(true)		
-	Flags.cryptoeffects=""
+	
+	var ce=Flags.tne.consumeEvent("cryptominos")
+	if ce!=null:
+		match ce.name:
+			"exit":
+				exit()
+			"dead":
+				exit(true)		
 
 func exit(isdead=false):
 	$music.stop()
 	home.exit(isdead)
 
 func start(called):
-	Flags.cryptoeffects=""
 	$music.play()
 	home=called
 	Flags.mode="cryptominos"

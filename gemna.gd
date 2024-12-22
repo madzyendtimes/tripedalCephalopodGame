@@ -10,15 +10,14 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	caninteract=true
 	Flags.interactablenpc=self
-	print("gemna")
-	pass # Replace with function body.
+
 
 
 func _on_body_exited(body: Node2D) -> void:
 	
 	caninteract=false
 	Flags.interactablenpc=null
-	pass # Replace with function body.
+
 
 func complete():
 	caninteract=false

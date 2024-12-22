@@ -20,7 +20,7 @@ func choose():
 
 func _on_body_entered(body):
 	
-	$"../../player".hit()
+	body.hit()
 	
 func hit():
 	$AnimatedSprite2D.animation="explode"

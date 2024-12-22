@@ -9,8 +9,7 @@ func _ready() -> void:
 	choosetype()
 
 func choosetype():
-	var rng:=RandomNumberGenerator.new()
-	var choice:=rng.randi_range(0,2)
+	var choice=Flags.rng.randi_range(0,2)
 	if choice==1:
 		type="temple"
 		$front.animation=type
@@ -31,15 +30,11 @@ func close():
 	
 	
 func _on_body_entered(body: Node2D) -> void:
-
-
 	Flags.entered.ready=true
 	Flags.entered.building=self
 	Flags.entered.type=$front.animation
 		
 	
-
-
 func _on_body_exited(body: Node2D) -> void:
 	Flags.entered.ready=false
 	

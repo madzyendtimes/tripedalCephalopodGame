@@ -67,12 +67,11 @@ func warn():
 	$AnimatedSprite2D.material.set_shader_parameter("rate",2.5)
 	$AnimatedSprite2D.material.set_shader_parameter("doblink",true)
 	#$AnimatedSprite2D.get_material().set_shader_param("rate",2.2)
-	pass
+
 	
 func unwarn():
 	$AnimatedSprite2D.material.set_shader_parameter("doblink",false)
 	#$AnimatedSprite2D.get_material().set_shader_param("rate",0.0)
-	pass
 
 func revert():
 	setCollision("normal")
@@ -99,7 +98,6 @@ func hit(dmg=1):
 		inHit=true
 		stat("-","health",dmg)
 		Flags.playerStats.health-=dmg
-		Flags.effect="updatehealth"
 		if Flags.playerStats.health<1:
 			kill()
 
@@ -142,7 +140,6 @@ func kill():
 func restart():
 	if get_node("/root") != null:
 		get_node("/root").get_child(1).restart()
-	#get_tree().restart()
 			
 
 func search():
@@ -169,6 +166,10 @@ func enter():
 	
 func walkani():
 
+	if Flags.playerDead:
+		$AnimatedSprite2D.animation="dead"+Flags.hat
+		return
+
 	if Flags.mesmerized==true:
 		
 
@@ -181,9 +182,3 @@ func walkani():
 	else:
 		$AnimatedSprite2D.animation="default"+Flags.hat
 		
-func _on_interact_trashable(body):
-	pass
-
-
-func _on_npc_body_entered(body):
-	pass

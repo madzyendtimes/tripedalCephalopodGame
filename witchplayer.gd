@@ -65,4 +65,3 @@ func _on_button_body_entered(body: Node2D) -> void:
 	engaged=true
 	$AnimatedSprite2D.flip_h=false
 	Flags.witchevents="newrecipe"
-	pass # Replace with function body.

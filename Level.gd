@@ -3,7 +3,6 @@ signal hit
 signal pukehit
 signal begout
 signal timeout
-var rng=RandomNumberGenerator.new()
 var treeScene:PackedScene=load("res://tree.tscn")
 var enemyScene:PackedScene=load("res://groundling.tscn")
 var rockScene:PackedScene=load("res://rock.tscn")
@@ -44,7 +43,7 @@ func _ready():
 	Flags.mode="level"
 	$Camera2D.make_current()
 	if Flags.options.randomizeDistribution:
-		Flags.percentageMap.sort_custom(func(a, b): return rng.randi_range(0,1)>0)
+		Flags.percentageMap.shuffle() #sort_custom(func(a, b): return rng.randi_range(0,1)>0)
 	Flags.playerStats.maxHealth=Flags.playerStats.maxHealth
 	Flags.playerStats.maxStanima=Flags.playerStats.maxStanima
 	#triggers events to ensure listeners will update,namely the stat bars, I know it's wonky, I like it better than alternatives :p
@@ -62,17 +61,17 @@ func _ready():
 		var ypos=0
 		var nType=0
 		if i>100:
-			nType=rng.randi_range(0,3)
+			nType=Flags.rng.randi_range(0,3)
 		
 		var ts=get_bg_texture(nType)
 		ts.position=Vector2(min(i+(i*.6189),i*3)*75,400)
-		ts.flip_h=rng.randi_range(0,1)>0
+		ts.flip_h=Flags.rng.randi_range(0,1)>0
 		var yscale=randf_range(.3,1)
 		if nType==1:
 			yscale=.54
-			ypos=rng.randi_range(75,100)
+			ypos=Flags.rng.randi_range(75,100)
 		ts.scale=Vector2(randf_range(.5,1),yscale)
-		ts.modulate=Color(rng.randf_range(0.0,1.0),rng.randf_range(0.0,1.0),rng.randf_range(0.0,1.0))
+		ts.modulate=Color(Flags.rng.randf_range(0.0,1.0),Flags.rng.randf_range(0.0,1.0),Flags.rng.randf_range(0.0,1.0))
 		applyshaders(ts)
 		if yscale<.55:
 			$treeholder.add_child(ts)
@@ -104,7 +103,7 @@ func _ready():
 	#warpto(34000)
 	#this sets off the spawntimer testing before removing old static enemyGeneraator
 	dospawns()
-	#Flags.addToInventory(1,4)
+	#Flags.addToInventory(1,4) #give user a begging board
 	
 func applyshaders(ts):
 	if Flags.options.graphics=="low":
@@ -131,7 +130,7 @@ func horrorflash():
 	tween.tween_property($random,"modulate",Color(1,1,1,1),.5)		
 
 func triggerhorror():
-	Flags.tne.dotime(self,[dohorror],rng.randf_range(0.5,5.0),"horror",true,"level")
+	Flags.tne.dotime(self,[dohorror],Flags.rng.randf_range(0.5,5.0),"horror",true,"level")
 	
 
 func setShaderParam(parm,val):
@@ -146,9 +145,9 @@ func dopuke():
 	renderPuke()
 
 func randpuke():	
-	Flags.tne.dotime(self,[dopuke],rng.randf_range(0.1,2.0),"dopuke",true,"level")	
+	Flags.tne.dotime(self,[dopuke],Flags.rng.randf_range(0.1,2.0),"dopuke",true,"level")	
 	if Flags.radiation==true:
-		Flags.tne.dotime(self,[randpuke],rng.randf_range(0.5,2.0),"randpuke",true,"level")	
+		Flags.tne.dotime(self,[randpuke],Flags.rng.randf_range(0.5,2.0),"randpuke",true,"level")	
 func radiationend():
 	Flags.radiation=false
 	var tween=get_tree().create_tween()
@@ -157,17 +156,18 @@ func radiationend():
 	tween.parallel().tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/saturation",1.0,1.0)
 
 
-func doEffect():
+func doEffect(effect):
 	if Flags.mode!="level":
+		Flags.tne.dotime(self,[doEffect.bind(effect)],.5,"retryEvent",true,"level")
 		return
-	var sEff=Flags.effect
+	var sEff=effect.name
 	var aSel = sEff.split("|")
 	if aSel.size()>1:
-		sEff=aSel[rng.randi_range(0,aSel.size()-1)]		
+		sEff=aSel[Flags.rng.randi_range(0,aSel.size()-1)]		
 	print(sEff)
 	match sEff:
 		"addgems":
-			var g=rng.randi_range(1,5)+Flags.playerStats.rizz
+			var g=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
 			Flags.megaStats.gems+=g
 			$player.stat("+","gem",g)
 			Flags.save()
@@ -176,14 +176,14 @@ func doEffect():
 		"spendingspree":
 			Flags.credit=true
 		"getgems":
-			var g=rng.randi_range(1,5)+Flags.playerStats.rizz
+			var g=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
 			Flags.megaStats.gems+=g
 			$player.stat("+","gem",g)
 			Flags.save()
 		"radiation":
 			Flags.radiation=true;
 			randpuke()
-			var radtime=rng.randi_range(1,10)
+			var radtime=Flags.rng.randi_range(1,10)
 			var tween=get_tree().create_tween()
 			tween.parallel().set_loops(radtime).tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/brightness",8.0,1.5).from_current()
 			tween.parallel().set_loops(radtime).tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/contrast",5.0,1.0).from_current()
@@ -193,8 +193,6 @@ func doEffect():
 			triggerhorror()
 		"exitenterable":
 			exit()
-		"updatehealth":
-			$healthbar.value=Flags.playerStats.health
 		"puke":
 			dopuke()
 		"restorehp":
@@ -210,14 +208,14 @@ func doEffect():
 			
 		"controlled":
 			var resistChance=Flags.playerStats.smarts*10
-			if rng.randi_range(0,100)>resistChance:
+			if Flags.rng.randi_range(0,100)>resistChance:
 				Flags.controlled=true
 				$player.walkani()
 			else:
 				$player.resisted()
 		"mesmerized":
 			var resistChance=Flags.playerStats.smarts*10
-			if rng.randi_range(0,100)>resistChance:
+			if Flags.rng.randi_range(0,100)>resistChance:
 				Flags.mesmerized=true
 				$player.walkani()
 			else:
@@ -266,7 +264,7 @@ func doEffect():
 			$player.hit()
 		"win":
 			dowin()
-	Flags.effect=""	
+
 
 
 func exit(isdead=false):
@@ -336,13 +334,13 @@ func warpCB(loc):
 
 
 func dorandaction():
-	var randaction:=rng.randi_range(0,4)
+	var randaction:=Flags.rng.randi_range(0,4)
 	if randaction==0:
 		Flags.dir=-1
-		moveDir(rng.randi_range(1,75),true,Flags.dir,true)
+		moveDir(Flags.rng.randi_range(1,75),true,Flags.dir,true)
 	if randaction==1:
 		Flags.dir=1
-		moveDir(rng.randi_range(1,75),true,Flags.dir,true)		
+		moveDir(Flags.rng.randi_range(1,75),true,Flags.dir,true)		
 	if randaction==2&& canJump==true:
 		canJump=false
 		Flags.inFight=true
@@ -365,7 +363,7 @@ func dorandaction():
 		$player.search()
 	canrandom=false	
 	
-	Flags.tne.dotime(self,[rando],rng.randi_range(1.0,4.0),"rando",true,"level")	
+	Flags.tne.dotime(self,[rando],Flags.rng.randi_range(1.0,4.0),"rando",true,"level")	
 
 
 func rando():
@@ -395,9 +393,9 @@ func _process(delta):
 		
 	if Input.is_action_just_released("run"):
 		stopRun()
-	
-	if Flags.effect!="":
-		doEffect()
+	var ce=Flags.tne.consumeEvent("level")
+	if ce != null:
+		doEffect(ce)
 		
 	if stanimaAction==true:
 		var rate=Flags.playerStats.stanimaRate
@@ -608,7 +606,7 @@ func get_bg_texture(type):
 	var name=types[type].name
 	var numvariant=types[type].num
 
-	var treenum=rng.randi_range(1,numvariant)
+	var treenum=Flags.rng.randi_range(1,numvariant)
 	var ts=assetsScene.instantiate()
 	ts.animation=s+str(treenum)
 	return ts
@@ -620,7 +618,7 @@ func createchoice(holder,scn,pos,brandflip,setani,ypos,deploycheck):
 		var spwn=scn.instantiate()
 		spwn.position.x=((holder.position.x)*-1)+pos
 		if brandflip:
-			spwn.get_child(1).flip_h=!rng.randi_range(0,1)>0
+			spwn.get_child(1).flip_h=!Flags.rng.randi_range(0,1)>0
 		if setani>1:
 			spwn.choose()
 		if ypos!=0:
@@ -700,15 +698,15 @@ var monsters=[
 
 
 func createrandommonster():
-	var mob=rng.randi_range(0,monsters.size()-1)
+	var mob=Flags.rng.randi_range(0,monsters.size()-1)
 	createchoice($enemy,monsters[mob].scene,1400,false,1,monsters[mob].height,false)
 
 
 
 func dohoarde():
-	for i in range(1,rng.randi_range(5,30)):
+	for i in range(1,Flags.rng.randi_range(5,30)):
 		
-		Flags.tne.dotime(self,[createrandommonster],rng.randf_range(0.1,3.5),"hoarde",false,"level")
+		Flags.tne.dotime(self,[createrandommonster],Flags.rng.randf_range(0.1,3.5),"hoarde",false,"level")
 
 func dospawns():
 	if Flags.mode!="level":
@@ -725,8 +723,8 @@ func dospawns():
 			if $interactive.position.x>-5000 && questDistributed==false:
 				upchoice=15
 			
-			var chance=rng.randi_range(0,upchoice)
-			var newchance=rng.randi_range(0,Flags.percentageAgg)
+			var chance=Flags.rng.randi_range(0,upchoice)
+			var newchance=Flags.rng.randi_range(0,Flags.percentageAgg)
 			print(newchance,Flags.percentageAgg)
 			var agg=0
 			var count=0
@@ -738,7 +736,7 @@ func dospawns():
 					break
 				count+=1									
 	
-			var nextSpawn=rng.randf_range(3.5,7.0)
+			var nextSpawn=Flags.rng.randf_range(3.5,7.0)
 			
 			Flags.tne.dotime(self,[dospawns],nextSpawn,"spawns",true,"level")
 			

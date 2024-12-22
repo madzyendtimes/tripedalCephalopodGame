@@ -1,9 +1,8 @@
 extends Area2D
 var type="blood1"
-var rng=RandomNumberGenerator.new()
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	var tempt=rng.randi_range(1,6)
+	var tempt=Flags.rng.randi_range(1,6)
 	if tempt==6:
 		type="gem"
 	else:

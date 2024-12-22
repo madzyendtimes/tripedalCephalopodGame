@@ -1,7 +1,7 @@
 extends Node2D
 var trashScene:PackedScene= load("res://trash.tscn") 
 var ghostScene:PackedScene= load("res://ghost.tscn") 
-var rng=RandomNumberGenerator.new()
+
 var home=self
 var offtimers=true
 
@@ -21,9 +21,9 @@ func start(called):
 	$music.play()
 	for i in range(1,30):
 		createtrash()
-	Flags.tne.dotime(self,[starttrash],rng.randf_range(.2,2.5),"starttrash",true,"temple")
+	Flags.tne.dotime(self,[starttrash],Flags.rng.randf_range(.2,2.5),"starttrash",true,"temple")
 
-	Flags.tne.dotime(self,[startghost],rng.randf_range(1.5,3.5),"startghost",true,"temple")
+	Flags.tne.dotime(self,[startghost],Flags.rng.randf_range(1.5,3.5),"startghost",true,"temple")
 	$templeplayer.start(called)
 
 func devstart():
@@ -38,8 +38,8 @@ func reset():
 	
 	
 func createtrash():
-		var tx=rng.randi_range(30,1500)
-		var ty=rng.randi_range(30,500)
+		var tx=Flags.rng.randi_range(30,1500)
+		var ty=Flags.rng.randi_range(30,500)
 		var trash=trashScene.instantiate()
 		trash.position.x=tx
 		trash.position.y=ty
@@ -48,15 +48,15 @@ func createtrash():
 		
 func starttrash():
 		createtrash()
-		Flags.tne.dotime(self,[starttrash],rng.randf_range(.2,2.5),"starttrash",true,"temple")
+		Flags.tne.dotime(self,[starttrash],Flags.rng.randf_range(.2,2.5),"starttrash",true,"temple")
 		
 func startghost():
 	createghost()
-	Flags.tne.dotime(self,[startghost],rng.randf_range(1.5,3.5),"startghost",true,"temple")
+	Flags.tne.dotime(self,[startghost],Flags.rng.randf_range(1.5,3.5),"startghost",true,"temple")
 	
 func createghost():
-		var tx=rng.randi_range(-1000,1500)
-		var ty=rng.randi_range(30,500)
+		var tx=Flags.rng.randi_range(-1000,1500)
+		var ty=Flags.rng.randi_range(30,500)
 		var ghost=ghostScene.instantiate()
 		ghost.position.x=tx
 		ghost.position.y=ty
@@ -91,4 +91,3 @@ func _on_exit_body_entered(body: Node2D) -> void:
 
 func _on_music_finished() -> void:
 	$music.play()
-	pass # Replace with function body.

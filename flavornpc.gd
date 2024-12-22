@@ -4,8 +4,7 @@ var candeploy:=true
 
 func choose():
 	var num=Flags.flavornpc.npc.size()
-	var rng=RandomNumberGenerator.new()
-	var choice=rng.randi_range(0,num-1)
+	var choice=Flags.rng.randi_range(0,num-1)
 	if Flags.flavornpc.npc[choice].deployed==false:
 		Flags.flavornpc.npc[choice].deployed=true
 		$npc.animation=Flags.flavornpc.npc[choice].name

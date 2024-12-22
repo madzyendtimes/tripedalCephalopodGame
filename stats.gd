@@ -2,7 +2,6 @@ extends Control
 var navDivide:=11
 var eventq
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	update()
 	$PopupPanel2.visible=false
@@ -12,9 +11,8 @@ func _ready():
 func showpop():
 	pass
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _process(delta):
-	#print(Flags.paused,Flags.entered,Flags.mode)
 	if Flags.mode!="statsScreen":		
 		return
 	else:
@@ -32,15 +30,12 @@ func _process(delta):
 			if Flags.selectedItem<=Flags.playerInventory.size():
 				var pi=Flags.playerInventory[Flags.selectedItem-1]
 				print(pi)
-				Flags.effect=pi.effect
+				Flags.tne.addEvent(pi.effect,"level")
+				#Flags.effect=pi.effect
 				if pi.consumable==true:
 					Flags.playerInventory.remove_at(Flags.selectedItem-1)
 					if pi.swap!={}:
 						doswap(pi.swap)
-
-					
-			else:
-				Flags.effect=""
 			contract()
 		
 
@@ -103,5 +98,6 @@ func clear():
 func addInventory(item,itemnum):
 	var t=Texture.new()
 	t=load(item.img)
+	#change to buttons with icons?
 	$PopupPanel2/VBoxContainer/inv.add_image(t,100,100,Color(1,1,1,1),5,Rect2(0,0,0,0),"k"+str(itemnum))
 	

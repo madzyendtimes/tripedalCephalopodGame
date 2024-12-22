@@ -55,8 +55,7 @@ func _process(delta: float) -> void:
 
 
 func getstock():
-	var rng=RandomNumberGenerator.new()
-	var c=choices[rng.randi_range(0,choices.size()-1)]
+	var c=choices[Flags.rng.randi_range(0,choices.size()-1)]
 	for i in stock:
 		if i.text==c.text:
 			c=getstock()
@@ -140,7 +139,8 @@ func purchase():
 				Flags.megaStats.inventorycapacity+=1
 				
 			"winner":
-				Flags.effect="win"
+				Flags.tne.addEvent("win","level")
+				#Flags.effect="win"
 				
 			"nocap":
 				Flags.megaStats.capHealth=10000

@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 			return
 
 	position.x+=dir*speed
-	pass
+
 
 
 
@@ -44,11 +44,12 @@ func _on_body_entered(body: Node2D) -> void:
 		if Flags.inFight==true && Flags.playerHits>0:
 				hp=Flags.calchits(hp)
 				if hp<1:
-					Flags.effect="addgems"
+					Flags.tne.addEvent("addgems","level")
+					#Flags.effect="addgems"
 					queue_free()
 				else:
 					knockback()
 		else:
-				Flags.effect="hit"
+				body.hit()
 
 		

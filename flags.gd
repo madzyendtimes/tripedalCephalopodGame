@@ -20,8 +20,7 @@ var multiScene:PackedScene=load("res://multistage.tscn")
 
 var options={"controls":"controller","music":100,"fx":100,"randomizeDistribution":false,"seed":{"active":false,"value":"fun"},"startfresh":false,"graphics":"high"}
 var defoptions={"controls":"controller","music":100,"fx":100,"randomizeDistribution":false,"seed":{"active":false,"value":"fun"},"startfresh":false,"graphics":"high"}
-var controlScheme="keyboard"
-#var controlScheme="controller"
+var controlScheme="controller"
 var freshstart=false
 var weather=""
 const stats=preload("res://playerstats.gd")
@@ -112,7 +111,6 @@ var mode:="level"
 var selectedItem:=-1
 var exhausted=false
 var pukestate=false
-var effect=""
 var warploc=2950
 var hat=""
 var mesmerized=false
@@ -137,7 +135,7 @@ var percentageMap=[
 5, #weather effects
 5, #fair weather
 3, #flavor npcs
-800,#8, #flying enemy
+8,#8, #flying enemy
 7, #multistage enemy
 2, #gemmonster
 1, #hoarde
@@ -150,7 +148,6 @@ var eventQ=[]
 
 var rng=RandomNumberGenerator.new()
 var witchevents=""
-var cryptoeffects=""
 
 var questDistributed=false
 
@@ -176,7 +173,6 @@ func reset():
 	hat=""
 	horror=false
 	warploc=2950
-	effect=""
 	pukestate=false
 	exhausted=false
 	selectedItem=-1
@@ -206,7 +202,8 @@ func calchits(hp):
 
 func beg(begchance):
 	if rng.randi_range(0,100)<(begchance+(playerStats.rizz*10)):
-		effect="addgems"
+		tne.addEvent("addgems","level")
+#		effect="addgems"
 		return true
 	return false
 
@@ -216,7 +213,7 @@ func addToInventory(type,numvarient):
 	print("addtoinventory")
 	var name=types[type].name
 	var treenum=numvarient
-
+	
 	var istr="res://"+name+"text"+str(treenum)+".PNG"
 	var image = Image.load_from_file(istr)
 	var texture = ImageTexture.create_from_image(image)
@@ -245,11 +242,11 @@ func saveoptions():
 func defaultoptions():
 	print("poroblem with options file, loading defaults")
 	options=defoptions
-	pass
+
 	
 
 func loadoptions():
-	print("load optionn function")
+	print("load option function")
 	if not FileAccess.file_exists("user://tcoptionsv2.save"):
 		print("error")
 		defaultoptions()

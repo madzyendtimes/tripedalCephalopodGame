@@ -6,8 +6,7 @@ func _ready() -> void:
 	gettype()
 
 func gettype():
-	var rng=RandomNumberGenerator.new()
-	var tempt=rng.randi_range(1,3)
+	var tempt=Flags.rng.randi_range(1,3)
 	if tempt==1:
 		type="holy"
 	if tempt==2:
@@ -17,7 +16,7 @@ func gettype():
 	$AnimatedSprite2D.animation=type
 	$AnimatedSprite2D.play()
 
-	Flags.tne.dotime(self,[gettype],rng.randi_range(0.9,2.8),"gettype",true,"temple")
+	Flags.tne.dotime(self,[gettype],Flags.rng.randf_range(0.9,2.8),"gettype",true,"temple")
 
 func inactive():
 	$AnimatedSprite2D.animation=type

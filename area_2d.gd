@@ -4,12 +4,10 @@ extends Area2D
 
 func _ready() -> void:
 	doaniChange()
-	var rng=RandomNumberGenerator.new()
-	$AnimatedSprite2D.flip_h=!rng.randi_range(0,1)>0
+	$AnimatedSprite2D.flip_h=!Flags.rng.randi_range(0,1)>0
 
 
 func doaniChange():
-	
 	if $AnimatedSprite2D.animation=="default":
 		$AnimatedSprite2D.animation="descend"
 		$CollisionShape2D.position.y=377

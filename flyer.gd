@@ -9,7 +9,6 @@ var maxchange:=5.0
 var maxspd:=3.0
 var minchange:=1.0
 var canflip:=true
-var rng=RandomNumberGenerator.new()
 var type:="default"
 var crashed:=false
 var runningaway:=false
@@ -22,7 +21,7 @@ func _ready() -> void:
 
 
 func selectType():
-	var choice:=rng.randi_range(0,2)
+	var choice=Flags.rng.randi_range(0,2)
 	if choice==0:
 		$AnimatedSprite2D.animation="bug"
 		type="bug"
@@ -44,7 +43,7 @@ func selectType():
 	
 	if hasmissle:
 		
-		Flags.tne.dotime(self,[dropmissle],rng.randf_range(0.5,5.0),"dropmissle"+str(self.get_instance_id()),true,"level")
+		Flags.tne.dotime(self,[dropmissle],Flags.rng.randf_range(0.5,5.0),"dropmissle"+str(self.get_instance_id()),true,"level")
 
 func dropmissle():
 		var egg=missle.instantiate()
@@ -53,7 +52,7 @@ func dropmissle():
 		self.get_parent().add_child(egg)
 #	
 
-		Flags.tne.dotime(self,[dropmissle],rng.randf_range(0.5,5.0),"dropmissle"+str(self.get_instance_id()),true,"level")
+		Flags.tne.dotime(self,[dropmissle],Flags.rng.randf_range(0.5,5.0),"dropmissle"+str(self.get_instance_id()),true,"level")
 
 
 func _process(delta):
@@ -76,13 +75,13 @@ func _process(delta):
 
 func showprize():
 	var prize=prizeScene.instantiate()
-	var version=rng.randi_range(1,7)
+	var version=Flags.rng.randi_range(1,7)
 	prize.animation="collectable"+str(version)
 	Flags.addToInventory(4,version)
 	add_child(prize)
 
 func changedirection():
-	var tdir=rng.randi_range(0,1)
+	var tdir=Flags.rng.randi_range(0,1)
 	if tdir==0:
 		tdir=-1
 	dir=dir*tdir
@@ -91,9 +90,9 @@ func changedirection():
 	else:
 		$AnimatedSprite2D.flip_h=true
 
-	spd=rng.randf_range(minspd,maxspd)
-	ypos=rng.randi_range(-5,5)
-	var nxtchange=rng.randf_range(minchange,maxchange)
+	spd=Flags.rng.randf_range(minspd,maxspd)
+	ypos=Flags.rng.randi_range(-5,5)
+	var nxtchange=Flags.rng.randf_range(minchange,maxchange)
 
 
 	Flags.tne.dotime(self,[changedirection],nxtchange,"changedirection"+str(self.get_instance_id()),true,"level")
@@ -127,4 +126,4 @@ func _on_body_entered(body: Node2D) -> void:
 		getpackage()
 		return
 	
-	Flags.effect="hit"
+	body.hit()
