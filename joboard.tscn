@@ -1,0 +1,298 @@
+[gd_scene load_steps=22 format=3 uid="uid://bv1r3uf6jmfs6"]
+
+[ext_resource type="Script" path="res://joboard.gd" id="1_k56gg"]
+[ext_resource type="Texture2D" uid="uid://bib5j5mfmltle" path="res://npc/epsilon frank/empty.PNG" id="2_2hetd"]
+[ext_resource type="Texture2D" uid="uid://l556nvylge07" path="res://npc/epsilon frank/ep1.PNG" id="2_j01hi"]
+[ext_resource type="Texture2D" uid="uid://dbto2te3j8r7" path="res://npc/epsilon frank/ep2.PNG" id="3_1jp5b"]
+[ext_resource type="Texture2D" uid="uid://dfrri0ec76ddb" path="res://npc/epsilon frank/ep3.PNG" id="4_rsbry"]
+[ext_resource type="Texture2D" uid="uid://dmxygt1dgn7e6" path="res://npc/epsilon frank/ep4.PNG" id="5_s0xpk"]
+[ext_resource type="Texture2D" uid="uid://b2c3qwb8jfe5a" path="res://npc/epsilon frank/blink1.PNG" id="5_vu8mf"]
+[ext_resource type="FontFile" uid="uid://ck07uk066rkqa" path="res://fonts/Metalien.otf" id="6_qpiul"]
+[ext_resource type="Texture2D" uid="uid://b7frjdoyp4pd3" path="res://npc/epsilon frank/blink2.PNG" id="6_wl2d5"]
+[ext_resource type="AudioStream" uid="uid://bnlttjgnqg5ek" path="res://music/Brilliant Charles.wav" id="10_iwpfe"]
+[ext_resource type="AudioStream" uid="uid://cbfs2xeaanff6" path="res://sounds/buzz.mp3" id="11_ihtsd"]
+[ext_resource type="Texture2D" uid="uid://cwe6krbyqy8yq" path="res://npc/epsilon frank/reject.PNG" id="12_qyx0e"]
+
+[sub_resource type="FontFile" id="FontFile_0uf1s"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/17/0/ascent = 0.0
+cache/0/17/0/descent = 0.0
+cache/0/17/0/underline_position = 0.0
+cache/0/17/0/underline_thickness = 0.0
+cache/0/17/0/scale = 1.0
+cache/0/18/0/ascent = 0.0
+cache/0/18/0/descent = 0.0
+cache/0/18/0/underline_position = 0.0
+cache/0/18/0/underline_thickness = 0.0
+cache/0/18/0/scale = 1.0
+cache/0/19/0/ascent = 0.0
+cache/0/19/0/descent = 0.0
+cache/0/19/0/underline_position = 0.0
+cache/0/19/0/underline_thickness = 0.0
+cache/0/19/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/21/0/ascent = 0.0
+cache/0/21/0/descent = 0.0
+cache/0/21/0/underline_position = 0.0
+cache/0/21/0/underline_thickness = 0.0
+cache/0/21/0/scale = 1.0
+cache/0/22/0/ascent = 0.0
+cache/0/22/0/descent = 0.0
+cache/0/22/0/underline_position = 0.0
+cache/0/22/0/underline_thickness = 0.0
+cache/0/22/0/scale = 1.0
+cache/0/23/0/ascent = 0.0
+cache/0/23/0/descent = 0.0
+cache/0/23/0/underline_position = 0.0
+cache/0/23/0/underline_thickness = 0.0
+cache/0/23/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/25/0/ascent = 0.0
+cache/0/25/0/descent = 0.0
+cache/0/25/0/underline_position = 0.0
+cache/0/25/0/underline_thickness = 0.0
+cache/0/25/0/scale = 1.0
+cache/0/26/0/ascent = 0.0
+cache/0/26/0/descent = 0.0
+cache/0/26/0/underline_position = 0.0
+cache/0/26/0/underline_thickness = 0.0
+cache/0/26/0/scale = 1.0
+cache/0/27/0/ascent = 0.0
+cache/0/27/0/descent = 0.0
+cache/0/27/0/underline_position = 0.0
+cache/0/27/0/underline_thickness = 0.0
+cache/0/27/0/scale = 1.0
+cache/0/28/0/ascent = 0.0
+cache/0/28/0/descent = 0.0
+cache/0/28/0/underline_position = 0.0
+cache/0/28/0/underline_thickness = 0.0
+cache/0/28/0/scale = 1.0
+cache/0/29/0/ascent = 0.0
+cache/0/29/0/descent = 0.0
+cache/0/29/0/underline_position = 0.0
+cache/0/29/0/underline_thickness = 0.0
+cache/0/29/0/scale = 1.0
+cache/0/30/0/ascent = 0.0
+cache/0/30/0/descent = 0.0
+cache/0/30/0/underline_position = 0.0
+cache/0/30/0/underline_thickness = 0.0
+cache/0/30/0/scale = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h01i7"]
+content_margin_left = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+expand_margin_left = 8.0
+
+[sub_resource type="Theme" id="Theme_cul46"]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = 14
+Label/constants/outline_size = 0
+Label/font_sizes/font_size = 30
+Label/fonts/font = SubResource("FontFile_0uf1s")
+Label/styles/normal = SubResource("StyleBoxFlat_h01i7")
+
+[sub_resource type="FontFile" id="FontFile_7jwb0"]
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="Theme" id="Theme_mreod"]
+default_font = SubResource("FontFile_7jwb0")
+default_font_size = 64
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aqliu"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_left = 153.0
+expand_margin_right = 163.0
+
+[sub_resource type="Theme" id="Theme_n1fru"]
+default_font_size = 21
+HSeparator/constants/separation = 16
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_f32t4"]
+grow_begin = 8.0
+grow_end = 16.0
+thickness = 7
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mdwsj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j01hi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vu8mf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wl2d5")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j01hi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1jp5b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rsbry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_s0xpk")
+}],
+"loop": true,
+"name": &"reject",
+"speed": 5.0
+}]
+
+[node name="joboard" type="Node2D"]
+script = ExtResource("1_k56gg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -664.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0979106, 0.298708, 0.25693, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 16.0
+offset_bottom = -488.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0979106, 0.298708, 0.25693, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1128.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0979106, 0.298708, 0.25693, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="CanvasLayer"]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 472.0
+offset_top = 576.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0979106, 0.298708, 0.25693, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+top_level = true
+z_index = -2
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -672.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="response" type="Node2D" parent="CanvasLayer"]
+visible = false
+
+[node name="wordballoon" type="Sprite2D" parent="CanvasLayer/response"]
+position = Vector2(264, 218)
+scale = Vector2(0.864, 1.07)
+texture = ExtResource("2_2hetd")
+
+[node name="reject" type="Label" parent="CanvasLayer/response"]
+offset_left = 120.0
+offset_top = 80.0
+offset_right = 456.0
+offset_bottom = 328.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -15
+theme_override_fonts/font = ExtResource("6_qpiul")
+theme_override_font_sizes/font_size = 32
+text = "Here Is Some Text blah blah blah"
+autowrap_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_left = 488.0
+offset_top = 64.0
+offset_right = 1116.0
+offset_bottom = 616.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_cul46")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_mreod")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_aqliu")
+text = "JOB BOARD"
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_n1fru")
+theme_override_styles/separator = SubResource("StyleBoxLine_f32t4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(96, 392)
+sprite_frames = SubResource("SpriteFrames_mdwsj")
+animation = &"reject"
+autoplay = "blink"
+frame_progress = 0.626272
+flip_h = true
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_iwpfe")
+
+[node name="buzzer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_ihtsd")
+
+[node name="stamp" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(72, 32)
+scale = Vector2(0.74, 0.42)
+texture = ExtResource("12_qyx0e")
+
+[connection signal="finished" from="music" to="." method="_on_music_finished"]

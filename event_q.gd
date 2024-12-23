@@ -33,7 +33,10 @@ var q={
 		"timers":{}},
 	"title":
 		{"events":[],
-		"timers":{}}		
+		"timers":{}},
+	"jobboard":
+		{"events":[],
+		"timers":{}}			
 	}
 var guid=0	
 
