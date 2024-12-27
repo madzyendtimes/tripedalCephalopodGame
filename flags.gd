@@ -85,7 +85,8 @@ var itemMap:=[
 
 	{"type":"quest","varients":
 		[{"name":"legs","effect":"quest","consumable":false,"swap":{}},
-		{"name":"specimen","effect":"quest","consumable":false,"swap":{}}
+		{"name":"specimen","effect":"quest","consumable":false,"swap":{}},
+		{"name":"rejectionletter","effect":"quest","consumable":false,"swap":{}}
 	]},
 		{"type":"collectable","varients":
 		[{"name":"the mime who cried","effect":"combustable","consumable":true,"swap":{}},
@@ -101,10 +102,12 @@ var itemMap:=[
 	
 	
 	]
-var flavornpc:={"npc":[
-	{"name":"fanguymanly","deployed":false},
-	{"name":"princessoccula","deployed":false},
-	{"name":"win3","deployed":false}
+var flavornpc:={"npc":[{"name":"fanguymanly","deployed":false,"quest":{}},
+	{"name":"princessoccula","deployed":false,"quest":{}},
+	{"name":"win3","deployed":false,"quest":{}},
+	{"name":"infotammy","deployed":false,"quest":{}},
+	{"name":"piper","deployed":false,"quest":{}},
+	{"name":"emmaemo","deployed":false,"quest":{"requirements":[{"type":3,"num":3}],"reward":"gun"}}
 ]}
 var paused:=false
 var mode:="level"
@@ -123,6 +126,11 @@ var questpc:=[
 	{"name":"epsilon","mode":"jobboard"},
 	{"name":"gemna","mode":"trader"}
 ]
+
+var		specialnpc=[
+		{"name":"epsilon frank","deployed":false,"code":"e"},
+		{"name":"gemna","deployed":false,"code":"e"}
+		]
 var playerHits=1
 var percentageMap=[
 10, #trash
@@ -134,12 +142,13 @@ var percentageMap=[
 9, #minigame
 5, #weather effects
 5, #fair weather
-3, #flavor npcs
+999, #flavor npcs
 8,#8, #flying enemy
 7, #multistage enemy
 2, #gemmonster
 1, #hoarde
-999, #gravestone
+9, #gravestone
+999, #special npc
 5 #quest
 ]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable
@@ -164,12 +173,18 @@ func reset():
 	controlled=false
 	radiation=false
 	flavornpc={"npc":[
-	{"name":"fanguymanly","deployed":false},
-	{"name":"princessoccula","deployed":false},
-	{"name":"win3","deployed":false},
-	{"name":"infotammy","deployed":false},
-	{"name":"piper","deployed":false}
+	{"name":"fanguymanly","deployed":false,"scale":-1,"quest":{}},
+	{"name":"princessoccula","deployed":false,"scale":-1,"quest":{}},
+	{"name":"win3","deployed":false,"scale":-1,"quest":{}},
+	{"name":"infotammy","deployed":false,"scale":-1,"quest":{}},
+	{"name":"piper","deployed":false,"scale":-1,"quest":{}},
+	{"name":"emmaemo","deployed":false,"scale":1.3,"quest":{"requirements":[{"type":3,"num":3}],"reward":"gun"}}
 	]}
+	specialnpc=[
+		{"name":"epsilon frank","deployed":false,"code":"e","scene":"jobboard","ypos":-400},
+		{"name":"gemna","deployed":false,"code":"g","scene":"trader","ypos":0}
+		]
+	
 	mesmerized=false
 	hat=""
 	horror=false

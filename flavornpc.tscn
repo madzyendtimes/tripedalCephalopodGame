@@ -1,12 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://bid0ue1i8kuhe"]
+[gd_scene load_steps=26 format=3 uid="uid://bid0ue1i8kuhe"]
 
 [ext_resource type="Texture2D" uid="uid://dtm1mcs1ddp4o" path="res://npc/fanguymanly/fanguymanly1.PNG" id="1_dn1sp"]
 [ext_resource type="Script" path="res://flavornpc.gd" id="1_y36xa"]
 [ext_resource type="Texture2D" uid="uid://bupdrdias4m1r" path="res://npc/fanguymanly/fanguymanly2.PNG" id="2_0g060"]
+[ext_resource type="Texture2D" uid="uid://ds14enqtivmx2" path="res://npc/emmaemo/emo1.PNG" id="2_roi4w"]
+[ext_resource type="Texture2D" uid="uid://cbqoxtwfwkl21" path="res://npc/emmaemo/emo2.PNG" id="3_kt4ud"]
 [ext_resource type="Texture2D" uid="uid://bhf3cyupogrc4" path="res://npc/princessOcula/ocula1.PNG" id="3_pcned"]
 [ext_resource type="Texture2D" uid="uid://cv86q1skmriyg" path="res://npc/princessOcula/ocula2.PNG" id="4_jalxh"]
 [ext_resource type="Texture2D" uid="uid://h23x3nbcabqa" path="res://npc/tammy1.PNG" id="4_rlvye"]
+[ext_resource type="Texture2D" uid="uid://cusmw7ljkgim5" path="res://npc/emmaemo/emoqcomplete1.PNG" id="4_vnspd"]
 [ext_resource type="Texture2D" uid="uid://bo8s1rmrj11km" path="res://npc/win3/win31.PNG" id="5_0qfb4"]
+[ext_resource type="Texture2D" uid="uid://ctgh42whtl4u2" path="res://npc/emmaemo/emoqcomplete2.PNG" id="5_pjgjp"]
 [ext_resource type="Texture2D" uid="uid://4nkb7iy8ck6x" path="res://npc/infotammy/tammy2.PNG" id="5_qsqpo"]
 [ext_resource type="Texture2D" uid="uid://biuntywasu6sl" path="res://npc/piper/piper1.PNG" id="6_bd5ld"]
 [ext_resource type="Texture2D" uid="uid://b05pawbl6kjvl" path="res://npc/win3/win32.PNG" id="6_qkk82"]
@@ -16,9 +20,33 @@
 [ext_resource type="Texture2D" uid="uid://dsi3hwuwfyl27" path="res://npc/win3/win3text.PNG" id="9_uacx3"]
 [ext_resource type="Texture2D" uid="uid://1vnodvvogy37" path="res://npc/infotammy/text.PNG" id="13_gpxhp"]
 [ext_resource type="Texture2D" uid="uid://bahipuch8spfu" path="res://npc/piper/text.PNG" id="14_4jt60"]
+[ext_resource type="Texture2D" uid="uid://dqv3jiljwtt71" path="res://npc/emmaemo/textcomplete.PNG" id="16_fx638"]
+[ext_resource type="Texture2D" uid="uid://cqkuflutrg5cb" path="res://npc/emmaemo/text.PNG" id="17_ehoqj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cidpi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_roi4w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kt4ud")
+}],
+"loop": true,
+"name": &"emmaemo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vnspd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pjgjp")
+}],
+"loop": true,
+"name": &"emmaemocomplete",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_dn1sp")
@@ -79,6 +107,22 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("16_fx638")
+}],
+"loop": true,
+"name": &"emmaemocompletetext",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_ehoqj")
+}],
+"loop": true,
+"name": &"emmaemotext",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("7_6n78j")
 }],
 "loop": true,
@@ -118,19 +162,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="flavornpc" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_judij"]
+radius = 56.0
+height = 192.0
+
+[node name="flavornpc" type="Area2D"]
 position = Vector2(0, 16)
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_y36xa")
 
 [node name="npc" type="AnimatedSprite2D" parent="."]
 position = Vector2(155, 325)
 scale = Vector2(0.82, 0.82)
 sprite_frames = SubResource("SpriteFrames_cidpi")
-animation = &"piper"
-frame_progress = 0.122491
+animation = &"emmaemo"
 
 [node name="text" type="AnimatedSprite2D" parent="."]
 position = Vector2(360, 176)
 scale = Vector2(0.74, 0.72)
 sprite_frames = SubResource("SpriteFrames_hh854")
-animation = &"pipertext"
+animation = &"emmaemotext"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(144, 336)
+shape = SubResource("CapsuleShape2D_judij")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

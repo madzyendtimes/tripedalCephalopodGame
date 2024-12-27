@@ -33,8 +33,16 @@ var responses=["Thank you for your application.\n unfortunately we are looking f
 
 var stamps=[]
 var lazy=[]
-
+var home=self
+var applied=false
 func _ready() -> void:
+	$music.volume_db=Flags.options.music
+	$buzzer.volume_db=Flags.options.fx
+	$CanvasLayer.visible=false
+
+func start(callee):
+	$CanvasLayer.visible=true
+	home=callee
 	$music.play()
 	jobs.shuffle()
 	for i in range(0,9):
@@ -57,6 +65,7 @@ func _ready() -> void:
 	Flags.mode="jobboard"
 	selectjob()
 
+
 func _process(delta: float) -> void:
 	if Flags.mode!="jobboard":
 		return
@@ -70,7 +79,9 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("jump"):
 		applyjob()
-	
+		
+	if Input.is_action_just_pressed("fight")||Input.is_action_just_pressed("reset"):
+		exit()
 
 
 	
@@ -80,6 +91,7 @@ func selectjob():
 	selected=newselect
 
 func applyjob():
+	
 	$buzzer.pitch_scale=Flags.rng.randf_range(0.7,1.3)
 	$buzzer.play()
 	choices[selected].set("theme_override_colors/font_color",Color.RED)
@@ -93,6 +105,9 @@ func applyjob():
 		$CanvasLayer/response/reject.text="Are you stupid? I'm glad I rejected you for this job already"
 	$CanvasLayer/response.visible=true
 	lazy[selected].applied=true
+	if !applied:
+		Flags.addToInventory(3,3)
+	applied=true
 	Flags.tne.dotime(self,[hidetext],3.5,"hidetext",true,"jobboard")
 	
 	
@@ -101,6 +116,15 @@ func hidetext():
 	$CanvasLayer/response.visible=false
 	
 	
+	
+func exit():
+	visible=false
+	$CanvasLayer.visible=false
+	Flags.mode="level"
+	Flags.paused=false
+	Flags.interactablenpc.complete()
+	$music.stop()
+	home.intreturn()
 	
 
 

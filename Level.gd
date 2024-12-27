@@ -21,6 +21,7 @@ var flyerScene:PackedScene=load("res://flyer.tscn")
 var multiScene:PackedScene=load("res://multistage.tscn")
 var gemScene:PackedScene=load("res://gemmonster.tscn")
 var graveScene:PackedScene=load("res://gravestone.tscn")
+var specialnpcScene:PackedScene=load("res://specialnpc.tscn")
 var lowshader=preload("res://low.gdshader")
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
@@ -265,7 +266,8 @@ func doEffect(effect):
 			$player.hit()
 		"win":
 			dowin()
-
+		"gun":
+			pass
 
 
 func exit(isdead=false):
@@ -515,7 +517,9 @@ func doMode():
 			$trader.visible=true
 			$AudioStreamPlayer.stop()
 			$trader.start(self)
-	
+		"jobboard":
+			$AudioStreamPlayer.stop()
+			$joboard.start(self)
 	
 	pass
 	
@@ -617,7 +621,7 @@ func get_bg_texture(type):
 
 func createchoice(holder,scn,pos,brandflip,setani,ypos,deploycheck):
 		var spwn=scn.instantiate()
-		spwn.position.x=((holder.position.x)*-1)+pos
+
 		if brandflip:
 			spwn.get_child(1).flip_h=!Flags.rng.randi_range(0,1)>0
 		if setani>1:
@@ -626,7 +630,10 @@ func createchoice(holder,scn,pos,brandflip,setani,ypos,deploycheck):
 			spwn.position.y=ypos
 		if deploycheck && !spwn.candeploy:
 			return
+		if spwn==null:
+			return
 		holder.add_child(spwn)	
+		spwn.position.x=((holder.position.x)*-1)+pos
 
 var spawnulator:=[
 
@@ -682,8 +689,12 @@ func dochances(val):
 	if val<15:
 		createchoice($enemy,graveScene,1400,false,1,400,false)
 		return
-		
 	if val<16:
+		createchoice($npcs,specialnpcScene,1400,false,2,400,true)
+		return
+
+		
+	if val<17:
 		if questDistributed==false:
 			var trash=trashScene.instantiate()
 			trash.position.x=(($interactive.position.x)*-1)+1400
@@ -723,10 +734,10 @@ func dospawns():
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
-			var upchoice=15
+			var upchoice=16
 
 			if $interactive.position.x>-5000 && questDistributed==false:
-				upchoice=16
+				upchoice=17
 			
 			var chance=Flags.rng.randi_range(0,upchoice)
 			var newchance=Flags.rng.randi_range(0,Flags.percentageAgg)

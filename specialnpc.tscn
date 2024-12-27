@@ -1,0 +1,161 @@
+[gd_scene load_steps=21 format=3 uid="uid://bjpj7lemsa2l2"]
+
+[ext_resource type="Script" path="res://specialnpc.gd" id="1_faj5w"]
+[ext_resource type="Texture2D" uid="uid://b2c3qwb8jfe5a" path="res://npc/epsilon frank/blink1.PNG" id="2_xkjjr"]
+[ext_resource type="Texture2D" uid="uid://b7frjdoyp4pd3" path="res://npc/epsilon frank/blink2.PNG" id="3_iym1m"]
+[ext_resource type="Texture2D" uid="uid://dbto2te3j8r7" path="res://npc/epsilon frank/ep2.PNG" id="4_cn0ix"]
+[ext_resource type="Texture2D" uid="uid://dmxygt1dgn7e6" path="res://npc/epsilon frank/ep4.PNG" id="5_thifd"]
+[ext_resource type="Texture2D" uid="uid://dfrri0ec76ddb" path="res://npc/epsilon frank/ep3.PNG" id="6_47dh5"]
+[ext_resource type="Texture2D" uid="uid://l556nvylge07" path="res://npc/epsilon frank/ep1.PNG" id="7_6xixi"]
+[ext_resource type="Texture2D" uid="uid://biyloyknuao3b" path="res://npc/gemna/gemna1.PNG" id="8_r1p3k"]
+[ext_resource type="Texture2D" uid="uid://bwglwr6oqc5fg" path="res://npc/gemna/gemna2.PNG" id="9_k43tq"]
+[ext_resource type="Texture2D" uid="uid://dsmgx0kh82byh" path="res://npc/gemna/gemnacomplete1.PNG" id="10_q212x"]
+[ext_resource type="Texture2D" uid="uid://dswtsk7j5ibfc" path="res://npc/gemna/gemnacomplete2.PNG" id="11_bp7tk"]
+[ext_resource type="Texture2D" uid="uid://c8yqyxkyp02ol" path="res://npc/epsilon frank/text.PNG" id="12_p51aj"]
+[ext_resource type="Texture2D" uid="uid://bund8qh78oiy1" path="res://npc/epsilon frank/quest text.PNG" id="13_7wmhk"]
+[ext_resource type="Texture2D" uid="uid://fhndgoloa6r8" path="res://npc/epsilon frank/keyquest.PNG" id="14_vrc0b"]
+[ext_resource type="Texture2D" uid="uid://coclpfsxscvc5" path="res://npc/gemna/gemnaCompleteText.PNG" id="15_l5y4n"]
+[ext_resource type="Texture2D" uid="uid://bcle7v2w4qvif" path="res://npc/gemna/gemnaquestfixed.PNG" id="16_ovogy"]
+[ext_resource type="Texture2D" uid="uid://jdrd53ln0qj1" path="res://npc/gemna/keygemnaquest.PNG" id="17_15prw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l5yc2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xkjjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_iym1m")
+}],
+"loop": true,
+"name": &"e",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cn0ix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_thifd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_47dh5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6xixi")
+}],
+"loop": true,
+"name": &"epq",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_r1p3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_k43tq")
+}],
+"loop": true,
+"name": &"g",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_q212x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bp7tk")
+}],
+"loop": true,
+"name": &"gpq",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"nothing",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8g8er"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_7wmhk")
+}],
+"loop": true,
+"name": &"e",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_vrc0b")
+}],
+"loop": true,
+"name": &"ekeyboard",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_p51aj")
+}],
+"loop": true,
+"name": &"epq",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_ovogy")
+}],
+"loop": true,
+"name": &"g",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_15prw")
+}],
+"loop": true,
+"name": &"gkeyboard",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_l5y4n")
+}],
+"loop": true,
+"name": &"gpq",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"nothing",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w66ns"]
+radius = 64.0
+height = 576.0
+
+[node name="specialnpc" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_faj5w")
+
+[node name="npc" type="AnimatedSprite2D" parent="."]
+position = Vector2(-6.54167, -66.0611)
+scale = Vector2(1.50542, 1.20022)
+sprite_frames = SubResource("SpriteFrames_l5yc2")
+animation = &"g"
+frame_progress = 0.259558
+offset = Vector2(0, 25)
+
+[node name="text" type="AnimatedSprite2D" parent="."]
+position = Vector2(296, -160)
+sprite_frames = SubResource("SpriteFrames_8g8er")
+animation = &"gkeyboard"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 120)
+shape = SubResource("CapsuleShape2D_w66ns")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
