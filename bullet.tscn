@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://vmv4fp0ucvm0"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_8076y"]
+[ext_resource type="Texture2D" uid="uid://bvf0eobog5dg8" path="res://missle/bullet.PNG" id="2_lex46"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dueks"]
+radius = 17.0294
+
+[node name="bullet" type="CharacterBody2D"]
+collision_layer = 524288
+collision_mask = 40124
+script = ExtResource("1_8076y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lex46")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dueks")

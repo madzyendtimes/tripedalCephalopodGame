@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfifekepfwvle"]
+
+[ext_resource type="Script" path="res://needle.gd" id="1_58d5x"]
+[ext_resource type="Texture2D" uid="uid://dsofxu06n21lr" path="res://enemies/missles/needle/needle1.PNG" id="2_td8es"]
+[ext_resource type="Texture2D" uid="uid://coahn4dhi0cg2" path="res://enemies/missles/needle/needle2.PNG" id="3_ingi5"]
+[ext_resource type="Texture2D" uid="uid://3nal60dndx8t" path="res://enemies/missles/needle/needle3.PNG" id="4_fw4uh"]
+[ext_resource type="Texture2D" uid="uid://bgsf3jai1q1a5" path="res://enemies/missles/needle/needle4.PNG" id="5_08nku"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ls6f3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_td8es")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ingi5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fw4uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_08nku")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jq1th"]
+radius = 27.0
+
+[node name="needle" type="Area2D"]
+collision_layer = 8
+collision_mask = 524290
+script = ExtResource("1_58d5x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-56, 42)
+scale = Vector2(0.376667, 0.503333)
+sprite_frames = SubResource("SpriteFrames_ls6f3")
+autoplay = "default"
+frame_progress = 0.606227
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-46, 39)
+shape = SubResource("CircleShape2D_jq1th")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -14,6 +14,16 @@ func _ready() -> void:
 func _on_body_entered(body):
 	if dead:
 		return
+
+	if body.name.find("bullet")>-1:
+		$AnimatedSprite2D.animation="dead"
+		dead=true	
+		$hit.play()
+		body.hit()
+		return
+
+
+
 	if Flags.hat=="beg":
 		var begsuccess=Flags.beg(begchance)
 		return

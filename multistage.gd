@@ -29,6 +29,10 @@ func recourage():
 func _on_body_entered(body: Node2D) -> void:
 	if dead==true:
 		return
+	if body.name.find("bullet")>-1:
+		hit()
+		body.hit()
+		return
 	if Flags.hat=="beg":
 		var begsuccess=Flags.beg(begchance)
 		return

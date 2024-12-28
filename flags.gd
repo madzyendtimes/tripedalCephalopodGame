@@ -142,13 +142,14 @@ var percentageMap=[
 9, #minigame
 5, #weather effects
 5, #fair weather
-999, #flavor npcs
+5, #flavor npcs
 8,#8, #flying enemy
 7, #multistage enemy
 2, #gemmonster
 1, #hoarde
 9, #gravestone
-999, #special npc
+5, #special npc
+1,#boss
 5 #quest
 ]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable
@@ -157,8 +158,8 @@ var eventQ=[]
 
 
 var rng=RandomNumberGenerator.new()
-var witchevents=""
-
+##var witchevents=""
+var fightmode=""
 var questDistributed=false
 
 func weatheroff():
@@ -173,18 +174,18 @@ func reset():
 	controlled=false
 	radiation=false
 	flavornpc={"npc":[
-	{"name":"fanguymanly","deployed":false,"scale":-1,"quest":{}},
-	{"name":"princessoccula","deployed":false,"scale":-1,"quest":{}},
-	{"name":"win3","deployed":false,"scale":-1,"quest":{}},
-	{"name":"infotammy","deployed":false,"scale":-1,"quest":{}},
-	{"name":"piper","deployed":false,"scale":-1,"quest":{}},
-	{"name":"emmaemo","deployed":false,"scale":1.3,"quest":{"requirements":[{"type":3,"num":3}],"reward":"gun"}}
+	{"name":"fanguymanly","deployed":false,"scale":-1,"ypos":0,"quest":{}},
+	{"name":"princessoccula","deployed":false,"scale":-1,"ypos":0,"quest":{}},
+	{"name":"win3","deployed":false,"scale":-1,"ypos":0,"quest":{}},
+	{"name":"infotammy","deployed":false,"scale":-1,"ypos":0,"quest":{}},
+	{"name":"piper","deployed":false,"scale":-1,"ypos":0,"quest":{}},
+	{"name":"emmaemo","deployed":false,"scale":1.9,"ypos":-100,"quest":{"requirements":[{"type":3,"num":3}],"reward":"gun"}}
 	]}
 	specialnpc=[
-		{"name":"epsilon frank","deployed":false,"code":"e","scene":"jobboard","ypos":-400},
+		{"name":"epsilon frank","deployed":false,"code":"e","scene":"jobboard","ypos":-200},
 		{"name":"gemna","deployed":false,"code":"g","scene":"trader","ypos":0}
 		]
-	
+	fightmode=""
 	mesmerized=false
 	hat=""
 	horror=false

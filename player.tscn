@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://cdj8g8hh6wurl"]
+[gd_scene load_steps=102 format=3 uid="uid://cdj8g8hh6wurl"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ohfo4"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="2_akx6h"]
@@ -34,23 +34,37 @@
 [ext_resource type="Texture2D" uid="uid://dkxsni0n57ow2" path="res://player/fightbeg/fightbeg5.PNG" id="32_4hddl"]
 [ext_resource type="Texture2D" uid="uid://juo8bc6nvb64" path="res://player/fightthat/fightthat1.PNG" id="33_8x5um"]
 [ext_resource type="Texture2D" uid="uid://dj7pr8fpv6t7k" path="res://player/fightthat/fightthat2.PNG" id="34_3jkl3"]
+[ext_resource type="Texture2D" uid="uid://dfd5332uvsie8" path="res://player/gunbeg/gunbeg1.PNG" id="34_ta5l8"]
 [ext_resource type="Texture2D" uid="uid://cmjbxbwjca6jp" path="res://player/fightthat/fightthat3.PNG" id="35_7ev5b"]
+[ext_resource type="Texture2D" uid="uid://ku4e8qc63dmc" path="res://player/gunbeg/gunbeg2.PNG" id="35_s8lmw"]
+[ext_resource type="Texture2D" uid="uid://dluuf3e1bruys" path="res://player/gunbeg/gunbeg3.PNG" id="36_hs5pl"]
 [ext_resource type="Texture2D" uid="uid://bb4ngdr08p55w" path="res://player/fightthat/fightthat4.PNG" id="36_n4nq4"]
+[ext_resource type="Texture2D" uid="uid://c673g4xjhw1r7" path="res://player/gunbeg/gunbeg4.PNG" id="37_21f66"]
 [ext_resource type="Texture2D" uid="uid://bhrbh5bfn04xq" path="res://player/forward/forward1.PNG" id="37_muqp8"]
 [ext_resource type="Texture2D" uid="uid://dbkyrrxyhngsl" path="res://player/forward/forward2.PNG" id="38_20jrn"]
+[ext_resource type="Texture2D" uid="uid://b5k6cv6jqmgtv" path="res://player/gunbeg/gunbeg5.PNG" id="38_vadh4"]
+[ext_resource type="Texture2D" uid="uid://cnr5aigrxujrr" path="res://player/gun/gun1.PNG" id="39_dtrc7"]
 [ext_resource type="Texture2D" uid="uid://c538auj77juw0" path="res://player/forward/forward3.PNG" id="39_prpev"]
+[ext_resource type="Texture2D" uid="uid://bijvbuytesir" path="res://player/gun/gun2.PNG" id="40_3n76w"]
 [ext_resource type="Texture2D" uid="uid://wequwctjw2da" path="res://player/mesmerized/mesmerized1.PNG" id="40_88chy"]
 [ext_resource type="Texture2D" uid="uid://cpllfmuvxgems" path="res://player/mesmerized/mesmerized2.PNG" id="41_aahe5"]
+[ext_resource type="Texture2D" uid="uid://brcp7mwg15mp6" path="res://player/gun/gun3.PNG" id="41_aylqp"]
 [ext_resource type="Texture2D" uid="uid://b8wqhflwmsr1s" path="res://player/mesmerized/mesmerized3.PNG" id="42_gjdyl"]
+[ext_resource type="Texture2D" uid="uid://drbgvsdw4nxwp" path="res://player/gun/gun4.PNG" id="42_gm207"]
 [ext_resource type="Texture2D" uid="uid://cld4ru5qdd0n5" path="res://player/mesmerizedbeg/mesmerizedbeg1.PNG" id="43_tk84l"]
+[ext_resource type="Texture2D" uid="uid://b8wv2cpmq8axv" path="res://player/gun/gun5.PNG" id="43_vh8i8"]
 [ext_resource type="Texture2D" uid="uid://cl0jo85fviqgj" path="res://player/mesmerizedbeg/mesmerizedbeg3.PNG" id="44_tj2se"]
 [ext_resource type="Texture2D" uid="uid://cl0npj4oy3r2v" path="res://player/mesmerizedbeg/mesmerizzedbeg2.PNG" id="45_w7yuk"]
 [ext_resource type="Texture2D" uid="uid://b6ootfv77ildd" path="res://player/puke/puke1.PNG" id="46_0ooq6"]
 [ext_resource type="Texture2D" uid="uid://chwomnyha5ggm" path="res://player/puke/puke2.PNG" id="47_d77uh"]
+[ext_resource type="Texture2D" uid="uid://buaijdux323fj" path="res://player/gunthat/gunthat1.PNG" id="48_2mfnn"]
 [ext_resource type="Texture2D" uid="uid://darcp6a0fme6o" path="res://player/puke/puke3.PNG" id="48_he8mf"]
+[ext_resource type="Texture2D" uid="uid://chd4c27kr11gt" path="res://player/gunthat/gunthat2.PNG" id="49_850rf"]
 [ext_resource type="Texture2D" uid="uid://bb3qxm3k41yq7" path="res://player/puke/puke4.PNG" id="49_fgncu"]
 [ext_resource type="Texture2D" uid="uid://c0bvasq6pqahv" path="res://player/puke/puke5.PNG" id="50_aryl8"]
+[ext_resource type="Texture2D" uid="uid://cbi8rsvkwhjmw" path="res://player/gunthat/gunthat3.PNG" id="50_uyuas"]
 [ext_resource type="Texture2D" uid="uid://b6ohmp4cv1i2w" path="res://player/pukebeg/pukebeg1.PNG" id="51_43ttl"]
+[ext_resource type="Texture2D" uid="uid://b0c6mxhrm4p6e" path="res://player/gunthat/gunthat4.PNG" id="51_ldjhr"]
 [ext_resource type="Texture2D" uid="uid://bshibitw2i3r6" path="res://player/pukebeg/pukebeg2.PNG" id="52_1gcum"]
 [ext_resource type="Texture2D" uid="uid://bun670mjly8l" path="res://player/pukebeg/pukebeg3.PNG" id="53_uifl3"]
 [ext_resource type="Texture2D" uid="uid://dunw4h3rxhovi" path="res://player/pukebeg/pukebeg4.PNG" id="54_ick48"]
@@ -251,6 +265,46 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("34_ta5l8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_s8lmw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_hs5pl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_21f66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_vadh4")
+}],
+"loop": true,
+"name": &"fightbeggun",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("39_dtrc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_3n76w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_aylqp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_gm207")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_vh8i8")
+}],
+"loop": true,
+"name": &"fightgun",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("33_8x5um")
 }, {
 "duration": 1.0,
@@ -265,6 +319,23 @@ animations = [{
 "loop": true,
 "name": &"fightthat",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("48_2mfnn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_850rf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_uyuas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_ldjhr")
+}],
+"loop": true,
+"name": &"fightthatgun",
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -493,9 +564,9 @@ material = SubResource("ShaderMaterial_2euv4")
 position = Vector2(-25.5, -7)
 scale = Vector2(0.826667, 0.715)
 sprite_frames = SubResource("SpriteFrames_qc2jh")
-animation = &"exhaustedbeg"
+animation = &"fightgun"
 autoplay = "default"
-frame_progress = 0.465698
+frame_progress = 0.599766
 
 [node name="dead" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-335.5, -211.5)

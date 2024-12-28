@@ -1,6 +1,6 @@
 extends Area2D
 
-
+var dead=false
 
 func _ready() -> void:
 	doaniChange()
@@ -8,6 +8,8 @@ func _ready() -> void:
 
 
 func doaniChange():
+	if dead:
+		return
 	if $AnimatedSprite2D.animation=="default":
 		$AnimatedSprite2D.animation="descend"
 		$CollisionShape2D.position.y=377
@@ -21,4 +23,12 @@ func doaniChange():
 
 
 func _on_body_entered(body: Node2D) -> void:
-	body.hit()
+	if dead:
+		return
+	if body.name.find("bullet")>-1:
+		$AnimatedSprite2D.animation="dead"
+		dead=true	
+		body.hit()
+		return
+	if !dead:
+		body.hit()

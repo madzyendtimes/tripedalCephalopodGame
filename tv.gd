@@ -42,8 +42,18 @@ func _on_active_body_entered(body: Node2D) -> void:
 		Flags.tne.addEvent("resisted","level")
 		#Flags.effect="resisted"	
 
+func hit():
+		type="tvhorror"
+		$active/AnimatedSprite2D.animation=type
+		return
+
 
 func _on_active_body_exited(body: Node2D) -> void:
+	if body.name.find("bullet")>-1:
+		hit()
+		body.hit()
+		return
+	
 	if Flags.mesmerized:
 		Flags.mesmerized=false
 		#Flags.effect="normal"

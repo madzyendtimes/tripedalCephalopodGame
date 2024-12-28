@@ -1,0 +1,151 @@
+[gd_scene load_steps=22 format=3 uid="uid://bfsv7rap1wsp8"]
+
+[ext_resource type="Script" path="res://braino.gd" id="1_1ahjy"]
+[ext_resource type="Texture2D" uid="uid://cy7k73ltjbsdw" path="res://enemies/braino/attack1.PNG" id="2_lvf77"]
+[ext_resource type="Texture2D" uid="uid://bc8gwxpw0ryek" path="res://enemies/braino/attack2.PNG" id="3_tb4ei"]
+[ext_resource type="Texture2D" uid="uid://b57co1qsl52b" path="res://enemies/braino/attack3.PNG" id="4_nnttq"]
+[ext_resource type="Texture2D" uid="uid://2g47r8cx7ww8" path="res://enemies/braino/attack4.PNG" id="5_v1cly"]
+[ext_resource type="Texture2D" uid="uid://bmsqq8m5j6h5k" path="res://enemies/braino/attack5.PNG" id="6_8wac6"]
+[ext_resource type="Texture2D" uid="uid://qyp8e0flmq7h" path="res://enemies/braino/attack6.PNG" id="7_e2n1a"]
+[ext_resource type="Texture2D" uid="uid://dm1t48uu0i4hu" path="res://enemies/braino/dazed1.PNG" id="8_7c7vv"]
+[ext_resource type="Texture2D" uid="uid://ck155mvdi486p" path="res://enemies/braino/dazed2.PNG" id="9_502mp"]
+[ext_resource type="Texture2D" uid="uid://brcswey87ysj6" path="res://enemies/braino/dazed3.PNG" id="10_eeraj"]
+[ext_resource type="Texture2D" uid="uid://b5hd31faarwo3" path="res://enemies/braino/dazed4.PNG" id="11_6plp2"]
+[ext_resource type="Texture2D" uid="uid://dtegd15fjpp5" path="res://enemies/braino/dead.PNG" id="12_tnaq8"]
+[ext_resource type="Texture2D" uid="uid://cos25khsq8qkx" path="res://enemies/braino/needle1.PNG" id="13_astoc"]
+[ext_resource type="Texture2D" uid="uid://rgv2fyq8gieu" path="res://enemies/braino/needle2.PNG" id="14_f0brd"]
+[ext_resource type="Texture2D" uid="uid://da0ygp6gyqpj1" path="res://enemies/braino/needle3.PNG" id="15_lo7wu"]
+[ext_resource type="Texture2D" uid="uid://b0k81mwvag8tt" path="res://enemies/braino/needle4.PNG" id="16_akk5v"]
+[ext_resource type="Texture2D" uid="uid://uv4k6wrrjl8f" path="res://enemies/braino/needle5.PNG" id="17_bn0ao"]
+[ext_resource type="Texture2D" uid="uid://sxiegft2o8nb" path="res://enemies/braino/needle6.PNG" id="18_vxn55"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h7uuy"]
+radius = 25.0
+height = 378.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmlib"]
+size = Vector2(91, 376)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uf0wu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lvf77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tb4ei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nnttq")
+}, {
+"duration": 1.4,
+"texture": ExtResource("5_v1cly")
+}, {
+"duration": 1.5,
+"texture": ExtResource("6_8wac6")
+}, {
+"duration": 1.7,
+"texture": ExtResource("7_e2n1a")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_7c7vv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_502mp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_eeraj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6plp2")
+}],
+"loop": true,
+"name": &"dazed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_tnaq8")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_astoc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_f0brd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_lo7wu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_akk5v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_bn0ao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_vxn55")
+}],
+"loop": true,
+"name": &"needle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lvf77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tb4ei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_vxn55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tb4ei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_bn0ao")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="braino" type="Node2D"]
+script = ExtResource("1_1ahjy")
+
+[node name="vulnerable" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 524290
+
+[node name="tounge" type="CollisionShape2D" parent="vulnerable"]
+position = Vector2(17, 50)
+shape = SubResource("CapsuleShape2D_h7uuy")
+
+[node name="hurt" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 524290
+
+[node name="arm" type="CollisionShape2D" parent="hurt"]
+position = Vector2(-83, 32)
+shape = SubResource("RectangleShape2D_pmlib")
+debug_color = Color(0, 0.6, 0.7, 0.805)
+
+[node name="boss" type="AnimatedSprite2D" parent="hurt"]
+position = Vector2(6, -15)
+scale = Vector2(1.03, 1.05)
+sprite_frames = SubResource("SpriteFrames_uf0wu")
+animation = &"attack"
+frame_progress = 0.488944
+
+[connection signal="body_entered" from="vulnerable" to="." method="_on_vulnerable_body_entered"]
+[connection signal="body_entered" from="hurt" to="." method="_on_hurt_body_entered"]

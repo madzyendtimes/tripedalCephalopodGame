@@ -5,23 +5,26 @@ var quest={}
 var who=""
 
 func choose():
-	var num=Flags.flavornpc.npc.size()
-	var choice=Flags.rng.randi_range(0,num-1)
-	if Flags.flavornpc.npc[choice].deployed==false:
-		Flags.flavornpc.npc[choice].deployed=true
-		who=Flags.flavornpc.npc[choice].name
-		$npc.animation=Flags.flavornpc.npc[choice].name
-		$text.animation=Flags.flavornpc.npc[choice].name+"text"
-		$npc.play()
-		if Flags.flavornpc.npc[choice].quest !={}:
-			questable=true
-			quest=Flags.flavornpc.npc[choice].quest
-			
-		if Flags.flavornpc.npc[choice].scale>0:
-			scale.x=Flags.flavornpc.npc[choice].scale
-			scale.y=scale.x
-	else:
+	if Flags.flavornpc.npc.size()<1:
 		candeploy=false
+		return
+	Flags.flavornpc.npc.shuffle()
+	var npc=Flags.flavornpc.npc.pop_back()
+	if npc==null:
+		candeploy=false
+		return
+	who=npc.name
+	$npc.animation=npc.name
+	$text.animation=npc.name+"text"
+	$npc.play()
+	if npc.quest !={}:
+		questable=true
+		quest=npc.quest
+			
+	if npc.scale>0:
+		$npc.scale.y=npc.scale
+	$npc.position.y+=npc.ypos
+	$text.position.y+=npc.ypos
 	
 
 
@@ -32,7 +35,7 @@ func _on_body_entered(body: Node2D) -> void:
 			success=success&&checkrequirements(i.type,i.num)
 		if success:
 			$npc.animation=who+"complete"
-			$text.animation=who+"completedtext"
+			$text.animation=who+"completetext"
 			questable=false
 			Flags.tne.addEvent(quest.reward,"level",true)
 		

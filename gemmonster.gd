@@ -36,20 +36,33 @@ func knockback():
 	pass
 
 func _on_body_entered(body: Node2D) -> void:
+	
+	if body.name.find("bullet")>-1:
+		hit()
+		body.hit()
+		return
 	if Flags.mode=="level":
 		if Flags.hat=="beg":
 			var begsuccess=Flags.beg(101)
 			queue_free()
 			return	
 		if Flags.inFight==true && Flags.playerHits>0:
-				hp=Flags.calchits(hp)
-				if hp<1:
-					Flags.tne.addEvent("addgems","level")
-					#Flags.effect="addgems"
-					queue_free()
-				else:
-					knockback()
+			hit()
 		else:
-				body.hit()
+			body.hit()
+
+
+
+
+func hit():
+	hp=Flags.calchits(hp)
+	if hp<1:
+		Flags.tne.addEvent("addgems","level")
+		#Flags.effect="addgems"
+		queue_free()
+	else:
+		knockback()
+	
+	
 
 		

@@ -146,7 +146,7 @@ position = Vector2(-6.54167, -66.0611)
 scale = Vector2(1.50542, 1.20022)
 sprite_frames = SubResource("SpriteFrames_l5yc2")
 animation = &"g"
-frame_progress = 0.259558
+frame_progress = 0.0681889
 offset = Vector2(0, 25)
 
 [node name="text" type="AnimatedSprite2D" parent="."]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://vm41mkvar7g0"]
+[gd_scene load_steps=13 format=3 uid="uid://vm41mkvar7g0"]
 
 [ext_resource type="Script" path="res://area_2d.gd" id="1_ep7v2"]
 [ext_resource type="Texture2D" uid="uid://c0rx6in5w55bd" path="res://expander/ascended1.PNG" id="2_xby6v"]
+[ext_resource type="Texture2D" uid="uid://c8wuvgiypgkv6" path="res://expander/dead.PNG" id="2_xy2g3"]
 [ext_resource type="Texture2D" uid="uid://dw73t8phk54ij" path="res://expander/ascended2.PNG" id="3_eynlq"]
 [ext_resource type="Texture2D" uid="uid://bgnob6j4geoec" path="res://expander/ascended3.PNG" id="4_oay5x"]
 [ext_resource type="Texture2D" uid="uid://01pxnok3ajte" path="res://expander/ascended4.PNG" id="5_ly2yn"]
@@ -12,6 +13,14 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n3y72"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xy2g3")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_xby6v")
@@ -52,13 +61,13 @@ size = Vector2(67, 269)
 
 [node name="expander" type="Area2D"]
 collision_layer = 1024
-collision_mask = 2
+collision_mask = 524290
 script = ExtResource("1_ep7v2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_n3y72")
+animation = &"dead"
 autoplay = "default"
-frame_progress = 0.931552
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-22, 106)

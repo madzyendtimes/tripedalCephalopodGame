@@ -54,13 +54,16 @@ func flip(bflip):
 	$AnimatedSprite2D.flip_h=bflip
 
 func fight():
-	$AnimatedSprite2D.animation="fight"+Flags.hat
+	$AnimatedSprite2D.animation="fight"+Flags.hat+Flags.fightmode
 	$AnimatedSprite2D.play()
 	$punch.play()
 	if isinoffset:
 		setCollision("fightoffset")
 	else:
 		setCollision("fight")
+	if Flags.fightmode=="gun":
+		Flags.tne.addEvent("shot","level",true)
+
 	
 	
 func warn():

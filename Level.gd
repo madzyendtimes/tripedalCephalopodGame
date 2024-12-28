@@ -22,6 +22,9 @@ var multiScene:PackedScene=load("res://multistage.tscn")
 var gemScene:PackedScene=load("res://gemmonster.tscn")
 var graveScene:PackedScene=load("res://gravestone.tscn")
 var specialnpcScene:PackedScene=load("res://specialnpc.tscn")
+var bulletScene:PackedScene=load("res://bullet.tscn")
+var needleScene:PackedScene=load("res://needle.tscn")
+var bossScene:PackedScene=load("res://braino.tscn")
 var lowshader=preload("res://low.gdshader")
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
@@ -267,7 +270,21 @@ func doEffect(effect):
 		"win":
 			dowin()
 		"gun":
-			pass
+			Flags.fightmode="gun"
+		"shot":
+			var bullet=bulletScene.instantiate()
+			bullet.position.y=Flags.rng.randi_range(450,500)
+			
+			$enemy.add_child(bullet)	
+			bullet.position.x=(($enemy.position.x)*-1)+300
+			bullet.start()
+		"needle":
+			var needy=needleScene.instantiate()
+			$enemy.add_child(needy)
+			var pos=effect.param.pos
+			needy.position.x=(($enemy.position.x)*-1)+800
+			needy.position.y=400
+			needy.start()
 
 
 func exit(isdead=false):
@@ -337,7 +354,7 @@ func warpCB(loc):
 
 
 func dorandaction():
-	var randaction:=Flags.rng.randi_range(0,4)
+	var randaction=Flags.rng.randi_range(0,4)
 	if randaction==0:
 		Flags.dir=-1
 		moveDir(Flags.rng.randi_range(1,75),true,Flags.dir,true)
@@ -692,9 +709,11 @@ func dochances(val):
 	if val<16:
 		createchoice($npcs,specialnpcScene,1400,false,2,400,true)
 		return
-
-		
 	if val<17:
+		createchoice($enemy,bossScene,1400,false,1,300,false)
+		return
+		
+	if val<18:
 		if questDistributed==false:
 			var trash=trashScene.instantiate()
 			trash.position.x=(($interactive.position.x)*-1)+1400
@@ -734,10 +753,10 @@ func dospawns():
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
-			var upchoice=16
+			var upchoice=17
 
 			if $interactive.position.x>-5000 && questDistributed==false:
-				upchoice=17
+				upchoice=18
 			
 			var chance=Flags.rng.randi_range(0,upchoice)
 			var newchance=Flags.rng.randi_range(0,Flags.percentageAgg)

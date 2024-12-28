@@ -117,8 +117,17 @@ func getpackage():
 	freefall=true
 	$AnimatedSprite2D.animation=type+"crashed"
 	
+func hit():
+	#dead=true
+	#implement later
+	pass
+
 
 func _on_body_entered(body: Node2D) -> void:
+	if body.name.find("bullet")>-1:
+		hit()
+		body.hit()
+		return
 	if Flags.hat=="beg":
 		var begsuccess=Flags.beg(begchance)
 		return

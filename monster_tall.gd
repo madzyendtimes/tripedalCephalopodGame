@@ -28,6 +28,11 @@ func recourage():
 func _on_body_entered(body: Node2D) -> void:
 	if dead:
 		return
+	if body.name.find("bullet")>-1:
+		hit()
+		body.hit()
+		return
+
 	if Flags.hat=="beg":
 		var begsuccess=Flags.beg(begchance)
 		return
@@ -38,6 +43,7 @@ func _on_body_entered(body: Node2D) -> void:
 		
 	
 func hit():
+	
 	hp=Flags.calchits(hp)
 	if hp<1:
 		$AnimatedSprite2D.animation="diapertoothdead"

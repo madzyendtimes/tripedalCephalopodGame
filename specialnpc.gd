@@ -9,26 +9,14 @@ var candeploy=true
 #		{"name":"epsilon frank","deployed":false,"code":"e","scene":"jobboard"},
 		#{"name":"gemna","deployed":false,"code":"g","scene":"trader"}
 func choose():
-	var rnd=Flags.rng.randi_range(0,Flags.specialnpc.size()-1)
-	npc=Flags.specialnpc[rnd]
-	if npc.deployed:
-		for i in Flags.specialnpc:
-			if npc.deployed:
-				candeploy=false
-				continue
-			npc=i
-		if npc.deployed:
-			$npc.animation="nothing"
-			$text.animation="nothing"		
-			caninteract=false	
-			noninteractable=true
-			candeploy=false
-			return
-			
-	Flags.specialnpc[rnd].deployed=true
+	if Flags.specialnpc.size()<1:
+		candeploy=false
+		return
+	Flags.specialnpc.shuffle()	
+	npc=Flags.specialnpc.pop_back()
 	mode=npc.scene
 	$npc.animation=npc.code		
-	position.y+=npc.ypos
+	$npc.position.y+=npc.ypos
 	$npc.play()	
 	var kb=""
 	if Flags.controlScheme=="keyboard":

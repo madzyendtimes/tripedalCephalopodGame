@@ -65,7 +65,7 @@ size = Vector2(872, 514.5)
 
 [node name="tv" type="Node2D"]
 light_mask = 128
-visibility_layer = 2
+visibility_layer = 524290
 script = ExtResource("1_r560u")
 
 [node name="active" type="Area2D" parent="."]
