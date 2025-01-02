@@ -29,6 +29,8 @@ var lowshader=preload("res://low.gdshader")
 var plaugeScene:PackedScene=load("res://plaugetester.tscn")
 var gasScene:PackedScene=load("res://vampiregas.tscn")
 var sawScene:PackedScene=load("res://saw.tscn")
+var knifeScene:PackedScene=load("res://knifulator.tscn")
+
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
 var speed=baseSpeed
@@ -780,8 +782,13 @@ func dochances(val):
 		#saw
 		createchoice($enemy,sawScene,1400,false,1,300,false,false)
 		return
-		
 	if val<20:
+		#kinfulator
+		createchoice($enemy,knifeScene,1400,false,1,375,false,false)
+		return
+
+		
+	if val<21:
 		#quest
 		if questDistributed==false:
 			var trash=trashScene.instantiate()
@@ -831,10 +838,10 @@ func dospawns():
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
-			var upchoice=18
+			var upchoice=20
 
 			if $interactive.position.x>-5000 && questDistributed==false:
-				upchoice=19
+				upchoice=21
 			
 			var chance=Flags.rng.randi_range(0,upchoice)
 			var newchance=Flags.rng.randi_range(0,Flags.percentageAgg)

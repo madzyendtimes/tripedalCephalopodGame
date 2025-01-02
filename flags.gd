@@ -154,6 +154,7 @@ var percentageMap=[
 1,#boss
 7,#gas
 10, #saw
+8, #knifulator
 5 #quest
 ]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable

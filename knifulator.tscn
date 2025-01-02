@@ -1,0 +1,95 @@
+[gd_scene load_steps=16 format=3 uid="uid://xxvio62d2i8y"]
+
+[ext_resource type="Script" path="res://knifulator.gd" id="1_gj11l"]
+[ext_resource type="Texture2D" uid="uid://c0q1iryqkq6on" path="res://enemies/knifulator/dead.PNG" id="2_3727t"]
+[ext_resource type="Texture2D" uid="uid://cl2eppocr6mt3" path="res://enemies/knifulator/k1.PNG" id="3_acjex"]
+[ext_resource type="Texture2D" uid="uid://cxq81j2n7tyj" path="res://enemies/knifulator/k2.PNG" id="4_vr12k"]
+[ext_resource type="Texture2D" uid="uid://bokwsxdqkg0f6" path="res://enemies/knifulator/k3.PNG" id="5_4r70d"]
+[ext_resource type="Texture2D" uid="uid://cs4ja8fvl6ljy" path="res://enemies/knifulator/k4.PNG" id="6_f6n2n"]
+[ext_resource type="Texture2D" uid="uid://ckne7aqap200c" path="res://enemies/knifulator/k5.PNG" id="7_xbs5g"]
+[ext_resource type="Texture2D" uid="uid://cwx3348m0bope" path="res://enemies/knifulator/k6.PNG" id="8_w01yr"]
+[ext_resource type="Texture2D" uid="uid://b16eo3i8k07da" path="res://enemies/knifulator/k7.PNG" id="9_6p61a"]
+[ext_resource type="Texture2D" uid="uid://xr1flasdinub" path="res://enemies/knifulator/k8.PNG" id="10_ws6ao"]
+[ext_resource type="Texture2D" uid="uid://c8ev7b637dovp" path="res://enemies/knifulator/k9.PNG" id="11_b8v3w"]
+[ext_resource type="Texture2D" uid="uid://cictqck1pg7vi" path="res://enemies/knifulator/k10.PNG" id="12_pc0l0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_livsf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3727t")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_acjex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_vr12k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4r70d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f6n2n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xbs5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_w01yr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_6p61a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ws6ao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_b8v3w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_pc0l0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_41l44"]
+height = 70.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xwogy"]
+radius = 46.8402
+
+[node name="knifulator" type="Node2D"]
+script = ExtResource("1_gj11l")
+
+[node name="attack" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="attack"]
+sprite_frames = SubResource("SpriteFrames_livsf")
+autoplay = "default"
+frame_progress = 0.415446
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
+position = Vector2(210, -60)
+rotation = 1.46924
+shape = SubResource("CapsuleShape2D_41l44")
+
+[node name="hurt" type="Area2D" parent="."]
+position = Vector2(70, 9)
+collision_layer = 8
+collision_mask = 524290
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurt"]
+position = Vector2(-77, -120)
+shape = SubResource("CircleShape2D_xwogy")
+
+[connection signal="body_entered" from="attack" to="." method="_on_attack_body_entered"]
+[connection signal="body_entered" from="hurt" to="." method="_on_hurt_body_entered"]
