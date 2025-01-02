@@ -14,6 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://cwe6krbyqy8yq" path="res://npc/epsilon frank/reject.PNG" id="12_qyx0e"]
 
 [sub_resource type="FontFile" id="FontFile_0uf1s"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -104,6 +107,9 @@ Label/fonts/font = SubResource("FontFile_0uf1s")
 Label/styles/normal = SubResource("StyleBoxFlat_h01i7")
 
 [sub_resource type="FontFile" id="FontFile_7jwb0"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/64/0/ascent = 0.0
 cache/0/64/0/descent = 0.0
 cache/0/64/0/underline_position = 0.0

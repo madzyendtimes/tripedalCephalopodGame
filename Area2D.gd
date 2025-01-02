@@ -75,3 +75,6 @@ func show_prize():
 func _on_body_entered(body):
 	searchable=true
 	trashable.emit()
+
+func hit():
+	pass

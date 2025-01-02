@@ -6,10 +6,18 @@ var runningaway:=false
 var dir=1
 var hp=1
 var begchance=25
+var speed=.7
 
 func _ready() -> void:
 	$hit.volume_db=Flags.options.fx
 	$die.volume_db=Flags.options.fx
+
+func polarity(canpolarity):
+	if !canpolarity:
+		return
+	$AnimatedSprite2D.flip_h=true
+	dir=-1
+	speed+=3
 
 func _on_body_entered(body):
 	if dead:
@@ -61,4 +69,4 @@ func _process(delta):
 		return
 	
 	if dead==false && Flags.horror==false:
-		position.x-=.7*dir
+		position.x-=speed*dir

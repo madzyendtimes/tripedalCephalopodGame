@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bfsv7rap1wsp8"]
+[gd_scene load_steps=39 format=3 uid="uid://bfsv7rap1wsp8"]
 
 [ext_resource type="Script" path="res://braino.gd" id="1_1ahjy"]
 [ext_resource type="Texture2D" uid="uid://cy7k73ltjbsdw" path="res://enemies/braino/attack1.PNG" id="2_lvf77"]
@@ -12,12 +12,29 @@
 [ext_resource type="Texture2D" uid="uid://brcswey87ysj6" path="res://enemies/braino/dazed3.PNG" id="10_eeraj"]
 [ext_resource type="Texture2D" uid="uid://b5hd31faarwo3" path="res://enemies/braino/dazed4.PNG" id="11_6plp2"]
 [ext_resource type="Texture2D" uid="uid://dtegd15fjpp5" path="res://enemies/braino/dead.PNG" id="12_tnaq8"]
-[ext_resource type="Texture2D" uid="uid://cos25khsq8qkx" path="res://enemies/braino/needle1.PNG" id="13_astoc"]
-[ext_resource type="Texture2D" uid="uid://rgv2fyq8gieu" path="res://enemies/braino/needle2.PNG" id="14_f0brd"]
-[ext_resource type="Texture2D" uid="uid://da0ygp6gyqpj1" path="res://enemies/braino/needle3.PNG" id="15_lo7wu"]
-[ext_resource type="Texture2D" uid="uid://b0k81mwvag8tt" path="res://enemies/braino/needle4.PNG" id="16_akk5v"]
+[ext_resource type="Texture2D" uid="uid://bg4s5d2jl4da1" path="res://enemies/braino/needle/n18.PNG" id="13_jyw5b"]
+[ext_resource type="Texture2D" uid="uid://du40g84u40ck7" path="res://enemies/braino/needle/n19.PNG" id="14_yf7e6"]
+[ext_resource type="Texture2D" uid="uid://chpfp04j2btgq" path="res://enemies/braino/needle/n1.PNG" id="15_gf5yn"]
+[ext_resource type="Texture2D" uid="uid://bludk0mkm5gq" path="res://enemies/braino/needle/n2.PNG" id="16_gr2eq"]
 [ext_resource type="Texture2D" uid="uid://uv4k6wrrjl8f" path="res://enemies/braino/needle5.PNG" id="17_bn0ao"]
+[ext_resource type="Texture2D" uid="uid://dw7vyshvdfrft" path="res://enemies/braino/needle/n3.PNG" id="17_xo22a"]
+[ext_resource type="Texture2D" uid="uid://bvclivnk1ods3" path="res://enemies/braino/needle/n4.PNG" id="18_kmuw6"]
 [ext_resource type="Texture2D" uid="uid://sxiegft2o8nb" path="res://enemies/braino/needle6.PNG" id="18_vxn55"]
+[ext_resource type="Texture2D" uid="uid://bom6erubnctcy" path="res://enemies/braino/needle/n5.PNG" id="19_uny7w"]
+[ext_resource type="Texture2D" uid="uid://bq2hh2ylotpkh" path="res://enemies/braino/needle/n6.PNG" id="20_pydai"]
+[ext_resource type="Texture2D" uid="uid://bw03xp8tv1wpf" path="res://enemies/braino/needle/n7.PNG" id="21_s0fju"]
+[ext_resource type="Texture2D" uid="uid://daq2mydmbjxqr" path="res://enemies/braino/needle/n8.PNG" id="22_6lkpf"]
+[ext_resource type="Texture2D" uid="uid://b54t0cf0dovwy" path="res://enemies/braino/needle/n9.PNG" id="23_f4lwr"]
+[ext_resource type="Texture2D" uid="uid://bhxyi2s0syuym" path="res://enemies/braino/needle/n10.PNG" id="24_ww8bw"]
+[ext_resource type="Texture2D" uid="uid://wd7cxaeegfkl" path="res://enemies/braino/needle/n11.PNG" id="25_m8ead"]
+[ext_resource type="Texture2D" uid="uid://c7gx6xir4ro4e" path="res://enemies/braino/needle/n12.PNG" id="26_c6d6q"]
+[ext_resource type="Texture2D" uid="uid://c5litx4ebayux" path="res://enemies/braino/needle/n13.PNG" id="27_oklrk"]
+[ext_resource type="Texture2D" uid="uid://mqfvl51uaib3" path="res://enemies/braino/needle/n14.PNG" id="28_wri3n"]
+[ext_resource type="Texture2D" uid="uid://dp87hjjpjq7rj" path="res://enemies/braino/needle/n15.PNG" id="29_8x54p"]
+[ext_resource type="Texture2D" uid="uid://bv3w0t2twaw1e" path="res://enemies/braino/needle/n16.PNG" id="30_vyt1i"]
+[ext_resource type="Texture2D" uid="uid://dqclf4licg83n" path="res://enemies/braino/needle/n17.PNG" id="31_8hhir"]
+[ext_resource type="Texture2D" uid="uid://csyx2iwasx7wq" path="res://enemies/braino/walk.PNG" id="33_b0hcp"]
+[ext_resource type="AudioStream" uid="uid://d3pn5ug2japjl" path="res://music/Naked Flat (1).wav" id="35_iqljx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h7uuy"]
 radius = 25.0
@@ -78,22 +95,64 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_astoc")
+"texture": ExtResource("13_jyw5b")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_f0brd")
+"texture": ExtResource("14_yf7e6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_lo7wu")
+"texture": ExtResource("15_gf5yn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_akk5v")
+"texture": ExtResource("16_gr2eq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_bn0ao")
+"texture": ExtResource("17_xo22a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_vxn55")
+"texture": ExtResource("18_kmuw6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_uny7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_pydai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_s0fju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_6lkpf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_f4lwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ww8bw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_m8ead")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_m8ead")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_c6d6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_oklrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_wri3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_8x54p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_vyt1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_8hhir")
 }],
 "loop": true,
 "name": &"needle",
@@ -104,16 +163,22 @@ animations = [{
 "texture": ExtResource("2_lvf77")
 }, {
 "duration": 1.0,
+"texture": ExtResource("33_b0hcp")
+}, {
+"duration": 1.0,
 "texture": ExtResource("3_tb4ei")
 }, {
 "duration": 1.0,
 "texture": ExtResource("18_vxn55")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_tb4ei")
+"texture": ExtResource("33_b0hcp")
 }, {
 "duration": 1.0,
 "texture": ExtResource("17_bn0ao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tb4ei")
 }],
 "loop": true,
 "name": &"walk",
@@ -144,8 +209,12 @@ debug_color = Color(0, 0.6, 0.7, 0.805)
 position = Vector2(6, -15)
 scale = Vector2(1.03, 1.05)
 sprite_frames = SubResource("SpriteFrames_uf0wu")
-animation = &"attack"
-frame_progress = 0.488944
+animation = &"walk"
+frame = 6
+frame_progress = 0.360478
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("35_iqljx")
 
 [connection signal="body_entered" from="vulnerable" to="." method="_on_vulnerable_body_entered"]
 [connection signal="body_entered" from="hurt" to="." method="_on_hurt_body_entered"]

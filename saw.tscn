@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://6taqotu3l4of"]
+
+[ext_resource type="Script" path="res://saw.gd" id="1_enmqw"]
+[ext_resource type="Texture2D" uid="uid://cqsnjc8n02j1j" path="res://enemies/saw/dead.PNG" id="2_pkopw"]
+[ext_resource type="Texture2D" uid="uid://dfiqlxh8j44il" path="res://enemies/saw/saw1.PNG" id="3_hwqar"]
+[ext_resource type="Texture2D" uid="uid://cqxr2206q76ja" path="res://enemies/saw/saw2.PNG" id="4_nfk46"]
+[ext_resource type="Texture2D" uid="uid://cb4voijx0r6se" path="res://enemies/saw/saw3.PNG" id="5_itrlq"]
+[ext_resource type="Texture2D" uid="uid://c03kd2p57q0su" path="res://enemies/saw/saw4.PNG" id="6_knkna"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_njj3c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pkopw")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hwqar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nfk46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_itrlq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_knkna")
+}],
+"loop": true,
+"name": &"default",
+"speed": 11.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hrmvb"]
+radius = 48.0
+height = 112.0
+
+[node name="saw" type="Area2D"]
+collision_layer = 8
+collision_mask = 524290
+script = ExtResource("1_enmqw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_njj3c")
+autoplay = "default"
+frame_progress = 0.449508
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, -16)
+shape = SubResource("CapsuleShape2D_hrmvb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

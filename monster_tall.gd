@@ -42,6 +42,15 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hit()
 		
 	
+
+func polarity(canpolarity):
+	if !canpolarity:
+		return
+	$AnimatedSprite2D.flip_h=true
+	dir=-1
+	speed+=3
+	
+	
 func hit():
 	
 	hp=Flags.calchits(hp)

@@ -146,7 +146,7 @@ position = Vector2(-6.54167, -66.0611)
 scale = Vector2(1.50542, 1.20022)
 sprite_frames = SubResource("SpriteFrames_l5yc2")
 animation = &"g"
-frame_progress = 0.0681889
+frame_progress = 0.841884
 offset = Vector2(0, 25)
 
 [node name="text" type="AnimatedSprite2D" parent="."]
@@ -159,3 +159,4 @@ position = Vector2(-8, 120)
 shape = SubResource("CapsuleShape2D_w66ns")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

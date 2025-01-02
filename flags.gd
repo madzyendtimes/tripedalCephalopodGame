@@ -18,8 +18,8 @@ var flyerScene:PackedScene=load("res://flyer.tscn")
 var multiScene:PackedScene=load("res://multistage.tscn")
 
 
-var options={"controls":"controller","music":100,"fx":100,"randomizeDistribution":false,"seed":{"active":false,"value":"fun"},"startfresh":false,"graphics":"high"}
-var defoptions={"controls":"controller","music":100,"fx":100,"randomizeDistribution":false,"seed":{"active":false,"value":"fun"},"startfresh":false,"graphics":"high"}
+var options={"controls":"controller","music":-10,"fx":-10,"randomizeDistribution":false,"seed":{"active":false,"value":"fun"},"startfresh":false,"graphics":"high"}
+var defoptions={"controls":"controller","music":-10,"fx":-10,"randomizeDistribution":false,"seed":{"active":false,"value":"fun"},"startfresh":false,"graphics":"high"}
 var controlScheme="controller"
 var freshstart=false
 var weather=""
@@ -61,6 +61,8 @@ var baseStats=playerStats
 var bonus:={"stanima":0,"health":0,"power":0,"speed":0,"rizz":0,"smarts":0}
 var playerSearch:=false
 var inSearch:=false
+var inJump:=false
+var inCrouch:=false
 var dir:=1
 var itemMap:=[
 	{"type":"food","varients":[
@@ -135,21 +137,23 @@ var playerHits=1
 var percentageMap=[
 10, #trash
 10, #rock
-10, #groundling
-5, #tv
-10, #expander
-10, #tall monster (diapertooth)
+9, #groundling
+4, #tv
+9, #expander
+9, #tall monster (diapertooth)
 9, #minigame
 5, #weather effects
 5, #fair weather
 5, #flavor npcs
 8,#8, #flying enemy
 7, #multistage enemy
-2, #gemmonster
-1, #hoarde
+3, #gemmonster
+3, #hoarde
 9, #gravestone
-5, #special npc
+10, #special npc
 1,#boss
+7,#gas
+10, #saw
 5 #quest
 ]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable
@@ -158,7 +162,7 @@ var eventQ=[]
 
 
 var rng=RandomNumberGenerator.new()
-##var witchevents=""
+var witchevents=""
 var fightmode=""
 var questDistributed=false
 
@@ -168,6 +172,8 @@ func weatheroff():
 
 
 func reset():
+	inJump=false
+	inCrouch=false
 	percentageAgg=0
 	for i in percentageMap:
 		percentageAgg+=i
@@ -207,6 +213,7 @@ func reset():
 	refreshPlayer()
 	credit=megaStats.credit
 	playerHits=megaStats.power
+	interactablenpc=null
 	
 	
 func calchits(hp):

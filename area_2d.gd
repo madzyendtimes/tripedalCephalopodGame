@@ -22,6 +22,10 @@ func doaniChange():
 			doaniChange()
 
 
+func hit():
+	pass
+
+
 func _on_body_entered(body: Node2D) -> void:
 	if dead:
 		return

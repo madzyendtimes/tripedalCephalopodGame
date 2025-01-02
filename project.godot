@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="land"
+config/version="0.2a"
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -18,6 +19,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 Flags="*res://flags.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [dotnet]
 
@@ -110,4 +115,5 @@ enter={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0.278825, 0.16169, 0.382752, 1)

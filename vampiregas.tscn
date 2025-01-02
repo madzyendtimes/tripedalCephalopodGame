@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6wk6om486pjl"]
+
+[ext_resource type="Script" path="res://vampiregas.gd" id="1_yvslo"]
+[ext_resource type="Texture2D" uid="uid://cfeqp6lyrt0jj" path="res://enemies/missles/vampiregas/gas1.PNG" id="2_qcndo"]
+[ext_resource type="Texture2D" uid="uid://46rhry7obu3l" path="res://enemies/missles/vampiregas/gas2.PNG" id="3_nlek0"]
+[ext_resource type="Texture2D" uid="uid://ei0ydvqbwoyo" path="res://enemies/missles/vampiregas/gas3.PNG" id="4_clbfy"]
+[ext_resource type="Texture2D" uid="uid://bdh317y6c6a71" path="res://enemies/missles/vampiregas/gas4.PNG" id="5_kead1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qfa4e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qcndo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nlek0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_clbfy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kead1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h24xl"]
+radius = 72.0
+height = 336.0
+
+[node name="vampiregas" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_yvslo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qfa4e")
+frame_progress = 0.193197
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-16, 3.05176e-05)
+rotation = -1.56337
+shape = SubResource("CapsuleShape2D_h24xl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

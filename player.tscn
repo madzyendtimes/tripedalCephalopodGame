@@ -1,9 +1,12 @@
-[gd_scene load_steps=102 format=3 uid="uid://cdj8g8hh6wurl"]
+[gd_scene load_steps=111 format=3 uid="uid://cdj8g8hh6wurl"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ohfo4"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="2_akx6h"]
 [ext_resource type="Texture2D" uid="uid://gbvxjs4awv43" path="res://player/deadbeg.PNG" id="3_0k5kv"]
+[ext_resource type="Texture2D" uid="uid://do5nyxgycy7tm" path="res://player/crouch/crouch1.PNG" id="3_vavkh"]
+[ext_resource type="Texture2D" uid="uid://ct2mbwxe2wv2w" path="res://player/crouch/crouch2(1).PNG" id="4_wppyw"]
 [ext_resource type="Texture2D" uid="uid://u7tcp4ltu80v" path="res://player/deadthat.PNG" id="4_ykx58"]
+[ext_resource type="Texture2D" uid="uid://b3n5qjr3jolw3" path="res://player/crouch/crouch2.PNG" id="5_nx3bf"]
 [ext_resource type="Texture2D" uid="uid://d20rivj1yrkr7" path="res://player/fight/walk1.PNG" id="5_ud48w"]
 [ext_resource type="Texture2D" uid="uid://c6flpbdvbw2t3" path="res://player/fight/walk2.PNG" id="6_wnm3d"]
 [ext_resource type="Texture2D" uid="uid://bowtiwa8luaw8" path="res://player/fight/walk3.PNG" id="7_76vjl"]
@@ -94,6 +97,10 @@
 [ext_resource type="Texture2D" uid="uid://dl1jcqtkgjwh3" path="res://items/icons/speed.PNG" id="77_ptf6o"]
 [ext_resource type="Texture2D" uid="uid://b676airl7nrfy" path="res://items/icons/stanima.PNG" id="78_npyn3"]
 [ext_resource type="Texture2D" uid="uid://ctixitctvmitk" path="res://enemies/tv/tv1.PNG" id="79_ihcod"]
+[ext_resource type="Texture2D" uid="uid://gky68pxnlskf" path="res://player/spin/spin1.PNG" id="88_obph2"]
+[ext_resource type="Texture2D" uid="uid://dq7phu1rmfkrk" path="res://player/spin/spin2.PNG" id="89_t3t87"]
+[ext_resource type="Texture2D" uid="uid://dk13q141f3gdi" path="res://player/spin/spin3.PNG" id="90_ac7e2"]
+[ext_resource type="Texture2D" uid="uid://la8ksontl5kw" path="res://player/spin/spin4.PNG" id="91_hrtvu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2uxv"]
 radius = 48.0
@@ -115,6 +122,20 @@ shader_parameter/lowgraphic = false
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qc2jh"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vavkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wppyw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nx3bf")
+}],
+"loop": true,
+"name": &"crouch",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_akx6h")
@@ -480,6 +501,23 @@ animations = [{
 "loop": true,
 "name": &"searchthat",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("90_ac7e2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_hrtvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_obph2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_t3t87")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 9.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gqrl6"]
@@ -536,6 +574,14 @@ animations = [{
 [sub_resource type="Theme" id="Theme_j4j25"]
 default_font_size = 36
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0mhpg"]
+radius = 32.0
+height = 208.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3j8qe"]
+radius = 40.1758
+height = 232.55
+
 [node name="player" type="CharacterBody2D"]
 position = Vector2(671, 423)
 scale = Vector2(2, 2)
@@ -564,9 +610,9 @@ material = SubResource("ShaderMaterial_2euv4")
 position = Vector2(-25.5, -7)
 scale = Vector2(0.826667, 0.715)
 sprite_frames = SubResource("SpriteFrames_qc2jh")
-animation = &"fightgun"
+animation = &"spin"
 autoplay = "default"
-frame_progress = 0.599766
+frame_progress = 0.998027
 
 [node name="dead" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-335.5, -211.5)
@@ -603,3 +649,15 @@ offset_right = 536.0
 offset_bottom = 191.0
 theme = SubResource("Theme_j4j25")
 text = "RESISTED"
+
+[node name="crouch" type="CollisionShape2D" parent="."]
+position = Vector2(-19.5, 52.5)
+rotation = 1.52022
+shape = SubResource("CapsuleShape2D_0mhpg")
+disabled = true
+
+[node name="spin" type="CollisionShape2D" parent="."]
+position = Vector2(-31.5, -35.5)
+rotation = 1.50549
+shape = SubResource("CapsuleShape2D_3j8qe")
+disabled = true

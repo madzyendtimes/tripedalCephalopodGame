@@ -16,7 +16,8 @@ func _process(delta: float) -> void:
 
 		$AnimatedSprite2D.animation="aftermath"
 
-
+func hit():
+	pass
 
 func _on_body_entered(body: Node2D) -> void:
 	if !flat:

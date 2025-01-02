@@ -8,9 +8,12 @@ var loaded=true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$music.volume_db=Flags.options.music
 	$hurt/boss.animation="attack"
 	$hurt/boss.play()
 	change()
+	$music.play()
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,10 +39,32 @@ func _process(delta: float) -> void:
 		$hurt/arm.position.x=-100
 		$hurt/arm.position.y=-300
 	if $hurt/boss.animation=="needle":
-		
 		$hurt/arm.position.x=-100
-		$hurt/arm.position.y=20
-		if $hurt/boss.frame==5 && lastframe!=5:
+		match $hurt/boss.frame:
+			0:
+				$hurt/arm.position.y=-200
+			2:
+				$hurt/arm.position.y=-300
+			3:
+				$hurt/arm.position.y=-500
+			4:
+				$hurt/arm.position.y=-500
+			5:
+				$hurt/arm.position.y=-500
+			6:
+				$hurt/arm.position.y=-300
+			7:
+				$hurt/arm.position.y=-300
+			8:
+				$hurt/arm.position.y=-300
+			9:
+				$hurt/arm.position.y=-200
+			10:
+				$hurt/arm.position.y=-200
+			_:
+				$hurt/arm.position.y=20		
+
+		if $hurt/boss.frame==16 && lastframe!=16:
 			if loaded:
 				loaded=false
 				Flags.tne.addEvent("needle","level",false,{"pos":position.x})
@@ -56,11 +81,15 @@ func loadneedle():
 	loaded=true
 
 func hit():
-	hp-=1
+	if dead:
+		return
+	hp=Flags.calchits(hp)
 	if hp<1:
 		$hurt/boss.animation="dead"
 		dead=true
+		Flags.tne.addEvent("bosskill","level")
 		Flags.tne.killTimer("change"+str(get_instance_id()),"level")
+		$music.stop()
 		return
 	$hurt/boss.animation="dazed"
 	

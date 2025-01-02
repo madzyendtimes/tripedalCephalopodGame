@@ -14,6 +14,14 @@ func _process(delta: float) -> void:
 	if (!dead)&& Flags.horror==false:
 		position.x-=speed*dir
 
+
+func polarity(canpolarity):
+	if !canpolarity:
+		return
+	$AnimatedSprite2D.flip_h=true
+	dir=-1
+	speed+=3
+
 func runaway():
 	if runningaway==false:
 		runningaway=true

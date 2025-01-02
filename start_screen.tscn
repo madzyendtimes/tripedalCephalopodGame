@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cnh3vntu44grh" path="res://music/Single Base.wav" id="2_f22xb"]
 [ext_resource type="Texture2D" uid="uid://dp75waqmd0mss" path="res://screen/titleclean.PNG" id="2_wqcsn"]
 [ext_resource type="Texture2D" uid="uid://bmayb6btgscc2" path="res://screen/loading/load1.PNG" id="3_74whf"]
-[ext_resource type="Texture2D" uid="uid://c3s5dv48juvup" path="res://screen/completed.PNG" id="3_p7bne"]
+[ext_resource type="Texture2D" uid="uid://c1irpbmdq3cvv" path="res://screen/completedclean.PNG" id="3_vocna"]
 [ext_resource type="Texture2D" uid="uid://dffiaracpfpqj" path="res://screen/loading/load2.PNG" id="4_dfguy"]
 [ext_resource type="Texture2D" uid="uid://bma7xyio1pdud" path="res://screen/loading/load3.PNG" id="5_e8m0s"]
 [ext_resource type="Theme" uid="uid://cyftuw3dg8645" path="res://new_theme.tres" id="5_sj1vq"]
@@ -29,7 +29,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_p7bne")
+"texture": ExtResource("3_vocna")
 }],
 "loop": false,
 "name": &"win",
@@ -87,7 +87,7 @@ z_index = -1
 position = Vector2(601.625, 317)
 scale = Vector2(0.623568, 0.6)
 sprite_frames = SubResource("SpriteFrames_yaxfw")
-animation = &"title"
+animation = &"win"
 autoplay = "title"
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Title"]

@@ -30,10 +30,11 @@ func _on_body_entered(body: Node2D) -> void:
 	Flags.interactablenpc=self
 
 func _on_body_exited(body: Node2D) -> void:
+	Flags.interactablenpc=null
 	if noninteractable:
 		return	
 	caninteract=false
-	Flags.interactablenpc=null
+
 
 
 func complete():

@@ -26,6 +26,9 @@ var bulletScene:PackedScene=load("res://bullet.tscn")
 var needleScene:PackedScene=load("res://needle.tscn")
 var bossScene:PackedScene=load("res://braino.tscn")
 var lowshader=preload("res://low.gdshader")
+var plaugeScene:PackedScene=load("res://plaugetester.tscn")
+var gasScene:PackedScene=load("res://vampiregas.tscn")
+var sawScene:PackedScene=load("res://saw.tscn")
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
 var speed=baseSpeed
@@ -43,6 +46,7 @@ var dangerZone
 var canrandom=true
 #var randopercents=false
 var newsave=false
+var bossZone=0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Flags.mode="level"
@@ -92,7 +96,7 @@ func _ready():
 	var welcome=welcomeScene.instantiate()
 	$locationfront.add_child(welcome)
 	welcome.position=Vector2(min(301+(301*.6189),301*3)*100,400)
-
+	bossZone=welcome.position.x-4000
 	dangerZone={"less":4114,"more":welcome.position.x-3000}
 	statScene=$stats
 	oldmod = $player.modulate
@@ -282,10 +286,23 @@ func doEffect(effect):
 			var needy=needleScene.instantiate()
 			$enemy.add_child(needy)
 			var pos=effect.param.pos
-			needy.position.x=(($enemy.position.x)*-1)+800
-			needy.position.y=400
+			needy.position.x=effect.param.pos
+			needy.position.y=400+Flags.rng.randi_range(-20,20)
 			needy.start()
-
+		"bosskill":
+			$AudioStreamPlayer.play()
+			var g=Flags.rng.randi_range(50,100)+(Flags.playerStats.rizz*10)
+			Flags.megaStats.gems+=g
+			$player.stat("+","gem",g)
+			Flags.save()
+		"gas":
+			var gas=gasScene.instantiate()
+			$enemy.add_child(gas)
+			gas.position.y=400+Flags.rng.randi_range(-50,50)
+			gas.position.x=((effect.param.pos))+Flags.rng.randi_range(-100,100)
+		"shrinkgas":
+			$player.scale.y=maxf($player.scale.y-.05,.10)
+			$player.scale.x=maxf($player.scale.x-.05,.10)
 
 func exit(isdead=false):
 	$Camera2D.make_current()			
@@ -410,7 +427,12 @@ func _process(delta):
 		return
 	if Flags.controlled==true && canrandom==true:
 		dorandaction()		
-		
+	
+	if Input.is_action_just_released("down"):
+		Flags.inCrouch=false
+		$player.uncrouch()
+		$player.walkani()
+	
 	if Input.is_action_just_released("run"):
 		stopRun()
 	var ce=Flags.tne.consumeEvent("level")
@@ -445,7 +467,10 @@ func _process(delta):
 			stop_fight()
 		return
 	
-	
+	if Input.is_action_pressed("down") && canJump:
+		if !Flags.inCrouch:
+			Flags.inCrouch=true
+			$player.crouch()
 	
 	if Input.is_action_pressed("right"):
 		Flags.dir=-1
@@ -469,9 +494,10 @@ func _process(delta):
 		return
 
 		
-	if Input.is_action_just_pressed("fight")&& canJump==true && !Flags.inFight:
-		Flags.playerHits=Flags.playerStats.power
-		canJump=false
+#	if Input.is_action_just_pressed("fight")&& (canJump==true && !Flags.inFight:
+	if Input.is_action_just_pressed("fight"):
+		Flags.inCrouch=false
+		Flags.playerHits=Flags.playerStats.power		
 		Flags.inFight=true
 		$player.fight()
 		var tween = get_tree().create_tween()
@@ -482,7 +508,9 @@ func _process(delta):
 
 			
 	if Input.is_action_just_pressed("jump") && canJump==true:
+		Flags.inCrouch=false
 		canJump=false
+		Flags.inJump=true
 		currSpeed=speed
 		speed+=5
 		var tween = get_tree().create_tween()
@@ -493,6 +521,7 @@ func _process(delta):
 		tween.tween_callback(reset_player)
 		
 	if Input.is_action_just_pressed("search") && canJump==true:
+		Flags.inCrouch=false
 		if Flags.interactablenpc!=null:
 			interact()
 			return
@@ -503,6 +532,7 @@ func _process(delta):
 		stanimaAction=true
 
 	if Input.is_action_just_pressed("enter") && Flags.entered.ready==true:
+		Flags.inCrouch=false
 		if Flags.entered.building.allreadyentered==false:
 			$player.enter()
 			Flags.entered.active=true
@@ -515,7 +545,7 @@ func _process(delta):
 			tween.parallel().tween_property($player,"scale",Vector2(0.4,0.4),1.5)
 			tween.parallel().tween_property($player,"position",Vector2($player.position.x,350),1.5)
 			tween.tween_callback(entered)		
-
+	
 
 	
 
@@ -609,6 +639,7 @@ func stop_fight():
 		stopRun()
 			
 func reset_player():
+	Flags.inJump=false
 	speed=currSpeed
 	if get_tree()!=null:
 		var tween = get_tree().create_tween()
@@ -616,8 +647,9 @@ func reset_player():
 		tween.tween_callback(reset_flags)
 
 func reset_flags():
-		canJump=true
-
+	Flags.inJump=false
+	canJump=true
+	Flags.inCrouch=false
 
 func get_bg_texture(type):
 	if type>types.size()-1:
@@ -636,7 +668,7 @@ func get_bg_texture(type):
 
 
 
-func createchoice(holder,scn,pos,brandflip,setani,ypos,deploycheck):
+func createchoice(holder,scn,pos,brandflip,setani,ypos,deploycheck,fromleft):
 		var spwn=scn.instantiate()
 
 		if brandflip:
@@ -649,71 +681,108 @@ func createchoice(holder,scn,pos,brandflip,setani,ypos,deploycheck):
 			return
 		if spwn==null:
 			return
+		if fromleft:
+			var bleft=randbool()
+			if bleft:
+				spwn.position.x=((holder.position.x)*-1)-pos
+				spwn.polarity(bleft)			
+			else:
+				spwn.position.x=((holder.position.x)*-1)+pos		
+		else:
+			spwn.position.x=((holder.position.x)*-1)+pos		
 		holder.add_child(spwn)	
-		spwn.position.x=((holder.position.x)*-1)+pos
+		
 
 var spawnulator:=[
 
 ]
 
-			
+func randbool():
+	return Flags.rng.randi_range(0,1)==1
 
 
 func dochances(val):
+	#trash
 	if val<1:
-		createchoice($interactive,trashScene,1400,false,1,0,false)
+		createchoice($interactive,trashScene,1400,false,1,0,false,false)
 		return
 	if val<2:
-		createchoice($rocks,rockScene,1400,true,3,0,false)
+		#rock
+		createchoice($rocks,rockScene,1400,true,3,0,false,false)
 		return
 	if val<3:
-		createchoice($enemy,enemyScene,1400,false,1,500,false)
+		#groundling
+		createchoice($enemy,enemyScene,1400,false,1,500,false, true)
 		return
 	if val<4:
-		createchoice($interactive,tvScene,1400,false,1,0,false)
+		#tv
+		createchoice($interactive,tvScene,1400,false,1,0,false,false)
 		return
 	if val<5:
-		createchoice($enemy,expanderScene,1400,false,1,350,false)
+		#expander
+		createchoice($enemy,expanderScene,1400,false,1,350,false,false)
 		return
 	if val<6:
-		createchoice($enemy,tallmScene,1400,false,1,450,false)
+		 #tall monster (diapertooth)
+		createchoice($enemy,tallmScene,1400,false,1,450,false,true)
 		return
 	if val<7:
-		createchoice($locationback,enterScene,1400,false,1,196,false)
+		 #minigame
+		createchoice($locationback,enterScene,1400,false,1,196,false,false)
 		return
 	if val<8:
+		 #weather effects
 		$weather.changeweather()
 		$weather.position.y=-800
 		return	
 	if val<9:
+		#fair weather
 		weatheroff()
 		return
 	if val<10:
-		createchoice($npcs,flavorScene,1400,false,3,0,true)
+		#flavor npcs
+		createchoice($npcs,flavorScene,1400,false,3,0,true,false)
 		return
 	if val<11:
-		createchoice($enemy,flyerScene,1400,false,1,0,false)
+		#flying enemy
+		createchoice($enemy,flyerScene,1400,false,1,0,false,false)
 		return
 	if val<12:
-		createchoice($enemy,multiScene,1400,false,1,400,false)
+		#multistage enemy
+		createchoice($enemy,multiScene,1400,false,1,400,false,true)
 		return
 	if val<13:
-		createchoice($enemy,gemScene,1400,false,1,400,false)
+		#gemmonster
+		createchoice($enemy,gemScene,1400,false,1,400,false,true)
 		return
 	if val<14:
+		#hoarde
 		dohoarde()
 		return
 	if val<15:
-		createchoice($enemy,graveScene,1400,false,1,400,false)
+		#gravestone
+		createchoice($enemy,graveScene,1400,false,1,400,false,false)
 		return
 	if val<16:
-		createchoice($npcs,specialnpcScene,1400,false,2,400,true)
+		 #special npc
+		createchoice($npcs,specialnpcScene,1400,false,2,400,true,false)
 		return
 	if val<17:
-		createchoice($enemy,bossScene,1400,false,1,300,false)
+		#boss
+		createchoice($enemy,bossScene,1400,false,1,300,false,false)
+		return
+
+	if val<18:
+		 #plaugetester
+		createchoice($enemy,plaugeScene,1400,false,1,400,false,true)
+		return
+	if val<19:
+		#saw
+		createchoice($enemy,sawScene,1400,false,1,300,false,false)
 		return
 		
-	if val<18:
+	if val<20:
+		#quest
 		if questDistributed==false:
 			var trash=trashScene.instantiate()
 			trash.position.x=(($interactive.position.x)*-1)+1400
@@ -727,14 +796,14 @@ var monsters=[
 	{"scene":tallmScene,"height":450},
 	{"scene":flyerScene,"height":0},
 	{"scene":multiScene,"height":400},
-	{"scene":gemScene,"height":400}
-	
+	{"scene":gemScene,"height":400},
+	{"scene":plaugeScene,"height":400}	
 	]
 
 
 func createrandommonster():
 	var mob=Flags.rng.randi_range(0,monsters.size()-1)
-	createchoice($enemy,monsters[mob].scene,1400,false,1,monsters[mob].height,false)
+	createchoice($enemy,monsters[mob].scene,1400,false,1,monsters[mob].height,false,true)
 
 
 
@@ -749,14 +818,23 @@ func dospawns():
 		
 		Flags.tne.dotime(self,[dospawns],3.0,"spawns",true,"level")
 		return
+	#print("bosszone ",bossZone," - current: ",$locationfront.position.x)
+	if $locationfront.position.x<(bossZone*-1):
+		
+		createchoice($locationfront,bossScene,1400,false,1,300,false,false)
+		Flags.tne.killTimer("spawns","level")
+		$AudioStreamPlayer.stop()
+		return
+		
+		
 		
 	if (dangerZone.less*-1>$enemy.position.x):
 		if (dangerZone.more*-1<$enemy.position.x):
 			
-			var upchoice=17
+			var upchoice=18
 
 			if $interactive.position.x>-5000 && questDistributed==false:
-				upchoice=18
+				upchoice=19
 			
 			var chance=Flags.rng.randi_range(0,upchoice)
 			var newchance=Flags.rng.randi_range(0,Flags.percentageAgg)
@@ -771,17 +849,16 @@ func dospawns():
 					break
 				count+=1									
 	
-			var nextSpawn=Flags.rng.randf_range(3.5,7.0)
+			var nextSpawn=Flags.rng.randf_range(2.5,5.0)
 			
 			Flags.tne.dotime(self,[dospawns],nextSpawn,"spawns",true,"level")
 			
 			return
 			
-			#chance=11 #force spawns here
 
 	
 	Flags.tne.dotime(self,[dospawns],3.0,"spawns",true,"level")
-	#move to own generator
+
 func changeweather():
 	$weather.changeweatherforce()
 	$weather.position.y=-800

@@ -39,6 +39,8 @@ func _process(delta: float) -> void:
 		position.x=clamp(-600,600,position.x+speed*xdir)
 		position.y=clamp(-10,+750,position.y+speed*ydir)
 	
+func hit():
+	pass
 
 func changedir():
 	xdir=Flags.rng.randi_range(-1,1)

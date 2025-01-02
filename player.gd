@@ -7,11 +7,15 @@ var isinoffset=false
 var oldmod
 var oldy
 var inHit:=false
+var crouched=false
+
 var colcollect=[
 	{"name":"fight","offset":false,"flip":false,"scene":$fight},
 	{"name":"fightoffset","offset":true,"flip":false,"scene":$fightoffset},
 	{"name":"offset","offset":true,"flip":false,"scene":$offset},
-	{"name":"normal","offset":false,"flip":false,"scene":$normal}
+	{"name":"normal","offset":false,"flip":false,"scene":$normal},
+	{"name":"crouch","offset":false,"flip":false,"scene":$normal},
+	{"name":"spin","offset":false,"flip":false,"scene":$normal}
 ]
 
 
@@ -42,6 +46,9 @@ func _process(delta):
 
 func dooffset(boff):
 	isinoffset=boff
+	if Flags.inCrouch:
+		return
+	isinoffset=boff
 	if boff:
 		$AnimatedSprite2D.offset=Vector2(-100,0)
 		#setCollision("offset")
@@ -50,10 +57,30 @@ func dooffset(boff):
 		$AnimatedSprite2D.offset=Vector2(0,0)
 		#setCollision("normal")
 
+func spin():
+	$AnimatedSprite2D.animation="spin"
+	setCollision("spin")
+
+func unspin():
+	revert()
+
+func uncrouch():
+	Flags.inCrouch=false
+	crouched=false
+	revert()
+
+func crouch():
+	$AnimatedSprite2D.animation="crouch"
+	setCollision("crouch")
+	crouched=true
+
 func flip(bflip):
 	$AnimatedSprite2D.flip_h=bflip
 
 func fight():
+	if Flags.inJump:
+		spin()
+		return
 	$AnimatedSprite2D.animation="fight"+Flags.hat+Flags.fightmode
 	$AnimatedSprite2D.play()
 	$punch.play()
@@ -78,6 +105,7 @@ func unwarn():
 
 func revert():
 	setCollision("normal")
+	Flags.inCrouch=false
 	walkani()
 
 func resisted():
@@ -169,9 +197,15 @@ func enter():
 	
 func walkani():
 
+
 	if Flags.playerDead:
 		$AnimatedSprite2D.animation="dead"+Flags.hat
 		return
+
+	if Flags.inCrouch:
+		crouch()
+		return
+
 
 	if Flags.mesmerized==true:
 		

@@ -17,12 +17,17 @@ func _process(delta: float) -> void:
 
 
 
-
+func polarity(canpolarity):
+	if !canpolarity:
+		return
+	$AnimatedSprite2D.flip_h
+	dir=-1
+	speed+=4
+	$AnimatedSprite2D.flip_h=true
 func runaway():
 	if runningaway==false:
 		runningaway=true
 		dir=dir*-1
-		
 		Flags.tne.dotime(self,[recourage],3.0,"recourage"+str(self.get_instance_id()),true,"level")
 		
 		$AnimatedSprite2D.flip_h=true

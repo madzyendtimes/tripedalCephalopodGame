@@ -12,6 +12,8 @@ func _process(delta: float) -> void:
 	if active:
 		position.x=position.x-speed
 
+func hit():
+	pass
 
 func kill():
 	active=false
