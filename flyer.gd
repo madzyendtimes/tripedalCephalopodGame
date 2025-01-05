@@ -123,7 +123,8 @@ func changedirection():
 
 	Flags.tne.dotime(self,[changedirection],nxtchange,"changedirection"+str(self.get_instance_id()),true,"level")
 	
-
+func polarity(bleft):
+	return
 
 func runaway():
 	if runningaway==false:
@@ -165,7 +166,7 @@ func hit():
 func _on_body_entered(body: Node2D) -> void:
 	if dead==true || freefall==true:
 		return
-	if body.name.find("bullet")>-1:
+	if body.name.find("bullet")>-1||body.name.find("laser")>-1:
 		hit()
 		body.hit()
 		return

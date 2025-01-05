@@ -1,0 +1,181 @@
+[gd_scene load_steps=32 format=3 uid="uid://rts3a3drt7ql"]
+
+[ext_resource type="Script" path="res://playership.gd" id="1_jjcto"]
+[ext_resource type="Texture2D" uid="uid://drredbwdvxpxa" path="res://space/ships/trips/damage/d3/IMG_6614.PNG" id="2_2l6tp"]
+[ext_resource type="Texture2D" uid="uid://bkfi3nqjflba" path="res://space/ships/trips/IMG_6567.PNG" id="2_nibyu"]
+[ext_resource type="Texture2D" uid="uid://211qt8okh2u6" path="res://space/ships/trips/damage/d3/IMG_6618.PNG" id="3_0w7mq"]
+[ext_resource type="Texture2D" uid="uid://dum3ips4s64ve" path="res://space/ships/trips/IMG_6568.PNG" id="3_xy8dd"]
+[ext_resource type="Texture2D" uid="uid://br05vd01gnkr7" path="res://space/ships/trips/damage/d3/IMG_6622.PNG" id="4_4bwtp"]
+[ext_resource type="Texture2D" uid="uid://c81cg4uciml30" path="res://space/ships/trips/IMG_6569.PNG" id="4_sif3q"]
+[ext_resource type="Texture2D" uid="uid://v81r511mkitk" path="res://space/ships/trips/IMG_6570.PNG" id="5_ow3h3"]
+[ext_resource type="Texture2D" uid="uid://b1bnldlnudvjl" path="res://space/ships/trips/damage/d3/IMG_6626.PNG" id="5_u271u"]
+[ext_resource type="Texture2D" uid="uid://bexu8h1281c60" path="res://space/ships/trips/damage/d3/IMG_6630.PNG" id="6_a62sr"]
+[ext_resource type="Texture2D" uid="uid://cy4b01ux5i5r7" path="res://space/ships/trips/IMG_6571.PNG" id="6_fe2sw"]
+[ext_resource type="Texture2D" uid="uid://dgd216d5h8ntb" path="res://space/ships/trips/IMG_6572.PNG" id="7_hfpdn"]
+[ext_resource type="Texture2D" uid="uid://nbcb6klnkuhe" path="res://space/ships/trips/damage/d3/IMG_6634.PNG" id="7_yeibn"]
+[ext_resource type="Texture2D" uid="uid://bg42gpwouecpm" path="res://space/ships/trips/damage/d2/IMG_6613.PNG" id="8_avmb0"]
+[ext_resource type="Texture2D" uid="uid://d7k4acgy6sl3" path="res://space/ships/trips/damage/d2/IMG_6617.PNG" id="9_yfyj5"]
+[ext_resource type="Texture2D" uid="uid://dniptl76a3hm3" path="res://space/ships/trips/damage/d2/IMG_6621.PNG" id="10_lc2ga"]
+[ext_resource type="Texture2D" uid="uid://dt2h8ufeuudfx" path="res://space/ships/trips/damage/d2/IMG_6625.PNG" id="11_5814d"]
+[ext_resource type="Texture2D" uid="uid://debxqje03n2n0" path="res://space/ships/trips/damage/d2/IMG_6629.PNG" id="12_0mhpd"]
+[ext_resource type="Texture2D" uid="uid://b6slyokmt7vjs" path="res://space/ships/trips/damage/d2/IMG_6633.PNG" id="13_hbdh3"]
+[ext_resource type="Texture2D" uid="uid://cvp3o1gfyguk0" path="res://space/ships/trips/damage/d1/IMG_6612.PNG" id="14_5em4p"]
+[ext_resource type="Texture2D" uid="uid://bqeu24g0gg2jn" path="res://space/ships/trips/damage/d1/IMG_6616.PNG" id="15_udsmb"]
+[ext_resource type="Texture2D" uid="uid://c82fbbofab4jl" path="res://space/ships/trips/damage/d1/IMG_6620.PNG" id="16_yrx3p"]
+[ext_resource type="Texture2D" uid="uid://dnfi7nutqph10" path="res://space/ships/trips/damage/d1/IMG_6624.PNG" id="17_wy1av"]
+[ext_resource type="Texture2D" uid="uid://cb48tsf586xxg" path="res://space/ships/trips/damage/d1/IMG_6628.PNG" id="18_s3po2"]
+[ext_resource type="Texture2D" uid="uid://cuwe67b1ajskt" path="res://space/ships/trips/damage/d1/IMG_6632.PNG" id="19_47su0"]
+[ext_resource type="Texture2D" uid="uid://blkqb3cqavfs4" path="res://items/fancy/fancy2.PNG" id="26_yq7we"]
+[ext_resource type="Texture2D" uid="uid://c4tmddighkeex" path="res://items/icons/health.PNG" id="27_6rpf8"]
+[ext_resource type="AudioStream" uid="uid://djdm82hlnul4y" path="res://space/sounds/playerhit.wav" id="28_y5vql"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_07nyr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2l6tp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0w7mq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4bwtp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_u271u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_a62sr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yeibn")
+}],
+"loop": true,
+"name": &"d1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_avmb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yfyj5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lc2ga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_5814d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0mhpd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_hbdh3")
+}],
+"loop": true,
+"name": &"d2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_5em4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_udsmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yrx3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_wy1av")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_s3po2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_47su0")
+}],
+"loop": true,
+"name": &"d3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_nibyu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xy8dd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sif3q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ow3h3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fe2sw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hfpdn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0x54j"]
+radius = 97.7394
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_13rfv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_yq7we")
+}],
+"loop": true,
+"name": &"gem",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_6rpf8")
+}],
+"loop": true,
+"name": &"health",
+"speed": 5.0
+}]
+
+[node name="playership" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_jjcto")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_07nyr")
+animation = &"d1"
+autoplay = "default"
+frame_progress = 0.19704
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0x54j")
+
+[node name="status" type="Node2D" parent="."]
+visible = false
+
+[node name="stat" type="AnimatedSprite2D" parent="status"]
+position = Vector2(60, -110)
+scale = Vector2(0.763333, 0.486667)
+sprite_frames = SubResource("SpriteFrames_13rfv")
+animation = &"gem"
+
+[node name="stattext" type="Label" parent="status"]
+offset_left = -71.0
+offset_top = -168.0
+offset_right = -31.0
+offset_bottom = -95.0
+theme_override_font_sizes/font_size = 53
+text = "+00"
+
+[node name="playerhit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("28_y5vql")
+volume_db = 24.0

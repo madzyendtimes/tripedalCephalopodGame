@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=3 uid="uid://bca5qkb3tq7ki"]
+
+[ext_resource type="Script" path="res://tb_5000.gd" id="1_lwigf"]
+[ext_resource type="Texture2D" uid="uid://thamlae28mcg" path="res://space/ships/tb5000/dead/IMG_6606.PNG" id="2_71you"]
+[ext_resource type="Texture2D" uid="uid://d2il85ibtag3k" path="res://space/ships/tb5000/dead/IMG_6607.PNG" id="3_76s7l"]
+[ext_resource type="Texture2D" uid="uid://bxrpcw8ausxvo" path="res://space/ships/tb5000/dead/IMG_6608.PNG" id="4_oiffs"]
+[ext_resource type="Texture2D" uid="uid://dt18fui4gby24" path="res://space/ships/tb5000/dead/IMG_6609.PNG" id="5_ob7i7"]
+[ext_resource type="Texture2D" uid="uid://cn0hwdjb3efg8" path="res://space/ships/tb5000/IMG_6603.PNG" id="6_xq38m"]
+[ext_resource type="Texture2D" uid="uid://djk2wmlbaiof8" path="res://space/ships/tb5000/IMG_6604.PNG" id="7_mnyy8"]
+[ext_resource type="Texture2D" uid="uid://rsdwg5883d8y" path="res://space/ships/tb5000/IMG_6605.PNG" id="8_2e6wr"]
+[ext_resource type="AudioStream" uid="uid://cf4a0ld1ervyt" path="res://space/sounds/splode.wav" id="9_h0p57"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yp38p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_71you")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_76s7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oiffs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ob7i7")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_xq38m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_mnyy8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2e6wr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7dfq"]
+radius = 119.424
+height = 238.847
+
+[node name="tb5000" type="Area2D"]
+collision_mask = 10
+script = ExtResource("1_lwigf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yp38p")
+autoplay = "default"
+frame_progress = 0.728415
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-14, -56)
+rotation = 1.54931
+shape = SubResource("CapsuleShape2D_p7dfq")
+
+[node name="splode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_h0p57")
+volume_db = 24.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

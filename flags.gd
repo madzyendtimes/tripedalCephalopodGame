@@ -152,27 +152,43 @@ var percentageMap=[
 9, #gravestone
 10, #special npc
 1,#boss
-7,#gas
+500,#gas
 10, #saw
 8, #knifulator
+500,#ufo
 5 #quest
 ]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable
 var percentageAgg=100
 var eventQ=[]
-
-
+var spinned=false
+var confused=false
+var special=""
 var rng=RandomNumberGenerator.new()
 var witchevents=""
 var fightmode=""
 var questDistributed=false
-
+var vehicle=null
+var currentmusic=""
 func weatheroff():
 	$weather.position.y=0
 	Flags.weather=""
 
+func vol(aud,atype="fx",added=0):
+	if atype=="fx":
+		aud.volume_db=options.fx+added
+	else:
+		aud.volume_db=options.music+added
+		
+func pitch(aud):	
+	aud.pitch_scale=rng.randf_range(-1.50,2.10)
 
 func reset():
+	currentmusic=""
+	vehicle=null
+	spinned=false
+	confused=false
+	special=""
 	inJump=false
 	inCrouch=false
 	percentageAgg=0
@@ -219,6 +235,8 @@ func reset():
 	
 func calchits(hp):
 	print("playerhits:",playerHits)
+	if special=="ufo":
+		return 0
 	var tmphit=hp
 	if playerHits>0:
 		hp-=playerHits

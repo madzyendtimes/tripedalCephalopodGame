@@ -41,8 +41,12 @@ func _process(delta: float) -> void:
 
 
 func _on_attack_body_entered(body: Node2D) -> void:
-		if !dead:
-			body.hit()
+	if body.name.find("bullet")>-1||body.name.find("laser")>-1:
+		hit()
+		body.hit()
+		return
+	if !dead:
+		body.hit()
 
 
 func hit():

@@ -5,7 +5,7 @@ var speed=1.8
 var dir=1
 var dead=false
 var begchance=42
-
+var inhit=false
 
 func _ready() -> void:
 	createGas()
@@ -21,7 +21,6 @@ func _process(delta: float) -> void:
 
 
 func createGas():
-	print("plauge:",position.x)
 	Flags.tne.addEvent("gas","level",false,{"pos":position.x})
 	Flags.tne.dotime(self,[createGas],Flags.rng.randf_range(.2,1.5),"makegas"+str(get_instance_id()),false,"level")
 
@@ -48,7 +47,7 @@ func recourage():
 func _on_body_entered(body: Node2D) -> void:
 	if dead==true:
 		return
-	if body.name.find("bullet")>-1:
+	if body.name.find("bullet")>-1||body.name.find("laser")>-1:
 		hit()
 		body.hit()
 		return
@@ -62,11 +61,12 @@ func _on_body_entered(body: Node2D) -> void:
 		
 	
 func hit():
-
-	var tween:=get_tree().create_tween()
-	var oldy=position.y
-	tween.tween_property($".", "position", Vector2( position.x+(300*Flags.dir*-1),position.y-100), .3)
-	tween.tween_property($".", "position", Vector2( position.x+(300*Flags.dir*-1),oldy), .3)
+	if !inhit:
+		inhit=true
+		var tween:=get_tree().create_tween()
+		var oldy=position.y
+		tween.tween_property($".", "position", Vector2( position.x+(300*Flags.dir*-1),position.y-100), .3)
+		tween.tween_property($".", "position", Vector2( position.x+(300*Flags.dir*-1),oldy), .3)
 	hp=Flags.calchits(hp)
 	if hp<1:
 		$AnimatedSprite2D.animation="dead"

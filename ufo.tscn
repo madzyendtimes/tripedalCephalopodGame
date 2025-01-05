@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://niho6hbxfiyu"]
+
+[ext_resource type="Script" path="res://ufo.gd" id="1_puroi"]
+[ext_resource type="Texture2D" uid="uid://05x7ea1irqgp" path="res://enemies/ufo/ship/gun.PNG" id="2_ugfh6"]
+[ext_resource type="Texture2D" uid="uid://djrr8dc4fo2oa" path="res://enemies/ufo/ship/ufo.PNG" id="3_8q3f8"]
+[ext_resource type="Texture2D" uid="uid://bhbmqnssos1ug" path="res://enemies/ufo/ship/dead.PNG" id="3_hv8gr"]
+[ext_resource type="Texture2D" uid="uid://d3136jf6ijkv2" path="res://enemies/ufo/ship/ufo2.PNG" id="4_l4t40"]
+[ext_resource type="Texture2D" uid="uid://duoef0i3cregd" path="res://enemies/ufo/ship/ufo3.PNG" id="5_2sfby"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7gkb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hv8gr")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8q3f8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_l4t40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_2sfby")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lkv15"]
+radius = 111.319
+
+[node name="ufo" type="Area2D"]
+collision_layer = 8
+collision_mask = 524290
+script = ExtResource("1_puroi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ugfh6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e7gkb")
+animation = &"dead"
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lkv15")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

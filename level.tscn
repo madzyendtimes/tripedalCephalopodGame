@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://bjlg8hhdf4x7l"]
+[gd_scene load_steps=110 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -65,6 +65,7 @@
 [ext_resource type="PackedScene" uid="uid://dw8ngxov1xaxq" path="res://healthbar.tscn" id="84_7qw28"]
 [ext_resource type="PackedScene" uid="uid://3gjeujea1ubj" path="res://stanimabar.tscn" id="84_to8ww"]
 [ext_resource type="PackedScene" uid="uid://bv1r3uf6jmfs6" path="res://joboard.tscn" id="86_pqqyq"]
+[ext_resource type="PackedScene" uid="uid://bvmdraii7ccwl" path="res://spaceattack.tscn" id="87_nb5pl"]
 [ext_resource type="PackedScene" uid="uid://bu7gmej612ogw" path="res://tv.tscn" id="107_57c1h"]
 [ext_resource type="PackedScene" uid="uid://ej35f8d30wde" path="res://enterable.tscn" id="108_lhqd7"]
 [ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="116_lqqny"]
@@ -760,6 +761,12 @@ offset_bottom = 630.0
 
 [node name="joboard" parent="." instance=ExtResource("86_pqqyq")]
 top_level = true
+
+[node name="spacetime" type="Camera2D" parent="."]
+offset = Vector2(0, -5000)
+
+[node name="spaceattack" parent="." instance=ExtResource("87_nb5pl")]
+position = Vector2(-574, -5324)
 
 [connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]

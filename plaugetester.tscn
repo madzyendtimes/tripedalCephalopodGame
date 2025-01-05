@@ -41,7 +41,7 @@ height = 240.0
 
 [node name="plaugetester" type="Area2D"]
 collision_layer = 8
-collision_mask = 2
+collision_mask = 524290
 script = ExtResource("1_mp1fj")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -49,7 +49,7 @@ position = Vector2(-36, -58)
 scale = Vector2(0.82, 0.806667)
 sprite_frames = SubResource("SpriteFrames_50qwd")
 autoplay = "default"
-frame_progress = 0.373768
+frame_progress = 0.398974
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)

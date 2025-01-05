@@ -9,6 +9,7 @@ var loaded=true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$music.volume_db=Flags.options.music
+	Flags.currentmusic=$music
 	$hurt/boss.animation="attack"
 	$hurt/boss.play()
 	change()
@@ -117,7 +118,7 @@ func _on_hurt_body_entered(body: Node2D) -> void:
 
 
 func _on_vulnerable_body_entered(body: Node2D) -> void:
-	if body.name.find("bullet")>-1:
+	if body.name.find("bullet")>-1||body.name.find("laser")>-1:
 		hit()
 		body.hit()
 		return

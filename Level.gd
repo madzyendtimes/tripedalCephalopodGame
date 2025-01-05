@@ -30,6 +30,8 @@ var plaugeScene:PackedScene=load("res://plaugetester.tscn")
 var gasScene:PackedScene=load("res://vampiregas.tscn")
 var sawScene:PackedScene=load("res://saw.tscn")
 var knifeScene:PackedScene=load("res://knifulator.tscn")
+var ufoScene:PackedScene=load("res://ufo.tscn")
+var laserScene:PackedScene=load("res://laser.tscn")
 
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
@@ -60,6 +62,7 @@ func _ready():
 	#triggers events to ensure listeners will update,namely the stat bars, I know it's wonky, I like it better than alternatives :p
 	$AudioStreamPlayer.volume_db=Flags.options.music
 	$tutorialmusic.volume_db=Flags.options.music
+	Flags.currentmusic=$AudioStreamPlayer
 	Flags.titlescreen="title"
 	$trader.visible=false	
 	Flags.reset()
@@ -109,6 +112,7 @@ func _ready():
 	warpS.play()
 	if newsave:
 		Flags.save()
+	$player.position.y=400
 	#uncomment to test gemna
 	#speed=1
 	#warpto(34000)
@@ -175,7 +179,7 @@ func doEffect(effect):
 	var aSel = sEff.split("|")
 	if aSel.size()>1:
 		sEff=aSel[Flags.rng.randi_range(0,aSel.size()-1)]		
-	print(sEff)
+	#print(sEff)
 	match sEff:
 		"addgems":
 			var g=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
@@ -305,7 +309,43 @@ func doEffect(effect):
 		"shrinkgas":
 			$player.scale.y=maxf($player.scale.y-.05,.10)
 			$player.scale.x=maxf($player.scale.x-.05,.10)
-
+		"laser":
+			var laser=laserScene.instantiate()
+			if effect.param.user:
+				add_child(laser)
+			else:
+				$enemy.add_child(laser)
+			laser.position=effect.param.pos
+			laser.start(effect.param.rot)
+		"vehicle":
+			$player.position.y=effect.param.pos.y
+			Flags.dir=effect.param.dir			
+			moveDir(effect.param.speed,true,Flags.dir,true)
+		"spacetime":
+			var tween = get_tree().create_tween()
+			
+			tween.parallel().tween_property($player, "position.y", -300, .5)
+			tween.parallel().tween_property(Flags.vehicle, "position.y", -300, .5)
+			$spacetime.make_current()
+			Flags.mode="spacetime"
+			Flags.vehicle.position.x=0
+			Flags.vehicle.position.y=-200
+			Flags.currentmusic.stop()
+			$spaceattack.start()
+			
+		"outufo":
+			$Camera2D.make_current()
+			Flags.mode="level"
+			$player.position.y=450
+			Flags.special=""
+			Flags.vehicle.rotation=1.27
+			$AudioStreamPlayer.play()
+			var tween = get_tree().create_tween()
+			tween.parallel().tween_property(Flags.vehicle, "position.y", 500, .5)
+			Flags.vehicle.queue_free()
+			Flags.currentmusic=$AudioStreamPlayer			
+			
+			
 func exit(isdead=false):
 	$Camera2D.make_current()			
 	Flags.paused=false
@@ -430,6 +470,14 @@ func _process(delta):
 	if Flags.controlled==true && canrandom==true:
 		dorandaction()		
 	
+
+	var ce=Flags.tne.consumeEvent("level")
+	if ce != null:
+		doEffect(ce)
+
+	if Flags.special!="":
+		return
+
 	if Input.is_action_just_released("down"):
 		Flags.inCrouch=false
 		$player.uncrouch()
@@ -437,9 +485,8 @@ func _process(delta):
 	
 	if Input.is_action_just_released("run"):
 		stopRun()
-	var ce=Flags.tne.consumeEvent("level")
-	if ce != null:
-		doEffect(ce)
+
+
 		
 	if stanimaAction==true:
 		var rate=Flags.playerStats.stanimaRate
@@ -554,6 +601,10 @@ func _process(delta):
 	if Flags.pukestate==true:
 		$player/AnimatedSprite2D.play()
 
+func unconfused():
+	Flags.confused=false
+
+
 func interact():
 	Flags.paused=true
 	Flags.mode=Flags.interactablenpc.mode
@@ -592,6 +643,8 @@ func stopRun():
 		stanimaAction=false
 
 func moveDir(base,flip,dir,offS):
+	if Flags.confused:
+		dir*=-1
 	var gospeed=speed
 	if Flags.weather=="snow":
 		gospeed=max(1,speed/2)
@@ -652,6 +705,12 @@ func reset_flags():
 	Flags.inJump=false
 	canJump=true
 	Flags.inCrouch=false
+	if Flags.spinned:
+		Flags.spinned=false
+		Flags.confused=true
+		$player.confused()
+		Flags.tne.dotime(self,[unconfused],1.0,"unconfuse",true,"level")
+
 
 func get_bg_texture(type):
 	if type>types.size()-1:
@@ -786,9 +845,12 @@ func dochances(val):
 		#kinfulator
 		createchoice($enemy,knifeScene,1400,false,1,375,false,false)
 		return
-
-		
 	if val<21:
+		#ufo
+		createchoice($enemy,ufoScene,1400,false,1,20,false,false)
+		return
+		
+	if val<22:
 		#quest
 		if questDistributed==false:
 			var trash=trashScene.instantiate()

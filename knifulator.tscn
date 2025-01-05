@@ -75,7 +75,7 @@ collision_mask = 2
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="attack"]
 sprite_frames = SubResource("SpriteFrames_livsf")
 autoplay = "default"
-frame_progress = 0.415446
+frame_progress = 0.980089
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
 position = Vector2(210, -60)

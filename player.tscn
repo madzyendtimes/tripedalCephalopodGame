@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://cdj8g8hh6wurl"]
+[gd_scene load_steps=114 format=3 uid="uid://cdj8g8hh6wurl"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ohfo4"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="2_akx6h"]
@@ -101,6 +101,9 @@
 [ext_resource type="Texture2D" uid="uid://dq7phu1rmfkrk" path="res://player/spin/spin2.PNG" id="89_t3t87"]
 [ext_resource type="Texture2D" uid="uid://dk13q141f3gdi" path="res://player/spin/spin3.PNG" id="90_ac7e2"]
 [ext_resource type="Texture2D" uid="uid://la8ksontl5kw" path="res://player/spin/spin4.PNG" id="91_hrtvu"]
+[ext_resource type="Texture2D" uid="uid://5gxv1bhq48ip" path="res://items/icons/confused/confused1.PNG" id="96_yuqsm"]
+[ext_resource type="Texture2D" uid="uid://cqmlkdyl4s30c" path="res://items/icons/confused/confused2.PNG" id="97_x8coj"]
+[ext_resource type="Texture2D" uid="uid://c3dxpewhmfys5" path="res://items/icons/confused/confused3.PNG" id="98_5j2wh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2uxv"]
 radius = 48.0
@@ -524,6 +527,20 @@ animations = [{
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("96_yuqsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_x8coj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_5j2wh")
+}],
+"loop": true,
+"name": &"confused",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("74_chbwn")
 }],
 "loop": true,
@@ -640,7 +657,8 @@ visible = false
 position = Vector2(600, 208)
 scale = Vector2(0.446667, 0.34)
 sprite_frames = SubResource("SpriteFrames_gqrl6")
-animation = &"tv"
+animation = &"confused"
+autoplay = "confused"
 
 [node name="Label" type="Label" parent="stat"]
 offset_left = 496.0

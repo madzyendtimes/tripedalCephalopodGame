@@ -164,7 +164,8 @@ func exit():
 	$CanvasLayer.visible=false
 	Flags.mode="level"
 	Flags.paused=false
-	Flags.interactablenpc.complete()
+	if Flags.interactablenpc!=null:
+		Flags.interactablenpc.complete()
 	$CanvasLayer/music.stop()
 	home.intreturn()
 	pass

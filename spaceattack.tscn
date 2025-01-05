@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvmdraii7ccwl"]
+
+[ext_resource type="Script" path="res://spaceattack.gd" id="1_xie1l"]
+[ext_resource type="PackedScene" uid="uid://rts3a3drt7ql" path="res://playership.tscn" id="2_byke4"]
+[ext_resource type="AudioStream" uid="uid://cgg7kwuwex8bh" path="res://space/sounds/gem.wav" id="3_g6k06"]
+[ext_resource type="AudioStream" uid="uid://bg5evqcgkx1is" path="res://space/sounds/laser.wav" id="4_0sv45"]
+[ext_resource type="AudioStream" uid="uid://bcnt1q242nln2" path="res://space/music/spacemusic.wav" id="5_rfaar"]
+
+[node name="spaceattack" type="Node2D"]
+script = ExtResource("1_xie1l")
+
+[node name="playership" parent="." instance=ExtResource("2_byke4")]
+position = Vector2(0, 600)
+
+[node name="gem" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_g6k06")
+volume_db = 13.053
+
+[node name="laser" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_0sv45")
+volume_db = 24.0
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_rfaar")
+volume_db = 12.804

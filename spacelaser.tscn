@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bv50w7h5k1f47"]
+
+[ext_resource type="Script" path="res://spacelaser.gd" id="1_e6r7q"]
+[ext_resource type="Texture2D" uid="uid://c6pa0re1batil" path="res://enemies/ufo/laser/laser1.PNG" id="2_j1663"]
+[ext_resource type="Texture2D" uid="uid://blpt57lj3cegb" path="res://enemies/ufo/laser/laser2.PNG" id="3_tpmf7"]
+[ext_resource type="Texture2D" uid="uid://tvetbp2tctfe" path="res://enemies/ufo/laser/laser3.PNG" id="4_7hy33"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jfoat"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j1663")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tpmf7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_7hy33")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6nwcg"]
+height = 212.0
+
+[node name="spacelaser" type="StaticBody2D"]
+collision_layer = 8
+script = ExtResource("1_e6r7q")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jfoat")
+autoplay = "default"
+frame_progress = 0.162088
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-11, 7)
+shape = SubResource("CapsuleShape2D_6nwcg")

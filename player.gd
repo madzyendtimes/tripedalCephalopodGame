@@ -60,6 +60,7 @@ func dooffset(boff):
 func spin():
 	$AnimatedSprite2D.animation="spin"
 	setCollision("spin")
+	Flags.spinned=true
 
 func unspin():
 	revert()
@@ -124,7 +125,8 @@ func unstat():
 	$stat.visible=false
 
 func hit(dmg=1):
-	
+	if Flags.special=="ufo":
+		return
 	if inHit!=true:
 		inHit=true
 		stat("-","health",dmg)
@@ -194,7 +196,15 @@ func outSearch():
 func enter():
 	$AnimatedSprite2D.animation="forward"
 	$AnimatedSprite2D.play()
-	
+
+
+func confused():
+	$stat/Label.text="CONFUSED "
+	$stat/AnimatedSprite2D.animation="confused"
+	$stat.visible=true
+	Flags.tne.dotime(self,[unstat],1.5,"unstat",true,"level")
+
+
 func walkani():
 
 

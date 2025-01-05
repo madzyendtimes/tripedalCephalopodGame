@@ -42,7 +42,7 @@ func knockback():
 
 func _on_body_entered(body: Node2D) -> void:
 	
-	if body.name.find("bullet")>-1:
+	if body.name.find("bullet")>-1||body.name.find("laser")>-1:
 		hit()
 		body.hit()
 		return
