@@ -17,9 +17,10 @@ func _ready():
 	#start()
 
 
-func start():
+func start(pos):
 	addstar()
 	$playership.start()
+	$playership.position.x=pos
 	$playership.position.y=600
 	$playership.rotation=0
 	active=true

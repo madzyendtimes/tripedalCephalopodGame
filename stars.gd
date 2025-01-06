@@ -3,6 +3,7 @@ extends Node2D
 var type="star1"
 var speed=4
 var rot=0
+var unmobile=false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var num=Flags.rng.randi_range(1,10)
@@ -13,8 +14,16 @@ func _ready() -> void:
 		
 	speed=Flags.rng.randi_range(2,6)
 
+func staticstar():
+	unmobile=true
+	position.y=Flags.rng.randi_range(0,400)
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if unmobile:
+		return
+		
 	if position.y>800:
 		queue_free()
 		return

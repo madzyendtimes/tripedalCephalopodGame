@@ -8,14 +8,15 @@ var descent=false
 var ydir=0
 var freefall=false
 var ufo=false
-
+var stopit=false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	domoves()
 	changegun()
 
-
+func stop():
+	stopit=true
 
 func domoves():
 	if dead:
@@ -40,6 +41,8 @@ func changegun():
 
 func _process(delta: float) -> void:
 	if ufo:
+		if stopit:
+			return
 		if Flags.mode!="spacetime":
 			if Flags.special=="ufo":
 				if Input.is_action_pressed("down"):
@@ -93,13 +96,14 @@ func getufo():
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if dead==true && !Flags.special=="ufo":
+	if dead==true && !Flags.special=="ufo"&& !Flags.wasufo:
 		if body.scale.x<.85:
 			Flags.special="ufo"
 			self.reparent(body.get_parent(),false)
 			self.position.x=body.position.x
 			Flags.vehicle=self
 			ufo=true
+			Flags.wasufo=true
 		return
 	if body.name.find("bullet")>-1:
 		hit()

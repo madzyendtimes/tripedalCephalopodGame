@@ -32,7 +32,9 @@ var sawScene:PackedScene=load("res://saw.tscn")
 var knifeScene:PackedScene=load("res://knifulator.tscn")
 var ufoScene:PackedScene=load("res://ufo.tscn")
 var laserScene:PackedScene=load("res://laser.tscn")
+var starScene:PackedScene=load("res://stars.tscn")
 
+var wrestplayercontrol=false
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
 var speed=baseSpeed
@@ -71,14 +73,19 @@ func _ready():
 	$"..".killStart() #this needs to change
 	$treeholder.position.y=-175
 	$treeholder2.position.y=-150
-	for i in range(0,300):
+	for i in range(0,600):
 		var ypos=0
 		var nType=0
-		if i>100:
+		if i>200:
 			nType=Flags.rng.randi_range(0,3)
 		
 		var ts=get_bg_texture(nType)
 		ts.position=Vector2(min(i+(i*.6189),i*3)*75,400)
+		var star=starScene.instantiate()
+		star.staticstar()
+		star.z_index=-5
+		star.position.x=min(i+(i*.6189),i*3)*75+Flags.rng.randi_range(0,600)
+		$stars.add_child(star)
 		ts.flip_h=Flags.rng.randi_range(0,1)>0
 		var yscale=randf_range(.3,1)
 		if nType==1:
@@ -318,34 +325,63 @@ func doEffect(effect):
 			laser.position=effect.param.pos
 			laser.start(effect.param.rot)
 		"vehicle":
+			if wrestplayercontrol:
+				return
 			$player.position.y=effect.param.pos.y
 			Flags.dir=effect.param.dir			
 			moveDir(effect.param.speed,true,Flags.dir,true)
 		"spacetime":
-			var tween = get_tree().create_tween()
-			
-			tween.parallel().tween_property($player, "position.y", -300, .5)
-			tween.parallel().tween_property(Flags.vehicle, "position.y", -300, .5)
-			$spacetime.make_current()
-			Flags.mode="spacetime"
-			Flags.vehicle.position.x=0
-			Flags.vehicle.position.y=-200
-			Flags.currentmusic.stop()
-			$spaceattack.start()
+			wrestplayercontrol=true
+			for i in range(0,100):				
+				Flags.tne.addEvent("flyup","level",false)
+			Flags.tne.addEvent("inspace","level",true)
 			
 		"outufo":
+			Flags.vehicle.rotation=1.27
+			#Flags.vehicle.position.y=600
 			$Camera2D.make_current()
 			Flags.mode="level"
-			$player.position.y=450
-			Flags.special=""
-			Flags.vehicle.rotation=1.27
-			$AudioStreamPlayer.play()
-			var tween = get_tree().create_tween()
-			tween.parallel().tween_property(Flags.vehicle, "position.y", 500, .5)
-			Flags.vehicle.queue_free()
-			Flags.currentmusic=$AudioStreamPlayer			
+			for i in range(0,100):				
+				Flags.tne.addEvent("flydown","level",false)
+			Flags.tne.addEvent("outspace","level",true)
+		
 			
+		"flyup":
+			flyup()
+		"flydown":
+			flydown()
+		"inspace":
+			inspaceattack()		
 			
+
+func outspace():
+		wrestplayercontrol=false
+		Flags.vehicle.reparent($enemy)
+		Flags.vehicle.position.y=600
+		$player.scale.x=.75
+		$player.scale.y=.75
+		Flags.special=""
+		$AudioStreamPlayer.play()
+		Flags.currentmusic=$AudioStreamPlayer		
+		$player.position.y=650
+		Flags.wasufo=true	
+
+func inspaceattack():
+			$spacetime.make_current()
+			Flags.mode="spacetime"
+			if Flags.currentmusic!=null:
+				Flags.currentmusic.stop()
+			$spaceattack.start($player.position.x)
+	
+		
+			
+func flyup():
+	print("flyup")
+	moveDir(1,false,1,false,"y")
+	
+func flydown():
+	moveDir(1,false,-1,false,"y")
+
 func exit(isdead=false):
 	$Camera2D.make_current()			
 	Flags.paused=false
@@ -642,22 +678,23 @@ func stopRun():
 		$player.walkani()
 		stanimaAction=false
 
-func moveDir(base,flip,dir,offS):
+func moveDir(base,flip,dir,offS,pos="x"):
 	if Flags.confused:
 		dir*=-1
 	var gospeed=speed
 	if Flags.weather=="snow":
 		gospeed=max(1,speed/2)
-	Flags.l=$locationback.position.x
-	$treeholder.position.x+=dir*base*gospeed 
-	$treeholder2.position.x+=dir*(base+0.5)*gospeed 
-	$treeholder3.position.x+=dir*(base+1.5)*gospeed
-	$rocks.position.x+=dir*(base+0.60)*gospeed
-	$npcs.position.x+=dir*(base+0.45)*gospeed
-	$interactive.position.x+=dir*(base+0.45)*gospeed
-	$enemy.position.x+=dir*(base+0.5)*gospeed
-	$locationback.position.x+=dir*(base+0.6)*gospeed
-	$locationfront.position.x+=dir*(base+0.6)*gospeed
+	Flags.l=$locationback.position[pos]
+	$stars.position[pos]+=dir*(base-.9)*gospeed
+	$treeholder.position[pos]+=dir*base*gospeed 
+	$treeholder2.position[pos]+=dir*(base+0.5)*gospeed 
+	$treeholder3.position[pos]+=dir*(base+1.5)*gospeed
+	$rocks.position[pos]+=dir*(base+0.60)*gospeed
+	$npcs.position[pos]+=dir*(base+0.45)*gospeed
+	$interactive.position[pos]+=dir*(base+0.45)*gospeed
+	$enemy.position[pos]+=dir*(base+0.5)*gospeed
+	$locationback.position[pos]+=dir*(base+0.6)*gospeed
+	$locationfront.position[pos]+=dir*(base+0.6)*gospeed
 	if flip:
 		$player.flip(dir==1)
 		
@@ -674,6 +711,7 @@ func moveDir(base,flip,dir,offS):
 func warpto(base):
 		base*=-1
 		$treeholder.position.x=base 
+		$stars.position.x+=(base-.9)*speed
 		$treeholder2.position.x=(base+0.5)*speed 
 		$treeholder3.position.x=(base+1.5)*speed
 		$rocks.position.x=(base+0.60)*speed

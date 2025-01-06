@@ -169,7 +169,9 @@ var witchevents=""
 var fightmode=""
 var questDistributed=false
 var vehicle=null
-var currentmusic=""
+var currentmusic=null
+var wasufo=false
+
 func weatheroff():
 	$weather.position.y=0
 	Flags.weather=""
@@ -184,7 +186,8 @@ func pitch(aud):
 	aud.pitch_scale=rng.randf_range(-1.50,2.10)
 
 func reset():
-	currentmusic=""
+	wasufo=false
+	currentmusic=null
 	vehicle=null
 	spinned=false
 	confused=false
