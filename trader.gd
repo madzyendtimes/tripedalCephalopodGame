@@ -13,14 +13,16 @@ var choices:=[
 	{"price":8,"effect":"addsmarts","instock":Flags.megaStats.smarts<(Flags.megaStats.capSmarts+1),"text":"a skeptic's guide to logic","implemented":true},
 	{"price":999,"effect":"nocap","instock":Flags.megaStats.capPower<1000,"text":"no cap","implemented":true},
 	{"price":15,"effect":"slowspeed","instock":Flags.megaStats.speed>1,"text":"adhd meds","implemented":true},
-	{"price":35,"effect":"doublejump","instock":true,"text":"extra air friction","implemented":false},
-	{"price":45,"effect":"deathgifts","instock":true,"text":"death gifts","implemented":false},
-	{"price":99,"effect":"fistshot","instock":true,"text":"hand cannon","implemented":false},
+	{"price":35,"effect":"spinattack","instock":!Flags.megaStats.spinattack,"text":"somersault assault","implemented":true},
+	{"price":8,"effect":"dizzyresist","instock":Flags.megaStats.dizres>.01,"text":"drama meme","implemented":true},
+	{"price":35,"effect":"doublejump","instock":Flags.megaStats.extraJump<Flags.megaStats.capExtraJump,"text":"extra air friction","implemented":true},
+	{"price":45,"effect":"deathgifts","instock":!Flags.megaStats.deathgifts,"text":"death gifts","implemented":true},
+	{"price":99,"effect":"fistshot","instock":!Flags.megaStats.attackmode.gun,"text":"hand cannon","implemented":true},
 	{"price":99,"effect":"flybuddy","instock":true,"text":"Oder De Body","implemented":false},
 	{"price":45,"effect":"levelselect","instock":true,"text":"flat circle dissector","implemented":false},
 	{"price":85,"effect":"transmute","instock":true,"text":"philosopher's rock","implemented":false},
 	{"price":85,"effect":"homebase","instock":true,"text":"mortage","implemented":false},
-	{"price":1,"effect":"vapor","instock":true,"text":"vapor ware","implemented":false}
+	{"price":1,"effect":"vapor","instock":true,"text":"vapor ware","implemented":false},
 	]
 var stock:=[]
 var home=""
@@ -147,7 +149,20 @@ func purchase():
 				Flags.megaStats.capSpeed=10000
 				Flags.megaStats.capPower=10000
 				Flags.megaStats.capStanima=10000
-				
+				Flags.megaStats.capExtraJump=10000
+			"spinattack":
+				Flags.megaStats.spinattack=true
+			"dizzyresist":
+				Flags.megaStats.dizres=maxf(Flags.megaStats.dizres-.3,0.0)
+			"doublejump":
+				Flags.megaStats.extraJump=min(Flags.megaStats.extraJump+1,Flags.megaStats.capExtraJump)
+			"deathgifts":
+				Flags.megaStats.deathgifts=true
+			"fistshot":
+				Flags.megaStats.attackmode.gun=true
+				Flags.fightmode="gun"
+
+
 		$CanvasLayer/AnimatedSprite2D.animation="eat"
 		Flags.save()
 		$CanvasLayer/purchase.play()

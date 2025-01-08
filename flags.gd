@@ -34,9 +34,22 @@ var inFight:=false
 var playerDead:=false
 var playerInventory:=[]
 var interactablenpc=null
-var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false}
+
+var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,
+"spinattack":false,
+"dizres":1.5,
+"extraJump":1,"capExtraJump":5,
+"deathgifts":false,
+"attackmode":{"fist":true,"gun":false}
+}
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
-var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false}
+var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,
+"spinattack":false,
+"dizres":1.5,
+"extraJump":1,"capExtraJump":5,
+"deathgifts":false,
+"attackmode":{"fist":true,"gun":false}
+}
 var entered:={
 	"ready":false,
 	"active":false,
@@ -150,12 +163,12 @@ var percentageMap=[
 3, #gemmonster
 3, #hoarde
 9, #gravestone
-10, #special npc
+9, #special npc
 1,#boss
-500,#gas
+5,#gas
 10, #saw
 8, #knifulator
-500,#ufo
+5,#ufo
 5 #quest
 ]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable
@@ -252,8 +265,28 @@ func beg(begchance):
 #		effect="addgems"
 		return true
 	return false
-
 	
+func deathgifts():
+	print("deathgifts")
+	var gift=rng.randi_range(0,100)
+	if gift<25:
+		playerStats.health+=1
+		print("health")
+		return
+	if gift<50:
+		tne.addEvent("addgems","level")
+		print("gems")
+		return
+	if gift<75:
+		playerStats.stanima=playerStats.maxStanima
+		print("stanima")
+		return
+	var gtype=Flags.rng.randi_range(0,2)
+	var numvariant=types[gtype].num
+	var treenum=rng.randi_range(1,numvariant)
+	var gitem=addToInventory(gtype,numvariant)
+	tne.addEvent("inventoryAcquired","level",false,{"item":gitem})
+	print("inventory"+gitem.name)	
 	
 func addToInventory(type,numvarient):
 	print("addtoinventory")
@@ -269,11 +302,12 @@ func addToInventory(type,numvarient):
 		"imgt":texture,
 		"effect":itemMap[type].varients[max(0,treenum-1)].effect,
 		"consumable":itemMap[type].varients[max(0,treenum-1)].consumable,
-		"swap":itemMap[type].varients[max(0,treenum-1)].swap
+		"swap":itemMap[type].varients[max(0,treenum-1)].swap,
+		"name":itemMap[type].varients[max(0,treenum-1)].name
 		}
 	print(invitem)
 	playerInventory.append(invitem)
-
+	return invitem
 
 
 func refreshoptions():
@@ -321,8 +355,12 @@ func save():
 	save_file.store_line(json_string)
 	print(megaStats)
 func defaultmegastats():
-	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false}
-	
+	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,"spinattack":false,"dizres":1.5,
+	"extraJump":1,"capExtraJump":5,
+	"deathgifts":false,
+	"attackmode":{"fist":true,"gun":false}
+	}
+
 func loader():
 	if not FileAccess.file_exists("user://tcv1.save")|| freshstart==true:
 		defaultmegastats()
@@ -340,6 +378,12 @@ func loader():
 			continue
 
 		megaStats=json.data
+		for i in defaultStats.keys():
+			if !megaStats.has(i):
+				megaStats[i]=defaultStats[i]
+		for i in megaStats.attackmode.keys():
+			if !megaStats.attackmode.has(i):
+				megaStats.attackmode[i]=defaultStats.attackmode[i]
 		refreshPlayer()
 		
 func refreshPlayer():
@@ -365,6 +409,8 @@ func refreshPlayer():
 	}
 	#print(megaStats)
 	credit=megaStats.credit		
+	if megaStats.attackmode.gun:
+		fightmode="gun"
 		
 func clearnode(danode):
 	var removenode=danode.get_children()

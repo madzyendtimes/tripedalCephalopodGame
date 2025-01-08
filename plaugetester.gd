@@ -7,6 +7,8 @@ var dead=false
 var begchance=42
 var inhit=false
 
+var enemytype={"name":"plaugetestor","flying":false,"hp":2,"begchance":42,"speed":1.8}
+
 func _ready() -> void:
 	createGas()
 
@@ -72,5 +74,6 @@ func hit():
 		$AnimatedSprite2D.animation="dead"
 		dead=true	
 		Flags.tne.killTimer("makegas"+str(get_instance_id()),"level")
+		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 		return
 		

@@ -5,7 +5,7 @@ var speed=2.5
 var dir=1
 var dead=false
 var begchance=75
-
+var enemytype={"name":"goop baby","flying":false,"hp":3,"begchance":75,"speed":2.5}
 
 func _process(delta: float) -> void:
 	if Flags.paused==true:
@@ -60,6 +60,7 @@ func hit():
 	if hp<1:
 		$AnimatedSprite2D.animation="dead"
 		dead=true	
+		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 		return
 
 	

@@ -5,10 +5,10 @@ var home=self
 var ingredients=["eye","mouth","hair","face","torso","arm","leg","clothes","tongue"]
 var stage=4
 var recipe=[]
-var playerchoice=[{"button":"jump","ingredient":"eye","scene":"","px":100,"py":220,"buttonscene":""},
-{"button":"run","ingredient":"mouth","scene":"","px":100,"py":60,"buttonscene":""},
-{"button":"search","ingredient":"hair","scene":"","px":320,"py":220,"buttonscene":""},
-{"button":"fight","ingredient":"face","scene":"","px":320,"py":60,"buttonscene":""}]
+var playerchoice=[{"button":"jump","ingredient":"eye","scene":"","px":100,"py":220,"buttonscene":null},
+{"button":"run","ingredient":"mouth","scene":"","px":100,"py":60,"buttonscene":null},
+{"button":"search","ingredient":"hair","scene":"","px":320,"py":220,"buttonscene":null},
+{"button":"fight","ingredient":"face","scene":"","px":320,"py":60,"buttonscene":null}]
 var recipeScene:PackedScene=load("res://recipe.tscn")
 var ingScene:PackedScene=load("res://ingredient.tscn")
 var inpScene:PackedScene=load("res://inputbutton.tscn")
@@ -76,7 +76,8 @@ func goodchoice(pc):
 	#Flags.megaStats.gems+=1
 
 func commit(pc):
-	pc.buttonscene.press()
+	if pc.buttonscene!=null:
+		pc.buttonscene.press()
 	var found=false
 	$witchplayer.press()
 	var count=0

@@ -4,7 +4,7 @@ var hp=1
 var dir=-1
 var runningaway=false
 var speed=3
-
+var enemytype={"name":"gemmonster","flying":false,"hp":1,"begchance":100,"speed":3}
 
 
 func _process(delta: float) -> void:
@@ -63,6 +63,7 @@ func hit():
 	hp=Flags.calchits(hp)
 	if hp<1:
 		Flags.tne.addEvent("addgems","level")
+		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 		#Flags.effect="addgems"
 		queue_free()
 	else:

@@ -5,6 +5,7 @@ var dir=1
 var speed=1
 var dead=false
 var loaded=true
+var enemytype={"name":"braino","flying":false,"hp":5,"begchance":0,"speed":1}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -90,6 +91,7 @@ func hit():
 		dead=true
 		Flags.tne.addEvent("bosskill","level")
 		Flags.tne.killTimer("change"+str(get_instance_id()),"level")
+		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 		$music.stop()
 		return
 	$hurt/boss.animation="dazed"

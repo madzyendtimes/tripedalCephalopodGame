@@ -1,5 +1,5 @@
 extends Area2D
-var hp=1
+var hp=4
 var dead=false
 var rot=0.0
 var speed=5
@@ -9,6 +9,8 @@ var ydir=0
 var freefall=false
 var ufo=false
 var stopit=false
+
+var enemytype={"name":"ufo","flying":true,"hp":4,"begchance":0,"speed":5}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -88,6 +90,7 @@ func _process(delta: float) -> void:
 		if position.y>500:
 			freefall=false
 			dead=true
+			Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 	position.x+=dir*speed
 	position.y+=ydir
 

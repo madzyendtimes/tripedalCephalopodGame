@@ -53,6 +53,9 @@ var canrandom=true
 #var randopercents=false
 var newsave=false
 var bossZone=0
+var jumps=0
+var basey=423
+var ascent=300
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Flags.mode="level"
@@ -119,7 +122,7 @@ func _ready():
 	warpS.play()
 	if newsave:
 		Flags.save()
-	$player.position.y=400
+	$player.position.y=basey
 	#uncomment to test gemna
 	#speed=1
 	#warpto(34000)
@@ -299,7 +302,7 @@ func doEffect(effect):
 			var needy=needleScene.instantiate()
 			$enemy.add_child(needy)
 			var pos=effect.param.pos
-			needy.position.x=effect.param.pos
+			needy.position.x=effect.param.pos-75
 			needy.position.y=400+Flags.rng.randi_range(-20,20)
 			needy.start()
 		"bosskill":
@@ -351,8 +354,11 @@ func doEffect(effect):
 		"flydown":
 			flydown()
 		"inspace":
-			inspaceattack()		
-			
+			inspaceattack()	
+		"inventoryAcquired":	
+			$player.inventoryAcquired(effect.param.item)
+		"deadEnemy":
+			Flags.deathgifts()			
 
 func outspace():
 		wrestplayercontrol=false
@@ -469,10 +475,10 @@ func dorandaction():
 		currSpeed=speed
 		speed+=5
 		var tween = get_tree().create_tween()
-		gy=$player.position.y
+		gy=basey
 		gx=$player.position.x
 		$player/jump.play()
-		tween.tween_property($player, "position", Vector2(gx,gy-300), .5)
+		tween.tween_property($player, "position", Vector2(gx,gy-ascent), .5)
 		tween.tween_callback(reset_player)
 	if randaction==4 && canJump==true:
 		$player.search()
@@ -593,8 +599,9 @@ func _process(delta):
 
 			
 	if Input.is_action_just_pressed("jump") && canJump==true:
+		jumps+=1
 		Flags.inCrouch=false
-		canJump=false
+		canJump=jumps<Flags.megaStats.extraJump
 		Flags.inJump=true
 		currSpeed=speed
 		speed+=5
@@ -602,7 +609,7 @@ func _process(delta):
 		gy=$player.position.y
 		gx=$player.position.x
 		$player/jump.play()
-		tween.tween_property($player, "position", Vector2(gx,gy-300), .5)
+		tween.tween_property($player, "position", Vector2(gx,gy-ascent), .5)
 		tween.tween_callback(reset_player)
 		
 	if Input.is_action_just_pressed("search") && canJump==true:
@@ -657,7 +664,6 @@ func doMode():
 			$AudioStreamPlayer.stop()
 			$joboard.start(self)
 	
-	pass
 	
 func intreturn():
 	$AudioStreamPlayer.play()
@@ -732,22 +738,30 @@ func stop_fight():
 		stopRun()
 			
 func reset_player():
-	Flags.inJump=false
-	speed=currSpeed
-	if get_tree()!=null:
+	canJump=false
+	jumps-=1
+	#Flags.inJump=false
+	#speed=currSpeed
+	if get_tree()!=null&&jumps<1:
 		var tween = get_tree().create_tween()
-		tween.tween_property($player, "position", Vector2(gx,gy), .5).from(Vector2(gx,gy-300))
+		tween.tween_property($player, "position", Vector2(gx,basey), .5)
 		tween.tween_callback(reset_flags)
 
 func reset_flags():
+	jumps=0
+	print($player.position.y)
+	if $player.position.y==basey:
+		speed=Flags.playerStats.speed
+		currSpeed=speed
 	Flags.inJump=false
 	canJump=true
 	Flags.inCrouch=false
 	if Flags.spinned:
 		Flags.spinned=false
-		Flags.confused=true
-		$player.confused()
-		Flags.tne.dotime(self,[unconfused],1.0,"unconfuse",true,"level")
+		if Flags.megaStats.dizres>0.0:
+			Flags.confused=true
+			$player.confused()
+			Flags.tne.dotime(self,[unconfused],Flags.megaStats.dizres,"unconfuse",true,"level")
 
 
 func get_bg_texture(type):

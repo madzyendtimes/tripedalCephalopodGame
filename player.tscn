@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://cdj8g8hh6wurl"]
+[gd_scene load_steps=126 format=3 uid="uid://cdj8g8hh6wurl"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ohfo4"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="2_akx6h"]
@@ -104,6 +104,18 @@
 [ext_resource type="Texture2D" uid="uid://5gxv1bhq48ip" path="res://items/icons/confused/confused1.PNG" id="96_yuqsm"]
 [ext_resource type="Texture2D" uid="uid://cqmlkdyl4s30c" path="res://items/icons/confused/confused2.PNG" id="97_x8coj"]
 [ext_resource type="Texture2D" uid="uid://c3dxpewhmfys5" path="res://items/icons/confused/confused3.PNG" id="98_5j2wh"]
+[ext_resource type="Texture2D" uid="uid://28a4yidhbw10" path="res://items/food/food1.PNG" id="101_gmrxf"]
+[ext_resource type="Texture2D" uid="uid://cpo36wc3fyamd" path="res://items/food/food2.PNG" id="102_50vvh"]
+[ext_resource type="Texture2D" uid="uid://c8uh77b7ftule" path="res://items/food/food3.PNG" id="103_5bu8s"]
+[ext_resource type="Texture2D" uid="uid://c4t5i4xp055p8" path="res://items/food/food4.PNG" id="104_ykk0t"]
+[ext_resource type="Texture2D" uid="uid://dbgqc3me3pbgt" path="res://items/scrap/scrap1.PNG" id="105_v3mod"]
+[ext_resource type="Texture2D" uid="uid://ds4fjttdr7nsw" path="res://items/scrap/scrap2.PNG" id="106_wk8xb"]
+[ext_resource type="Texture2D" uid="uid://dnqsl1orm8iyv" path="res://items/scrap/scrap3.PNG" id="107_wxuka"]
+[ext_resource type="Texture2D" uid="uid://dka2evv7l1cho" path="res://items/scrap/scrap4.PNG" id="108_pspuc"]
+[ext_resource type="Texture2D" uid="uid://b46r88cjjmq1y" path="res://items/scrap/scrap5.PNG" id="109_joqkt"]
+[ext_resource type="Texture2D" uid="uid://c821ammer5fjt" path="res://items/scrap/scrap6.PNG" id="110_5r5cg"]
+[ext_resource type="Texture2D" uid="uid://65fik2ppv784" path="res://items/fancy/fancy1.PNG" id="111_foxvf"]
+[ext_resource type="Texture2D" uid="uid://cgtphnxbpnf2y" path="res://items/fancy/fancy3.PNG" id="112_agou6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2uxv"]
 radius = 48.0
@@ -557,6 +569,110 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("101_gmrxf")
+}],
+"loop": true,
+"name": &"p01",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("102_50vvh")
+}],
+"loop": true,
+"name": &"p02",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("103_5bu8s")
+}],
+"loop": true,
+"name": &"p03",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("104_ykk0t")
+}],
+"loop": true,
+"name": &"p04",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("105_v3mod")
+}],
+"loop": true,
+"name": &"p11",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("106_wk8xb")
+}],
+"loop": true,
+"name": &"p12",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("107_wxuka")
+}],
+"loop": true,
+"name": &"p13",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("108_pspuc")
+}],
+"loop": true,
+"name": &"p14",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("109_joqkt")
+}],
+"loop": true,
+"name": &"p15",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("110_5r5cg")
+}],
+"loop": true,
+"name": &"p16",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("111_foxvf")
+}],
+"loop": true,
+"name": &"p21",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("74_chbwn")
+}],
+"loop": true,
+"name": &"p22",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("112_agou6")
+}],
+"loop": true,
+"name": &"p23",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("76_fmk2e")
 }],
 "loop": true,
@@ -657,7 +773,7 @@ visible = false
 position = Vector2(600, 208)
 scale = Vector2(0.446667, 0.34)
 sprite_frames = SubResource("SpriteFrames_gqrl6")
-animation = &"confused"
+animation = &"p23"
 autoplay = "confused"
 
 [node name="Label" type="Label" parent="stat"]

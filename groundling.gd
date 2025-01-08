@@ -7,6 +7,8 @@ var dir=1
 var hp=1
 var begchance=25
 var speed=.7
+var enemytype={"name":"groundling","flying":false,"hp":1,"begchance":25,"speed":.75}
+
 
 func _ready() -> void:
 	$hit.volume_db=Flags.options.fx
@@ -62,6 +64,7 @@ func hit():
 		$AnimatedSprite2D.animation="dead"
 		dead=true
 		$hit.play()
+		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 	
 func _process(delta):
 	

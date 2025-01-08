@@ -5,6 +5,8 @@ var speed=1.8
 var dir:=1
 var runningaway:=false
 var begchance=50 #add new playerstat charisma to improve chances
+var enemytype={"name":"diaper tooth","flying":false,"hp":2,"begchance":50,"speed":1.8}
+
 
 func _process(delta: float) -> void:
 	if Flags.paused==true:
@@ -57,6 +59,7 @@ func hit():
 	if hp<1:
 		$AnimatedSprite2D.animation="diapertoothdead"
 		dead=true	
+		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 	var tween:=get_tree().create_tween()
 	var oldy=position.y
 	tween.tween_property($".", "position", Vector2( position.x+(100*Flags.dir*-1),position.y-100), .3)

@@ -80,7 +80,10 @@ func flip(bflip):
 
 func fight():
 	if Flags.inJump:
-		spin()
+		if Flags.megaStats.spinattack:
+			spin()
+			return
+		Flags.inFight=false
 		return
 	$AnimatedSprite2D.animation="fight"+Flags.hat+Flags.fightmode
 	$AnimatedSprite2D.play()
@@ -92,6 +95,12 @@ func fight():
 	if Flags.fightmode=="gun":
 		Flags.tne.addEvent("shot","level",true)
 
+func inventoryAcquired(inv):
+	stat("+",inv.name,0)
+	$stat/Label.text=inv.name+" "
+	$stat/AnimatedSprite2D.animation="p"+str(inv.type)+str(inv.item)
+	$stat.visible=true
+	Flags.tne.dotime(self,[unstat],1.5,"unstat",true,"level")
 	
 	
 func warn():
@@ -116,7 +125,10 @@ func resisted():
 	Flags.tne.dotime(self,[unstat],1.5,"unstat",true,"level")
 
 func stat(mth,ptype,amount):
-	$stat/Label.text=mth+" "+str(amount)
+	var showamount=str(amount)
+	if amount==0:
+		showamount=""
+	$stat/Label.text=mth+" "+showamount
 	$stat/AnimatedSprite2D.animation=ptype
 	$stat.visible=true
 	Flags.tne.dotime(self,[unstat],1.5,"unstat",true,"level")
@@ -157,7 +169,8 @@ func outhit():
 	inHit=false
 	for i in range(1,10):
 		$"..".moveDir(1,false,Flags.dir*-5,false)
-		await get_tree().create_timer(0.005).timeout
+		if get_tree()!=null:
+			await get_tree().create_timer(0.005).timeout
 		
 
 func kill():
@@ -199,10 +212,11 @@ func enter():
 
 
 func confused():
-	$stat/Label.text="CONFUSED "
-	$stat/AnimatedSprite2D.animation="confused"
-	$stat.visible=true
-	Flags.tne.dotime(self,[unstat],1.5,"unstat",true,"level")
+	if Flags.megaStats.dizres>0.0:
+		$stat/Label.text="CONFUSED "
+		$stat/AnimatedSprite2D.animation="confused"
+		$stat.visible=true
+		Flags.tne.dotime(self,[unstat],Flags.megaStats.dizres,"unstat",true,"level")
 
 
 func walkani():

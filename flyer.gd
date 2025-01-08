@@ -20,6 +20,8 @@ var dead=false
 var candive=false
 var indive=false
 
+var enemytype={"name":"bird","flying":true,"hp":1,"begchance":40,"speed":2.5}
+
 func _ready() -> void:
 	selectType()
 
@@ -36,6 +38,10 @@ func selectType():
 		hasmissle=false
 		hp=2
 		candive=true
+		enemytype.name="bug"
+		enemytype.speed=5.0
+		enemytype.hp=2
+		
 	if choice==1:
 		$AnimatedSprite2D.animation="drone"
 		type="drone"
@@ -45,6 +51,9 @@ func selectType():
 		minspd=1.0
 		canflip=false
 		hasmissle=false
+		enemytype.name="drone"
+		enemytype.speed=4.0
+
 	Flags.tne.dotime(self,[changedirection],1.0,"changedirection"+str(self.get_instance_id()),true,"level")
 	
 	if hasmissle:
@@ -75,12 +84,14 @@ func _process(delta):
 				freefall=false
 				showprize()
 				dead=true
+				Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 			return
 	if crashed==true  && freefall==true:
 			position.y+=7
 			if position.y>500:
 				freefall=false
 				dead=true
+				Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 			return
 	if crashed==true:
 		return	

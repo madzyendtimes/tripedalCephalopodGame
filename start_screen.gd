@@ -90,6 +90,8 @@ func _on_high_pressed() -> void:
 
 func _on_freshstart_toggled(toggled_on: bool) -> void:
 	Flags.freshstart=toggled_on
+	if toggled_on:
+			Flags.defaultmegastats()
 
 
 func _on_randomize_distribution_toggled(toggled_on: bool) -> void:
