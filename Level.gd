@@ -56,6 +56,13 @@ var bossZone=0
 var jumps=0
 var basey=423
 var ascent=300
+var height=0
+var countheight=0
+var inascent=false
+var indescent=false
+var treeholderResetY=0
+var treeholder2ResetY=0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Flags.mode="level"
@@ -75,7 +82,9 @@ func _ready():
 	speed=baseSpeed
 	$"..".killStart() #this needs to change
 	$treeholder.position.y=-175
+	treeholderResetY=$treeholder.position.y
 	$treeholder2.position.y=-150
+	treeholder2ResetY=$treeholder2.position.y
 	for i in range(0,600):
 		var ypos=0
 		var nType=0
@@ -348,7 +357,11 @@ func doEffect(effect):
 				Flags.tne.addEvent("flydown","level",false)
 			Flags.tne.addEvent("outspace","level",true)
 		
+		"upenv":
+			upenv()
+		"downenv":
 			
+			downenv()
 		"flyup":
 			flyup()
 		"flydown":
@@ -358,7 +371,26 @@ func doEffect(effect):
 		"inventoryAcquired":	
 			$player.inventoryAcquired(effect.param.item)
 		"deadEnemy":
-			Flags.deathgifts()			
+			Flags.deathgifts()
+						
+
+func downenv():
+		height-=1
+		countheight-=1
+		if countheight>0:
+			moveDir(1,false,-1,false,"y")
+		else:
+			height=0
+			countheight=0
+			indescent=false
+			resety()
+
+func upenv():
+
+	height+=1
+	if height>15:
+		countheight+=1
+		moveDir(1,false,1,false,"y")
 
 func outspace():
 		wrestplayercontrol=false
@@ -382,7 +414,6 @@ func inspaceattack():
 		
 			
 func flyup():
-	print("flyup")
 	moveDir(1,false,1,false,"y")
 	
 func flydown():
@@ -509,6 +540,12 @@ func _process(delta):
 	
 	if Flags.paused==true:
 		return
+		
+	if inascent:
+		upenv()
+	if indescent:
+		downenv()
+		
 	if Flags.controlled==true && canrandom==true:
 		dorandaction()		
 	
@@ -600,6 +637,7 @@ func _process(delta):
 			
 	if Input.is_action_just_pressed("jump") && canJump==true:
 		jumps+=1
+		inascent=true
 		Flags.inCrouch=false
 		canJump=jumps<Flags.megaStats.extraJump
 		Flags.inJump=true
@@ -714,19 +752,35 @@ func moveDir(base,flip,dir,offS,pos="x"):
 			$player.dooffset(true)
 			
 
-func warpto(base):
+func warpto(base,sped=speed,axis="x"):
 		base*=-1
-		$treeholder.position.x=base 
-		$stars.position.x+=(base-.9)*speed
-		$treeholder2.position.x=(base+0.5)*speed 
-		$treeholder3.position.x=(base+1.5)*speed
-		$rocks.position.x=(base+0.60)*speed
-		$npcs.position.x=(base+0.45)*speed
-		$interactive.position.x=(base+0.45)*speed
-		$enemy.position.x=(base+0.5)*speed
-		$locationback.position.x=(base+0.6)*speed
-		$locationfront.position.x=(base+0.6)*speed
+		$treeholder.position[axis]=base 
+		$stars.position[axis]+=(base-.9)*speed
+		$treeholder2.position[axis]=(base+0.5)*speed 
+		$treeholder3.position[axis]=(base+1.5)*speed
+		$rocks.position[axis]=(base+0.60)*speed
+		$npcs.position[axis]=(base+0.45)*speed
+		$interactive.position[axis]=(base+0.45)*speed
+		$enemy.position[axis]=(base+0.5)*speed
+		$locationback.position[axis]=(base+0.6)*speed
+		$locationfront.position[axis]=(base+0.6)*speed
 		$player/AnimatedSprite2D.offset=Vector2(0,0)
+
+
+func resety(axis="y"):
+	
+		$treeholder.position[axis]=treeholderResetY 
+		$stars.position[axis]=0
+		$treeholder2.position[axis]=treeholder2ResetY
+		$treeholder3.position[axis]=0
+		$rocks.position[axis]=0
+		$npcs.position[axis]=0
+		$interactive.position[axis]=0
+		$enemy.position[axis]=0
+		$locationback.position[axis]=0
+		$locationfront.position[axis]=0
+#		$player/AnimatedSprite2D.offset=Vector2(0,0)
+
 
 func stop_fight():
 		#Flags.playerHits=Flags.playerStats.power
@@ -738,6 +792,8 @@ func stop_fight():
 		stopRun()
 			
 func reset_player():
+	indescent=true
+	inascent=false
 	canJump=false
 	jumps-=1
 	#Flags.inJump=false

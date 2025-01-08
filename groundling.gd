@@ -63,8 +63,9 @@ func hit():
 	if hp<1:
 		$AnimatedSprite2D.animation="dead"
 		dead=true
-		$hit.play()
 		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
+		$hit.play()
+
 	
 func _process(delta):
 	
