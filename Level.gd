@@ -62,9 +62,12 @@ var inascent=false
 var indescent=false
 var treeholderResetY=0
 var treeholder2ResetY=0
+var jumpheight=0
+var jumpups=0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	Flags.mode="level"
 	$Camera2D.make_current()
 	if Flags.options.randomizeDistribution:
@@ -82,6 +85,7 @@ func _ready():
 	speed=baseSpeed
 	$"..".killStart() #this needs to change
 	$treeholder.position.y=-175
+
 	treeholderResetY=$treeholder.position.y
 	$treeholder2.position.y=-150
 	treeholder2ResetY=$treeholder2.position.y
@@ -132,6 +136,9 @@ func _ready():
 	if newsave:
 		Flags.save()
 	$player.position.y=basey
+	Flags.env=[]
+	Flags.addEnv([$treeholder,$treeholder2,$treeholder3,$stars,$locationback,$interactive,$npcs,$locationfront,$enemy,$rocks])
+
 	#uncomment to test gemna
 	#speed=1
 	#warpto(34000)
@@ -378,19 +385,20 @@ func downenv():
 		height-=1
 		countheight-=1
 		if countheight>0:
-			moveDir(1,false,-1,false,"y")
+	#		moveDir(1,false,-1,false,"y")
+			return
 		else:
 			height=0
 			countheight=0
 			indescent=false
-			resety()
+		#	resety()
 
 func upenv():
 
 	height+=1
 	if height>15:
 		countheight+=1
-		moveDir(1,false,1,false,"y")
+		#moveDir(1,false,1,false,"y")
 
 func outspace():
 		wrestplayercontrol=false
@@ -633,23 +641,38 @@ func _process(delta):
 		tween.tween_property($player, "modulate", oldmod, .65)
 		tween.tween_callback(stop_fight)
 
-
-			
 	if Input.is_action_just_pressed("jump") && canJump==true:
-		jumps+=1
-		inascent=true
-		Flags.inCrouch=false
-		canJump=jumps<Flags.megaStats.extraJump
-		Flags.inJump=true
-		currSpeed=speed
-		speed+=5
-		var tween = get_tree().create_tween()
-		gy=$player.position.y
-		gx=$player.position.x
-		$player/jump.play()
-		tween.tween_property($player, "position", Vector2(gx,gy-ascent), .5)
-		tween.tween_callback(reset_player)
+			jumps+=1
+			inascent=true
+			Flags.inCrouch=false
+			canJump=jumps<Flags.megaStats.extraJump
+			Flags.inJump=true
+			currSpeed=speed
+			speed+=5
+#			var tween = get_tree().create_tween()
+			gy=$player.position.y
+			gx=$player.position.x
+			$player/jump.play()
+			jump(gy-ascent)
+#			tween.tween_property($player, "position", Vector2(gx,gy-ascent), .5)
+#			tween.tween_callback(reset_player)	
+			
+	#if Input.is_action_just_pressed("jump") && canJump==true:				
+		#jumps+=1
+		#inascent=true
+		#Flags.inCrouch=false
+		#canJump=jumps<Flags.megaStats.extraJump
+		#Flags.inJump=true
+		#currSpeed=speed
+		#speed+=5
+		#var tween = get_tree().create_tween()
+		#gy=$player.position.y
+		#gx=$player.position.x
+		#$player/jump.play()
+		#tween.tween_property($player, "position", Vector2(gx,gy-ascent), .5)
+		#tween.tween_callback(reset_player)
 		
+
 	if Input.is_action_just_pressed("search") && canJump==true:
 		Flags.inCrouch=false
 		if Flags.interactablenpc!=null:
@@ -682,6 +705,72 @@ func _process(delta):
 	if Flags.pukestate==true:
 		$player/AnimatedSprite2D.play()
 
+func jump(howhigh):
+	jumpheight=howhigh
+	jumpup()
+	doenvup()
+
+
+func doenvup():
+	for i in Flags.env:
+		i.scene.position.y+=10
+	Flags.tne.dotime(self,[doenvup],.01,"doenvup",true,"level")
+
+func doenvdown():
+	Flags.tne.killTimer("doenvup","level")
+	var count=0
+	for i in Flags.env:
+		if i.scene.position.y>i.y:
+			i.scene.position.y-=7
+			count+=1
+		else:
+			i.scene.position.y=i.y
+	if count>0:
+		Flags.tne.dotime(self,[doenvdown],.01,"doenvdown",true,"level")
+		
+		
+		
+func jumpup():
+	#Flags.tne.killTimer("jumpdown","level")
+	jumpups+=1
+	#print("jumpup:",$player.position.y," -- height: ",jumpheight," -- jumps : ",jumps," -- jumpups: ",jumpups)
+	inascent=true
+	$player.position.y-=20
+	#moveDir(1,false,1,false,"y")
+	if $player.position.y<jumpheight:
+		jumps-=1
+		if jumps<1:
+			jumpdown()
+			doenvdown()
+			inascent=false
+			Flags.tne.killTimer("jumpup","level")
+			return
+	Flags.tne.dotime(self,[jumpup],.01,"jumpup",false,"level")
+
+func jumpdown():
+	Flags.tne.killTimer("jumpup","level")
+	jumpups-=1
+#	print("jumpdown:",$player.position.y," -- height: ",jumpheight," -- jumps : ",jumps," -- jumpups: ",jumpups)
+	indescent=true
+#	moveDir(1,false,-1,false,"y")
+	$player.position.y+=20
+	if $player.position.y>basey:
+		$player.position.y=basey
+		Flags.tne.killTimer("jumpdown","level")
+		stopjump()
+		return
+	Flags.tne.dotime(self,[jumpdown],.01,"jumpdown",false,"level")
+	
+	
+func finishenvdescent():
+	#if $treeholder.position.y>treeholderResetY:
+		#moveDir(1,false,1,false,"y")
+#	else:
+		#Flags.tne.killTimer("finishdown","level")
+		#resety()
+		return
+	#Flags.tne.dotime(self,[finishenvdescent],.01,"finishdown",false,"level")	
+	
 func unconfused():
 	Flags.confused=false
 
@@ -790,6 +879,32 @@ func stop_fight():
 		Flags.inFight=false
 		Flags.playerDead=false
 		stopRun()
+
+func stopjump():
+	indescent=false
+	inascent=false
+	jumps=0
+	speed=Flags.playerStats.speed
+	currSpeed=speed
+	height=0
+	countheight=0
+	indescent=false
+	#finishenvdescent()
+	
+	Flags.inJump=false
+	canJump=true
+	Flags.inCrouch=false
+	if Flags.spinned:
+		Flags.spinned=false
+		if Flags.megaStats.dizres>0.0:
+			Flags.confused=true
+			$player.confused()
+			Flags.tne.dotime(self,[unconfused],Flags.megaStats.dizres,"unconfuse",true,"level")
+
+
+
+
+
 			
 func reset_player():
 	indescent=true

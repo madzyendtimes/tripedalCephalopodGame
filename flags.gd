@@ -184,6 +184,8 @@ var questDistributed=false
 var vehicle=null
 var currentmusic=null
 var wasufo=false
+var env=[]
+
 
 func weatheroff():
 	$weather.position.y=0
@@ -247,8 +249,13 @@ func reset():
 	credit=megaStats.credit
 	playerHits=megaStats.power
 	interactablenpc=null
+	env=[]
 	
-	
+func addEnv(scenes):
+	for i in scenes:
+		env.append({"scene":i,"y":i.position.y})
+
+
 func calchits(hp):
 	print("playerhits:",playerHits)
 	if special=="ufo":
