@@ -417,6 +417,10 @@ func refreshPlayer():
 	}
 	#print(megaStats)
 	credit=megaStats.credit
+	#translate old saves
+	if megaStats.attackmode.get("fist") != null:
+		megaStats.attackmode.erase("fist")
+		megaStats.attackmode["tentacle"]=true
 		
 func clearnode(danode):
 	var removenode=danode.get_children()

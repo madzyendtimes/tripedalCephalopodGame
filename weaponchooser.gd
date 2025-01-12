@@ -8,22 +8,25 @@ var fps=10
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print(Flags.megaStats)
 	for i in Flags.megaStats.attackmode:
 		if (i=="fist") :
 			i="tentacle"
 		print(i)
-		#if Flags.megaStats.attackmode[i]:
-		Flags.amode.append(i)
+		if Flags.megaStats.attackmode[i]:
+			Flags.amode.append(i)
 	for i in range(1,9):
 		var c=Flags.rng.randi_range(0,Flags.amode.size()-1)
 		get_node("wheel/board/sel"+str(i)+"/sel").animation=Flags.amode[c]
 	self.visible=false
+	print(Flags.amode , Flags.amode.size())
 	if Flags.amode.size()>1:
 		start()
 
 func start():
-	self.visible=true
-	Flags.tne.dotime(self,[dospin],Flags.rng.randf_range(.01,.25),"dospin",true,"level")
+	if Flags.amode.size()>1:
+		self.visible=true
+		Flags.tne.dotime(self,[dospin],Flags.rng.randf_range(.01,.25),"dospin",true,"level")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
