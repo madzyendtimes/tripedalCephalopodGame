@@ -3,7 +3,7 @@ var choice:=6
 var lastchoice:=6
 var choices:=[
 	{"price":99,"effect":"winner","instock":true,"text":"pay to win","implemented":true},
-	{"price":10,"effect":"carryinventory","instock":true,"text":"limited will & testament","implemented":false},
+	{"price":10,"effect":"carryinventory","instock":true,"text":"limited will & testament","implemented":true},
 	{"price":8,"effect":"addstrength","instock":Flags.megaStats.power<(Flags.megaStats.capPower+1),"text":"muscle memory","implemented":true},
 	{"price":8,"effect":"addhealth","instock":Flags.megaStats.health<(Flags.megaStats.capHealth+1),"text":"well fed","implemented":true},
 	{"price":8,"effect":"addspeed","instock":Flags.megaStats.speed<(Flags.megaStats.capSpeed+1),"text":"adhd","implemented":true},
@@ -20,7 +20,7 @@ var choices:=[
 	{"price":99,"effect":"fistshot","instock":!Flags.megaStats.attackmode.gun,"text":"hand cannon","implemented":true},
 	{"price":99,"effect":"flybuddy","instock":true,"text":"Oder De Body","implemented":false},
 	{"price":45,"effect":"levelselect","instock":true,"text":"flat circle dissector","implemented":false},
-	{"price":85,"effect":"transmute","instock":true,"text":"philosopher's rock","implemented":false},
+	{"price":85,"effect":"transmute","instock":true,"text":"philosopher's rock","implemented":true},
 	{"price":85,"effect":"homebase","instock":true,"text":"mortage","implemented":false},
 	{"price":1,"effect":"vapor","instock":true,"text":"vapor ware","implemented":false},
 	]
@@ -161,7 +161,10 @@ func purchase():
 			"fistshot":
 				Flags.megaStats.attackmode.gun=true
 				Flags.fightmode="gun"
-
+			"transmute":
+				Flags.megaStats.transmute=true
+			"carryinventory":
+				Flags.megaStats.inventorycapacity+=1
 
 		$CanvasLayer/AnimatedSprite2D.animation="eat"
 		Flags.save()

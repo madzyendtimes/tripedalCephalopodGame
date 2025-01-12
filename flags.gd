@@ -35,20 +35,24 @@ var playerDead:=false
 var playerInventory:=[]
 var interactablenpc=null
 
-var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,
+var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,
+"inventory":[],"inventorycapacity":0,"credit":false,
 "spinattack":false,
 "dizres":1.5,
 "extraJump":1,"capExtraJump":5,
 "deathgifts":false,
-"attackmode":{"tentacle":true,"gun":false}
+"attackmode":{"tentacle":true,"gun":false},
+"transmute":false
 }
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
-var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,
+var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,
+"inventory":[],"inventorycapacity":0,"credit":false,
 "spinattack":false,
 "dizres":1.5,
 "extraJump":1,"capExtraJump":5,
 "deathgifts":false,
-"attackmode":{"tentacle":true,"gun":false}
+"attackmode":{"tentacle":true,"gun":false},
+"transmute":false
 }
 var entered:={
 	"ready":false,
@@ -163,7 +167,7 @@ var percentageMap=[
 3, #gemmonster
 3, #hoarde
 9, #gravestone
-9, #special npc
+900, #special npc
 1,#boss
 5,#gas
 10, #saw
@@ -366,7 +370,8 @@ func defaultmegastats():
 	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,"spinattack":false,"dizres":1.5,
 	"extraJump":1,"capExtraJump":5,
 	"deathgifts":false,
-	"attackmode":{"tentacle":true,"gun":false}
+	"attackmode":{"tentacle":true,"gun":false},
+	"transmute":false
 	}
 
 func loader():

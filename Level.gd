@@ -147,6 +147,10 @@ func _ready():
 	#warpto(34000)
 	#this sets off the spawntimer testing before removing old static enemyGeneraator
 	dospawns()
+	for i in Flags.megaStats.inventory:
+		Flags.playerInventory.append(i)
+	print(Flags.playerInventory)
+	
 	#Flags.addToInventory(1,4) #give user a begging board
 	
 func applyshaders(ts):

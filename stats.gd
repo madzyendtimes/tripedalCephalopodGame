@@ -32,16 +32,39 @@ func _process(delta):
 				print(pi)
 				Flags.tne.addEvent(pi.effect,"level")
 				#Flags.effect=pi.effect
+				var inInv=Flags.megaStats.inventory.find(pi)
+				if inInv>-1:
+					Flags.megaStats.inventory.remove_at(inInv)
 				if pi.consumable==true:
 					Flags.playerInventory.remove_at(Flags.selectedItem-1)
 					if pi.swap!={}:
 						doswap(pi.swap)
 			contract()
 		
-
+		if Input.is_action_just_pressed("search"):
+			if Flags.megaStats.transmute:
+				if Flags.selectedItem<=Flags.playerInventory.size():
+					var pi=Flags.playerInventory[Flags.selectedItem-1]					
+					Flags.tne.addEvent("addgems","level")
+					Flags.playerInventory.remove_at(Flags.selectedItem-1)
+					var inInv=Flags.megaStats.inventory.find(pi)
+					if inInv>-1:
+						Flags.megaStats.inventory.remove_at(inInv)
+					contract()
 			
-
-		
+		if Input.is_action_just_pressed("run"):
+			if Flags.megaStats.inventorycapacity>0:
+				if Flags.selectedItem<=Flags.playerInventory.size():
+					var pi=Flags.playerInventory[Flags.selectedItem-1]					
+					Flags.megaStats.inventory.append(pi)
+					if Flags.megaStats.inventory.size()>Flags.megaStats.inventorycapacity:
+						Flags.megaStats.inventory.pop_front()
+						
+			print(Flags.megaStats.inventory)
+			
+		if Input.is_action_just_pressed("fight"):
+			contract()
+			
 func doswap(obj):
 	Flags.addToInventory(obj.type,obj.varient)
 		
