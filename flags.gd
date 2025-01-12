@@ -40,7 +40,7 @@ var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"
 "dizres":1.5,
 "extraJump":1,"capExtraJump":5,
 "deathgifts":false,
-"attackmode":{"fist":true,"gun":false}
+"attackmode":{"tentacle":true,"gun":false}
 }
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
 var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,
@@ -48,7 +48,7 @@ var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"pow
 "dizres":1.5,
 "extraJump":1,"capExtraJump":5,
 "deathgifts":false,
-"attackmode":{"fist":true,"gun":false}
+"attackmode":{"tentacle":true,"gun":false}
 }
 var entered:={
 	"ready":false,
@@ -185,7 +185,7 @@ var vehicle=null
 var currentmusic=null
 var wasufo=false
 var env=[]
-
+var amode=[]
 
 func weatheroff():
 	$weather.position.y=0
@@ -201,6 +201,7 @@ func pitch(aud):
 	aud.pitch_scale=rng.randf_range(-1.50,2.10)
 
 func reset():
+	amode=[]
 	wasufo=false
 	currentmusic=null
 	vehicle=null
@@ -253,7 +254,7 @@ func reset():
 	
 func addEnv(scenes):
 	for i in scenes:
-		env.append({"scene":i,"y":i.position.y})
+		env.append({"scene":i[0],"y":i[0].position.y,"speed":i[1]})
 
 
 func calchits(hp):
@@ -365,7 +366,7 @@ func defaultmegastats():
 	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,"spinattack":false,"dizres":1.5,
 	"extraJump":1,"capExtraJump":5,
 	"deathgifts":false,
-	"attackmode":{"fist":true,"gun":false}
+	"attackmode":{"tentacle":true,"gun":false}
 	}
 
 func loader():
@@ -415,9 +416,7 @@ func refreshPlayer():
 		"smarts":megaStats.smarts
 	}
 	#print(megaStats)
-	credit=megaStats.credit		
-	if megaStats.attackmode.gun:
-		fightmode="gun"
+	credit=megaStats.credit
 		
 func clearnode(danode):
 	var removenode=danode.get_children()

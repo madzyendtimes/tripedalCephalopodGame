@@ -1,0 +1,266 @@
+[gd_scene load_steps=21 format=3 uid="uid://daalhhjwi7mri"]
+
+[ext_resource type="Script" path="res://weaponchooser.gd" id="1_rcnh4"]
+[ext_resource type="Texture2D" uid="uid://du6q7021h8kyb" path="res://choosers/spinwheel/wheel.PNG" id="2_rreox"]
+[ext_resource type="Texture2D" uid="uid://dkh1n3ul12a04" path="res://choosers/items/weapons/IMG_6660.PNG" id="3_amaks"]
+[ext_resource type="Texture2D" uid="uid://c3uxu2cgnr6m3" path="res://choosers/spinwheel/needle1.PNG" id="3_jgdb2"]
+[ext_resource type="Texture2D" uid="uid://dqs08i7xjdfla" path="res://choosers/items/weapons/IMG_6654.PNG" id="3_whe73"]
+[ext_resource type="Texture2D" uid="uid://7q16fpbu3jmv" path="res://choosers/spinwheel/needle2.PNG" id="4_aax62"]
+[ext_resource type="Texture2D" uid="uid://buxraj4uuvtix" path="res://choosers/items/weapons/IMG_6656.PNG" id="4_m7gjc"]
+[ext_resource type="Texture2D" uid="uid://dociop324owyx" path="res://choosers/spinwheel/needle3.PNG" id="5_duoib"]
+[ext_resource type="Texture2D" uid="uid://p4g8hlmdbrxy" path="res://choosers/items/weapons/IMG_6655.PNG" id="5_w3xmb"]
+[ext_resource type="Texture2D" uid="uid://so26lgs1ator" path="res://choosers/items/weapons/IMG_6657.PNG" id="6_5ujt4"]
+[ext_resource type="Texture2D" uid="uid://br47nnvygwi63" path="res://choosers/items/weapons/IMG_6659.PNG" id="7_do1lt"]
+[ext_resource type="Texture2D" uid="uid://b08lmx4o6d2kw" path="res://choosers/items/weapons/IMG_6661.PNG" id="8_r8jl6"]
+[ext_resource type="Texture2D" uid="uid://7aous4dsec42" path="res://choosers/items/weapons/IMG_6658.PNG" id="9_ma1g0"]
+[ext_resource type="Script" path="res://needlechoice.gd" id="11_n73bj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kjmsp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_amaks")
+}],
+"loop": true,
+"name": &"bomb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_m7gjc")
+}],
+"loop": true,
+"name": &"dynamitechucks",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_w3xmb")
+}],
+"loop": true,
+"name": &"gun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_5ujt4")
+}],
+"loop": true,
+"name": &"laser",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_do1lt")
+}],
+"loop": true,
+"name": &"lightsaber",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_r8jl6")
+}],
+"loop": true,
+"name": &"machinegun",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_ma1g0")
+}],
+"loop": true,
+"name": &"molotav",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_whe73")
+}],
+"loop": true,
+"name": &"tentacle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ifdq"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fcc66"]
+radius = 80.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jwsls"]
+radius = 72.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i0ite"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jgdb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_aax62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_duoib")
+}],
+"loop": true,
+"name": &"default",
+"speed": 17.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jgdb2")
+}],
+"loop": true,
+"name": &"stop",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u5t3r"]
+radius = 40.0
+
+[node name="weaponchooser" type="Node2D"]
+position = Vector2(-8, 24)
+script = ExtResource("1_rcnh4")
+
+[node name="wheel" type="Node2D" parent="."]
+
+[node name="board" type="Sprite2D" parent="wheel"]
+position = Vector2(-8, 8)
+texture = ExtResource("2_rreox")
+offset = Vector2(-8, 8)
+
+[node name="sel1" type="Area2D" parent="wheel/board"]
+
+[node name="sel" type="AnimatedSprite2D" parent="wheel/board/sel1"]
+position = Vector2(-47.9999, -120)
+rotation = -0.18586
+scale = Vector2(0.751395, 0.707187)
+sprite_frames = SubResource("SpriteFrames_kjmsp")
+animation = &"machinegun"
+
+[node name="col" type="CollisionShape2D" parent="wheel/board/sel1"]
+position = Vector2(-56, -160)
+shape = SubResource("CircleShape2D_8ifdq")
+
+[node name="sel2" type="Area2D" parent="wheel/board"]
+
+[node name="sel" type="AnimatedSprite2D" parent="wheel/board/sel2"]
+position = Vector2(-120, -64)
+rotation = -1.07967
+scale = Vector2(0.751395, 0.707187)
+sprite_frames = SubResource("SpriteFrames_kjmsp")
+animation = &"gun"
+
+[node name="col" type="CollisionShape2D" parent="wheel/board/sel2"]
+position = Vector2(-168, -88)
+shape = SubResource("CircleShape2D_fcc66")
+
+[node name="sel3" type="Area2D" parent="wheel/board"]
+
+[node name="sel" type="AnimatedSprite2D" parent="wheel/board/sel3"]
+position = Vector2(-136, 40)
+rotation = -1.97141
+scale = Vector2(0.751395, 0.707187)
+sprite_frames = SubResource("SpriteFrames_kjmsp")
+animation = &"dynamitechucks"
+
+[node name="col" type="CollisionShape2D" parent="wheel/board/sel3"]
+position = Vector2(-176, 56)
+shape = SubResource("CircleShape2D_fcc66")
+
+[node name="sel4" type="Area2D" parent="wheel/board"]
+
+[node name="sel" type="AnimatedSprite2D" parent="wheel/board/sel4"]
+position = Vector2(-56, 136)
+rotation = -2.45904
+scale = Vector2(0.751395, 0.707187)
+sprite_frames = SubResource("SpriteFrames_kjmsp")
+animation = &"tentacle"
+
+[node name="col" type="CollisionShape2D" parent="wheel/board/sel4"]
+position = Vector2(-80, 160)
+shape = SubResource("CircleShape2D_fcc66")
+
+[node name="sel5" type="Area2D" parent="wheel/board"]
+
+[node name="sel" type="AnimatedSprite2D" parent="wheel/board/sel5"]
+position = Vector2(56, 144)
+rotation = -3.33972
+scale = Vector2(0.751395, 0.707187)
+sprite_frames = SubResource("SpriteFrames_kjmsp")
+animation = &"laser"
+
+[node name="col" type="CollisionShape2D" parent="wheel/board/sel5"]
+position = Vector2(64, 176)
+shape = SubResource("CircleShape2D_fcc66")
+
+[node name="sel6" type="Area2D" parent="wheel/board"]
+
+[node name="sel" type="AnimatedSprite2D" parent="wheel/board/sel6"]
+position = Vector2(144, 48)
+rotation = -4.06834
+scale = Vector2(0.751395, 0.707187)
+sprite_frames = SubResource("SpriteFrames_kjmsp")
+animation = &"bomb"
+
+[node name="col" type="CollisionShape2D" parent="wheel/board/sel6"]
+position = Vector2(200, 88)
+shape = SubResource("CircleShape2D_fcc66")
+
+[node name="sel7" type="Area2D" parent="wheel/board"]
+
+[node name="sel" type="AnimatedSprite2D" parent="wheel/board/sel7"]
+position = Vector2(128, -56)
+rotation = -5.12844
+scale = Vector2(0.751395, 0.707187)
+sprite_frames = SubResource("SpriteFrames_kjmsp")
+animation = &"lightsaber"
+
+[node name="col" type="CollisionShape2D" parent="wheel/board/sel7"]
+position = Vector2(184, -72)
+shape = SubResource("CircleShape2D_jwsls")
+
+[node name="sel8" type="Area2D" parent="wheel/board"]
+
+[node name="sel" type="AnimatedSprite2D" parent="wheel/board/sel8"]
+position = Vector2(64, -112)
+rotation = -5.93232
+scale = Vector2(0.751395, 0.707187)
+sprite_frames = SubResource("SpriteFrames_kjmsp")
+animation = &"molotav"
+
+[node name="col" type="CollisionShape2D" parent="wheel/board/sel8"]
+position = Vector2(80, -168)
+shape = SubResource("CircleShape2D_jwsls")
+
+[node name="chose" type="AnimatedSprite2D" parent="."]
+position = Vector2(16, 48)
+rotation = -0.18586
+scale = Vector2(1.29092, 1.10503)
+sprite_frames = SubResource("SpriteFrames_kjmsp")
+animation = &"machinegun"
+
+[node name="needlechoice" type="StaticBody2D" parent="."]
+script = ExtResource("11_n73bj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="needlechoice"]
+position = Vector2(-8, -15)
+scale = Vector2(1, 1.028)
+sprite_frames = SubResource("SpriteFrames_i0ite")
+autoplay = "default"
+frame_progress = 0.451716
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="needlechoice"]
+position = Vector2(-24, -216)
+shape = SubResource("CircleShape2D_u5t3r")
+
+[connection signal="body_entered" from="wheel/board/sel1" to="." method="_on_sel_1_body_entered"]
+[connection signal="body_entered" from="wheel/board/sel2" to="." method="_on_sel_2_body_entered"]
+[connection signal="body_entered" from="wheel/board/sel3" to="." method="_on_sel_3_body_entered"]
+[connection signal="body_entered" from="wheel/board/sel4" to="." method="_on_sel_4_body_entered"]
+[connection signal="body_entered" from="wheel/board/sel5" to="." method="_on_sel_5_body_entered"]
+[connection signal="body_entered" from="wheel/board/sel6" to="." method="_on_sel_6_body_entered"]
+[connection signal="body_entered" from="wheel/board/sel7" to="." method="_on_sel_7_body_entered"]
+[connection signal="body_entered" from="wheel/board/sel8" to="." method="_on_sel_8_body_entered"]

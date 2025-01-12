@@ -64,6 +64,7 @@ var treeholderResetY=0
 var treeholder2ResetY=0
 var jumpheight=0
 var jumpups=0
+var phantomposition=0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -137,8 +138,10 @@ func _ready():
 		Flags.save()
 	$player.position.y=basey
 	Flags.env=[]
-	Flags.addEnv([$treeholder,$treeholder2,$treeholder3,$stars,$locationback,$interactive,$npcs,$locationfront,$enemy,$rocks])
-
+	Flags.addEnv([[$treeholder,.5],[$treeholder2,.7],[$treeholder3,1],[$stars,.1],[$locationback,1],[$interactive,1],[$npcs,1],[$locationfront,1],[$enemy,1],[$rocks,1]])
+	phantomposition=$player.position.y
+	#if Flags.amode.size()>0:
+	$player.chooseweapon()
 	#uncomment to test gemna
 	#speed=1
 	#warpto(34000)
@@ -653,6 +656,7 @@ func _process(delta):
 			gy=$player.position.y
 			gx=$player.position.x
 			$player/jump.play()
+			phantomposition=$player.position.y
 			jump(gy-ascent)
 #			tween.tween_property($player, "position", Vector2(gx,gy-ascent), .5)
 #			tween.tween_callback(reset_player)	
@@ -706,6 +710,7 @@ func _process(delta):
 		$player/AnimatedSprite2D.play()
 
 func jump(howhigh):
+	
 	jumpheight=howhigh
 	jumpup()
 	doenvup()
@@ -713,7 +718,7 @@ func jump(howhigh):
 
 func doenvup():
 	for i in Flags.env:
-		i.scene.position.y+=10
+		i.scene.position.y+=10*i.speed
 	Flags.tne.dotime(self,[doenvup],.01,"doenvup",true,"level")
 
 func doenvdown():
@@ -721,7 +726,7 @@ func doenvdown():
 	var count=0
 	for i in Flags.env:
 		if i.scene.position.y>i.y:
-			i.scene.position.y-=7
+			i.scene.position.y-=7*i.speed
 			count+=1
 		else:
 			i.scene.position.y=i.y
@@ -735,10 +740,15 @@ func jumpup():
 	jumpups+=1
 	#print("jumpup:",$player.position.y," -- height: ",jumpheight," -- jumps : ",jumps," -- jumpups: ",jumpups)
 	inascent=true
-	$player.position.y-=20
+	$player.position.y=max(100,$player.position.y-20)
+	phantomposition-=20
+	print("phantomy:",phantomposition," - playerposition: ",$player.position.y," -- jumpheight : ",jumpheight)
 	#moveDir(1,false,1,false,"y")
-	if $player.position.y<jumpheight:
+	
+	
+	if phantomposition<(jumpheight*jumps):
 		jumps-=1
+		print("**** phantomy:",phantomposition," - playerposition: ",$player.position.y," -- jumpheight : ",jumpheight," --- jumps: ",jumps)
 		if jumps<1:
 			jumpdown()
 			doenvdown()
@@ -753,8 +763,11 @@ func jumpdown():
 #	print("jumpdown:",$player.position.y," -- height: ",jumpheight," -- jumps : ",jumps," -- jumpups: ",jumpups)
 	indescent=true
 #	moveDir(1,false,-1,false,"y")
-	$player.position.y+=20
-	if $player.position.y>basey:
+	phantomposition+=20
+	$player.position.y=min($player.position.y+20,basey)
+	print("downphantomy:",phantomposition," - playerposition: ",$player.position.y," -- basey : ",basey)
+	if phantomposition>basey:
+		print("******downphantomy:",phantomposition," - playerposition: ",$player.position.y," -- basey : ",basey)
 		$player.position.y=basey
 		Flags.tne.killTimer("jumpdown","level")
 		stopjump()

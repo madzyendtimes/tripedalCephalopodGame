@@ -44,6 +44,10 @@ func _process(delta):
 	if Flags.pukestate==true:
 		puke()
 
+func chooseweapon():
+	print("chooseWeapon")
+	$weaponchooser.start()
+
 func dooffset(boff):
 	isinoffset=boff
 	if Flags.inCrouch:

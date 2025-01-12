@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://cdj8g8hh6wurl"]
+[gd_scene load_steps=127 format=3 uid="uid://cdj8g8hh6wurl"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ohfo4"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="2_akx6h"]
@@ -116,6 +116,7 @@
 [ext_resource type="Texture2D" uid="uid://c821ammer5fjt" path="res://items/scrap/scrap6.PNG" id="110_5r5cg"]
 [ext_resource type="Texture2D" uid="uid://65fik2ppv784" path="res://items/fancy/fancy1.PNG" id="111_foxvf"]
 [ext_resource type="Texture2D" uid="uid://cgtphnxbpnf2y" path="res://items/fancy/fancy3.PNG" id="112_agou6"]
+[ext_resource type="PackedScene" uid="uid://daalhhjwi7mri" path="res://weaponchooser.tscn" id="117_d7pic"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2uxv"]
 radius = 48.0
@@ -795,3 +796,7 @@ position = Vector2(-31.5, -35.5)
 rotation = 1.50549
 shape = SubResource("CapsuleShape2D_3j8qe")
 disabled = true
+
+[node name="weaponchooser" parent="." instance=ExtResource("117_d7pic")]
+position = Vector2(-43.5, -143.5)
+scale = Vector2(0.25, 0.25)
