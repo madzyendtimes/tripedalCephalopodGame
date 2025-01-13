@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://bd5wvmtgxelxd"]
+
+[ext_resource type="Texture2D" uid="uid://dpwd2dwlvojg4" path="res://pets/liltrip/walk2.PNG" id="1_caqu4"]
+[ext_resource type="Script" path="res://liltrip.gd" id="1_nooq3"]
+[ext_resource type="Texture2D" uid="uid://b4hfwefi501s5" path="res://pets/liltrip/attack1.PNG" id="2_ido20"]
+[ext_resource type="Texture2D" uid="uid://bim0mrff6fwbx" path="res://pets/liltrip/attack2.PNG" id="3_0c51p"]
+[ext_resource type="Texture2D" uid="uid://bievdrsifawbt" path="res://pets/liltrip/sit1.PNG" id="4_1u0m0"]
+[ext_resource type="Texture2D" uid="uid://jso8kksq0fhj" path="res://pets/liltrip/sit2.PNG" id="5_vpj6f"]
+[ext_resource type="Texture2D" uid="uid://plnlrabao53" path="res://pets/liltrip/walk1.PNG" id="6_tj8iw"]
+[ext_resource type="Texture2D" uid="uid://fp0lla61sgiw" path="res://pets/liltrip/walk3.PNG" id="7_11gph"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2meaw"]
+radius = 72.4431
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ey0wn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_caqu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ido20")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0c51p")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1u0m0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vpj6f")
+}],
+"loop": true,
+"name": &"rest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_vpj6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tj8iw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_caqu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_11gph")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="liltrip" type="StaticBody2D"]
+collision_layer = 524288
+collision_mask = 40124
+script = ExtResource("1_nooq3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_2meaw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_ey0wn")
+animation = &"attack"
+autoplay = "rest"
+frame_progress = 0.570599
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(2.86102e-06, 3.99999)
+scale = Vector2(8, 7.6)
+
+[node name="right" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(160, 0)
+
+[node name="left" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-128, 8)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="right" to="." method="_on_right_screen_exited"]
+[connection signal="screen_exited" from="left" to="." method="_on_left_screen_exited"]

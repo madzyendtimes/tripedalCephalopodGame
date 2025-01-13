@@ -43,6 +43,9 @@ text = "
 "
 fit_content = true
 
+[node name="hbinv" type="HBoxContainer" parent="PopupPanel2/VBoxContainer"]
+layout_mode = 2
+
 [node name="PopupPanel" type="PopupPanel" parent="."]
 size = Vector2i(1150, 58)
 visible = true

@@ -40,6 +40,7 @@ func changedir():
 
 
 func _on_body_entered(body: Node2D) -> void:
+	
 	if body.name.find("laser")>-1:
 		Flags.pitch($splode)
 		$splode.play()

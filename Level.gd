@@ -33,6 +33,7 @@ var knifeScene:PackedScene=load("res://knifulator.tscn")
 var ufoScene:PackedScene=load("res://ufo.tscn")
 var laserScene:PackedScene=load("res://laser.tscn")
 var starScene:PackedScene=load("res://stars.tscn")
+var liltripScene:PackedScene=load("res://liltrip.tscn")
 
 var wrestplayercontrol=false
 var canJump:=true
@@ -138,7 +139,7 @@ func _ready():
 		Flags.save()
 	$player.position.y=basey
 	Flags.env=[]
-	Flags.addEnv([[$treeholder,.5],[$treeholder2,.7],[$treeholder3,1],[$stars,.1],[$locationback,1],[$interactive,1],[$npcs,1],[$locationfront,1],[$enemy,1],[$rocks,1]])
+	Flags.addEnv([[$treeholder,.5],[$treeholder2,.7],[$treeholder3,1],[$stars,.1],[$locationback,1],[$interactive,1],[$npcs,1],[$locationfront,1],[$enemy,1],[$rocks,1],[$pets,1]])
 	phantomposition=$player.position.y
 	#if Flags.amode.size()>0:
 	$player.chooseweapon()
@@ -149,8 +150,14 @@ func _ready():
 	dospawns()
 	for i in Flags.megaStats.inventory:
 		Flags.playerInventory.append(i)
-	print(Flags.playerInventory)
 	
+	var testliltrip=false
+	if testliltrip || Flags.megaStats.liltrip:
+		var pet=liltripScene.instantiate()
+		pet.position.y=basey+100
+		$pets.add_child(pet)
+	
+		
 	#Flags.addToInventory(1,4) #give user a begging board
 	
 func applyshaders(ts):
@@ -746,13 +753,13 @@ func jumpup():
 	inascent=true
 	$player.position.y=max(100,$player.position.y-20)
 	phantomposition-=20
-	print("phantomy:",phantomposition," - playerposition: ",$player.position.y," -- jumpheight : ",jumpheight)
+	#print("phantomy:",phantomposition," - playerposition: ",$player.position.y," -- jumpheight : ",jumpheight)
 	#moveDir(1,false,1,false,"y")
 	
 	
 	if phantomposition<(jumpheight*jumps):
 		jumps-=1
-		print("**** phantomy:",phantomposition," - playerposition: ",$player.position.y," -- jumpheight : ",jumpheight," --- jumps: ",jumps)
+		#print("**** phantomy:",phantomposition," - playerposition: ",$player.position.y," -- jumpheight : ",jumpheight," --- jumps: ",jumps)
 		if jumps<1:
 			jumpdown()
 			doenvdown()
@@ -769,9 +776,9 @@ func jumpdown():
 #	moveDir(1,false,-1,false,"y")
 	phantomposition+=20
 	$player.position.y=min($player.position.y+20,basey)
-	print("downphantomy:",phantomposition," - playerposition: ",$player.position.y," -- basey : ",basey)
+	#print("downphantomy:",phantomposition," - playerposition: ",$player.position.y," -- basey : ",basey)
 	if phantomposition>basey:
-		print("******downphantomy:",phantomposition," - playerposition: ",$player.position.y," -- basey : ",basey)
+		#print("******downphantomy:",phantomposition," - playerposition: ",$player.position.y," -- basey : ",basey)
 		$player.position.y=basey
 		Flags.tne.killTimer("jumpdown","level")
 		stopjump()
@@ -845,6 +852,8 @@ func moveDir(base,flip,dir,offS,pos="x"):
 	$enemy.position[pos]+=dir*(base+0.5)*gospeed
 	$locationback.position[pos]+=dir*(base+0.6)*gospeed
 	$locationfront.position[pos]+=dir*(base+0.6)*gospeed
+	if Flags.petmove:
+		$pets.position[pos]+=dir*(base+1)*gospeed
 	if flip:
 		$player.flip(dir==1)
 		
@@ -871,6 +880,8 @@ func warpto(base,sped=speed,axis="x"):
 		$locationback.position[axis]=(base+0.6)*speed
 		$locationfront.position[axis]=(base+0.6)*speed
 		$player/AnimatedSprite2D.offset=Vector2(0,0)
+		
+		#$pets.position[axis]=(base+1)*speed
 
 
 func resety(axis="y"):
@@ -885,6 +896,7 @@ func resety(axis="y"):
 		$enemy.position[axis]=0
 		$locationback.position[axis]=0
 		$locationfront.position[axis]=0
+		$pets.position[axis]=0
 #		$player/AnimatedSprite2D.offset=Vector2(0,0)
 
 

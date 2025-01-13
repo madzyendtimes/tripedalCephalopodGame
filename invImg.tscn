@@ -1,0 +1,199 @@
+[gd_scene load_steps=23 format=3 uid="uid://edw7cp3i3ijn"]
+
+[ext_resource type="Texture2D" uid="uid://5gxv1bhq48ip" path="res://items/icons/confused/confused1.PNG" id="1_6n1l6"]
+[ext_resource type="Texture2D" uid="uid://cqmlkdyl4s30c" path="res://items/icons/confused/confused2.PNG" id="2_cmu07"]
+[ext_resource type="Texture2D" uid="uid://c3dxpewhmfys5" path="res://items/icons/confused/confused3.PNG" id="3_1rv30"]
+[ext_resource type="Texture2D" uid="uid://blkqb3cqavfs4" path="res://items/fancy/fancy2.PNG" id="4_g7262"]
+[ext_resource type="Texture2D" uid="uid://c4tmddighkeex" path="res://items/icons/health.PNG" id="5_p3js1"]
+[ext_resource type="Texture2D" uid="uid://28a4yidhbw10" path="res://items/food/food1.PNG" id="6_ljnf3"]
+[ext_resource type="Texture2D" uid="uid://cpo36wc3fyamd" path="res://items/food/food2.PNG" id="7_yjs1c"]
+[ext_resource type="Texture2D" uid="uid://c8uh77b7ftule" path="res://items/food/food3.PNG" id="8_boja8"]
+[ext_resource type="Texture2D" uid="uid://c4t5i4xp055p8" path="res://items/food/food4.PNG" id="9_plgyp"]
+[ext_resource type="Texture2D" uid="uid://dbgqc3me3pbgt" path="res://items/scrap/scrap1.PNG" id="10_i71le"]
+[ext_resource type="Texture2D" uid="uid://ds4fjttdr7nsw" path="res://items/scrap/scrap2.PNG" id="11_4tmt2"]
+[ext_resource type="Texture2D" uid="uid://dnqsl1orm8iyv" path="res://items/scrap/scrap3.PNG" id="12_oaf2t"]
+[ext_resource type="Texture2D" uid="uid://dka2evv7l1cho" path="res://items/scrap/scrap4.PNG" id="13_npt6g"]
+[ext_resource type="Texture2D" uid="uid://b46r88cjjmq1y" path="res://items/scrap/scrap5.PNG" id="14_5caax"]
+[ext_resource type="Texture2D" uid="uid://c821ammer5fjt" path="res://items/scrap/scrap6.PNG" id="15_p2ghx"]
+[ext_resource type="Texture2D" uid="uid://65fik2ppv784" path="res://items/fancy/fancy1.PNG" id="16_5f2lc"]
+[ext_resource type="Texture2D" uid="uid://cgtphnxbpnf2y" path="res://items/fancy/fancy3.PNG" id="17_x3abe"]
+[ext_resource type="Texture2D" uid="uid://du1aheyjbqop0" path="res://items/icons/power.PNG" id="18_quyk6"]
+[ext_resource type="Texture2D" uid="uid://dl1jcqtkgjwh3" path="res://items/icons/speed.PNG" id="19_pc6rm"]
+[ext_resource type="Texture2D" uid="uid://b676airl7nrfy" path="res://items/icons/stanima.PNG" id="20_b1adm"]
+[ext_resource type="Texture2D" uid="uid://ctixitctvmitk" path="res://enemies/tv/tv1.PNG" id="21_rl6wy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqrl6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6n1l6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_cmu07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1rv30")
+}],
+"loop": true,
+"name": &"confused",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_g7262")
+}],
+"loop": true,
+"name": &"gem",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_p3js1")
+}],
+"loop": true,
+"name": &"health",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_ljnf3")
+}],
+"loop": true,
+"name": &"p01",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_yjs1c")
+}],
+"loop": true,
+"name": &"p02",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_boja8")
+}],
+"loop": true,
+"name": &"p03",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_plgyp")
+}],
+"loop": true,
+"name": &"p04",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_i71le")
+}],
+"loop": true,
+"name": &"p11",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_4tmt2")
+}],
+"loop": true,
+"name": &"p12",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_oaf2t")
+}],
+"loop": true,
+"name": &"p13",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_npt6g")
+}],
+"loop": true,
+"name": &"p14",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_5caax")
+}],
+"loop": true,
+"name": &"p15",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_p2ghx")
+}],
+"loop": true,
+"name": &"p16",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_5f2lc")
+}],
+"loop": true,
+"name": &"p21",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_g7262")
+}],
+"loop": true,
+"name": &"p22",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_x3abe")
+}],
+"loop": true,
+"name": &"p23",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_quyk6")
+}],
+"loop": true,
+"name": &"power",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_pc6rm")
+}],
+"loop": true,
+"name": &"speed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_b1adm")
+}],
+"loop": true,
+"name": &"stanima",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_rl6wy")
+}],
+"loop": true,
+"name": &"tv",
+"speed": 5.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+position = Vector2(600, 208)
+scale = Vector2(0.446667, 0.34)
+sprite_frames = SubResource("SpriteFrames_gqrl6")
+animation = &"p23"
+autoplay = "confused"

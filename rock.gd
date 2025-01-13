@@ -19,8 +19,18 @@ func choose():
 	setAnimation(Flags.rng.randi_range(1,3))
 
 func _on_body_entered(body):
+	
+	print(body)
 	if body.name.find("bullet")>-1||body.name.find("laser")>-1:
 		hit()
+	
+	if body.name.find("liltrip")>-1:
+		if body.state=="attack":
+			hit()
+		return
+	
+	
+	
 	body.hit()
 	
 func hit():

@@ -18,9 +18,9 @@ var choices:=[
 	{"price":35,"effect":"doublejump","instock":Flags.megaStats.extraJump<Flags.megaStats.capExtraJump,"text":"extra air friction","implemented":true},
 	{"price":45,"effect":"deathgifts","instock":!Flags.megaStats.deathgifts,"text":"death gifts","implemented":true},
 	{"price":99,"effect":"fistshot","instock":!Flags.megaStats.attackmode.gun,"text":"hand cannon","implemented":true},
-	{"price":99,"effect":"flybuddy","instock":true,"text":"Oder De Body","implemented":false},
+	{"price":99,"effect":"liltrip","instock":!Flags.megaStats.liltrip,"text":"adoption papers","implemented":true},
 	{"price":45,"effect":"levelselect","instock":true,"text":"flat circle dissector","implemented":false},
-	{"price":85,"effect":"transmute","instock":true,"text":"philosopher's rock","implemented":true},
+	{"price":85,"effect":"transmute","instock":!Flags.megaStats.transmute,"text":"philosopher's rock","implemented":true},
 	{"price":85,"effect":"homebase","instock":true,"text":"mortage","implemented":false},
 	{"price":1,"effect":"vapor","instock":true,"text":"vapor ware","implemented":false},
 	]
@@ -165,6 +165,8 @@ func purchase():
 				Flags.megaStats.transmute=true
 			"carryinventory":
 				Flags.megaStats.inventorycapacity+=1
+			"liltrip":
+				Flags.megaStats.liltrip=true
 
 		$CanvasLayer/AnimatedSprite2D.animation="eat"
 		Flags.save()

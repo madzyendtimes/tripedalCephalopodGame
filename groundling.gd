@@ -24,7 +24,10 @@ func polarity(canpolarity):
 func _on_body_entered(body):
 	if dead:
 		return
-
+	if body.name.find("liltrip")>-1:
+		if body.state=="attack":
+			hit()
+		return
 	if body.name.find("bullet")>-1||body.name.find("laser")>-1:
 		$AnimatedSprite2D.animation="dead"
 		dead=true	

@@ -249,7 +249,7 @@ position = Vector2(-8, -15)
 scale = Vector2(1, 1.028)
 sprite_frames = SubResource("SpriteFrames_i0ite")
 autoplay = "default"
-frame_progress = 0.834387
+frame_progress = 0.654337
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="needlechoice"]

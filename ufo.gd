@@ -108,6 +108,10 @@ func _on_body_entered(body: Node2D) -> void:
 			ufo=true
 			Flags.wasufo=true
 		return
+	if body.name.find("liltrip")>-1:
+		if body.state=="attack":
+			hit()
+		return
 	if body.name.find("bullet")>-1:
 		hit()
 		body.hit()

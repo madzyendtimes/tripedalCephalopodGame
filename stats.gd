@@ -1,6 +1,8 @@
 extends Control
 var navDivide:=11
 var eventq
+var invScene:PackedScene=load("res://invImg.tscn")
+var ainv=[]
 
 func _ready():
 	update()
@@ -79,16 +81,18 @@ func SelectItem(selx,sely):
 		Flags.selectedItem+=min(selx,sz)
 		Flags.selectedItem+=min(sely*11,sz)
 		if oldSelect>0:
-			$PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_SIZE,Flags.playerInventory[oldSelect-1].imgt,100,100,Color(1.0,1.0,1.0,1.0))
-			$PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_COLOR,Flags.playerInventory[oldSelect-1].imgt,100,100,Color(1.0,1.0,1.0,1.0))
+			$PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_SIZE,ainv[oldSelect-1],100,100,Color(1.0,1.0,1.0,1.0))
+			$PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_COLOR,ainv[oldSelect-1],100,100,Color(1.0,1.0,1.0,1.0))
 		if Flags.selectedItem<1:
 			Flags.selectedItem=1
 		if  Flags.selectedItem>sz:
 			Flags.selectedItem=sz
-		var texture=Flags.playerInventory[Flags.selectedItem-1].imgt
-
+		var texture=ainv[Flags.selectedItem-1]
+		#Flags.playerInventory[Flags.selectedItem-1].imgt
+		print(Flags.playerInventory)
+		print(Flags.selectedItem)
 		$PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_SIZE,texture,150,150,Color(1.0,1.0,0.0,1.0))
-		$PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_COLOR,texture,150,150,Color(1.0,0.0,0.0,1.0))
+		$PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_COLOR,texture,150,150,Color(1.0,1.0,0.0,1.0))
 #		
 
 	
@@ -115,12 +119,19 @@ func expand():
 	Flags.paused=true
 
 func clear():
+	ainv=[]
 	$PopupPanel2/VBoxContainer/inv.clear()
 	$PopupPanel2/VBoxContainer/inv.add_text("select an item and press 'a' to use\n\n\n")
 
 func addInventory(item,itemnum):
+	#richtext still works best
+	#var invI=invScene.instantiate()
+	#$PopupPanel2/VBoxContainer/hbinv.add_child(invI)
+	#invI.animation="p"+str(item.type)+str(item.item)
+	#print(invI.animation)
+	#ainv.append(invI)
 	var t=Texture.new()
 	t=load(item.img)
 	#change to buttons with icons?
 	$PopupPanel2/VBoxContainer/inv.add_image(t,100,100,Color(1,1,1,1),5,Rect2(0,0,0,0),"k"+str(itemnum))
-	
+	ainv.append(t)

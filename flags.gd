@@ -42,7 +42,8 @@ var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"
 "extraJump":1,"capExtraJump":5,
 "deathgifts":false,
 "attackmode":{"tentacle":true,"gun":false},
-"transmute":false
+"transmute":false,
+"liltrip":false
 }
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
 var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,
@@ -52,7 +53,8 @@ var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"pow
 "extraJump":1,"capExtraJump":5,
 "deathgifts":false,
 "attackmode":{"tentacle":true,"gun":false},
-"transmute":false
+"transmute":false,
+"liltrip":false
 }
 var entered:={
 	"ready":false,
@@ -167,7 +169,7 @@ var percentageMap=[
 3, #gemmonster
 3, #hoarde
 9, #gravestone
-900, #special npc
+9, #special npc
 1,#boss
 5,#gas
 10, #saw
@@ -190,6 +192,7 @@ var currentmusic=null
 var wasufo=false
 var env=[]
 var amode=[]
+var petmove=true
 
 func weatheroff():
 	$weather.position.y=0
@@ -255,6 +258,7 @@ func reset():
 	playerHits=megaStats.power
 	interactablenpc=null
 	env=[]
+	petmove=true
 	
 func addEnv(scenes):
 	for i in scenes:
@@ -371,7 +375,8 @@ func defaultmegastats():
 	"extraJump":1,"capExtraJump":5,
 	"deathgifts":false,
 	"attackmode":{"tentacle":true,"gun":false},
-	"transmute":false
+	"transmute":false,
+	"liltrip":false
 	}
 
 func loader():
