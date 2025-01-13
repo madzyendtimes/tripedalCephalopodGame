@@ -19,6 +19,8 @@ func start():
 func dochange():
 	var newstate=Flags.rng.randi_range(0,100)
 	Flags.tne.dotime(self,[dochange],Flags.rng.randf_range(0.25,1.5),"dochange"+str(get_instance_id()),true,"level")
+	if !Flags.petmove:
+		newstate=35
 	if newstate<25:
 		state="rest"
 		speed=0
@@ -55,7 +57,7 @@ func hit():
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
-	print("whoaoh ",rightexit)
+	#print("whoaoh ",rightexit)
 	#print(position.x," -- ",global_position.x, " --:-- ",get_parent().position.x)
 	Flags.petmove=false
 	if rightexit:
@@ -70,7 +72,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 		$AnimatedSprite2D.animation="walk"
 		$AnimatedSprite2D.play()
 		$AnimatedSprite2D.flip_h=false
-		
+			
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	Flags.petmove=true
 
