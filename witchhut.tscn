@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://bmq0wbqe1b72p"]
+[gd_scene load_steps=69 format=3 uid="uid://bmq0wbqe1b72p"]
 
 [ext_resource type="Script" path="res://witchhut.gd" id="1_segje"]
 [ext_resource type="Texture2D" uid="uid://bvlmeil7lqiyx" path="res://enterable/witchhut/assets/witchplayer/button.PNG" id="2_cgy88"]
@@ -53,6 +53,7 @@
 [ext_resource type="Texture2D" uid="uid://bvgpijmssqiqh" path="res://enterable/witchhut/assets/necrowitch/read2.PNG" id="29_plg3v"]
 [ext_resource type="Texture2D" uid="uid://dlen1q6qb3fvp" path="res://enterable/witchhut/assets/necrowitch/rip1.PNG" id="30_g06gc"]
 [ext_resource type="Texture2D" uid="uid://dxlh27hoeh35v" path="res://enterable/witchhut/assets/necrowitch/rip2.PNG" id="31_ja5ul"]
+[ext_resource type="AudioStream" uid="uid://b5diaegodc4xu" path="res://sounds/die.mp3" id="55_25o7w"]
 [ext_resource type="Texture2D" uid="uid://blkqb3cqavfs4" path="res://items/fancy/fancy2.PNG" id="55_m7veu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tp0ad"]
@@ -446,6 +447,9 @@ visible = false
 position = Vector2(344, 392)
 scale = Vector2(0.516667, 0.316667)
 texture = ExtResource("55_m7veu")
+
+[node name="ouch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("55_25o7w")
 
 [connection signal="body_entered" from="button" to="witchplayer" method="_on_button_body_entered"]
 [connection signal="body_exited" from="button" to="." method="_on_button_body_exited"]

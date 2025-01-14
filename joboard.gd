@@ -36,14 +36,15 @@ var lazy=[]
 var home=self
 var applied=false
 func _ready() -> void:
-	$music.volume_db=Flags.options.music
-	$buzzer.volume_db=Flags.options.fx
+#	$music.volume_db=Flags.options.music
+	#$buzzer.volume_db=Flags.options.fx
 	$CanvasLayer.visible=false
 
 func start(callee):
 	$CanvasLayer.visible=true
 	home=callee
-	$music.play()
+#	$music.play()
+	Flags.play("jobmusic","music")
 	jobs.shuffle()
 	for i in range(0,9):
 		var h=HBoxContainer.new()
@@ -92,8 +93,9 @@ func selectjob():
 
 func applyjob():
 	
-	$buzzer.pitch_scale=Flags.rng.randf_range(0.7,1.3)
-	$buzzer.play()
+	#$buzzer.pitch_scale=Flags.rng.randf_range(0.7,1.3)
+	Flags.play("invalid")
+#	$buzzer.play()
 	choices[selected].set("theme_override_colors/font_color",Color.RED)
 	stamps[selected].visible=true
 	attributes.shuffle()
@@ -123,10 +125,11 @@ func exit():
 	Flags.mode="level"
 	Flags.paused=false
 	Flags.interactablenpc.complete()
-	$music.stop()
+#	$music.stop()
 	home.intreturn()
 	
 
 
 func _on_music_finished() -> void:
-	$music.play()
+#	$music.play()
+	pass

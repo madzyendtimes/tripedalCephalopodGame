@@ -10,12 +10,12 @@ var spaceobjects=[]
 
 
 func _ready():
-	Flags.vol($laser)
-	Flags.vol($gem)
-	Flags.vol($music,"music")
+	#Flags.vol($laser)
+	#Flags.vol($gem)
+	#Flags.vol($music,"music")
 	
 	#start()
-
+	pass
 
 func start(pos):
 	addstar()
@@ -24,7 +24,8 @@ func start(pos):
 	$playership.position.y=600
 	$playership.rotation=0
 	active=true
-	$music.play()
+	Flags.play("spacemusic","music")
+#	$music.play()
 
 func _process(delta: float) -> void:
 	
@@ -53,11 +54,12 @@ func addgems():
 
 
 	$playership.addgems()
-	Flags.pitch($gem)
-	$gem.play()
+	#Flags.pitch($gem)
+	#$gem.play()
+	Flags.play("gemget")
 
 func killship():
-	$music.stop()
+	#$music.stop()
 	Flags.tne.killTimer("addstar","level")
 	Flags.mode="level"
 	Flags.tne.addEvent("outufo","level",true)
@@ -70,8 +72,9 @@ func dolaser():
 	laser.position.x=$playership.position.x
 	laser.position.y=$playership.position.y
 	add_child(laser)
-	Flags.pitch($laser)
-	$laser.play()
+	#Flags.pitch($laser)
+	#$laser.play()
+	Flags.play("lasersound")
 	
 	
 func addstar():

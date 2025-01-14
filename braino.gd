@@ -9,12 +9,13 @@ var enemytype={"name":"braino","flying":false,"hp":5,"begchance":0,"speed":1}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$music.volume_db=Flags.options.music
-	Flags.currentmusic=$music
+	#$music.volume_db=Flags.options.music
+	#Flags.currentmusic=$music
 	$hurt/boss.animation="attack"
 	$hurt/boss.play()
 	change()
-	$music.play()
+	Flags.play("bossmusic","music")
+	#$music.play()
 
 
 
@@ -85,6 +86,7 @@ func loadneedle():
 func hit():
 	if dead:
 		return
+		Flags.play("multihit")
 	hp=Flags.calchits(hp)
 	if hp<1:
 		$hurt/boss.animation="dead"
@@ -92,7 +94,7 @@ func hit():
 		Flags.tne.addEvent("bosskill","level")
 		Flags.tne.killTimer("change"+str(get_instance_id()),"level")
 		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
-		$music.stop()
+		#$music.stop()
 		return
 	$hurt/boss.animation="dazed"
 	

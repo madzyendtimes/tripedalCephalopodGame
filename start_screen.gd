@@ -11,8 +11,10 @@ func _ready():
 		$Title.animation="win"
 	else:
 		$Title.animation="title"
-	$ui/VBoxContainer.get_child(selected).grab_focus()	
-	$AudioStreamPlayer2D.volume_db=Flags.options.music
+	$ui/VBoxContainer.get_child(selected).grab_focus()
+	Flags.setvolumes()
+	Flags.play("titlemusic","music")	
+	#$AudioStreamPlayer2D.volume_db=Flags.options.music
 	#$PopupPanel/VBoxContainer.get_child(selected)
 	
 func populateoptions():
@@ -68,12 +70,12 @@ func _on_keyboard_pressed() -> void:
 
 func _on_music_value_changed(value: float) -> void:
 	Flags.options.music=value
-	$AudioStreamPlayer2D.volume_db=Flags.options.music	
-
+	#$AudioStreamPlayer2D.volume_db=Flags.options.music	
+	Flags.setvolumes()
 
 func _on_fx_value_changed(value: float) -> void:
 	Flags.options.fx=value
-	
+	Flags.setvolumes()
 
 
 func _on_low_pressed() -> void:
@@ -114,8 +116,8 @@ func _on_backtogame_pressed() -> void:
 
 
 func _on_audio_stream_player_2d_finished() -> void:
-	$AudioStreamPlayer2D.play()
-
+	#$AudioStreamPlayer2D.play()
+	pass
 
 
 func _on_menu_button_2_pressed() -> void:

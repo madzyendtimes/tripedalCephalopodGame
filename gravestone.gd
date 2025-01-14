@@ -20,6 +20,8 @@ func hit():
 	$stone/debri.visible=true
 	Flags.tne.dotime(self,[debrioff],.7,"debrioff"+str(self.get_instance_id()),true,"level")
 	dmg=max(1,dmg-1)
+	#$thud.play()
+	Flags.play("thud")
 	$stone/grave.animation="dmg"+str(dmg)
 	if dmg==1:
 		demolished=true

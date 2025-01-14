@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bov3lsjwnuosb"
+path="res://.godot/imported/warcry (1).wav-37efa249dd8a0e94bcd7260e63c9466f.sample"
+
+[deps]
+
+source_file="res://sounds/fx/warcry (1).wav"
+dest_files=["res://.godot/imported/warcry (1).wav-37efa249dd8a0e94bcd7260e63c9466f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

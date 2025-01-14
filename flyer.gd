@@ -163,8 +163,13 @@ func hit():
 	var oldy=position.y
 	tween.tween_property($".", "position", Vector2( position.x+(100*Flags.dir*-1),position.y-100), .3)
 	tween.tween_property($".", "position", Vector2( position.x+(100*Flags.dir*-1),oldy), .3)
+	
 	if type=="drone":
+		Flags.play("dronehit")
+		#$dronehit.play()
 		return
+	#$hit.play()
+	Flags.play("hit")
 	hp=Flags.calchits(hp)
 	if hp<1:
 		crashed=true

@@ -71,7 +71,7 @@ z_index = -1
 sprite_frames = SubResource("SpriteFrames_ey0wn")
 animation = &"attack"
 autoplay = "rest"
-frame_progress = 0.0947465
+frame_progress = 0.306863
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(2.86102e-06, 3.99999)

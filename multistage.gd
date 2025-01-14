@@ -61,6 +61,8 @@ func hit():
 	tween.tween_property($".", "position", Vector2( position.x+(300*Flags.dir*-1),position.y-100), .3)
 	tween.tween_property($".", "position", Vector2( position.x+(300*Flags.dir*-1),oldy), .3)
 	hp=Flags.calchits(hp)
+	#$hit.play()
+	Flags.play("multihit")
 	if hp<1:
 		$AnimatedSprite2D.animation="dead"
 		dead=true	

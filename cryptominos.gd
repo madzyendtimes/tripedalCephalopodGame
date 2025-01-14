@@ -4,7 +4,7 @@ var rockScene:PackedScene=load("res://cryptominoswscenes/comrock.tscn")
 var axeScene:PackedScene=load("res://pickaxe.tscn")
 
 func _ready() -> void:
-	$music.volume_db=Flags.options.music
+	#$music.volume_db=Flags.options.music
 	for j in range(0,5):
 		for i in range(0,20):
 			var rocky=rockScene.instantiate()
@@ -22,11 +22,12 @@ func _process(delta: float) -> void:
 				exit(true)		
 
 func exit(isdead=false):
-	$music.stop()
+	#$music.stop()
 	home.exit(isdead)
 
 func start(called):
-	$music.play()
+	#$music.play()
+	Flags.play("cryptomusic","music")
 	home=called
 	Flags.mode="cryptominos"
 	Flags.entered.active=true
@@ -41,4 +42,5 @@ func start(called):
 
 
 func _on_music_finished() -> void:
-	$music.play()
+	#$music.play()
+	pass

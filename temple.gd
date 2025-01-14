@@ -7,9 +7,9 @@ var offtimers=true
 
 
 func _ready() -> void:
-	$music.volume_db=Flags.options.music
+	#$music.volume_db=Flags.options.music
 #	devstart()
-
+	pass
 
 
 		
@@ -18,7 +18,8 @@ func start(called):
 	offtimers=false
 	Flags.mode="temple"
 	home=called
-	$music.play()
+	#$music.play()
+	Flags.play("templemusic","music")
 	for i in range(1,30):
 		createtrash()
 	Flags.tne.dotime(self,[starttrash],Flags.rng.randf_range(.2,2.5),"starttrash",true,"temple")
@@ -70,7 +71,7 @@ func eliminateghosts(type):
 
 func exit(isdead=false):
 	reset()
-	$music.stop()
+#	$music.stop()
 	print("exit")
 	home.exit(isdead)
 
@@ -84,10 +85,11 @@ func _on_alter_body_entered(body: Node2D) -> void:
 
 func _on_exit_body_entered(body: Node2D) -> void:
 	reset()
-	$music.stop()
+#	$music.stop()
 	home.exit()
 
 
 
 func _on_music_finished() -> void:
-	$music.play()
+	#$music.play()
+	pass

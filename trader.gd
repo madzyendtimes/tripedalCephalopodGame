@@ -28,9 +28,9 @@ var stock:=[]
 var home=""
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$CanvasLayer/music.volume_db=Flags.options.music
-	$CanvasLayer/purchase.volume_db=Flags.options.fx
-	$CanvasLayer/invalid.volume_db=Flags.options.fx
+#	$CanvasLayer/music.volume_db=Flags.options.music
+#	$CanvasLayer/purchase.volume_db=Flags.options.fx
+#	$CanvasLayer/invalid.volume_db=Flags.options.fx
 	$CanvasLayer.visible=false
 #uncomment to test locally
 	#Flags.load() 
@@ -71,7 +71,8 @@ func start(returnlevel):
 	lastchoice=6
 	$CanvasLayer.visible=true
 	home=returnlevel
-	$CanvasLayer/music.play()
+	Flags.play("gemmusic","music")
+#	$CanvasLayer/music.play()
 
 	for i in range(1,7):
 		var item=getstock()
@@ -170,11 +171,12 @@ func purchase():
 
 		$CanvasLayer/AnimatedSprite2D.animation="eat"
 		Flags.save()
-		$CanvasLayer/purchase.play()
+		#$CanvasLayer/purchase.play()
+		Flags.play("purchase")
 		Flags.tne.dotime(self,[backtonormal],3.6,"backtonormal")
 	else:
-		$CanvasLayer/invalid.play()
-
+		#$CanvasLayer/invalid.play()
+		Flags.play("invalid")
 
 func backtonormal():
 	$CanvasLayer/AnimatedSprite2D.animation="default"
@@ -186,7 +188,7 @@ func exit():
 	Flags.paused=false
 	if Flags.interactablenpc!=null:
 		Flags.interactablenpc.complete()
-	$CanvasLayer/music.stop()
+#	$CanvasLayer/music.stop()
 	home.intreturn()
 	pass
 

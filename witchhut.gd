@@ -204,14 +204,15 @@ func start(callee):
 	Flags.witchevents=""
 	Flags.mode="witchhut"
 	home=callee
-	$music.play()
+	#$music.play()
+	Flags.play("witchmusic","music")
 	recipe=[]
 
 func exit(isdead=false):
 	clearrecipe()
 	clearinput()
 	freshstart=true
-	$music.stop()
+	#$music.stop()
 	home.exit(isdead)
 
 func _on_exit_body_entered(body: Node2D) -> void:
@@ -219,8 +220,8 @@ func _on_exit_body_entered(body: Node2D) -> void:
 
 
 func _on_music_finished() -> void:
-	$music.play()
-	
+	#$music.play()
+	pass
 
 
 
@@ -230,6 +231,8 @@ func _on_cauldrenfront_body_entered(body: Node2D) -> void:
 	body.queue_free()
 	if ouch:
 		ouch=false
+		Flags.play("die")
+#		$ouch.play()
 		$punish.punish()
 		Flags.playerStats.health-=1
 		$witchplayer.hit()

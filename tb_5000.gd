@@ -12,7 +12,7 @@ func _ready() -> void:
 	position.x=Flags.rng.randi_range(-400,1200)
 	position.y=0
 	changedir()
-	Flags.vol($splode,"fx",8)
+	#Flags.vol($splode,"fx",8)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,8 +42,9 @@ func changedir():
 func _on_body_entered(body: Node2D) -> void:
 	
 	if body.name.find("laser")>-1:
-		Flags.pitch($splode)
-		$splode.play()
+		#Flags.pitch($splode)
+		#$splode.play()
+		Flags.play("splode")
 		$AnimatedSprite2D.animation="dead"
 		freefall=true
 		yspeed=10

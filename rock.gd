@@ -23,7 +23,7 @@ func _on_body_entered(body):
 	print(body)
 	if body.name.find("bullet")>-1||body.name.find("laser")>-1:
 		hit()
-	
+		return
 	if body.name.find("liltrip")>-1:
 		if body.state=="attack":
 			hit()
@@ -34,6 +34,7 @@ func _on_body_entered(body):
 	body.hit()
 	
 func hit():
+	$splode.play()
 	$AnimatedSprite2D.animation="explode"
 	await get_tree().create_timer(1.0).timeout
 	queue_free()

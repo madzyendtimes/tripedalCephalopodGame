@@ -12,8 +12,8 @@ var deterministic:=false
 
 func _ready():
 	$AnimatedSprite2D.animation=chesttype+"closed"	
-	$questfound.volume_db=Flags.options.fx
-	$trash.volume_db=Flags.options.fx
+#	$questfound.volume_db=Flags.options.fx
+#	$trash.volume_db=Flags.options.fx
 	$prize.animation="default"
 
 func _process(delta):
@@ -38,7 +38,8 @@ func searched():
 func do_search():
 		
 		if $AnimatedSprite2D.animation==chesttype+"closed":
-			$trash.play()
+			Flags.play("trash")
+			#$trash.play()
 			notSearched=false
 			$AnimatedSprite2D.animation=chesttype+"search"
 			var tween = get_tree().create_tween()
@@ -70,7 +71,8 @@ func show_prize():
 	Flags.addToInventory(type,treenum)
 	
 	if questItem==true:
-		$questfound.play()
+		Flags.play("questfound")
+#		$questfound.play()
 
 func _on_body_entered(body):
 	searchable=true

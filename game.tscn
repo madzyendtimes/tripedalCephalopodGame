@@ -1,6 +1,153 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjypcqai2gv82"]
+[gd_scene load_steps=34 format=3 uid="uid://bjypcqai2gv82"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_apl8i"]
+[ext_resource type="AudioStream" uid="uid://c3j1tddsstr75" path="res://sounds/fx2/hypnotised.wav" id="2_j3rvk"]
+[ext_resource type="AudioStream" uid="uid://ds7idnbge50lb" path="res://sounds/fx2/puke.wav.wav" id="3_lmxke"]
+[ext_resource type="AudioStream" uid="uid://cf4a0ld1ervyt" path="res://space/sounds/splode.wav" id="4_udl0y"]
+[ext_resource type="AudioStream" uid="uid://b2u7y8vde1ax3" path="res://sounds/hit.mp3" id="5_wlrmf"]
+[ext_resource type="AudioStream" uid="uid://biei2vdvtf0jq" path="res://sounds/questfound.mp3" id="6_a5ntv"]
+[ext_resource type="AudioStream" uid="uid://b5diaegodc4xu" path="res://sounds/die.mp3" id="7_njp1r"]
+[ext_resource type="AudioStream" uid="uid://djdm82hlnul4y" path="res://space/sounds/playerhit.wav" id="8_djs43"]
+[ext_resource type="AudioStream" uid="uid://cf5bfmjaky0jl" path="res://sounds/fx/echothud.wav" id="9_f5ps0"]
+[ext_resource type="AudioStream" uid="uid://cbglxmkk1gbwe" path="res://sounds/punch1.mp3" id="10_j2edj"]
+[ext_resource type="AudioStream" uid="uid://6dd0on15gn4i" path="res://sounds/trash.mp3.mp3" id="11_1qson"]
+[ext_resource type="AudioStream" uid="uid://cl0g8sqp43mme" path="res://sounds/fx/warcry (1).wav" id="12_7qmyt"]
+[ext_resource type="AudioStream" uid="uid://bg5evqcgkx1is" path="res://space/sounds/laser.wav" id="13_kjm42"]
+[ext_resource type="AudioStream" uid="uid://clm7y1hiargnt" path="res://sounds/fx/gunshot.wav" id="14_i7c16"]
+[ext_resource type="AudioStream" uid="uid://cj5n7xfvbtxjf" path="res://sounds/fx/grunt.wav" id="15_1sb1r"]
+[ext_resource type="AudioStream" uid="uid://bglceu2pvvvhe" path="res://sounds/fx/lilthud.wav" id="16_1o65u"]
+[ext_resource type="AudioStream" uid="uid://c2pckj4mi250s" path="res://sounds/fx/warn.wav" id="17_eglxj"]
+[ext_resource type="AudioStream" uid="uid://cgg7kwuwex8bh" path="res://space/sounds/gem.wav" id="18_pb2vp"]
+[ext_resource type="AudioStream" uid="uid://d1cexbf7v885f" path="res://sounds/purchase.mp3" id="19_m8tyd"]
+[ext_resource type="AudioStream" uid="uid://cbfs2xeaanff6" path="res://sounds/buzz.mp3" id="20_6yu06"]
+[ext_resource type="AudioStream" uid="uid://bshshv36ut6ge" path="res://sounds/jump0.wav" id="21_t665v"]
+[ext_resource type="AudioStream" uid="uid://bcnt1q242nln2" path="res://space/music/spacemusic.wav" id="22_g0tbe"]
+[ext_resource type="AudioStream" uid="uid://hplu4vb2g5ug" path="res://music/Windy Formula.wav" id="23_sa57n"]
+[ext_resource type="AudioStream" uid="uid://cnh3vntu44grh" path="res://music/Single Base.wav" id="24_cxspl"]
+[ext_resource type="AudioStream" uid="uid://4m28yh6w2jy" path="res://music/Sensible Chip.wav" id="25_v0i7g"]
+[ext_resource type="AudioStream" uid="uid://bv3qpfv21xy3y" path="res://music/Prosperous Camp.wav" id="26_scibu"]
+[ext_resource type="AudioStream" uid="uid://d3pn5ug2japjl" path="res://music/Naked Flat (1).wav" id="27_8c5cu"]
+[ext_resource type="AudioStream" uid="uid://ktv0ghsoqwag" path="res://music/Lonely Yard.wav" id="28_7ndx2"]
+[ext_resource type="AudioStream" uid="uid://n0ixwmtpn538" path="res://music/Crisp Combination.wav" id="29_qw0q5"]
+[ext_resource type="AudioStream" uid="uid://dec0gx8c0mfwe" path="res://music/Changeable Balance.mp3" id="30_cyst8"]
+[ext_resource type="AudioStream" uid="uid://bnlttjgnqg5ek" path="res://music/Brilliant Charles.wav" id="31_l2215"]
+[ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="32_viduq"]
+[ext_resource type="AudioStream" uid="uid://yotkhxff2mfd" path="res://music/Fallen Date.wav" id="33_ug3jt"]
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_apl8i")
+
+[node name="hypno" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_j3rvk")
+
+[node name="puke" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_lmxke")
+
+[node name="splode" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_udl0y")
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_wlrmf")
+volume_db = 15.928
+
+[node name="questfound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_a5ntv")
+
+[node name="dead" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_njp1r")
+volume_db = 24.0
+
+[node name="spaceplayerhit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_djs43")
+volume_db = 24.0
+
+[node name="thud" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_f5ps0")
+
+[node name="punch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_j2edj")
+volume_db = 24.0
+
+[node name="search" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_1qson")
+volume_db = 24.0
+
+[node name="trash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_1qson")
+volume_db = 3.748
+
+[node name="die" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_njp1r")
+volume_db = 24.0
+
+[node name="warcry" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_7qmyt")
+
+[node name="lasersound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_kjm42")
+
+[node name="gunshot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_i7c16")
+
+[node name="dronehit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_1sb1r")
+
+[node name="alarm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_eglxj")
+
+[node name="gemget" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_pb2vp")
+
+[node name="multihit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_1sb1r")
+
+[node name="purchase" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_m8tyd")
+volume_db = 10.339
+
+[node name="invalid" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_6yu06")
+volume_db = 2.433
+
+[node name="jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_t665v")
+
+[node name="spacemusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_g0tbe")
+
+[node name="cryptomusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_sa57n")
+
+[node name="titlemusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_cxspl")
+
+[node name="insanitymusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_v0i7g")
+
+[node name="witchmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("26_scibu")
+
+[node name="bossmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("27_8c5cu")
+
+[node name="strangemusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_7ndx2")
+
+[node name="templemusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("29_qw0q5")
+
+[node name="jobmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("30_cyst8")
+
+[node name="gemmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("31_l2215")
+
+[node name="tutorialmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("32_viduq")
+volume_db = 1.0
+
+[node name="mainmusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("33_ug3jt")
+
+[node name="lilthud" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_1o65u")

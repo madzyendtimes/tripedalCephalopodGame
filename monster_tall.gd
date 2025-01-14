@@ -60,6 +60,8 @@ func polarity(canpolarity):
 func hit():
 	
 	hp=Flags.calchits(hp)
+	Flags.play("hit")
+#	$hit.play()
 	if hp<1:
 		$AnimatedSprite2D.animation="diapertoothdead"
 		dead=true	

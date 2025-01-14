@@ -96,7 +96,7 @@ func offer():
 func hit():
 	inhit=true
 	$AnimatedSprite2D.animation="hit"
-
+	Flags.play("die")
 	Flags.playerStats.health-=1
 	if Flags.playerStats.health<1:
 		dead=true

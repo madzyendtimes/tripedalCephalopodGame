@@ -1,4 +1,4 @@
-[gd_scene load_steps=110 format=3 uid="uid://bjlg8hhdf4x7l"]
+[gd_scene load_steps=108 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -38,7 +38,6 @@
 [ext_resource type="Texture2D" uid="uid://dsmgx0kh82byh" path="res://npc/gemna/gemnacomplete1.PNG" id="22_wa8vn"]
 [ext_resource type="Texture2D" uid="uid://bimsw8oqu1xk8" path="res://npc/sludgebutt/questcomplete.PNG" id="23_7wcso"]
 [ext_resource type="Texture2D" uid="uid://dswtsk7j5ibfc" path="res://npc/gemna/gemnacomplete2.PNG" id="23_hrphj"]
-[ext_resource type="AudioStream" uid="uid://yotkhxff2mfd" path="res://music/Fallen Date.wav" id="23_kcqfy"]
 [ext_resource type="PackedScene" uid="uid://bid0ue1i8kuhe" path="res://flavornpc.tscn" id="24_f2tfj"]
 [ext_resource type="Texture2D" uid="uid://x10nc4ufvaex" path="res://npc/sludgebutt/questcomplete2.PNG" id="24_rb1w3"]
 [ext_resource type="Texture2D" uid="uid://cn020rbt5e0ci" path="res://npc/snitchyjoe/snitchyjoe1.PNG" id="25_dow64"]
@@ -68,7 +67,6 @@
 [ext_resource type="PackedScene" uid="uid://bvmdraii7ccwl" path="res://spaceattack.tscn" id="87_nb5pl"]
 [ext_resource type="PackedScene" uid="uid://bu7gmej612ogw" path="res://tv.tscn" id="107_57c1h"]
 [ext_resource type="PackedScene" uid="uid://ej35f8d30wde" path="res://enterable.tscn" id="108_lhqd7"]
-[ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="116_lqqny"]
 [ext_resource type="PackedScene" path="res://assets.tscn" id="117_jg7m3"]
 [ext_resource type="PackedScene" uid="uid://utpjm1uc1isi" path="res://temple.tscn" id="119_0ei4f"]
 [ext_resource type="PackedScene" uid="uid://dos1618drl4dc" path="res://cryptominos.tscn" id="125_dyu73"]
@@ -683,15 +681,7 @@ z_index = 4
 
 [node name="tree" parent="." instance=ExtResource("2_nllk3")]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("23_kcqfy")
-autoplay = true
-
 [node name="stats" parent="." instance=ExtResource("30_mddu5")]
-
-[node name="tutorialmusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("116_lqqny")
-volume_db = 1.0
 
 [node name="assets" parent="." instance=ExtResource("117_jg7m3")]
 
@@ -787,4 +777,3 @@ position = Vector2(-574, -5324)
 [connection signal="body_entered" from="npcs/pailface" to="." method="_on_pailface_body_entered"]
 [connection signal="body_entered" from="locationfront/tutorial" to="." method="_on_tutorial_body_entered"]
 [connection signal="body_entered" from="rocks/rock" to="." method="_on_rock_body_entered"]
-[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

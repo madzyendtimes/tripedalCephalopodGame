@@ -25,10 +25,10 @@ func _ready():
 	Flags.playerscale=self.scale
 	oldmod = $AnimatedSprite2D.modulate
 	inHit=false
-	$dead.volume_db=Flags.options.fx
-	$punch.volume_db=Flags.options.fx
-	$search.volume_db=Flags.options.fx
-	$jump.volume_db=Flags.options.fx
+	#$dead.volume_db=Flags.options.fx
+	#$punch.volume_db=Flags.options.fx
+	#$search.volume_db=Flags.options.fx
+	#$jump.volume_db=Flags.options.fx
 	$AnimatedSprite2D.material.set_shader_parameter("lowgraphic",Flags.options.graphics=="low")
 
 func setCollision(type):
@@ -91,7 +91,8 @@ func fight():
 		return
 	$AnimatedSprite2D.animation="fight"+Flags.hat+Flags.fightmode
 	$AnimatedSprite2D.play()
-	$punch.play()
+	Flags.play("punch")
+	#$punch.play()
 	if isinoffset:
 		setCollision("fightoffset")
 	else:
@@ -159,7 +160,7 @@ func hit(dmg=1):
 
 func puke():
 	$AnimatedSprite2D.animation="puke"+Flags.hat	
-
+	Flags.play("puke")
 	await get_tree().create_timer(1).timeout
 	outpuke()
 	
@@ -179,7 +180,8 @@ func outhit():
 
 func kill():
 	$AnimatedSprite2D.animation="dead"+Flags.hat
-	$dead.play()
+#	$dead.play()
+	Flags.play("dead")
 	Flags.playerDead=true
 	var oldmod = $AnimatedSprite2D.modulate
 	var tween = get_tree().create_tween()

@@ -8,7 +8,7 @@ var inhit=false
 
 func _ready() -> void:
 	$AnimatedSprite2D.play()
-	Flags.vol($playerhit,"fx",9)
+	#Flags.vol($playerhit,"fx",9)
 
 func start():
 	hp=4
@@ -31,8 +31,9 @@ func killstat():
 func hit():
 	if inhit:
 		return
-	Flags.pitch($playerhit)
-	$playerhit.play()
+	#Flags.pitch($playerhit)
+	Flags.play("spaceplayerhit")
+#	$playerhit.play()
 	hp-=1
 	if hp<1:
 		rotation=1.27

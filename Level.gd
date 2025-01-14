@@ -77,9 +77,26 @@ func _ready():
 	Flags.playerStats.maxHealth=Flags.playerStats.maxHealth
 	Flags.playerStats.maxStanima=Flags.playerStats.maxStanima
 	#triggers events to ensure listeners will update,namely the stat bars, I know it's wonky, I like it better than alternatives :p
-	$AudioStreamPlayer.volume_db=Flags.options.music
-	$tutorialmusic.volume_db=Flags.options.music
-	Flags.currentmusic=$AudioStreamPlayer
+
+	#Flags.addSounds([
+		#["mainmusic",$AudioStreamPlayer,0],
+		#["tutorial",$tutorialmusic,0],
+		#["spacemusic",$spacemusic,0]
+		#
+		#],"music")
+	#Flags.addSounds([
+		#["warcry",$warcry,0],
+		#["lasersound",$lasersound,0],
+		#["gunshot",$gunshot,0],
+		#["lilthud",$lilthud,0],
+		#["alarm",$alarm,0],
+		#["gemget",$gemget,0],
+		#["puke",$puke,0],
+		#["hypno",$hypno,0],
+		#["jump",$jump,0]
+		#],"fx")
+	#Flags.setvolumes()			
+	Flags.play("mainmusic","music")
 	Flags.titlescreen="title"
 	$trader.visible=false	
 	Flags.reset()
@@ -143,6 +160,9 @@ func _ready():
 	phantomposition=$player.position.y
 	#if Flags.amode.size()>0:
 	$player.chooseweapon()
+	
+
+	
 	#uncomment to test gemna
 	#speed=1
 	#warpto(34000)
@@ -205,10 +225,11 @@ func randpuke():
 		Flags.tne.dotime(self,[randpuke],Flags.rng.randf_range(0.5,2.0),"randpuke",true,"level")	
 func radiationend():
 	Flags.radiation=false
-	var tween=get_tree().create_tween()
-	tween.parallel().tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/brightness",1.0,1.0)
-	tween.parallel().tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/contrast",1.0,1.0)
-	tween.parallel().tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/saturation",1.0,1.0)
+	if get_tree()!=null:
+		var tween=get_tree().create_tween()
+		tween.parallel().tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/brightness",1.0,1.0)
+		tween.parallel().tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/contrast",1.0,1.0)
+		tween.parallel().tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/saturation",1.0,1.0)
 
 
 func doEffect(effect):
@@ -226,15 +247,18 @@ func doEffect(effect):
 			Flags.megaStats.gems+=g
 			$player.stat("+","gem",g)
 			Flags.save()
+			Flags.play("gemget")
 		"changeweather":
 			changeweather()
 		"spendingspree":
 			Flags.credit=true
+			Flags.play("gemget")
 		"getgems":
 			var g=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
 			Flags.megaStats.gems+=g
 			$player.stat("+","gem",g)
 			Flags.save()
+			Flags.play("gemget")
 		"radiation":
 			Flags.radiation=true;
 			randpuke()
@@ -244,6 +268,7 @@ func doEffect(effect):
 			tween.parallel().set_loops(radtime).tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/contrast",5.0,1.0).from_current()
 			tween.parallel().set_loops(radtime).tween_property($Camera2D/CanvasLayer/colorect,"material:shader_parameter/saturation",6.0,1.0).from_current()
 			tween.tween_callback(radiationend)
+			Flags.play("alarm")
 		"horror":
 			triggerhorror()
 		"exitenterable":
@@ -273,6 +298,7 @@ func doEffect(effect):
 			if Flags.rng.randi_range(0,100)>resistChance:
 				Flags.mesmerized=true
 				$player.walkani()
+				Flags.play("hypno")
 			else:
 				$player.resisted()
 		"resisted":
@@ -288,6 +314,8 @@ func doEffect(effect):
 			missle.position.y=550
 			missle.dir=Flags.dir
 			missle.hit.connect(missleHit)
+			Flags.play("lilthud")
+			
 		"warp":
 			var loc=Flags.warploc
 			Flags.warploc=-1*$interactive.position.x
@@ -300,7 +328,7 @@ func doEffect(effect):
 			var tween = get_tree().create_tween()
 			tween.tween_property($player, "modulate", Color(1,1,1,0), .5)
 			tween.tween_callback(warpCB.bind(loc))
-			pass
+
 		"beg":
 			Flags.hat="beg"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
@@ -328,6 +356,7 @@ func doEffect(effect):
 			$enemy.add_child(bullet)	
 			bullet.position.x=(($enemy.position.x)*-1)+300
 			bullet.start()
+			Flags.play("gunshot")
 		"needle":
 			var needy=needleScene.instantiate()
 			$enemy.add_child(needy)
@@ -336,7 +365,7 @@ func doEffect(effect):
 			needy.position.y=400+Flags.rng.randi_range(-20,20)
 			needy.start()
 		"bosskill":
-			$AudioStreamPlayer.play()
+			Flags.play("mainmusic","music")
 			var g=Flags.rng.randi_range(50,100)+(Flags.playerStats.rizz*10)
 			Flags.megaStats.gems+=g
 			$player.stat("+","gem",g)
@@ -357,6 +386,7 @@ func doEffect(effect):
 				$enemy.add_child(laser)
 			laser.position=effect.param.pos
 			laser.start(effect.param.rot)
+			Flags.play("lasersound")
 		"vehicle":
 			if wrestplayercontrol:
 				return
@@ -421,16 +451,15 @@ func outspace():
 		$player.scale.x=.75
 		$player.scale.y=.75
 		Flags.special=""
-		$AudioStreamPlayer.play()
-		Flags.currentmusic=$AudioStreamPlayer		
+		Flags.play("mainmusic","music")
+
 		$player.position.y=650
 		Flags.wasufo=true	
 
 func inspaceattack():
 			$spacetime.make_current()
 			Flags.mode="spacetime"
-			if Flags.currentmusic!=null:
-				Flags.currentmusic.stop()
+			Flags.play("spacemusic","music")
 			$spaceattack.start($player.position.x)
 	
 		
@@ -452,7 +481,7 @@ func exit(isdead=false):
 		$player.kill()
 		return
 	$player/AnimatedSprite2D.play()
-	$AudioStreamPlayer.play()
+	Flags.play("mainmusic","music")
 	$player.walkani()
 
 
@@ -530,7 +559,7 @@ func dorandaction():
 		var tween = get_tree().create_tween()
 		gy=basey
 		gx=$player.position.x
-		$player/jump.play()
+		Flags.play("jump")
 		tween.tween_property($player, "position", Vector2(gx,gy-ascent), .5)
 		tween.tween_callback(reset_player)
 	if randaction==4 && canJump==true:
@@ -666,7 +695,7 @@ func _process(delta):
 #			var tween = get_tree().create_tween()
 			gy=$player.position.y
 			gx=$player.position.x
-			$player/jump.play()
+			Flags.play("jump")
 			phantomposition=$player.position.y
 			jump(gy-ascent)
 #			tween.tween_property($player, "position", Vector2(gx,gy-ascent), .5)
@@ -809,21 +838,21 @@ func doMode():
 	match Flags.mode:
 		"trader":
 			$trader.visible=true
-			$AudioStreamPlayer.stop()
+			Flags.stopthemusic()
 			$trader.start(self)
 		"jobboard":
-			$AudioStreamPlayer.stop()
+			Flags.stopthemusic()
 			$joboard.start(self)
 	
 	
 func intreturn():
-	$AudioStreamPlayer.play()
+	Flags.play("mainmusic","music")
 	
 	
 func entered():
 	weatheroff()
 	speed=1
-	$AudioStreamPlayer.stop()
+	Flags.stopthemusic()
 	Flags.entered.building.start(self)
 	Flags.entered.building.close()
 
@@ -1132,7 +1161,8 @@ func dohoarde():
 	for i in range(1,Flags.rng.randi_range(5,30)):
 		
 		Flags.tne.dotime(self,[createrandommonster],Flags.rng.randf_range(0.1,3.5),"hoarde",false,"level")
-
+	Flags.play("warcry")
+	
 func dospawns():
 	if Flags.mode!="level":
 		#checkspawn in 5 seconds
@@ -1144,7 +1174,7 @@ func dospawns():
 		
 		createchoice($locationfront,bossScene,1400,false,1,300,false,false)
 		Flags.tne.killTimer("spawns","level")
-		$AudioStreamPlayer.stop()
+		Flags.stopthemusic()
 		return
 		
 		
@@ -1193,9 +1223,8 @@ func _on_rock_body_entered(body):
 
 
 func _on_audio_stream_player_finished():
-	$AudioStreamPlayer.play()
-	pass # Replace with function body.
-
+	#$AudioStreamPlayer.play()
+	pass
 
 func _on_missle_hit() -> void:
 	pass # Replace with function body.
@@ -1211,14 +1240,12 @@ func _on_tutorial_body_entered(body: Node2D) -> void:
 		spawn()
 		spawntrash(7680,1,1)
 		Flags.Levels.tutorial.instantiated=true
-	$AudioStreamPlayer.stop()
-	$tutorialmusic.play()
+	Flags.play("tutorial","music")
 
 func backHome():
 	Flags.Levels.tutorial.completed=true
 	warpto(0)
-	$AudioStreamPlayer.play()
-	$tutorialmusic.stop()
+	Flags.play("mainmusic","music")
 
 
 func spawn():

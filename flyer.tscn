@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://g1ac1yi42oru"]
+[gd_scene load_steps=15 format=3 uid="uid://g1ac1yi42oru"]
 
 [ext_resource type="Script" path="res://flyer.gd" id="1_m8uu6"]
 [ext_resource type="Texture2D" uid="uid://bsg1447kn5qbx" path="res://enemies/flying/flyling1.PNG" id="1_p0hsu"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://dn3fnl3x1afff" path="res://enemies/flying/flyingc2.PNG" id="7_8sror"]
 [ext_resource type="Texture2D" uid="uid://ijufll875oep" path="res://enemies/flying/deadbug.PNG" id="7_jnk70"]
 [ext_resource type="Texture2D" uid="uid://baue5rnxnlo6o" path="res://enemies/flying/flyingccrashed.PNG" id="8_bcn70"]
+[ext_resource type="AudioStream" uid="uid://cj5n7xfvbtxjf" path="res://sounds/fx/grunt.wav" id="11_ewyvi"]
+[ext_resource type="AudioStream" uid="uid://b2u7y8vde1ax3" path="res://sounds/hit.mp3" id="12_viwdg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4k2br"]
 animations = [{
@@ -88,5 +90,11 @@ autoplay = "bird"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(40, 104)
 shape = SubResource("CircleShape2D_fnedh")
+
+[node name="dronehit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_ewyvi")
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_viwdg")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -193,10 +193,43 @@ var wasufo=false
 var env=[]
 var amode=[]
 var petmove=true
+var sounds={"music":{},"fx":{}}
+
+
+
 
 func weatheroff():
 	$weather.position.y=0
 	Flags.weather=""
+
+func addSounds(asounds,ptype="fx"):
+	for i in asounds:
+		sounds[ptype][i[0]]={"aud":i[1],"vol":i[2]}
+
+func setvolumes():
+	for i in sounds.music:
+		sounds.music[i].aud.volume_db=options.music+sounds.music[i].vol
+	for i in sounds.fx:
+		sounds.fx[i].aud.volume_db=options.fx+sounds.fx[i].vol
+
+func stopthemusic():
+	print(currentmusic)
+	if currentmusic!=null&&(sounds.music.get(currentmusic) != null):
+		sounds.music[currentmusic].aud.stop()
+		print("stop")
+		
+func play(key,type="fx"):
+
+	if sounds[type][key]!=null:
+		if type=="fx":
+			pitch(sounds[type][key].aud)
+		if type=="music":
+			stopthemusic()
+			currentmusic=key
+			print(currentmusic)
+		sounds[type][key].aud.play()
+
+		
 
 func vol(aud,atype="fx",added=0):
 	if atype=="fx":
@@ -210,7 +243,6 @@ func pitch(aud):
 func reset():
 	amode=[]
 	wasufo=false
-	currentmusic=null
 	vehicle=null
 	spinned=false
 	confused=false
