@@ -195,5 +195,5 @@ animations = [{
 position = Vector2(600, 208)
 scale = Vector2(0.446667, 0.34)
 sprite_frames = SubResource("SpriteFrames_gqrl6")
-animation = &"p23"
+animation = &"confused"
 autoplay = "confused"

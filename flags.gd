@@ -204,7 +204,9 @@ func weatheroff():
 
 func addSounds(asounds,ptype="fx"):
 	for i in asounds:
-		sounds[ptype][i[0]]={"aud":i[1],"vol":i[2]}
+		sounds[ptype][i[0]]={"aud":i[1],"vol":i[2],"pitch":i[3]}
+		if ptype=="music":
+			i[1].finished.connect(i[1].play)
 
 func setvolumes():
 	for i in sounds.music:
@@ -221,8 +223,8 @@ func stopthemusic():
 func play(key,type="fx"):
 
 	if sounds[type][key]!=null:
-		if type=="fx":
-			pitch(sounds[type][key].aud)
+		if sounds[type][key].pitch>0:
+			pitch(sounds[type][key].aud,sounds[type][key].pitch)
 		if type=="music":
 			stopthemusic()
 			currentmusic=key
@@ -237,8 +239,8 @@ func vol(aud,atype="fx",added=0):
 	else:
 		aud.volume_db=options.music+added
 		
-func pitch(aud):	
-	aud.pitch_scale=rng.randf_range(-1.50,2.10)
+func pitch(aud,pch=0):	
+	aud.pitch_scale=rng.randf_range(1-pch,1+pch)
 
 func reset():
 	amode=[]

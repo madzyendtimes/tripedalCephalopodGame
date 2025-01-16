@@ -6,7 +6,7 @@ var ainv=[]
 
 func _ready():
 	update()
-	$PopupPanel2.visible=false
+	$VBoxContainer/PopupPanel2.visible=false
 	$PopupPanel.visible=false
 
 
@@ -61,8 +61,8 @@ func _process(delta):
 					Flags.megaStats.inventory.append(pi)
 					if Flags.megaStats.inventory.size()>Flags.megaStats.inventorycapacity:
 						Flags.megaStats.inventory.pop_front()
-						
-			print(Flags.megaStats.inventory)
+				rewill()	
+
 			
 		if Input.is_action_just_pressed("fight"):
 			contract()
@@ -81,8 +81,8 @@ func SelectItem(selx,sely):
 		Flags.selectedItem+=min(selx,sz)
 		Flags.selectedItem+=min(sely*11,sz)
 		if oldSelect>0:
-			$PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_SIZE,ainv[oldSelect-1],100,100,Color(1.0,1.0,1.0,1.0))
-			$PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_COLOR,ainv[oldSelect-1],100,100,Color(1.0,1.0,1.0,1.0))
+			$VBoxContainer/PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_SIZE,ainv[oldSelect-1],100,100,Color(1.0,1.0,1.0,1.0))
+			$VBoxContainer/PopupPanel2/VBoxContainer/inv.update_image("k"+str(oldSelect),RichTextLabel.UPDATE_COLOR,ainv[oldSelect-1],100,100,Color(1.0,1.0,1.0,1.0))
 		if Flags.selectedItem<1:
 			Flags.selectedItem=1
 		if  Flags.selectedItem>sz:
@@ -91,22 +91,20 @@ func SelectItem(selx,sely):
 		#Flags.playerInventory[Flags.selectedItem-1].imgt
 		print(Flags.playerInventory)
 		print(Flags.selectedItem)
-		$PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_SIZE,texture,150,150,Color(1.0,1.0,0.0,1.0))
-		$PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_COLOR,texture,150,150,Color(1.0,1.0,0.0,1.0))
+		$VBoxContainer/PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_SIZE,texture,150,150,Color(1.0,1.0,0.0,1.0))
+		$VBoxContainer/PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_COLOR,texture,150,150,Color(1.0,1.0,0.0,1.0))
 #		
 
 	
 
 func update():
 	$PopupPanel/statbar/Label.text="health :"+str(Flags.playerStats.health)+" - stanima :"+str(Flags.playerStats.stanima)+" - speed : "+str(Flags.playerStats.speed)+ " - power : "+str(Flags.playerStats.power)+" - gems: "+str(Flags.megaStats.gems)
-	#$PopupPanel/TextureProgressBar.max_value=Flags.playerStats.maxHealth
-	#$PopupPanel/TextureProgressBar.value=Flags.playerStats.health
-	#"loc:"+str(Flags.l)
+
 	
 func contract():
 	print("contract")
 	$PopupPanel.visible=false
-	$PopupPanel2.visible=false
+	$VBoxContainer/PopupPanel2.visible=false
 	Flags.paused=false
 	Flags.mode="level"
 	
@@ -115,23 +113,32 @@ func expand():
 	$PopupPanel.visible=true
 #	$PopupPanel.size.y=100
 	Flags.mode="statsScreen"
-	$PopupPanel2.visible=true
+	$VBoxContainer/PopupPanel2.visible=true
 	Flags.paused=true
 
 func clear():
 	ainv=[]
-	$PopupPanel2/VBoxContainer/inv.clear()
-	$PopupPanel2/VBoxContainer/inv.add_text("select an item and press 'a' to use\n\n\n")
+	$VBoxContainer/PopupPanel2/VBoxContainer/inv.clear()
+	$VBoxContainer/PopupPanel2/VBoxContainer/inv.add_text("select an item and press 'a' to use\n\n\n")
 
+func rewill():
+	var t=Texture.new()
+	t=load("res://items/will.PNG")
+	$VBoxContainer/PopupPanel2/VBoxContainer/hbinv/CanvasLayer/HBoxContainer2/RichTextLabel.clear()
+	$VBoxContainer/PopupPanel2/VBoxContainer/hbinv/CanvasLayer/HBoxContainer2/RichTextLabel.add_image(t,100,100,"white",5,Rect2(0,0,0,0))
+	print(Flags.megaStats.inventory)
+	for i in Flags.megaStats.inventory:
+		addtowill(i.img)
+
+
+func addtowill(img):
+	var t=Texture.new()
+	t=load(img)
+
+	$VBoxContainer/PopupPanel2/VBoxContainer/hbinv/CanvasLayer/HBoxContainer2/RichTextLabel.add_image(t,100,100,"white",5,Rect2(0,0,0,0))
+	
 func addInventory(item,itemnum):
-	#richtext still works best
-	#var invI=invScene.instantiate()
-	#$PopupPanel2/VBoxContainer/hbinv.add_child(invI)
-	#invI.animation="p"+str(item.type)+str(item.item)
-	#print(invI.animation)
-	#ainv.append(invI)
 	var t=Texture.new()
 	t=load(item.img)
-	#change to buttons with icons?
-	$PopupPanel2/VBoxContainer/inv.add_image(t,100,100,Color(1,1,1,1),5,Rect2(0,0,0,0),"k"+str(itemnum))
+	$VBoxContainer/PopupPanel2/VBoxContainer/inv.add_image(t,100,100,"white",5,Rect2(0,0,0,0),"k"+str(itemnum))
 	ainv.append(t)
