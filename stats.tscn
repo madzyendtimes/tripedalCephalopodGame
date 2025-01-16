@@ -52,6 +52,12 @@ text = "
 "
 fit_content = true
 
+[node name="PopupMenu" type="PopupMenu" parent="VBoxContainer/PopupPanel2/VBoxContainer/inv"]
+position = Vector2i(526, 274)
+visible = true
+always_on_top = true
+unfocusable = true
+
 [node name="hbinv" type="HBoxContainer" parent="VBoxContainer/PopupPanel2/VBoxContainer"]
 layout_mode = 2
 
@@ -101,3 +107,5 @@ theme = ExtResource("1_ruft0")
 layout_mode = 2
 theme = ExtResource("1_ruft0")
 text = "yo"
+
+[connection signal="id_focused" from="VBoxContainer/PopupPanel2/VBoxContainer/inv/PopupMenu" to="." method="_on_popup_menu_id_focused"]

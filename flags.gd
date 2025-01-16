@@ -353,7 +353,8 @@ func addToInventory(type,numvarient):
 		"effect":itemMap[type].varients[max(0,treenum-1)].effect,
 		"consumable":itemMap[type].varients[max(0,treenum-1)].consumable,
 		"swap":itemMap[type].varients[max(0,treenum-1)].swap,
-		"name":itemMap[type].varients[max(0,treenum-1)].name
+		"name":itemMap[type].varients[max(0,treenum-1)].name,
+		"bequeathed":false
 		}
 	print(invitem)
 	playerInventory.append(invitem)
