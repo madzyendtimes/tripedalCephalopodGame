@@ -3,9 +3,10 @@ var hp:=2
 var dead:=false
 var speed=1.8
 var dir:=1
+var pow:=1
 var runningaway:=false
 var begchance=50 #add new playerstat charisma to improve chances
-var enemytype={"name":"diaper tooth","flying":false,"hp":2,"begchance":50,"speed":1.8}
+var enemytype={"name":"diaper tooth","flying":false,"hp":2,"begchance":50,"speed":1.8,"pow":1}
 
 
 func _process(delta: float) -> void:
@@ -40,12 +41,12 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 
 	if Flags.hat=="beg":
-		var begsuccess=Flags.beg(begchance)
+		var begsuccess=Flags.beg(enemytype.begchance)
 		return
 	if Flags.inFight==true:
 		hit()
 	else:
-		body.hit()
+		body.hit(enemytype.pow)
 		
 	
 
@@ -57,7 +58,7 @@ func polarity(canpolarity):
 	speed+=3
 	
 	
-func hit():
+func hit(dmg=1):
 	
 	hp=Flags.calchits(hp)
 	Flags.play("hit")

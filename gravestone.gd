@@ -14,7 +14,7 @@ func debrioff():
 
 
 
-func hit():
+func hit(dmg=1):
 	if demolished:
 		return
 	$stone/debri.visible=true

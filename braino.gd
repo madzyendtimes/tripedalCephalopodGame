@@ -5,7 +5,7 @@ var dir=1
 var speed=1
 var dead=false
 var loaded=true
-var enemytype={"name":"braino","flying":false,"hp":5,"begchance":0,"speed":1}
+var enemytype={"name":"braino","flying":false,"hp":5,"begchance":0,"speed":1,"pow":2}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -70,7 +70,7 @@ func _process(delta: float) -> void:
 		if $hurt/boss.frame==16 && lastframe!=16:
 			if loaded:
 				loaded=false
-				Flags.tne.addEvent("needle","level",false,{"pos":position.x})
+				Flags.tne.addEvent("needle","level",false,{"pos":global_position.x})
 				Flags.tne.dotime(self,[loadneedle],1.5,"loadneedle"+str(get_instance_id()),true,"level")			
 		lastframe=$hurt/boss.frame
 
@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
 func loadneedle():
 	loaded=true
 
-func hit():
+func hit(dmg=1):
 	if dead:
 		return
 		Flags.play("multihit")
@@ -117,7 +117,7 @@ func change():
 
 func _on_hurt_body_entered(body: Node2D) -> void:
 	if !dead:
-		body.hit()
+		body.hit(enemytype.pow)
 
 
 

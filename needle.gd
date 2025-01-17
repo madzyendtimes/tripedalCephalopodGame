@@ -2,17 +2,12 @@ extends Area2D
 var active=false
 var speed=5
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if active:
 		position.x=position.x-speed
 
-func hit():
+func hit(dmg=1):
 	pass
 
 func kill():
@@ -30,7 +25,7 @@ func _on_body_entered(body: Node2D) -> void:
 		kill()
 		return
 	
-	body.hit()
+	body.hit(1)
 	body.scale.y=body.scale.y-.2
 	body.scale.x=body.scale.x-.2
 	kill()

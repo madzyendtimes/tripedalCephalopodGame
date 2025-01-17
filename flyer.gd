@@ -20,7 +20,7 @@ var dead=false
 var candive=false
 var indive=false
 
-var enemytype={"name":"bird","flying":true,"hp":1,"begchance":40,"speed":2.5}
+var enemytype={"name":"bird","flying":true,"hp":1,"begchance":40,"speed":2.5,"pow":1}
 
 func _ready() -> void:
 	selectType()
@@ -156,7 +156,7 @@ func getpackage():
 	freefall=true
 	$AnimatedSprite2D.animation=type+"crashed"
 	
-func hit():
+func hit(dmg=1):
 	if dead==true:
 		return
 	var tween:=get_tree().create_tween()
@@ -201,4 +201,4 @@ func _on_body_entered(body: Node2D) -> void:
 		hit()		
 		return
 
-	body.hit()
+	body.hit(enemytype.pow)

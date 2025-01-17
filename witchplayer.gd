@@ -42,7 +42,7 @@ func unhit():
 	#var tween=get_tree().create_tween()
 
 	
-func hit():
+func hit(dmg=1):
 	$AnimatedSprite2D.animation="hit"
 	playerhit=true
 

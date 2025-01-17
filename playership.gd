@@ -28,7 +28,7 @@ func addgems():
 func killstat():
 	$status.visible=false
 
-func hit():
+func hit(dmg=1):
 	if inhit:
 		return
 	#Flags.pitch($playerhit)

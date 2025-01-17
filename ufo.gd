@@ -10,9 +10,9 @@ var freefall=false
 var ufo=false
 var stopit=false
 
-var enemytype={"name":"ufo","flying":true,"hp":4,"begchance":0,"speed":5}
+var enemytype={"name":"ufo","flying":true,"hp":4,"begchance":0,"speed":5,"pow":3}
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	domoves()
 	changegun()
@@ -123,12 +123,12 @@ func _on_body_entered(body: Node2D) -> void:
 		hit()
 		return
 	if !ufo:
-		body.hit()
+		body.hit(enemytype.pow)
 
 	
 	
 	
-func hit():
+func hit(dmg=1):
 
 	var tween:=get_tree().create_tween()
 	var oldy=position.y

@@ -1,5 +1,5 @@
 extends Area2D
-
+var enemytype={"name":"rock","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1}
 
 func _ready():
 	$AnimatedSprite2D.play()
@@ -31,10 +31,11 @@ func _on_body_entered(body):
 	
 	
 	
-	body.hit()
+	body.hit(enemytype.pow)
 	
-func hit():
-	$splode.play()
+func hit(dmg=1):
+	Flags.play("splode")
 	$AnimatedSprite2D.animation="explode"
+	Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 	await get_tree().create_timer(1.0).timeout
 	queue_free()

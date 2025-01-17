@@ -7,12 +7,7 @@ var dir=1
 var hp=1
 var begchance=25
 var speed=.7
-var enemytype={"name":"groundling","flying":false,"hp":1,"begchance":25,"speed":.75}
-
-
-func _ready() -> void:
-	$hit.volume_db=Flags.options.fx
-	$die.volume_db=Flags.options.fx
+var enemytype={"name":"groundling","flying":false,"hp":1,"begchance":25,"speed":.75,"pow":1}
 
 func polarity(canpolarity):
 	if !canpolarity:
@@ -31,7 +26,7 @@ func _on_body_entered(body):
 	if body.name.find("bullet")>-1||body.name.find("laser")>-1:
 		$AnimatedSprite2D.animation="dead"
 		dead=true	
-		$hit.play()
+		Flags.play("hit")
 		body.hit()
 		return
 
@@ -43,10 +38,9 @@ func _on_body_entered(body):
 	if Flags.inFight==true:
 		$AnimatedSprite2D.animation="dead"
 		dead=true	
-		$hit.play()
+		Flags.play("hit")
 	else:
-		$die.play()
-		body.hit()
+		body.hit(enemytype.pow)
 	
 func runaway():
 	if runningaway==false:
@@ -61,13 +55,13 @@ func recourage():
 	dir=dir*-1
 	$AnimatedSprite2D.flip_h=false
 	
-func hit():
+func hit(dmg=1):
 	hp=Flags.calchits(hp)
 	if hp<1:
 		$AnimatedSprite2D.animation="dead"
 		dead=true
 		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
-		$hit.play()
+		Flags.play("hit")
 
 	
 func _process(delta):

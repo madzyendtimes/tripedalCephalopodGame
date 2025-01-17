@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 		position.x=clamp(-600,600,position.x+speed*xdir)
 		position.y=clamp(-10,+750,position.y+speed*ydir)
 	
-func hit():
+func hit(dmg=1):
 	pass
 
 func changedir():

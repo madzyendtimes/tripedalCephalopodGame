@@ -12,7 +12,7 @@ func _ready() -> void:
 func dissipate():
 	queue_free()
 
-func hit():
+func hit(dmg=1):
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

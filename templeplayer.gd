@@ -93,7 +93,7 @@ func offer():
 	Flags.tne.dotime(self,[makeoffer],0.5,"makeoffer",true,"temple")
 
 
-func hit():
+func hit(dmg=1):
 	inhit=true
 	$AnimatedSprite2D.animation="hit"
 	Flags.play("die")

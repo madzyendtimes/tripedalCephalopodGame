@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpm4tmnn754ff"]
+[gd_scene load_steps=8 format=3 uid="uid://cpm4tmnn754ff"]
 
 [ext_resource type="Script" path="res://groundling.gd" id="1_xhkfi"]
 [ext_resource type="Texture2D" uid="uid://dhyf35vk7m5y4" path="res://enemies/groundling/walk1.PNG" id="2_0hg70"]
 [ext_resource type="Texture2D" uid="uid://cwkwuw5cty8kt" path="res://enemies/groundling/dead.PNG" id="2_yw45e"]
 [ext_resource type="Texture2D" uid="uid://5qriq87yaccr" path="res://enemies/groundling/walk2.PNG" id="3_rwkqk"]
 [ext_resource type="Texture2D" uid="uid://0yqg7go43th4" path="res://enemies/groundling/walk3.PNG" id="4_fbam7"]
-[ext_resource type="AudioStream" uid="uid://b2u7y8vde1ax3" path="res://sounds/hit.mp3" id="6_5s1r7"]
-[ext_resource type="AudioStream" uid="uid://b5diaegodc4xu" path="res://sounds/die.mp3" id="7_2nqtj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7fff5"]
 animations = [{
@@ -49,13 +47,5 @@ autoplay = "default"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2, 23)
 shape = SubResource("CapsuleShape2D_ffas2")
-
-[node name="hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_5s1r7")
-volume_db = 15.928
-
-[node name="die" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_2nqtj")
-volume_db = 24.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

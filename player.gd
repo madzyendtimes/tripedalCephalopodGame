@@ -147,7 +147,7 @@ func hit(dmg=1):
 	if inHit!=true:
 		inHit=true
 		stat("-","health",dmg)
-		Flags.playerStats.health-=dmg
+		Flags.playerStats.health-=Flags.calcdmg(dmg)
 		if Flags.playerStats.health<1:
 			kill()
 

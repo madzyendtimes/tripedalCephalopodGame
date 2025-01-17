@@ -134,7 +134,10 @@ func purchase():
 				Flags.megaStats.stanima+=100
 				Flags.playerStats.maxStanima=Flags.megaStats.stanima
 				Flags.playerStats.stanima=Flags.megaStats.stanima
-				
+			"addtoughness":
+				Flags.megaStats.toughness+=1
+				Flags.playerStats.maxToughness=Flags.megaStats.toughness
+				Flags.playerStats.toughness=Flags.megaStats.toughness				
 			"moneybags":
 				Flags.megaStats.credit=true
 				Flags.credit=true
@@ -151,6 +154,8 @@ func purchase():
 				Flags.megaStats.capPower=10000
 				Flags.megaStats.capStanima=10000
 				Flags.megaStats.capExtraJump=10000
+				Flags.megaStats.capToughness=10000
+				
 			"spinattack":
 				Flags.megaStats.spinattack=true
 			"dizzyresist":

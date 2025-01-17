@@ -16,11 +16,11 @@ func _process(delta: float) -> void:
 
 		$AnimatedSprite2D.animation="aftermath"
 
-func hit():
+func hit(dmg=1):
 	pass
 
 func _on_body_entered(body: Node2D) -> void:
 	if !flat:
 
-		body.hit()
+		body.hit(1)
 		queue_free()

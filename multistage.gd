@@ -5,7 +5,7 @@ var speed=2.5
 var dir=1
 var dead=false
 var begchance=75
-var enemytype={"name":"goop baby","flying":false,"hp":3,"begchance":75,"speed":2.5}
+var enemytype={"name":"goop baby","flying":false,"hp":3,"begchance":75,"speed":2.5,"pow":2}
 
 func _process(delta: float) -> void:
 	if Flags.paused==true:
@@ -46,15 +46,15 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hit()
 		return
 	if Flags.hat=="beg":
-		var begsuccess=Flags.beg(begchance)
+		var begsuccess=Flags.beg(enemytype.begchance)
 		return
 	if Flags.inFight==true:
 		hit()
 	else:
-		body.hit()
+		body.hit(enemytype.pow)
 		
 	
-func hit():
+func hit(dmg=1):
 
 	var tween:=get_tree().create_tween()
 	var oldy=position.y
@@ -72,6 +72,7 @@ func hit():
 	
 	if hp<2:
 		$AnimatedSprite2D.animation="short"
+		enemytype.pow=1
 		speed=1.2
 		$collisiontall.position.y=200
 		

@@ -12,7 +12,7 @@ func start():
 	if dir>0:
 		position.x+=400
 	
-func hit():
+func hit(dmg=1):
 	queue_free()
 	
 func kill():

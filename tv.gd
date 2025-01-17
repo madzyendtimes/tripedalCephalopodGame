@@ -42,7 +42,7 @@ func _on_active_body_entered(body: Node2D) -> void:
 		Flags.tne.addEvent("resisted","level")
 		#Flags.effect="resisted"	
 
-func hit():
+func hit(dmg=1):
 		type="tvhorror"
 		$active/AnimatedSprite2D.animation=type
 		return

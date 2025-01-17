@@ -78,5 +78,5 @@ func _on_body_entered(body):
 	searchable=true
 	trashable.emit()
 
-func hit():
+func hit(dmg=1):
 	pass

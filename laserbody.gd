@@ -5,5 +5,5 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 
-func hit():
-	get_parent().hit()
+func hit(dmg=1):
+	get_parent().hit(dmg)

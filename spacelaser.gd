@@ -6,7 +6,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-func hit():
+func hit(dmg=1):
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

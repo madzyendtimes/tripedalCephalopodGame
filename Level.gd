@@ -361,7 +361,7 @@ func doEffect(effect):
 			var needy=needleScene.instantiate()
 			$enemy.add_child(needy)
 			var pos=effect.param.pos
-			needy.position.x=effect.param.pos-75
+			needy.global_position.x=effect.param.pos-75
 			needy.position.y=400+Flags.rng.randi_range(-20,20)
 			needy.start()
 		"bosskill":

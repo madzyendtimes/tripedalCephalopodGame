@@ -10,7 +10,9 @@ var bonus:={
 	"stanimaRate":0,
 	"stanimaRecharge":0,
 	"rizz":0,
-	"smarts":0
+	"smarts":0,
+	"toughness":0,
+	"karma":0
 }
 
 var maximum:={
@@ -21,7 +23,9 @@ var maximum:={
 	"stanimaRate":1,
 	"stanimaRecharge":1,
 	"rizz":0,
-	"smarts":0
+	"smarts":0,
+	"toughness":0,
+	"karma":0
 }
 var actual:={
 	"health":3,
@@ -31,7 +35,9 @@ var actual:={
 	"stanimaRate":1,
 	"stanimaRecharge":1,
 	"rizz":0,
-	"smarts":0
+	"smarts":0,
+	"toughness":0,
+	"karma":0
 }
 	
 var health: int :
@@ -91,6 +97,17 @@ var smarts: int :
 		return actual.smarts+bonus.smarts
 	set(val):
 		setStat("smarts",val)					
+var toughness: int :
+	get:
+		return actual.toughness+bonus.toughness
+	set(val):
+		setStat("toughness",val)		
+var karma: int :
+	get:
+		return actual.karma+bonus.karma
+	set(val):
+		setStat("karma",val)		
+
 		
 var maxHealth:int:
 	get:
@@ -146,6 +163,20 @@ var maxSmarts:int:
 	set(val):
 		maximum.smarts=val
 
+var maxToughness:int:
+	get:
+		return maximum.toughness
+	set(val):
+		maximum.toughness=val
+var maxKarma:int:
+	get:
+		return maximum.karma
+	set(val):
+		maximum.karma=val
+
+
+
+
 var bonusHealth:int:
 	get:
 		return bonus.health
@@ -193,6 +224,21 @@ var bonusSmarts:int:
 		return bonus.smarts
 	set(val):
 		bonus.smarts=val
+var bonusToughness:int:
+	get:
+		return bonus.toughness
+	set(val):
+		bonus.toughness=val
+var bonusKarma:int:
+	get:
+		return bonus.karma
+	set(val):
+		bonus.karma=val
+
+
+
+
+
 
 func resetBonus():
 	var key="stanima"

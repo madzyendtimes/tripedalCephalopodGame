@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bfsv7rap1wsp8"]
+[gd_scene load_steps=38 format=3 uid="uid://bfsv7rap1wsp8"]
 
 [ext_resource type="Script" path="res://braino.gd" id="1_1ahjy"]
 [ext_resource type="Texture2D" uid="uid://cy7k73ltjbsdw" path="res://enemies/braino/attack1.PNG" id="2_lvf77"]
@@ -34,7 +34,6 @@
 [ext_resource type="Texture2D" uid="uid://bv3w0t2twaw1e" path="res://enemies/braino/needle/n16.PNG" id="30_vyt1i"]
 [ext_resource type="Texture2D" uid="uid://dqclf4licg83n" path="res://enemies/braino/needle/n17.PNG" id="31_8hhir"]
 [ext_resource type="Texture2D" uid="uid://csyx2iwasx7wq" path="res://enemies/braino/walk.PNG" id="33_b0hcp"]
-[ext_resource type="AudioStream" uid="uid://d3pn5ug2japjl" path="res://music/Naked Flat (1).wav" id="35_iqljx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h7uuy"]
 radius = 25.0
@@ -212,9 +211,6 @@ sprite_frames = SubResource("SpriteFrames_uf0wu")
 animation = &"walk"
 frame = 6
 frame_progress = 0.360478
-
-[node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("35_iqljx")
 
 [connection signal="body_entered" from="vulnerable" to="." method="_on_vulnerable_body_entered"]
 [connection signal="body_entered" from="hurt" to="." method="_on_hurt_body_entered"]

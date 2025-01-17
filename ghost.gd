@@ -48,5 +48,5 @@ func kill():
 func _on_body_entered(body: Node2D) -> void:
 	body.hit()
 	
-func hit():
+func hit(dmg=1):
 	pass

@@ -14,11 +14,11 @@ func _process(delta: float) -> void:
 		return
 	if position.y>550:
 		queue_free()
-	position.y+=speed
+	position.y+=max(speed*rot,3)
 	position.x+=rot*(speed/2)
 
 
-func hit():
+func hit(dmg=1):
 	pass
 	
 	
@@ -29,5 +29,5 @@ func _on_body_entered(body: Node2D) -> void:
 		if body.ufo:
 			return
 		print("laser hit")
-		body.hit()
+		body.hit(2)
 		queue_free()

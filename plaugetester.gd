@@ -7,7 +7,7 @@ var dead=false
 var begchance=42
 var inhit=false
 
-var enemytype={"name":"plaugetestor","flying":false,"hp":2,"begchance":42,"speed":1.8}
+var enemytype={"name":"plaugetestor","flying":false,"hp":2,"begchance":42,"speed":1.8,"pow":1}
 
 func _ready() -> void:
 	createGas()
@@ -63,10 +63,10 @@ func _on_body_entered(body: Node2D) -> void:
 	if Flags.inFight==true:
 		hit()
 	else:
-		body.hit()
+		body.hit(enemytype.pow)
 		
 	
-func hit():
+func hit(dmg=1):
 	if !inhit:
 		inhit=true
 		var tween:=get_tree().create_tween()

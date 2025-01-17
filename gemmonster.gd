@@ -4,7 +4,7 @@ var hp=1
 var dir=-1
 var runningaway=false
 var speed=3
-var enemytype={"name":"gemmonster","flying":false,"hp":1,"begchance":100,"speed":3}
+var enemytype={"name":"gemmonster","flying":false,"hp":1,"begchance":100,"speed":3,"pow":1}
 
 
 func _process(delta: float) -> void:
@@ -57,12 +57,12 @@ func _on_body_entered(body: Node2D) -> void:
 		if Flags.inFight==true && Flags.playerHits>0:
 			hit()
 		else:
-			body.hit()
+			body.hit(enemytype.pow)
 
 
 
 
-func hit():
+func hit(dmg=1):
 	hp=Flags.calchits(hp)
 	if hp<1:
 		Flags.tne.addEvent("addgems","level")

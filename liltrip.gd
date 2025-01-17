@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 	#global_position.x=clamp(global_position.x+(speed*dir),get_parent().position.x*-1,(get_parent().position.x+600)*-1)
 	#print(position.x," -- ",global_position.x, " --:-- ",get_parent().position.x)
 	
-func hit():
+func hit(dmg=1):
 	print("pethit")
 
 

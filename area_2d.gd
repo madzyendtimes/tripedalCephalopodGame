@@ -1,6 +1,7 @@
 extends Area2D
 
 var dead=false
+var enemytype={"name":"expander","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1}
 
 func _ready() -> void:
 	doaniChange()
@@ -22,7 +23,7 @@ func doaniChange():
 			doaniChange()
 
 
-func hit():
+func hit(dmg=1):
 	pass
 
 
@@ -33,6 +34,7 @@ func _on_body_entered(body: Node2D) -> void:
 		$AnimatedSprite2D.animation="dead"
 		dead=true	
 		body.hit()
+		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})		
 		return
 	if !dead:
-		body.hit()
+		body.hit(enemytype.pow)

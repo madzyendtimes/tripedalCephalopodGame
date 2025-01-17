@@ -37,6 +37,8 @@ var interactablenpc=null
 
 var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,
 "inventory":[],"inventorycapacity":0,"credit":false,
+"toughness":1,"capToughness":5,
+"karma":0,
 "spinattack":false,
 "dizres":1.5,
 "extraJump":1,"capExtraJump":5,
@@ -48,6 +50,8 @@ var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
 var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,
 "inventory":[],"inventorycapacity":0,"credit":false,
+"toughness":1,"capToughness":5,
+"karma":0,
 "spinattack":false,
 "dizres":1.5,
 "extraJump":1,"capExtraJump":5,
@@ -309,6 +313,12 @@ func calchits(hp):
 		playerHits=max(0,playerHits-tmphit)
 	return hp
 
+#subtrcts enemy power by toughness with a max reduction of 1
+func calcdmg(pow):
+	var tmp=playerStats.toughness
+	var dmg=tmp-pow
+	return max(dmg,1)
+
 func beg(begchance):
 	if rng.randi_range(0,100)<(begchance+(playerStats.rizz*10)):
 		tne.addEvent("addgems","level")
@@ -407,6 +417,8 @@ func save():
 	print(megaStats)
 func defaultmegastats():
 	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,"spinattack":false,"dizres":1.5,
+	"toughness":1,"capToughness":5,
+	"karma":0,
 	"extraJump":1,"capExtraJump":5,
 	"deathgifts":false,
 	"attackmode":{"tentacle":true,"gun":false},
@@ -448,7 +460,9 @@ func refreshPlayer():
 		"stanimaRate":megaStats.stanimaRate,
 		"stanimaRecharge":megaStats.stanimaRecharge,
 		"rizz":megaStats.rizz,
-		"smarts":megaStats.smarts
+		"smarts":megaStats.smarts,
+		"toughness":megaStats.toughness,
+		"karma":megaStats.karma
 	}
 	playerStats.maximum={
 		"health":megaStats.health,
@@ -458,7 +472,9 @@ func refreshPlayer():
 		"stanimaRate":megaStats.stanimaRate,
 		"stanimaRecharge":megaStats.stanimaRecharge,
 		"rizz":megaStats.rizz,
-		"smarts":megaStats.smarts
+		"smarts":megaStats.smarts,
+		"toughness":megaStats.toughness,
+		"karma":megaStats.karma
 	}
 	#print(megaStats)
 	credit=megaStats.credit
