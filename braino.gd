@@ -5,21 +5,14 @@ var dir=1
 var speed=1
 var dead=false
 var loaded=true
-var enemytype={"name":"braino","flying":false,"hp":5,"begchance":0,"speed":1,"pow":2}
+var enemytype=Flags.enemytypes.braino.duplicate()
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#$music.volume_db=Flags.options.music
-	#Flags.currentmusic=$music
 	$hurt/boss.animation="attack"
 	$hurt/boss.play()
 	change()
 	Flags.play("bossmusic","music")
-	#$music.play()
 
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if $hurt/boss.animation=="dead":
 		return
@@ -77,8 +70,7 @@ func _process(delta: float) -> void:
 	if $hurt/boss.animation=="walk":
 		$hurt/arm.position.x=-100
 		$hurt/arm.position.y=20
-		position.x+=dir*speed
-	pass
+		position.x+=dir*enemytype.speed
 
 func loadneedle():
 	loaded=true
@@ -87,14 +79,13 @@ func hit(dmg=1):
 	if dead:
 		return
 		Flags.play("multihit")
-	hp=Flags.calchits(hp)
-	if hp<1:
+	enemytype.hp=Flags.calchits(enemytype.hp)
+	if enemytype.hp<1:
 		$hurt/boss.animation="dead"
 		dead=true
 		Flags.tne.addEvent("bosskill","level")
 		Flags.tne.killTimer("change"+str(get_instance_id()),"level")
 		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
-		#$music.stop()
 		return
 	$hurt/boss.animation="dazed"
 	
@@ -118,8 +109,6 @@ func change():
 func _on_hurt_body_entered(body: Node2D) -> void:
 	if !dead:
 		body.hit(enemytype.pow)
-
-
 
 func _on_vulnerable_body_entered(body: Node2D) -> void:
 	if body.name.find("liltrip")>-1:

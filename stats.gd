@@ -26,7 +26,7 @@ func _ready():
 			$VBoxContainer/PopupPanel2/VBoxContainer/inv/PopupMenu.add_item("BEQUEATH")
 			afuncs.append("bequeath")
 		
-		$VBoxContainer/PopupPanel2/VBoxContainer/inv/PopupMenu.visible=false
+	$VBoxContainer/PopupPanel2/VBoxContainer/inv/PopupMenu.visible=false
 
 func showpop():
 	pass
@@ -185,6 +185,8 @@ func clear():
 	rewill()
 
 func rewill():
+	if Flags.megaStats.inventorycapacity<1:
+		return
 	var t=Texture.new()
 	t=load("res://items/will.PNG")
 	$VBoxContainer/PopupPanel2/VBoxContainer/hbinv/CanvasLayer/HBoxContainer2/RichTextLabel.clear()

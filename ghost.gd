@@ -10,6 +10,7 @@ var xboundo=-1400
 var yboundo=-700
 var oldx=0
 var oldy=0
+var enemytype=Flags.enemytypes.ghost.duplicate()
 
 func _ready() -> void:
 	var tempt=Flags.rng.randi_range(1,3)
@@ -36,8 +37,8 @@ func getdir():
 
 
 func _process(delta: float) -> void:
-	position.y=clamp(position.y+ty*speed,yboundo,ybound)
-	position.x=clamp(position.x+tx*speed,xboundo,xbound)
+	position.y=clamp(position.y+ty*enemytype.speed,yboundo,ybound)
+	position.x=clamp(position.x+tx*enemytype.speed,xboundo,xbound)
 
 
 func kill():

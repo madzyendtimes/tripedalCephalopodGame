@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://8fh4n0b4ccau"]
+
+[ext_resource type="Script" path="res://basemonster.gd" id="1_k2pnm"]
+
+[node name="basemonster" type="Area2D"]
+script = ExtResource("1_k2pnm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

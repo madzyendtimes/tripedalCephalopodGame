@@ -10,6 +10,7 @@ var choices:=[
 	{"price":5,"effect":"moneybags","instock":Flags.megaStats.credit!=true,"text":"unlimited credit","implemented":true},
 	{"price":8,"effect":"addstanima","instock":Flags.megaStats.stanima<(Flags.megaStats.capStanima+1),"text":"coffee iv","implemented":true},
 	{"price":8,"effect":"addrizz","instock":Flags.megaStats.rizz<(Flags.megaStats.capRizz+1),"text":"mouthwash","implemented":true},
+	{"price":8,"effect":"addtoughness","instock":Flags.megaStats.toughness<(Flags.megaStats.capToughness+1),"text":"bullied as a child","implemented":true},
 	{"price":8,"effect":"addsmarts","instock":Flags.megaStats.smarts<(Flags.megaStats.capSmarts+1),"text":"a skeptic's guide to logic","implemented":true},
 	{"price":999,"effect":"nocap","instock":Flags.megaStats.capPower<1000,"text":"no cap","implemented":true},
 	{"price":15,"effect":"slowspeed","instock":Flags.megaStats.speed>1,"text":"adhd meds","implemented":true},

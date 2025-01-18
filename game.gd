@@ -10,6 +10,7 @@ var instantiated:=false
 
 func _ready():
 	Flags.loader()
+	Flags.uberstatsloader()
 	Flags.addSounds([
 	["mainmusic",$mainmusic,0,0],
 	["tutorial",$tutorialmusic,0,0],

@@ -10,7 +10,7 @@ var freefall=false
 var ufo=false
 var stopit=false
 
-var enemytype={"name":"ufo","flying":true,"hp":4,"begchance":0,"speed":5,"pow":3}
+var enemytype=Flags.enemytypes.ufo.duplicate()
 
 
 func _ready() -> void:
@@ -68,15 +68,15 @@ func _process(delta: float) -> void:
 					ydir=-1
 				if position.y<-20:
 					ydir=1
-				position.y+=ydir*speed	
-				Flags.tne.addEvent("vehicle","level",true,{"pos":position,"dir":dir,"speed":speed})
+				position.y+=ydir*enemytype.speed	
+				Flags.tne.addEvent("vehicle","level",true,{"pos":position,"dir":dir,"speed":enemytype.speed})
 				if Input.is_action_just_pressed("fight"):
 					Flags.tne.addEvent("laser","level",false,{"pos":position,"rot":rot,"user":true})
 			return
 		if Input.is_action_pressed("left"):
-			position.x=clamp(position.x-speed,-400,800)
+			position.x=clamp(position.x-enemytype.speed,-400,800)
 		if Input.is_action_pressed("right"):
-			position.x=clamp(position.x+speed,-400,800)
+			position.x=clamp(position.x+enemytype.speed,-400,800)
 		
 	if dead:
 		return
@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 			freefall=false
 			dead=true
 			Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
-	position.x+=dir*speed
+	position.x+=dir*enemytype.speed
 	position.y+=ydir
 
 func getufo():
@@ -134,8 +134,8 @@ func hit(dmg=1):
 	var oldy=position.y
 	tween.tween_property($".", "position", Vector2( position.x+(300*Flags.dir*-1),position.y-100), .3)
 	tween.tween_property($".", "position", Vector2( position.x+(300*Flags.dir*-1),oldy), .3)
-	hp=Flags.calchits(hp)
-	if hp<1:
+	enemytype.hp=Flags.calchits(enemytype.hp)
+	if enemytype.hp<1:
 		freefall=true		
 		$AnimatedSprite2D.animation="dead"
 		$Sprite2D.rotation=0

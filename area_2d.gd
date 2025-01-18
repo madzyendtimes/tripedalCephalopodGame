@@ -1,9 +1,7 @@
-extends Area2D
+extends "res://basemonster.gd"
 
-var dead=false
-var enemytype={"name":"expander","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1}
-
-func _ready() -> void:
+func _ready():
+	enemytype=Flags.enemytypes.expander.duplicate()
 	doaniChange()
 	$AnimatedSprite2D.flip_h=!Flags.rng.randi_range(0,1)>0
 
@@ -24,7 +22,7 @@ func doaniChange():
 
 
 func hit(dmg=1):
-	pass
+	return
 
 
 func _on_body_entered(body: Node2D) -> void:

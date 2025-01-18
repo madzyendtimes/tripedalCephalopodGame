@@ -37,7 +37,7 @@ var interactablenpc=null
 
 var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,
 "inventory":[],"inventorycapacity":0,"credit":false,
-"toughness":1,"capToughness":5,
+"toughness":0,"capToughness":5,
 "karma":0,
 "spinattack":false,
 "dizres":1.5,
@@ -47,10 +47,15 @@ var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"
 "transmute":false,
 "liltrip":false
 }
+var uberStats:={"collectables":[],"kills":{},"specials":{},"items":{},"purchases":{},"npcs":{}
+}
+var defaultUberStats={
+		"collectables":[],"kills":{},"specials":{},"items":{},"purchases":{},"npcs":{}
+	}
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
 var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,
 "inventory":[],"inventorycapacity":0,"credit":false,
-"toughness":1,"capToughness":5,
+"toughness":0,"capToughness":5,
 "karma":0,
 "spinattack":false,
 "dizres":1.5,
@@ -122,10 +127,6 @@ var itemMap:=[
 		{"name":"batman slaps dracula","effect":"combustable","consumable":true,"swap":{}},
 		{"name":"london during midnight","effect":"combustable","consumable":true,"swap":{}},
 	]}
-	
-	
-	
-	
 	]
 var flavornpc:={"npc":[{"name":"fanguymanly","deployed":false,"quest":{}},
 	{"name":"princessoccula","deployed":false,"quest":{}},
@@ -134,6 +135,23 @@ var flavornpc:={"npc":[{"name":"fanguymanly","deployed":false,"quest":{}},
 	{"name":"piper","deployed":false,"quest":{}},
 	{"name":"emmaemo","deployed":false,"quest":{"requirements":[{"type":3,"num":3}],"reward":"gun"}}
 ]}
+var enemytypes:={
+	"ufo":{"name":"ufo","flying":true,"hp":4,"begchance":0,"speed":5,"pow":3,"variety":""},
+	"knifeulator":{"name":"knifeulator","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
+	"plaugetestor":{"name":"plaugetestor","flying":false,"hp":2,"begchance":42,"speed":1.8,"pow":1,"variety":""},
+	"braino":{"name":"braino","flying":false,"hp":5,"begchance":0,"speed":1,"pow":2,"variety":""},
+	"gravestone":{"name":"gravestone","flying":false,"hp":5,"begchance":0,"speed":0,"pow":0,"variety":""},
+	"ghost":{"name":"ghost","flying":false,"hp":5000,"begchance":0,"speed":3,"pow":1,"variety":""},
+	"gemmonster":{"name":"gemmonster","flying":false,"hp":1,"begchance":100,"speed":3,"pow":1,"variety":""},
+	"goop baby":{"name":"goop baby","flying":false,"hp":3,"begchance":75,"speed":2.5,"pow":2,"variety":""},
+	"bird":{"name":"bird","flying":true,"hp":1,"begchance":40,"speed":2.5,"pow":1,"variety":""},
+	"diaper tooth":{"name":"diaper tooth","flying":false,"hp":2,"begchance":50,"speed":1.8,"pow":1,"variety":""},
+	"saw":{"name":"saw","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
+	"expander":{"name":"expander","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
+	"rock":{"name":"rock","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
+	"groundling":{"name":"groundling","flying":false,"hp":1,"begchance":25,"speed":.75,"pow":1,"variety":""}
+}
+var varietymap:={"rock1":"stench jelly","rock2":"watcher's rock","rock3":"spite knocker"}
 var paused:=false
 var mode:="level"
 var selectedItem:=-1
@@ -327,6 +345,8 @@ func beg(begchance):
 	return false
 	
 func deathgifts():
+	if !megaStats.deathgifts:
+		return
 	print("deathgifts")
 	var gift=rng.randi_range(0,100)
 	if gift<25:
@@ -409,15 +429,62 @@ func loadoptions():
 		print(options)
 
 
+
+func saveuberstats():
+	print(uberStats)
+	var save_file = FileAccess.open("user://tcvuber1.save", FileAccess.WRITE)
+	var json_string = JSON.stringify(uberStats)
+	save_file.store_line(json_string)
+	print(uberStats)
+
+
+
+func recordKill(enemy):
+	if uberStats.kills.has(enemy.name):
+		uberStats.kills[enemy.name]+=1
+	else:
+		uberStats.kills[enemy.name]=1
+	saveuberstats()
+
 func save():
 	print(megaStats)
 	var save_file = FileAccess.open("user://tcv1.save", FileAccess.WRITE)
 	var json_string = JSON.stringify(megaStats)
 	save_file.store_line(json_string)
 	print(megaStats)
+	
+func defaultuberstats():
+	uberStats={
+		"collectables":[],"kills":{},"specials":{},"items":{},"purchases":{},"npcs":{}
+	}
+
+func uberstatsloader():
+	if not FileAccess.file_exists("user://tcvuber1.save")|| freshstart==true:
+		defaultuberstats()
+		return
+
+	var save_file = FileAccess.open("user://tcvuber1.save", FileAccess.READ)
+
+	while save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
+		var json = JSON.new()
+		var parse_result = json.parse(json_string)
+		
+		if not parse_result == OK:
+			defaultuberstats()
+			continue
+
+		uberStats=json.data
+		for i in defaultUberStats.keys():
+			if !uberStats.has(i):
+				uberStats[i]=defaultUberStats[i]
+
+
+
+
 func defaultmegastats():
 	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,"spinattack":false,"dizres":1.5,
-	"toughness":1,"capToughness":5,
+	"toughness":0,"capToughness":5,
 	"karma":0,
 	"extraJump":1,"capExtraJump":5,
 	"deathgifts":false,

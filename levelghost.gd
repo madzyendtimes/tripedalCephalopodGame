@@ -6,7 +6,7 @@ var speed=Flags.rng.randi_range(1,4)
 var maxchange=3.0
 var active=false
 var home=self
-
+var enemytype={"name":"ghost","flying":false,"hp":5000,"begchance":0,"speed":speed,"pow":1}
 
 func _ready() -> void:
 	var rnd=Flags.rng.randi_range(1,3)
@@ -51,5 +51,5 @@ func changedir():
 
 func _on_body_entered(body: Node2D) -> void:
 	if active:
-		body.hit()
+		body.hit(enemytype.pow)
 		

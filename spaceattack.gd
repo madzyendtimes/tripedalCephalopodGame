@@ -54,8 +54,7 @@ func addgems():
 
 
 	$playership.addgems()
-	#Flags.pitch($gem)
-	#$gem.play()
+
 	Flags.play("gemget")
 
 func killship():

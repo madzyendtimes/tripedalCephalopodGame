@@ -1,7 +1,7 @@
 extends Node2D
 var dead=false
 var hp=1
-var enemytype={"name":"knifulator","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1}
+var enemytype=Flags.enemytypes.knifeulator.duplicate()
 
 func _process(delta: float) -> void:
 	if dead:
@@ -50,8 +50,8 @@ func _on_attack_body_entered(body: Node2D) -> void:
 
 
 func hit(dmg=1):
-	hp=Flags.calchits(hp)
-	if hp<1:
+	enemytype.hp=Flags.calchits(enemytype.hp)
+	if enemytype.hp<1:
 		$attack/AnimatedSprite2D.animation="dead"
 		dead=true	
 		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://br7mye3jii4pp"]
+[gd_scene load_steps=9 format=3 uid="uid://br7mye3jii4pp"]
 
 [ext_resource type="Script" path="res://plaugetester.gd" id="1_mp1fj"]
 [ext_resource type="Texture2D" uid="uid://yucj383yuwur" path="res://enemies/plaugetester/dead.PNG" id="2_ni0yi"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://p1a1l600rn6k" path="res://enemies/plaugetester/pt2.PNG" id="4_pbpvs"]
 [ext_resource type="Texture2D" uid="uid://cye6mhhcld0e7" path="res://enemies/plaugetester/pt3.PNG" id="5_pv77b"]
 [ext_resource type="Texture2D" uid="uid://b2dtj2msnfxq7" path="res://enemies/plaugetester/pt4.PNG" id="6_n1uim"]
-[ext_resource type="AudioStream" uid="uid://b2u7y8vde1ax3" path="res://sounds/hit.mp3" id="7_l7kjy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_50qwd"]
 animations = [{
@@ -55,8 +54,5 @@ frame_progress = 0.398974
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_cut0m")
-
-[node name="hit" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_l7kjy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

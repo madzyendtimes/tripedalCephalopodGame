@@ -4,8 +4,7 @@ var hp=1
 var dir=-1
 var runningaway=false
 var speed=3
-var enemytype={"name":"gemmonster","flying":false,"hp":1,"begchance":100,"speed":3,"pow":1}
-
+var enemytype=Flags.enemytypes.gemmonster.duplicate()
 
 func _process(delta: float) -> void:
 	if position.x<-200 && Flags.mode=="witchhut":
@@ -13,7 +12,7 @@ func _process(delta: float) -> void:
 			queue_free()
 			return
 
-	position.x+=dir*speed
+	position.x+=dir*enemytype.speed
 
 
 
@@ -22,7 +21,7 @@ func polarity(canpolarity):
 		return
 	$AnimatedSprite2D.flip_h
 	dir=-1
-	speed+=4
+	enemytype.speed+=4
 	$AnimatedSprite2D.flip_h=true
 func runaway():
 	if runningaway==false:
@@ -62,9 +61,11 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 
+
+
 func hit(dmg=1):
-	hp=Flags.calchits(hp)
-	if hp<1:
+	enemytype.hp=Flags.calchits(enemytype.hp)
+	if enemytype.hp<1:
 		Flags.tne.addEvent("addgems","level")
 		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 		#Flags.effect="addgems"

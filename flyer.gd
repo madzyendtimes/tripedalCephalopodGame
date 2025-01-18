@@ -20,7 +20,7 @@ var dead=false
 var candive=false
 var indive=false
 
-var enemytype={"name":"bird","flying":true,"hp":1,"begchance":40,"speed":2.5,"pow":1}
+var enemytype=Flags.enemytypes.bird.duplicate()
 
 func _ready() -> void:
 	selectType()
@@ -36,7 +36,7 @@ func selectType():
 		maxchange=1.5
 		minspd=2.0
 		hasmissle=false
-		hp=2
+		enemytype.hp=2
 		candive=true
 		enemytype.name="bug"
 		enemytype.speed=5.0
@@ -170,8 +170,8 @@ func hit(dmg=1):
 		return
 	#$hit.play()
 	Flags.play("hit")
-	hp=Flags.calchits(hp)
-	if hp<1:
+	enemytype.hp=Flags.calchits(enemytype.hp)
+	if enemytype.hp<1:
 		crashed=true
 		freefall=true
 		$AnimatedSprite2D.animation=type+"dead"
@@ -192,7 +192,7 @@ func _on_body_entered(body: Node2D) -> void:
 		body.hit()
 		return
 	if Flags.hat=="beg":
-		var begsuccess=Flags.beg(begchance)
+		var begsuccess=Flags.beg(enemytype.begchance)
 		return
 	if Flags.credit==true and type=="drone":
 		getpackage()

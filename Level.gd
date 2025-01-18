@@ -423,7 +423,7 @@ func doEffect(effect):
 			$player.inventoryAcquired(effect.param.item)
 		"deadEnemy":
 			Flags.deathgifts()
-						
+			Flags.recordKill(effect.param.type)	
 
 func downenv():
 		height-=1
