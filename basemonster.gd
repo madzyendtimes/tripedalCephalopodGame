@@ -8,7 +8,8 @@ var dead=false
 var begchance=42
 var inhit=false
 
-var enemytype={"name":"plaugetestor","flying":false,"hp":2,"begchance":42,"speed":1.8,"pow":1}
+var enemytype={"name":"basemonster","flying":false,"hp":1,"begchance":0,"speed":0,"pow":0,"variety":""}
+#enemytype must be overwritten
 
 func _process(delta: float) -> void:
 	if Flags.paused==true:
@@ -53,8 +54,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if Flags.inFight==true:
 		hit()
 	else:
-		body.hit(enemytype.pow)
-		
+		body.hit(enemytype)
 	
 func hit(dmg=1):
 	if !inhit:

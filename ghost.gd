@@ -14,12 +14,14 @@ var enemytype=Flags.enemytypes.ghost.duplicate()
 
 func _ready() -> void:
 	var tempt=Flags.rng.randi_range(1,3)
+
 	if tempt==1:
 		type="holy"
 	if tempt==2:
 		type="demon"
 	if tempt==3:
 		type="peace"
+	enemytype.variety=type
 	$AnimatedSprite2D.animation=type		
 	$AnimatedSprite2D.play()
 	getdir()

@@ -123,7 +123,7 @@ func _on_body_entered(body: Node2D) -> void:
 		hit()
 		return
 	if !ufo:
-		body.hit(enemytype.pow)
+		body.hit(enemytype)
 
 	
 	

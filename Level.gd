@@ -51,7 +51,6 @@ var warpS
 var missle
 var dangerZone
 var canrandom=true
-#var randopercents=false
 var newsave=false
 var bossZone=0
 var jumps=0
@@ -67,37 +66,18 @@ var jumpheight=0
 var jumpups=0
 var phantomposition=0
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	
 	Flags.mode="level"
 	$Camera2D.make_current()
 	if Flags.options.randomizeDistribution:
-		Flags.percentageMap.shuffle() #sort_custom(func(a, b): return rng.randi_range(0,1)>0)
+		Flags.percentageMap.shuffle()
 	Flags.playerStats.maxHealth=Flags.playerStats.maxHealth
 	Flags.playerStats.maxStanima=Flags.playerStats.maxStanima
-	#triggers events to ensure listeners will update,namely the stat bars, I know it's wonky, I like it better than alternatives :p
-
-	#Flags.addSounds([
-		#["mainmusic",$AudioStreamPlayer,0],
-		#["tutorial",$tutorialmusic,0],
-		#["spacemusic",$spacemusic,0]
-		#
-		#],"music")
-	#Flags.addSounds([
-		#["warcry",$warcry,0],
-		#["lasersound",$lasersound,0],
-		#["gunshot",$gunshot,0],
-		#["lilthud",$lilthud,0],
-		#["alarm",$alarm,0],
-		#["gemget",$gemget,0],
-		#["puke",$puke,0],
-		#["hypno",$hypno,0],
-		#["jump",$jump,0]
-		#],"fx")
-	#Flags.setvolumes()			
+	
 	Flags.play("mainmusic","music")
-	Flags.titlescreen="title"
+	Flags.titlescreen="gameover"
 	$trader.visible=false	
 	Flags.reset()
 	baseSpeed=Flags.megaStats.speed
@@ -423,7 +403,9 @@ func doEffect(effect):
 			$player.inventoryAcquired(effect.param.item)
 		"deadEnemy":
 			Flags.deathgifts()
-			Flags.recordKill(effect.param.type)	
+			Flags.recordKill(effect.param.type)
+		"killedby":
+			Flags.recordDeath(effect.param)
 
 func downenv():
 		height-=1
@@ -776,19 +758,17 @@ func doenvdown():
 		
 		
 func jumpup():
-	#Flags.tne.killTimer("jumpdown","level")
+
 	jumpups+=1
-	#print("jumpup:",$player.position.y," -- height: ",jumpheight," -- jumps : ",jumps," -- jumpups: ",jumpups)
 	inascent=true
-	$player.position.y=max(100,$player.position.y-20)
+	var jumpmax=100
+	if Flags.weather=="snow":
+		jumpmax=150
+	$player.position.y=max(jumpmax,$player.position.y-20)
 	phantomposition-=20
-	#print("phantomy:",phantomposition," - playerposition: ",$player.position.y," -- jumpheight : ",jumpheight)
-	#moveDir(1,false,1,false,"y")
-	
 	
 	if phantomposition<(jumpheight*jumps):
 		jumps-=1
-		#print("**** phantomy:",phantomposition," - playerposition: ",$player.position.y," -- jumpheight : ",jumpheight," --- jumps: ",jumps)
 		if jumps<1:
 			jumpdown()
 			doenvdown()
@@ -800,14 +780,10 @@ func jumpup():
 func jumpdown():
 	Flags.tne.killTimer("jumpup","level")
 	jumpups-=1
-#	print("jumpdown:",$player.position.y," -- height: ",jumpheight," -- jumps : ",jumps," -- jumpups: ",jumpups)
 	indescent=true
-#	moveDir(1,false,-1,false,"y")
 	phantomposition+=20
 	$player.position.y=min($player.position.y+20,basey)
-	#print("downphantomy:",phantomposition," - playerposition: ",$player.position.y," -- basey : ",basey)
 	if phantomposition>basey:
-		#print("******downphantomy:",phantomposition," - playerposition: ",$player.position.y," -- basey : ",basey)
 		$player.position.y=basey
 		Flags.tne.killTimer("jumpdown","level")
 		stopjump()
@@ -816,13 +792,9 @@ func jumpdown():
 	
 	
 func finishenvdescent():
-	#if $treeholder.position.y>treeholderResetY:
-		#moveDir(1,false,1,false,"y")
-#	else:
-		#Flags.tne.killTimer("finishdown","level")
-		#resety()
+	#potential kill
 		return
-	#Flags.tne.dotime(self,[finishenvdescent],.01,"finishdown",false,"level")	
+
 	
 func unconfused():
 	Flags.confused=false
@@ -832,16 +804,15 @@ func interact():
 	Flags.paused=true
 	Flags.mode=Flags.interactablenpc.mode
 	doMode()
-	pass
 
 func doMode():
 	match Flags.mode:
 		"trader":
 			$trader.visible=true
-			Flags.stopthemusic()
+#			Flags.stopthemusic()
 			$trader.start(self)
 		"jobboard":
-			Flags.stopthemusic()
+#			Flags.stopthemusic()
 			$joboard.start(self)
 	
 	
@@ -852,7 +823,7 @@ func intreturn():
 func entered():
 	weatheroff()
 	speed=1
-	Flags.stopthemusic()
+#	Flags.stopthemusic()
 	Flags.entered.building.start(self)
 	Flags.entered.building.close()
 
@@ -978,7 +949,7 @@ func reset_player():
 
 func reset_flags():
 	jumps=0
-	print($player.position.y)
+	##print($player.position.y)
 	if $player.position.y==basey:
 		speed=Flags.playerStats.speed
 		currSpeed=speed
@@ -1189,7 +1160,7 @@ func dospawns():
 			
 			var chance=Flags.rng.randi_range(0,upchoice)
 			var newchance=Flags.rng.randi_range(0,Flags.percentageAgg)
-			print(newchance,Flags.percentageAgg)
+		#	print(newchance,Flags.percentageAgg)
 			var agg=0
 			var count=0
 			for i in Flags.percentageMap:

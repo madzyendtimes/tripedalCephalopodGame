@@ -18,7 +18,7 @@ func _on_body_entered(body: Node2D) -> void:
 		
 		var objective=Flags.Quests[npcName].objective
 		for x in Flags.playerInventory:
-			print(x.type,x.item)
+			#print(x.type,x.item)
 			if (x.type==objective[0] && x.item==(objective[1])):
 				foundQuest();
 				Flags.playerInventory.remove_at(count)

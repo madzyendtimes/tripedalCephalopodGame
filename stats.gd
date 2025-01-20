@@ -114,7 +114,7 @@ func dotransmute():
 func douse():
 	if Flags.selectedItem<=Flags.playerInventory.size():
 		var pi=Flags.playerInventory[Flags.selectedItem-1]
-		print(pi)
+	#	print(pi)
 		Flags.tne.addEvent(pi.effect,"level")
 		#Flags.effect=pi.effect
 		var inInv=Flags.megaStats.inventory.find(pi)
@@ -148,8 +148,8 @@ func SelectItem(selx,sely):
 			Flags.selectedItem=sz
 		var texture=ainv[Flags.selectedItem-1]
 		#Flags.playerInventory[Flags.selectedItem-1].imgt
-		print(Flags.playerInventory)
-		print(Flags.selectedItem)
+#		print(Flags.playerInventory)
+#		print(Flags.selectedItem)
 		$VBoxContainer/PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_SIZE,texture,150,150,Color(1.0,1.0,0.0,1.0))
 		$VBoxContainer/PopupPanel2/VBoxContainer/inv.update_image("k"+str(Flags.selectedItem),RichTextLabel.UPDATE_COLOR,texture,150,150,Color(1.0,1.0,0.0,1.0))
 		$VBoxContainer/PopupPanel2/VBoxContainer/inv/PopupMenu.position.x=((Flags.selectedItem%11)*100)-50
@@ -158,11 +158,11 @@ func SelectItem(selx,sely):
 	
 
 func update():
-	$PopupPanel/statbar/Label.text="health :"+str(Flags.playerStats.health)+" - stanima :"+str(Flags.playerStats.stanima)+" - speed : "+str(Flags.playerStats.speed)+ " - power : "+str(Flags.playerStats.power)+" - gems: "+str(Flags.megaStats.gems)
+	$PopupPanel/statbar/Label.text="health :"+str(Flags.playerStats.health)+" - stanima :"+str(Flags.playerStats.stanima)+" - speed : "+str(Flags.playerStats.speed)+ " - power : "+str(Flags.playerStats.power)+" - toughness "+str(Flags.megaStats.toughness)+" - gems: "+str(Flags.megaStats.gems)
 
 	
 func contract():
-	print("contract")
+	#print("contract")
 	$PopupPanel.visible=false
 	$VBoxContainer/PopupPanel2.visible=false
 	Flags.paused=false
@@ -170,7 +170,7 @@ func contract():
 	unmenu()
 
 func expand():
-	print("expand")
+#	print("expand")
 	$PopupPanel.visible=true
 #	$PopupPanel.size.y=100
 	Flags.mode="statsScreen"
@@ -191,7 +191,7 @@ func rewill():
 	t=load("res://items/will.PNG")
 	$VBoxContainer/PopupPanel2/VBoxContainer/hbinv/CanvasLayer/HBoxContainer2/RichTextLabel.clear()
 	$VBoxContainer/PopupPanel2/VBoxContainer/hbinv/CanvasLayer/HBoxContainer2/RichTextLabel.add_image(t,100,100,"white",5,Rect2(0,0,0,0))
-	print(Flags.megaStats.inventory)
+#	print(Flags.megaStats.inventory)
 	for i in Flags.megaStats.inventory:
 		addtowill(i.img)
 
@@ -213,4 +213,3 @@ func addInventory(item,itemnum):
 
 func _on_popup_menu_id_focused(id: int) -> void:
 	function=id
-	print("FUNCTION!!!!----",id)

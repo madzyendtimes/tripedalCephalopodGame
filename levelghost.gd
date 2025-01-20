@@ -51,5 +51,5 @@ func changedir():
 
 func _on_body_entered(body: Node2D) -> void:
 	if active:
-		body.hit(enemytype.pow)
+		body.hit(enemytype)
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://bjlg8hhdf4x7l"]
+[gd_scene load_steps=94 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://fxs76c7jxk0o" path="res://npc.tscn" id="2_q0aer"]
 [ext_resource type="Texture2D" uid="uid://d1s4lqu3w7n6r" path="res://location/tutorial/blackboaard.PNG" id="3_7vpnf"]
 [ext_resource type="PackedScene" uid="uid://47rqth40v12t" path="res://interact.tscn" id="3_wwvka"]
-[ext_resource type="PackedScene" uid="uid://dgoj5xbbjud02" path="res://missle.tscn" id="4_a4tke"]
 [ext_resource type="Texture2D" uid="uid://4m08f3jurlqs" path="res://decorations/cityoutskirts/signs/tutorial.PNG" id="4_km83g"]
 [ext_resource type="Script" path="res://npc.gd" id="5_3jyy4"]
 [ext_resource type="Texture2D" uid="uid://ig3t15w63i23" path="res://decorations/cityoutskirts/signs/danger.PNG" id="5_ec3b4"]
@@ -28,16 +27,8 @@
 [ext_resource type="Script" path="res://npcs.gd" id="15_vuva8"]
 [ext_resource type="Texture2D" uid="uid://bjt4hai4ttkuk" path="res://npc/sludgebutt/questtext.PNG" id="16_7iadb"]
 [ext_resource type="Texture2D" uid="uid://btao0ksax3aqi" path="res://location/home/front.PNG" id="17_7wont"]
-[ext_resource type="Script" path="res://gemna.gd" id="17_asgom"]
 [ext_resource type="PackedScene" uid="uid://dbooao61w5erw" path="res://pailface.tscn" id="18_dbl8f"]
-[ext_resource type="Texture2D" uid="uid://jdrd53ln0qj1" path="res://npc/gemna/keygemnaquest.PNG" id="18_vq4ee"]
-[ext_resource type="Texture2D" uid="uid://bcle7v2w4qvif" path="res://npc/gemna/gemnaquestfixed.PNG" id="19_ord6d"]
-[ext_resource type="Texture2D" uid="uid://coclpfsxscvc5" path="res://npc/gemna/gemnaCompleteText.PNG" id="19_xli40"]
-[ext_resource type="Texture2D" uid="uid://biyloyknuao3b" path="res://npc/gemna/gemna1.PNG" id="20_334ox"]
-[ext_resource type="Texture2D" uid="uid://bwglwr6oqc5fg" path="res://npc/gemna/gemna2.PNG" id="21_ws368"]
-[ext_resource type="Texture2D" uid="uid://dsmgx0kh82byh" path="res://npc/gemna/gemnacomplete1.PNG" id="22_wa8vn"]
 [ext_resource type="Texture2D" uid="uid://bimsw8oqu1xk8" path="res://npc/sludgebutt/questcomplete.PNG" id="23_7wcso"]
-[ext_resource type="Texture2D" uid="uid://dswtsk7j5ibfc" path="res://npc/gemna/gemnacomplete2.PNG" id="23_hrphj"]
 [ext_resource type="PackedScene" uid="uid://bid0ue1i8kuhe" path="res://flavornpc.tscn" id="24_f2tfj"]
 [ext_resource type="Texture2D" uid="uid://x10nc4ufvaex" path="res://npc/sludgebutt/questcomplete2.PNG" id="24_rb1w3"]
 [ext_resource type="Texture2D" uid="uid://cn020rbt5e0ci" path="res://npc/snitchyjoe/snitchyjoe1.PNG" id="25_dow64"]
@@ -66,8 +57,6 @@
 [ext_resource type="PackedScene" uid="uid://bv1r3uf6jmfs6" path="res://joboard.tscn" id="86_pqqyq"]
 [ext_resource type="PackedScene" uid="uid://bvmdraii7ccwl" path="res://spaceattack.tscn" id="87_nb5pl"]
 [ext_resource type="PackedScene" uid="uid://bu7gmej612ogw" path="res://tv.tscn" id="107_57c1h"]
-[ext_resource type="PackedScene" uid="uid://ej35f8d30wde" path="res://enterable.tscn" id="108_lhqd7"]
-[ext_resource type="PackedScene" path="res://assets.tscn" id="117_jg7m3"]
 [ext_resource type="PackedScene" uid="uid://utpjm1uc1isi" path="res://temple.tscn" id="119_0ei4f"]
 [ext_resource type="PackedScene" uid="uid://dos1618drl4dc" path="res://cryptominos.tscn" id="125_dyu73"]
 [ext_resource type="Script" path="res://weather.gd" id="126_gpbvy"]
@@ -95,62 +84,6 @@ radius = 272.47
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pfs00"]
 radius = 339.411
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fcxne"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("18_vq4ee")
-}],
-"loop": true,
-"name": &"keyboardtext",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("19_ord6d")
-}],
-"loop": true,
-"name": &"text",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("19_xli40")
-}],
-"loop": true,
-"name": &"textcomplete",
-"speed": 5.0
-}]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_53ti5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("20_334ox")
-}, {
-"duration": 1.0,
-"texture": ExtResource("21_ws368")
-}],
-"loop": true,
-"name": &"gemna",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("22_wa8vn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("23_hrphj")
-}],
-"loop": true,
-"name": &"gemnacomplete",
-"speed": 5.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_73mud"]
-radius = 64.0
-height = 272.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e2jih"]
 animations = [{
@@ -489,14 +422,7 @@ texture = ExtResource("9_rp4wn")
 position = Vector2(-2782, 364)
 shape = SubResource("CircleShape2D_pfs00")
 
-[node name="enterable" parent="locationback" instance=ExtResource("108_lhqd7")]
-z_index = -5
-position = Vector2(5162, -4268)
-
 [node name="interactive" type="Node2D" parent="."]
-
-[node name="missle" parent="interactive" instance=ExtResource("4_a4tke")]
-position = Vector2(-127, -44)
 
 [node name="interact" parent="interactive" instance=ExtResource("3_wwvka")]
 
@@ -505,29 +431,6 @@ script = ExtResource("15_vuva8")
 
 [node name="npc" parent="npcs" instance=ExtResource("2_q0aer")]
 script = ExtResource("5_3jyy4")
-
-[node name="gemna" type="Area2D" parent="npcs/npc"]
-collision_layer = 8
-collision_mask = 2
-script = ExtResource("17_asgom")
-
-[node name="text" type="AnimatedSprite2D" parent="npcs/npc/gemna"]
-position = Vector2(35938, -324)
-scale = Vector2(0.596, 0.54)
-sprite_frames = SubResource("SpriteFrames_fcxne")
-animation = &"text"
-autoplay = "text"
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npcs/npc/gemna"]
-position = Vector2(35690, -212)
-scale = Vector2(1.48, 1.34)
-sprite_frames = SubResource("SpriteFrames_53ti5")
-animation = &"gemna"
-autoplay = "gemna"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="npcs/npc/gemna"]
-position = Vector2(35706, -196)
-shape = SubResource("CapsuleShape2D_73mud")
 
 [node name="flavornpc" parent="npcs/npc" instance=ExtResource("24_f2tfj")]
 visible = false
@@ -683,8 +586,6 @@ z_index = 4
 
 [node name="stats" parent="." instance=ExtResource("30_mddu5")]
 
-[node name="assets" parent="." instance=ExtResource("117_jg7m3")]
-
 [node name="weather" type="Area2D" parent="."]
 position = Vector2(-6, 4)
 script = ExtResource("126_gpbvy")
@@ -769,10 +670,7 @@ position = Vector2(-574, -5324)
 
 [connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]
-[connection signal="hit" from="interactive/missle" to="." method="_on_missle_hit"]
 [connection signal="body_entered" from="npcs/npc" to="npcs/npc" method="_on_body_entered"]
-[connection signal="body_entered" from="npcs/npc/gemna" to="npcs/npc/gemna" method="_on_body_entered"]
-[connection signal="body_exited" from="npcs/npc/gemna" to="npcs/npc/gemna" method="_on_body_exited"]
 [connection signal="body_entered" from="npcs/sludgebutt" to="npcs/sludgebutt" method="_on_body_entered"]
 [connection signal="body_entered" from="npcs/pailface" to="." method="_on_pailface_body_entered"]
 [connection signal="body_entered" from="locationfront/tutorial" to="." method="_on_tutorial_body_entered"]

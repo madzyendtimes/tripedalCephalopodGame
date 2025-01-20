@@ -72,7 +72,7 @@ func eliminateghosts(type):
 func exit(isdead=false):
 	reset()
 #	$music.stop()
-	print("exit")
+#	print("exit")
 	home.exit(isdead)
 
 

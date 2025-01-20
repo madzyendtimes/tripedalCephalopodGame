@@ -52,7 +52,7 @@ func _process(delta: float) -> void:
 	#global_position.x=clamp(global_position.x+(speed*dir),get_parent().position.x*-1,(get_parent().position.x+600)*-1)
 	#print(position.x," -- ",global_position.x, " --:-- ",get_parent().position.x)
 	
-func hit(dmg=1):
+func hit(enemytype={}):
 	print("pethit")
 
 
@@ -79,9 +79,9 @@ func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 
 func _on_right_screen_exited() -> void:
 	rightexit=true
-	print("rightexit")
+	#print("rightexit")
 
 
 func _on_left_screen_exited() -> void:
 	rightexit=false
-	print("leftexit")
+	#print("leftexit")

@@ -35,4 +35,4 @@ func _on_body_entered(body: Node2D) -> void:
 		Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})		
 		return
 	if !dead:
-		body.hit(enemytype.pow)
+		body.hit(enemytype)

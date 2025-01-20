@@ -4,13 +4,11 @@ var home=self
 #var options={"controls":"controller","music":100,"fx":100,"randomizeDistribution":false,"seed":{"active":false,"value":"fun"},"startfresh":false,"graphics":"high"}
 func _ready():
 	Flags.loadoptions()
-	print("load options")
+	#print("load options")
 	$loading.visible=false
 	
-	if Flags.titlescreen=="win":
-		$Title.animation="win"
-	else:
-		$Title.animation="title"
+
+	$Title.animation=Flags.titlescreen
 	$ui/VBoxContainer.get_child(selected).grab_focus()
 	Flags.setvolumes()
 	Flags.play("titlemusic","music")	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bjypcqai2gv82"]
+[gd_scene load_steps=36 format=3 uid="uid://bjypcqai2gv82"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_apl8i"]
 [ext_resource type="AudioStream" uid="uid://c3j1tddsstr75" path="res://sounds/fx2/hypnotised.wav" id="2_j3rvk"]
@@ -33,6 +33,12 @@
 [ext_resource type="AudioStream" uid="uid://bnlttjgnqg5ek" path="res://music/Brilliant Charles.wav" id="31_l2215"]
 [ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="32_viduq"]
 [ext_resource type="AudioStream" uid="uid://yotkhxff2mfd" path="res://music/Fallen Date.wav" id="33_ug3jt"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_y6vlv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kwq3b"]
+texture = SubResource("CanvasTexture_y6vlv")
+modulate_color = Color(0.011, 0.011, 0.011, 0.39)
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_apl8i")
@@ -151,3 +157,20 @@ stream = ExtResource("33_ug3jt")
 
 [node name="lilthud" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_1o65u")
+
+[node name="acheivement" type="PopupPanel" parent="."]
+transparent_bg = true
+initial_position = 2
+size = Vector2i(300, 100)
+visible = true
+always_on_top = true
+transparent = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_kwq3b")
+
+[node name="Label" type="Label" parent="acheivement"]
+offset_right = 300.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 25
+text = "blah blah"
+horizontal_alignment = 1
+vertical_alignment = 1

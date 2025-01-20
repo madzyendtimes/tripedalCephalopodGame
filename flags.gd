@@ -47,10 +47,10 @@ var defaultStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"
 "transmute":false,
 "liltrip":false
 }
-var uberStats:={"collectables":[],"kills":{},"specials":{},"items":{},"purchases":{},"npcs":{}
+var uberStats:={"collectables":[],"kills":{"total":0},"deaths":{"total":0},"specials":{},"items":{},"purchases":{},"npcs":{},"acheivements":{"total":0}
 }
 var defaultUberStats={
-		"collectables":[],"kills":{},"specials":{},"items":{},"purchases":{},"npcs":{}
+		"collectables":[],"kills":{"total":0},"deaths":{"total":0},"specials":{},"items":{},"purchases":{},"npcs":{},"acheivements":{"total":0}
 	}
 var Levels:={"tutorial":{"instantiated":false,"complete":false},"cityOutskirts":{"instantiated":true,"complete":false}}
 var megaStats:={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,
@@ -136,20 +136,23 @@ var flavornpc:={"npc":[{"name":"fanguymanly","deployed":false,"quest":{}},
 	{"name":"emmaemo","deployed":false,"quest":{"requirements":[{"type":3,"num":3}],"reward":"gun"}}
 ]}
 var enemytypes:={
-	"ufo":{"name":"ufo","flying":true,"hp":4,"begchance":0,"speed":5,"pow":3,"variety":""},
-	"knifeulator":{"name":"knifeulator","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
-	"plaugetestor":{"name":"plaugetestor","flying":false,"hp":2,"begchance":42,"speed":1.8,"pow":1,"variety":""},
-	"braino":{"name":"braino","flying":false,"hp":5,"begchance":0,"speed":1,"pow":2,"variety":""},
-	"gravestone":{"name":"gravestone","flying":false,"hp":5,"begchance":0,"speed":0,"pow":0,"variety":""},
-	"ghost":{"name":"ghost","flying":false,"hp":5000,"begchance":0,"speed":3,"pow":1,"variety":""},
-	"gemmonster":{"name":"gemmonster","flying":false,"hp":1,"begchance":100,"speed":3,"pow":1,"variety":""},
-	"goop baby":{"name":"goop baby","flying":false,"hp":3,"begchance":75,"speed":2.5,"pow":2,"variety":""},
-	"bird":{"name":"bird","flying":true,"hp":1,"begchance":40,"speed":2.5,"pow":1,"variety":""},
-	"diaper tooth":{"name":"diaper tooth","flying":false,"hp":2,"begchance":50,"speed":1.8,"pow":1,"variety":""},
-	"saw":{"name":"saw","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
-	"expander":{"name":"expander","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
-	"rock":{"name":"rock","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
-	"groundling":{"name":"groundling","flying":false,"hp":1,"begchance":25,"speed":.75,"pow":1,"variety":""}
+	"ufo":{"type":"vehicle","weak":"laser","strong":"physical","immune":"","name":"ufo","flying":true,"hp":4,"begchance":0,"speed":5,"pow":3,"variety":""},
+	"knifeulator":{"type":"trap","weak":"balistic","strong":"","immune":"tentacle","name":"knifeulator","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
+	"plaugetestor":{"type":"humanoid","weak":"fire","strong":"poison","immune":"","name":"plaugetestor","flying":false,"hp":2,"begchance":42,"speed":1.8,"pow":1,"variety":""},
+	"braino":{"type":"zombie","weak":"","strong":"","immune":"","name":"braino","flying":false,"hp":5,"begchance":0,"speed":1,"pow":2,"variety":""},
+	"gravestone":{"type":"haunted","weak":"","strong":"fire","immune":"","name":"gravestone","flying":false,"hp":5,"begchance":0,"speed":0,"pow":0,"variety":""},
+	"ghost":{"type":"ephemeral","weak":"magic","strong":"physical","immune":"tentacle","name":"ghost","flying":false,"hp":5000,"begchance":0,"speed":3,"pow":1,"variety":""},
+	"gemmonster":{"type":"magical","weak":"","strong":"","immune":"","name":"gemmonster","flying":false,"hp":1,"begchance":100,"speed":3,"pow":1,"variety":""},
+	"goop baby":{"type":"humanoid","weak":"","strong":"","immune":"","name":"goop baby","flying":false,"hp":3,"begchance":75,"speed":2.5,"pow":2,"variety":""},
+	"bird":{"type":"flying","weak":"","strong":"","immune":"","name":"bird","flying":true,"hp":1,"begchance":40,"speed":2.5,"pow":1,"variety":""},
+	"diaper tooth":{"type":"humanoid","weak":"","strong":"","immune":"","name":"diaper tooth","flying":false,"hp":2,"begchance":50,"speed":1.8,"pow":1,"variety":""},
+	"saw":{"type":"trap","weak":"ballistic","strong":"physical","immune":"tentacle","name":"saw","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
+	"expander":{"type":"trap","weak":"ballistic","strong":"","immune":"tentacle","name":"expander","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
+	"rock":{"type":"rock","weak":"ballistic","strong":"physical","immune":"tentacle","name":"rock","flying":false,"hp":1,"begchance":0,"speed":0,"pow":1,"variety":""},
+	"groundling":{"type":"zombie","weak":"fire","strong":"","immune":"","name":"groundling","flying":false,"hp":1,"begchance":25,"speed":.75,"pow":1,"variety":""},
+	"eggmissle":{"type":"missle","weak":"","strong":"","immune":"all","name":"eggmissle","flying":false,"hp":1,"begchance":0,"speed":2,"pow":1,"variety":""},
+	"needle":{"type":"missle","weak":"","strong":"","immune":"all","name":"needle","flying":false,"hp":1,"begchance":0,"speed":1,"pow":1,"variety":""},
+	"laser":{"type":"missle","weak":"","strong":"","immune":"all","name":"laser","flying":false,"hp":1,"begchance":0,"speed":1,"pow":2,"variety":""}
 }
 var varietymap:={"rock1":"stench jelly","rock2":"watcher's rock","rock3":"spite knocker"}
 var paused:=false
@@ -217,7 +220,10 @@ var amode=[]
 var petmove=true
 var sounds={"music":{},"fx":{}}
 
-
+var acheivements={
+	"totalkills":{"criteria":func criteriamet(aobj): return aobj.value>0,"description":"Kill 1 enemy total","points":10,"name":"You choose murder!"}
+	
+	}
 
 
 func weatheroff():
@@ -237,10 +243,8 @@ func setvolumes():
 		sounds.fx[i].aud.volume_db=options.fx+sounds.fx[i].vol
 
 func stopthemusic():
-	print(currentmusic)
 	if currentmusic!=null&&(sounds.music.get(currentmusic) != null):
 		sounds.music[currentmusic].aud.stop()
-		print("stop")
 		
 func play(key,type="fx"):
 
@@ -250,7 +254,6 @@ func play(key,type="fx"):
 		if type=="music":
 			stopthemusic()
 			currentmusic=key
-			print(currentmusic)
 		sounds[type][key].aud.play()
 
 		
@@ -315,7 +318,8 @@ func reset():
 	interactablenpc=null
 	env=[]
 	petmove=true
-	
+#	defaultuberstats()
+
 func addEnv(scenes):
 	for i in scenes:
 		env.append({"scene":i[0],"y":i[0].position.y,"speed":i[1]})
@@ -329,47 +333,46 @@ func calchits(hp):
 	if playerHits>0:
 		hp-=playerHits
 		playerHits=max(0,playerHits-tmphit)
+	print("hp=",hp)
 	return hp
 
 #subtrcts enemy power by toughness with a max reduction of 1
 func calcdmg(pow):
+	print("calc damage with power ",pow)
+	print("toughness ",Flags.megaStats.toughness)
 	var tmp=playerStats.toughness
 	var dmg=tmp-pow
-	return max(dmg,1)
+	dmg=max(dmg,1)
+	print("resluting damage= ",dmg)
+	return dmg
 
 func beg(begchance):
 	if rng.randi_range(0,100)<(begchance+(playerStats.rizz*10)):
 		tne.addEvent("addgems","level")
-#		effect="addgems"
 		return true
 	return false
 	
 func deathgifts():
 	if !megaStats.deathgifts:
 		return
-	print("deathgifts")
 	var gift=rng.randi_range(0,100)
 	if gift<25:
 		playerStats.health+=1
-		print("health")
 		return
 	if gift<50:
 		tne.addEvent("addgems","level")
-		print("gems")
 		return
 	if gift<75:
 		playerStats.stanima=playerStats.maxStanima
-		print("stanima")
 		return
 	var gtype=Flags.rng.randi_range(0,2)
 	var numvariant=types[gtype].num
 	var treenum=rng.randi_range(1,numvariant)
 	var gitem=addToInventory(gtype,numvariant)
 	tne.addEvent("inventoryAcquired","level",false,{"item":gitem})
-	print("inventory"+gitem.name)	
+	
 	
 func addToInventory(type,numvarient):
-	print("addtoinventory")
 	var name=types[type].name
 	var treenum=numvarient
 	
@@ -386,7 +389,7 @@ func addToInventory(type,numvarient):
 		"name":itemMap[type].varients[max(0,treenum-1)].name,
 		"bequeathed":false
 		}
-	print(invitem)
+
 	playerInventory.append(invitem)
 	return invitem
 
@@ -407,9 +410,8 @@ func defaultoptions():
 	
 
 func loadoptions():
-	print("load option function")
+
 	if not FileAccess.file_exists("user://tcoptionsv2.save"):
-		print("error")
 		defaultoptions()
 		return
 	var save_file = FileAccess.open("user://tcoptionsv2.save", FileAccess.READ)
@@ -426,36 +428,66 @@ func loadoptions():
 
 		options=json.data
 		refreshoptions()
-		print(options)
+		#print(options)
 
 
 
 func saveuberstats():
-	print(uberStats)
+
 	var save_file = FileAccess.open("user://tcvuber1.save", FileAccess.WRITE)
 	var json_string = JSON.stringify(uberStats)
 	save_file.store_line(json_string)
-	print(uberStats)
 
+func recordAcheivement(ament,crit={"value":0}):
+	if acheivements[ament].criteria.call(crit):
+		if !uberStats.acheivements.has(ament):
+			uberStats.acheivements[ament]=true
+			tne.addEvent("acheivement","main",false,{"type":ament,"obj":acheivements[ament]})
 
-
-func recordKill(enemy):
-	if uberStats.kills.has(enemy.name):
-		uberStats.kills[enemy.name]+=1
+func recordDeath(enemy):
+	if !uberStats.deaths.has(enemy.type):
+		uberStats.deaths[enemy.type]={}
+	uberStats.deaths.total+=1
+	var name=enemy.name
+	if enemy.variety!="":
+		name=enemy.variety
+	if !uberStats.deaths[enemy.type].has("total"):
+		uberStats.deaths[enemy.type]["total"]=0
+	uberStats.deaths[enemy.type]["total"]+=1
+	if uberStats.deaths[enemy.type].has(name):
+		uberStats.deaths[enemy.type][name]+=1
 	else:
-		uberStats.kills[enemy.name]=1
+		uberStats.deaths[enemy.type][name]=1
+	saveuberstats()
+	
+func recordKill(enemy):
+
+	uberStats.kills.total+=1
+	recordAcheivement("totalkills",{"value":uberStats.kills.total})
+	if !uberStats.kills.has(enemy.type):
+		uberStats.kills[enemy.type]={}
+	var name=enemy.name
+	if enemy.variety!="":
+		name=enemy.variety
+	if !uberStats.kills[enemy.type].has("total"):
+		uberStats.kills[enemy.type]["total"]=0
+	uberStats.kills[enemy.type]["total"]+=1
+	if uberStats.kills[enemy.type].has(name):
+		uberStats.kills[enemy.type][name]+=1
+	else:
+		uberStats.kills[enemy.type][name]=1
 	saveuberstats()
 
 func save():
-	print(megaStats)
 	var save_file = FileAccess.open("user://tcv1.save", FileAccess.WRITE)
 	var json_string = JSON.stringify(megaStats)
 	save_file.store_line(json_string)
-	print(megaStats)
+
 	
 func defaultuberstats():
+	print("problem with uberstats, loading defaults")
 	uberStats={
-		"collectables":[],"kills":{},"specials":{},"items":{},"purchases":{},"npcs":{}
+		"collectables":[],"kills":{"total":0},"deaths":{"total":0},"specials":{},"items":{},"purchases":{},"npcs":{},"acheivements":{"total":0}
 	}
 
 func uberstatsloader():
@@ -479,10 +511,11 @@ func uberstatsloader():
 			if !uberStats.has(i):
 				uberStats[i]=defaultUberStats[i]
 
-
+	print(uberStats)
 
 
 func defaultmegastats():
+	print("problem with megastats, loading defaults")
 	megaStats={"gems":99,"health":3,"capHealth":20,"speed":1,"capSpeed":10,"power":1,"capPower":10,"stanima":600,"capStanima":1200,"stanimaRate":1,"capStanimaRate":10,"stanimaRecharge":1,"capStanimaRecharge":20,"rizz":0,"capRizz":10,"smarts":0,"capSmarts":10,"inventory":[],"inventorycapacity":0,"credit":false,"spinattack":false,"dizres":1.5,
 	"toughness":0,"capToughness":5,
 	"karma":0,
@@ -543,7 +576,7 @@ func refreshPlayer():
 		"toughness":megaStats.toughness,
 		"karma":megaStats.karma
 	}
-	#print(megaStats)
+
 	credit=megaStats.credit
 	#translate old saves
 	if megaStats.attackmode.get("fist") != null:

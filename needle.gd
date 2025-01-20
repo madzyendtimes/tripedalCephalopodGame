@@ -1,7 +1,7 @@
 extends Area2D
 var active=false
 var speed=5
-
+var enemytype=Flags.enemytypes.needle.duplicate()
 
 func _process(delta: float) -> void:
 	if active:
@@ -25,7 +25,7 @@ func _on_body_entered(body: Node2D) -> void:
 		kill()
 		return
 	
-	body.hit(1)
+	body.hit(enemytype)
 	body.scale.y=body.scale.y-.2
 	body.scale.x=body.scale.x-.2
 	kill()

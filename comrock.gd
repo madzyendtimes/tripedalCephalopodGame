@@ -38,9 +38,8 @@ func _on_body_entered(body: Node2D) -> void:
 			hasHit=true
 			match id:
 				"gem":
-					Flags.megaStats.gems+=1
+					Flags.megaStats.gems+=Flags.randi_range(1,5)+Flags.megaStats.rizz
 					Flags.save()
-					print("gems=",Flags.megaStats.gems)
 				"rock":
 					Flags.playerStats.health-=1
 					print("hitwith rock")

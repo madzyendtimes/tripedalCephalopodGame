@@ -56,7 +56,7 @@ func _on_body_entered(body: Node2D) -> void:
 		if Flags.inFight==true && Flags.playerHits>0:
 			hit()
 		else:
-			body.hit(enemytype.pow)
+			body.hit(enemytype)
 
 
 

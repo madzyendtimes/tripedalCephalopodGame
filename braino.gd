@@ -108,7 +108,7 @@ func change():
 
 func _on_hurt_body_entered(body: Node2D) -> void:
 	if !dead:
-		body.hit(enemytype.pow)
+		body.hit(enemytype)
 
 func _on_vulnerable_body_entered(body: Node2D) -> void:
 	if body.name.find("liltrip")>-1:

@@ -46,7 +46,7 @@ func _on_attack_body_entered(body: Node2D) -> void:
 		body.hit()
 		return
 	if !dead:
-		body.hit(enemytype.pow)
+		body.hit(enemytype)
 
 
 func hit(dmg=1):

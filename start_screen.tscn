@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://y8woy4ym2t3i"]
+[gd_scene load_steps=23 format=3 uid="uid://y8woy4ym2t3i"]
 
 [ext_resource type="Script" path="res://start_screen.gd" id="1_dvlgs"]
 [ext_resource type="AudioStream" uid="uid://cnh3vntu44grh" path="res://music/Single Base.wav" id="2_f22xb"]
 [ext_resource type="Texture2D" uid="uid://dp75waqmd0mss" path="res://screen/titleclean.PNG" id="2_wqcsn"]
+[ext_resource type="Texture2D" uid="uid://b1bl3isjfntm1" path="res://screen/gameover.PNG" id="2_ycmus"]
 [ext_resource type="Texture2D" uid="uid://bmayb6btgscc2" path="res://screen/loading/load1.PNG" id="3_74whf"]
 [ext_resource type="Texture2D" uid="uid://c1irpbmdq3cvv" path="res://screen/completedclean.PNG" id="3_vocna"]
 [ext_resource type="Texture2D" uid="uid://dffiaracpfpqj" path="res://screen/loading/load2.PNG" id="4_dfguy"]
@@ -19,6 +20,14 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yaxfw"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ycmus")
+}],
+"loop": true,
+"name": &"gameover",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_wqcsn")
@@ -87,7 +96,7 @@ z_index = -1
 position = Vector2(601.625, 317)
 scale = Vector2(0.623568, 0.6)
 sprite_frames = SubResource("SpriteFrames_yaxfw")
-animation = &"win"
+animation = &"gameover"
 autoplay = "title"
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Title"]

@@ -2,7 +2,7 @@ extends Area2D
 var speed=10
 var rot=0
 var active=false
-
+var	enemytype=Flags.enemytypes.laser.duplicate()
 func start(prot):
 	rot=prot
 	active=true
@@ -28,6 +28,5 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("getufo"):
 		if body.ufo:
 			return
-		print("laser hit")
-		body.hit(2)
+		body.hit(enemytype)
 		queue_free()

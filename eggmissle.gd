@@ -2,7 +2,7 @@ extends Area2D
 var flat=false
 var speed=3
 var flatland=450
-
+var enemytype=Flags.enemytypes.eggmissle.duplicate()
 func _ready() -> void:
 	flatland+=Flags.rng.randi_range(-10,40)
 
@@ -21,6 +21,6 @@ func hit(dmg=1):
 
 func _on_body_entered(body: Node2D) -> void:
 	if !flat:
-
-		body.hit(1)
+		print("eggmissle hit")
+		body.hit(enemytype)
 		queue_free()

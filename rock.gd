@@ -17,6 +17,13 @@ func _process(delta):
 func setAnimation(val):
 	$AnimatedSprite2D.animation="rock"+str(val)
 	enemytype.variety="rock"+str(val)
+	match val:
+		1:
+			enemytype.variety="stench jelly"
+		2:
+			enemytype.variety="lookiller"
+		3:
+			enemytype.variety="planty of thorns"
 	
 func choose():
 	setAnimation(Flags.rng.randi_range(1,3))
@@ -30,7 +37,7 @@ func _on_body_entered(body):
 		if body.state=="attack":
 			hit()
 		return
-	body.hit(enemytype.pow)
+	body.hit(enemytype)
 	
 	
 func hit(dmg=1):

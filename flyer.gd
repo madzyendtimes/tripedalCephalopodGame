@@ -27,6 +27,7 @@ func _ready() -> void:
 
 
 func selectType():
+	enemytype.variety="bird"
 	var choice=Flags.rng.randi_range(0,2)
 	if choice==0:
 		$AnimatedSprite2D.animation="bug"
@@ -41,7 +42,7 @@ func selectType():
 		enemytype.name="bug"
 		enemytype.speed=5.0
 		enemytype.hp=2
-		
+		enemytype.variety="bug"
 	if choice==1:
 		$AnimatedSprite2D.animation="drone"
 		type="drone"
@@ -53,7 +54,7 @@ func selectType():
 		hasmissle=false
 		enemytype.name="drone"
 		enemytype.speed=4.0
-
+		enemytype.variety="drone"
 	Flags.tne.dotime(self,[changedirection],1.0,"changedirection"+str(self.get_instance_id()),true,"level")
 	
 	if hasmissle:
@@ -201,4 +202,4 @@ func _on_body_entered(body: Node2D) -> void:
 		hit()		
 		return
 
-	body.hit(enemytype.pow)
+	body.hit(enemytype)

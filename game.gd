@@ -9,6 +9,7 @@ var instantiated:=false
 
 
 func _ready():
+	$acheivement.visible=false
 	Flags.loader()
 	Flags.uberstatsloader()
 	Flags.addSounds([
@@ -55,7 +56,21 @@ func _ready():
 	Flags.setvolumes()		
 	dostart()
 
-	
+func hideac():
+	$acheivement.visible=false
+
+func _process(delta: float) -> void:
+	var ev=Flags.tne.consumeEvent("main")
+	if ev != null:
+		match ev.name:
+			"acheivement":
+				print("acheivement",ev.param)
+				$acheivement.visible=true
+				$acheivement/Label.text="acheivement:"+ev.param.obj.name+"\n"+ev.param.obj.description+"\n"+str(ev.param.obj.points)+" points"
+				if !Flags.uberStats.acheivements.has("total"):
+					Flags.uberStats.acheivements["total"]=0
+				Flags.uberStats.acheivements["total"]+=ev.param.obj.points
+				Flags.tne.dotime(self,[hideac],3.0,"hideacheivement",true,"main")
 
 func dostart():
 	startScreen=start.instantiate()
