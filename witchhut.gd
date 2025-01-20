@@ -14,15 +14,14 @@ var ingScene:PackedScene=load("res://ingredient.tscn")
 var inpScene:PackedScene=load("res://inputbutton.tscn")
 var gemScene:PackedScene=load("res://gemmonster.tscn")
 var ouch=false
-var timetext=30
+var timetext=20
 
 
 func _ready() -> void:
 	$music.volume_db=Flags.options.music
 	#start(self)
 
-func hidegems():
-	$gems.visible=false
+
 
 
 func _process(delta: float) -> void:
@@ -44,11 +43,11 @@ func _process(delta: float) -> void:
 			var gm=gemScene.instantiate()
 			gm.position=Vector2(600,550)
 			$monsters.add_child(gm)
-			$gems/Label.text="+"+str(stage)
-			$gems.visible=true
-			Flags.tne.dotime(self,[hidegems],1.0,"hidegems",true,"witchhut")
+
 		"gemcaught":
-			Flags.megaStats.gems+=stage	
+			var tmpgem=stage+Flags.megaStats.rizz+Flags.rng.randi_range(1,5)
+			Flags.megaStats.gems+=tmpgem
+			stat("+","gem",tmpgem)	
 			Flags.save()
 			stage+=1
 			
@@ -117,13 +116,16 @@ func resetinput():
 func createrecipe():
 	$necrowitch/AnimatedSprite2D.animation="rip"
 	var count=0
+	var possys=200
+	if floor(stage/3)>2:
+		possys-=(50*floor(stage/3))
 	for i in range(0,stage):
 		var choice=Flags.rng.randi_range(0,8)
 		var reciperender=recipeScene.instantiate()
 		if i%3==0:
 			count=0
 		var rx=860+(100*count)
-		var ry=200 +floor(i/3)*100
+		var ry=possys +floor(i/3)*100
 		reciperender.position.x=rx
 		reciperender.position.y=ry
 		reciperender.settype(ingredients[choice])
@@ -207,6 +209,7 @@ func start(callee):
 	#$music.play()
 	Flags.play("witchmusic","music")
 	recipe=[]
+	Flags.recordAcheivement("enteredwitchhut",{"value":true})
 
 func exit(isdead=false):
 	clearrecipe()
@@ -232,12 +235,14 @@ func _on_cauldrenfront_body_entered(body: Node2D) -> void:
 	if ouch:
 		ouch=false
 		Flags.play("die")
-#		$ouch.play()
+
 		$punish.punish()
-		Flags.playerStats.health-=1
+		Flags.playerStats.health-=(stage-3)
+		stat("-","health",stage-3)
 		$witchplayer.hit()
 		if Flags.playerStats.health<1:
 			playerdead=true
+			Flags.recordDeath(Flags.enemytypes.witchesbrew)
 			exit(true)
 
 
@@ -245,3 +250,19 @@ func _on_cauldrenfront_body_entered(body: Node2D) -> void:
 func _on_button_body_exited(body: Node2D) -> void:
 	clearrecipe()
 	clearinput()
+
+
+func stat(mth,ptype,amount):
+	$stat.visible=true
+	var showamount=str(amount)
+	if amount==0:
+		showamount=""
+	$stat/Label.text=mth+" "+showamount
+	$stat/AnimatedSprite2D.animation=ptype
+
+	Flags.tne.dotime(self,[unstat],1.5,"unstat",true,"witchhut")
+
+
+func unstat():
+	$stat.visible=false
+	pass

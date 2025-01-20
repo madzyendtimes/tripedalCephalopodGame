@@ -1135,11 +1135,13 @@ func dohoarde():
 	Flags.play("warcry")
 	
 func dospawns():
+
 	if Flags.mode!="level":
-		#checkspawn in 5 seconds
+		#checkspawn in x seconds
 		
 		Flags.tne.dotime(self,[dospawns],3.0,"spawns",true,"level")
 		return
+
 	#print("bosszone ",bossZone," - current: ",$locationfront.position.x)
 	if $locationfront.position.x<(bossZone*-1):
 		

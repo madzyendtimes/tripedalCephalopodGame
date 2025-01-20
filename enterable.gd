@@ -22,6 +22,7 @@ func choosetype():
 func start(called):	
 	called.get_node(type+"camera").make_current()
 	Flags.mode=type
+	Flags.paused=true
 	called.get_node(type).start(called)
 
 

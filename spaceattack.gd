@@ -25,7 +25,7 @@ func start(pos):
 	$playership.rotation=0
 	active=true
 	Flags.play("spacemusic","music")
-#	$music.play()
+	Flags.recordAcheivement("enteredspace")
 
 func _process(delta: float) -> void:
 	

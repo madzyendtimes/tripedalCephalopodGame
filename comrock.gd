@@ -38,15 +38,26 @@ func _on_body_entered(body: Node2D) -> void:
 			hasHit=true
 			match id:
 				"gem":
-					Flags.megaStats.gems+=Flags.randi_range(1,5)+Flags.megaStats.rizz
+					var tmpgem=Flags.rng.randi_range(1,5)+Flags.megaStats.rizz
+					Flags.megaStats.gems+=tmpgem
+					Flags.tne.addEvent("gem","cryptominos",false,{"gems":tmpgem})
 					Flags.save()
 				"rock":
 					Flags.playerStats.health-=1
 					print("hitwith rock")
+					Flags.tne.addEvent("hit","cryptominos",false,{"dmg":1})
 					if Flags.playerStats.health<1:
+						var killer=Flags.enemytypes.rock.duplicate()
+						killer.variety="falling rock"
+						Flags.recordDeath(Flags.enemytypes.rock)
 						gameover(true)
 				"skull":				
-					print("hit with skull")
-					gameover()
+					Flags.playerStats.health-=3					
+					Flags.tne.addEvent("hit","cryptominos",false,{"dmg":3})
+					if Flags.playerStats.health<1:
+						var killer=Flags.enemytypes.rock.duplicate()
+						killer.variety="falling skull"
+						Flags.recordDeath(Flags.enemytypes.rock)
+						gameover(true)
 		if $"..":
 			queue_free()

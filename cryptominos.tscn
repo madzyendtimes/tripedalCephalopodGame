@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dd3ek8osevi1x" path="res://cryptominoswscenes/comrock.tscn" id="8_ac0yy"]
 [ext_resource type="Texture2D" uid="uid://bpffw0lif2h8w" path="res://enterable/cryptominos/assets/IMG_6155.PNG" id="9_5bixw"]
 [ext_resource type="Texture2D" uid="uid://dkgyyqiavos5" path="res://enterable/cryptominos/assets/IMG_6156.PNG" id="10_5clmj"]
-[ext_resource type="AudioStream" uid="uid://bnlttjgnqg5ek" path="res://music/Brilliant Charles.wav" id="11_b68a7"]
+[ext_resource type="PackedScene" uid="uid://edw7cp3i3ijn" path="res://invImg.tscn" id="11_u4qu7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3hv1"]
 size = Vector2(1680, 50)
@@ -46,7 +46,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xh6wk"]
-size = Vector2(80, 117)
+size = Vector2(32, 122.5)
 
 [node name="cryptominos" type="Node2D"]
 script = ExtResource("1_7jtwu")
@@ -134,12 +134,24 @@ animation = &"forward"
 autoplay = "forward"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="complayer"]
-position = Vector2(216, 608)
+position = Vector2(216, 605.25)
 shape = SubResource("RectangleShape2D_xh6wk")
 
-[node name="music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_b68a7")
+[node name="stat" type="Node2D" parent="complayer"]
+visible = false
+position = Vector2(200, 0)
+
+[node name="Label" type="Label" parent="complayer/stat"]
+offset_left = -8.0
+offset_top = 488.0
+offset_right = 193.0
+offset_bottom = 516.0
+theme_override_font_sizes/font_size = 20
+text = "yo there is stuff here"
+
+[node name="AnimatedSprite2D" parent="complayer/stat" instance=ExtResource("11_u4qu7")]
+position = Vector2(46.4167, 501.5)
+scale = Vector2(0.255833, 0.1725)
 
 [connection signal="body_entered" from="boundary/floor" to="boundary/floor" method="_on_body_entered"]
 [connection signal="body_entered" from="exit" to="exit" method="_on_body_entered"]
-[connection signal="finished" from="music" to="." method="_on_music_finished"]

@@ -20,8 +20,5 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	if body.bag>9:
 		return
-
-	if type=="gem":
-		Flags.megaStats.gems+=1
-	body.clean()
+	body.clean(type)
 	queue_free()	

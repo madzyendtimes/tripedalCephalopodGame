@@ -26,6 +26,7 @@ func start(called):
 
 	Flags.tne.dotime(self,[startghost],Flags.rng.randf_range(1.5,3.5),"startghost",true,"temple")
 	$templeplayer.start(called)
+	Flags.recordAcheivement("enteredtemple")
 
 func devstart():
 	start(self)
@@ -65,6 +66,7 @@ func createghost():
 		
 func eliminateghosts(type):
 	if $templeplayer.bag>9:
+		$templeplayer.stat("offering accepted","offer"+type,0)
 		for i in $ghostholder.get_children():
 			i.dissapear(type)
 	$templeplayer.bag=0

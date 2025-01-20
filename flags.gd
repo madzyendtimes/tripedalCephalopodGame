@@ -152,7 +152,8 @@ var enemytypes:={
 	"groundling":{"type":"zombie","weak":"fire","strong":"","immune":"","name":"groundling","flying":false,"hp":1,"begchance":25,"speed":.75,"pow":1,"variety":""},
 	"eggmissle":{"type":"missle","weak":"","strong":"","immune":"all","name":"eggmissle","flying":false,"hp":1,"begchance":0,"speed":2,"pow":1,"variety":""},
 	"needle":{"type":"missle","weak":"","strong":"","immune":"all","name":"needle","flying":false,"hp":1,"begchance":0,"speed":1,"pow":1,"variety":""},
-	"laser":{"type":"missle","weak":"","strong":"","immune":"all","name":"laser","flying":false,"hp":1,"begchance":0,"speed":1,"pow":2,"variety":""}
+	"laser":{"type":"missle","weak":"","strong":"","immune":"all","name":"laser","flying":false,"hp":1,"begchance":0,"speed":1,"pow":2,"variety":""},
+	"witchesbrew":{"type":"magic","weak":"","strong":"","immune":"all","name":"witch's brew","flying":false,"hp":1,"begchance":0,"speed":1,"pow":1,"variety":""}
 }
 var varietymap:={"rock1":"stench jelly","rock2":"watcher's rock","rock3":"spite knocker"}
 var paused:=false
@@ -221,8 +222,13 @@ var petmove=true
 var sounds={"music":{},"fx":{}}
 
 var acheivements={
-	"totalkills":{"criteria":func criteriamet(aobj): return aobj.value>0,"description":"Kill 1 enemy total","points":10,"name":"You choose murder!"}
-	
+	"firstkill":{"criteria":func criteriamet(aobj): return aobj.value>0,"description":"Kill 1 enemy total","points":10,"name":"You choose murder!"},
+	"firstdeath":{"criteria":func criteriamet(aobj): return aobj.value>0,"description":"Die 1 time total","points":10,"name":"Alert the next of kin!"},
+	"enteredwitchhut":{"criteria":func criteriamet(aobj): return true,"description":"Visited Necrowitch Margo's alchemical hut","points":10,"name":"Witch's Apprentice."},
+	"enteredcryptominos":{"criteria":func criteriamet(aobj): return true,"description":"Visited the Crypto Mines","points":10,"name":"Don't sweat the mine."},
+	"enteredtemple":{"criteria":func criteriamet(aobj): return true,"description":"Visited the desecrated temple","points":10,"name":"Cleaning Crusade"},
+	"enteredspace":{"criteria":func criteriamet(aobj): return true,"description":"Flew to outer space","points":10,"name":"Eve offline!"},
+	"playedaminigame":{"criteria":func criteriamet(aobj): return true,"description":"Played a minigame","points":10,"name":"Inquisitive"}
 	}
 
 
@@ -318,7 +324,7 @@ func reset():
 	interactablenpc=null
 	env=[]
 	petmove=true
-#	defaultuberstats()
+	#defaultuberstats()
 
 func addEnv(scenes):
 	for i in scenes:
@@ -326,6 +332,8 @@ func addEnv(scenes):
 
 
 func calchits(hp):
+	if paused:
+		return hp
 	print("playerhits:",playerHits)
 	if special=="ufo":
 		return 0
@@ -336,8 +344,10 @@ func calchits(hp):
 	print("hp=",hp)
 	return hp
 
-#subtrcts enemy power by toughness with a max reduction of 1
+#subtracts enemy power by toughness with a max reduction of 1
 func calcdmg(pow):
+	if paused:
+		return 0
 	print("calc damage with power ",pow)
 	print("toughness ",Flags.megaStats.toughness)
 	var tmp=playerStats.toughness
@@ -448,6 +458,7 @@ func recordDeath(enemy):
 	if !uberStats.deaths.has(enemy.type):
 		uberStats.deaths[enemy.type]={}
 	uberStats.deaths.total+=1
+	recordAcheivement("firstdeath",{"value":uberStats.deaths.total})
 	var name=enemy.name
 	if enemy.variety!="":
 		name=enemy.variety
@@ -463,7 +474,7 @@ func recordDeath(enemy):
 func recordKill(enemy):
 
 	uberStats.kills.total+=1
-	recordAcheivement("totalkills",{"value":uberStats.kills.total})
+	recordAcheivement("firstkill",{"value":uberStats.kills.total})
 	if !uberStats.kills.has(enemy.type):
 		uberStats.kills[enemy.type]={}
 	var name=enemy.name

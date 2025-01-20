@@ -19,14 +19,17 @@ func _process(delta: float) -> void:
 			"exit":
 				exit()
 			"dead":
-				exit(true)		
-
+				exit(true)
+			"hit":
+				stat("-","health",ce.param.dmg)	
+			"gem":
+				stat("+","gem",ce.param.gems)
+				
+			
 func exit(isdead=false):
-	#$music.stop()
 	home.exit(isdead)
 
 func start(called):
-	#$music.play()
 	Flags.play("cryptomusic","music")
 	home=called
 	Flags.mode="cryptominos"
@@ -39,8 +42,19 @@ func start(called):
 	add_child(axe)
 	axe.name="pickaxe"
 	axe.start()
+	Flags.recordAcheivement("enteredcryptominos")
+
+func stat(mth,ptype,amount):
+	$complayer/stat.visible=true
+	var showamount=str(amount)
+	if amount==0:
+		showamount=""
+	$complayer/stat/Label.text=mth+" "+showamount
+	$complayer/stat/AnimatedSprite2D.animation=ptype
+
+	Flags.tne.dotime(self,[unstat],1.5,"unstat",true,"cryptominos")
 
 
-func _on_music_finished() -> void:
-	#$music.play()
+func unstat():
+	$complayer/stat.visible=false
 	pass

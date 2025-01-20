@@ -61,9 +61,9 @@ func _process(delta: float) -> void:
 	
 	if dirx!=0:
 		$AnimatedSprite2D.flip_h=(dirx==-1)
-	velocity.x = dirx * SPEED
+	velocity.x = dirx * (SPEED+(Flags.playerStats.speed*50))
 
-	velocity.y = diry * SPEED
+	velocity.y = diry * (SPEED+(Flags.playerStats.speed*50))
 
 	move_and_slide()	
 	var testy=floor(position.y/100)
@@ -86,7 +86,6 @@ func makeoffer():
 		
 	$AnimatedSprite2D.animation="front"
 	inoffer=true
-	
 	Flags.tne.dotime(self,[walk],1.6,"walk",true,"temple")
 	
 func offer():
@@ -98,9 +97,11 @@ func hit(dmg=1):
 	$AnimatedSprite2D.animation="hit"
 	Flags.play("die")
 	Flags.playerStats.health-=1
+	stat("-","health",1)
 	if Flags.playerStats.health<1:
 		dead=true
 		$AnimatedSprite2D.animation="dead"
+		Flags.recordDeath(Flags.enemytypes.ghost)
 		home.exit(true)
 		return	
 	Flags.tne.dotime(self,[outhit],1.4,"outhit",true,"temple")
@@ -122,7 +123,7 @@ func walk():
 	if bag>9:
 		$AnimatedSprite2D.animation="fullbag"
 
-func clean():
+func clean(type="trash"):
 	if inhit:
 		return
 	if dead:
@@ -130,10 +131,30 @@ func clean():
 		return	
 	$AnimatedSprite2D.animation="pickup"
 	bag+=1
+	print(type)
+	if type=="gem":
+		var tmpg=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
+		Flags.megaStats.gems+=tmpg
+		stat("+","gem",tmpg)		
+		Flags.save()
 	Flags.tne.dotime(self,[walk],0.6,"walk",true,"temple")
 
 func revert():
 
 	pass
 
+func stat(mth,ptype,amount):
+	$templestat.visible=true
 	
+	var showamount=str(amount)
+	if amount==0:
+		showamount=""
+	$templestat/Label.text=mth+" "+showamount
+	$templestat/AnimatedSprite2D.animation=ptype
+
+	Flags.tne.dotime(self,[unstat],1.5,"unstat",true,"temple")
+
+
+func unstat():
+	$templestat.visible=false
+	pass

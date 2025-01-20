@@ -657,6 +657,7 @@ offset_left = 26.0
 offset_top = 580.0
 offset_right = 526.0
 offset_bottom = 630.0
+metadata/_edit_use_anchors_ = true
 
 [node name="joboard" parent="." instance=ExtResource("86_pqqyq")]
 top_level = true
