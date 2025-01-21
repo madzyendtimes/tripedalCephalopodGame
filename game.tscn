@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bjypcqai2gv82"]
+[gd_scene load_steps=43 format=3 uid="uid://bjypcqai2gv82"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_apl8i"]
 [ext_resource type="AudioStream" uid="uid://c3j1tddsstr75" path="res://sounds/fx2/hypnotised.wav" id="2_j3rvk"]
@@ -33,8 +33,13 @@
 [ext_resource type="AudioStream" uid="uid://bnlttjgnqg5ek" path="res://music/Brilliant Charles.wav" id="31_l2215"]
 [ext_resource type="AudioStream" uid="uid://ch4bm6xv6xnu" path="res://music/cityoutskirt.wav" id="32_viduq"]
 [ext_resource type="AudioStream" uid="uid://yotkhxff2mfd" path="res://music/Fallen Date.wav" id="33_ug3jt"]
-[ext_resource type="AudioStream" uid="uid://c87pvffotlj1j" path="res://music/win.wav" id="34_iavvw"]
+[ext_resource type="AudioStream" uid="uid://3m3ywwmijncl" path="res://music/win (1).wav" id="34_aln4k"]
 [ext_resource type="AudioStream" uid="uid://bii16lc6uw1a4" path="res://music/the reapening.wav" id="35_paegd"]
+[ext_resource type="AudioStream" uid="uid://1nee3mbu4uce" path="res://sounds/fx3/pick.wav" id="36_ryuql"]
+[ext_resource type="AudioStream" uid="uid://bju7vuyqbc2as" path="res://sounds/fx3/church.wav" id="37_nxjcr"]
+[ext_resource type="AudioStream" uid="uid://cyhx51ljo8pmo" path="res://sounds/fx3/scare2.wav" id="38_cxy7c"]
+[ext_resource type="AudioStream" uid="uid://cskt4mw2mc63w" path="res://sounds/fx3/weathermachine.wav" id="39_l4hcc"]
+[ext_resource type="AudioStream" uid="uid://ou28gfueph7e" path="res://sounds/fx3/scarebell.wav" id="40_v72o8"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_y6vlv"]
 
@@ -178,7 +183,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="winmusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("34_iavvw")
+stream = ExtResource("34_aln4k")
 
 [node name="gameover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("35_paegd")
+
+[node name="pickaxe" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("36_ryuql")
+volume_db = 1.0
+
+[node name="offering" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("37_nxjcr")
+
+[node name="scary" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("38_cxy7c")
+
+[node name="weathermachine" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("39_l4hcc")
+
+[node name="warp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("40_v72o8")

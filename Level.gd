@@ -180,6 +180,7 @@ func dohorror():
 
 
 func horrorflash():
+	Flags.play("scary")
 	$random.position.y=0
 	var tween=get_tree().create_tween()
 	tween.tween_property($random,"modulate",Color(1,1,1,1),.5)		
@@ -229,10 +230,11 @@ func doEffect(effect):
 			Flags.save()
 			Flags.play("gemget")
 		"changeweather":
+			Flags.play("weathermachine")
 			changeweather()
 		"spendingspree":
 			Flags.credit=true
-			Flags.play("gemget")
+			Flags.play("purchase")
 		"getgems":
 			var g=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
 			Flags.megaStats.gems+=g
@@ -251,6 +253,7 @@ func doEffect(effect):
 			Flags.play("alarm")
 		"horror":
 			triggerhorror()
+
 		"exitenterable":
 			exit()
 		"puke":
@@ -308,7 +311,7 @@ func doEffect(effect):
 			var tween = get_tree().create_tween()
 			tween.tween_property($player, "modulate", Color(1,1,1,0), .5)
 			tween.tween_callback(warpCB.bind(loc))
-
+			Flags.play("warp")
 		"beg":
 			Flags.hat="beg"
 			$player/AnimatedSprite2D.animation=$player/AnimatedSprite2D.animation+Flags.hat
@@ -1193,8 +1196,8 @@ func weatheroff():
 	Flags.weather=""
 	
 func _on_rock_body_entered(body):
-	$player.hit()
-
+	#$player.hit()
+	pass
 
 func _on_audio_stream_player_finished():
 	#$AudioStreamPlayer.play()

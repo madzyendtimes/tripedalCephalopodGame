@@ -37,7 +37,7 @@ func _ready():
 		["gemget",$gemget,0,.05],
 		["puke",$puke,10,.05],
 		["hypno",$hypno,0,0],
-		["jump",$jump,0,0],
+		["jump",$jump,0,.05],
 		["splode",$splode,0,.05],
 		["hit",$hit,0,.05],
 		["die",$die,0,0],
@@ -51,8 +51,12 @@ func _ready():
 		["purchase",$purchase,10,.05],
 		["multihit",$multihit,0,.05],
 		["thud",$thud,0,.05],
-		["spaceplayerhit",$spaceplayerhit,0,.05]
-		
+		["spaceplayerhit",$spaceplayerhit,0,.05],
+		["pickaxe",$pickaxe,0,.05],
+		["offering",$offering,0,.05],
+		["scary",$scary,0,.05],
+		["warp",$warp,0,.05],
+		["weathermachine",$weathermachine,0,.05],
 		],"fx")
 	Flags.setvolumes()		
 	dostart()

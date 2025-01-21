@@ -29,6 +29,7 @@ func gameover(isdead=false):
 func _on_body_entered(body: Node2D) -> void:
 	if body.name.find("pickaxe")>-1:
 		staticly=false
+		Flags.play("pickaxe")
 		if !hitAlready:
 			chooseType()
 			hitAlready=true
@@ -40,19 +41,24 @@ func _on_body_entered(body: Node2D) -> void:
 				"gem":
 					var tmpgem=Flags.rng.randi_range(1,5)+Flags.megaStats.rizz
 					Flags.megaStats.gems+=tmpgem
+					Flags.play("gemget")
 					Flags.tne.addEvent("gem","cryptominos",false,{"gems":tmpgem})
 					Flags.save()
 				"rock":
 					Flags.playerStats.health-=1
 					print("hitwith rock")
 					Flags.tne.addEvent("hit","cryptominos",false,{"dmg":1})
+					Flags.play("hit")
 					if Flags.playerStats.health<1:
 						var killer=Flags.enemytypes.rock.duplicate()
 						killer.variety="falling rock"
+						
 						Flags.recordDeath(Flags.enemytypes.rock)
+						
 						gameover(true)
 				"skull":				
-					Flags.playerStats.health-=3					
+					Flags.playerStats.health-=3
+					Flags.play("hit")					
 					Flags.tne.addEvent("hit","cryptominos",false,{"dmg":3})
 					if Flags.playerStats.health<1:
 						var killer=Flags.enemytypes.rock.duplicate()

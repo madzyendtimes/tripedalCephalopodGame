@@ -89,13 +89,15 @@ func makeoffer():
 	Flags.tne.dotime(self,[walk],1.6,"walk",true,"temple")
 	
 func offer():
+	Flags.play("offering")
 	Flags.tne.dotime(self,[makeoffer],0.5,"makeoffer",true,"temple")
 
 
 func hit(dmg=1):
 	inhit=true
 	$AnimatedSprite2D.animation="hit"
-	Flags.play("die")
+	Flags.play("hit")
+	
 	Flags.playerStats.health-=1
 	stat("-","health",1)
 	if Flags.playerStats.health<1:
@@ -137,6 +139,7 @@ func clean(type="trash"):
 		Flags.megaStats.gems+=tmpg
 		stat("+","gem",tmpg)		
 		Flags.save()
+		Flags.play("gemget")
 	Flags.tne.dotime(self,[walk],0.6,"walk",true,"temple")
 
 func revert():

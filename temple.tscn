@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://utpjm1uc1isi"]
+[gd_scene load_steps=34 format=3 uid="uid://utpjm1uc1isi"]
 
 [ext_resource type="Script" path="res://temple.gd" id="1_qyduo"]
 [ext_resource type="PackedScene" uid="uid://qvhfqa3kjxom" path="res://trash.tscn" id="2_xeo57"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://dakjcaoeyoegg" path="res://enterable/temple/assets/alterdemon.PNG" id="9_asbvu"]
 [ext_resource type="Texture2D" uid="uid://ifjculxqapsf" path="res://enterable/temple/assets/alterholy.PNG" id="10_ilio2"]
 [ext_resource type="Texture2D" uid="uid://c6a331hfvf510" path="res://enterable/temple/assets/alterpeace.PNG" id="11_0ao2p"]
-[ext_resource type="AudioStream" uid="uid://n0ixwmtpn538" path="res://music/Crisp Combination.wav" id="11_4rie1"]
 [ext_resource type="Texture2D" uid="uid://yt85lol8vwys" path="res://enterable/temple/assets/holyactive1.PNG" id="11_4126x"]
 [ext_resource type="Texture2D" uid="uid://dccjbye7fr072" path="res://enterable/temple/assets/holyactive2.PNG" id="12_2l37t"]
 [ext_resource type="Texture2D" uid="uid://ldyyp543xa57" path="res://enterable/temple/assets/peaceactive1.PNG" id="14_jitm3"]
@@ -271,9 +270,6 @@ flip_h = true
 position = Vector2(16, 536)
 shape = SubResource("CapsuleShape2D_17lif")
 
-[node name="music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_4rie1")
-
 [node name="frontdecoration" type="Node2D" parent="."]
 
 [node name="Halfpillar" type="Sprite2D" parent="frontdecoration"]
@@ -290,4 +286,3 @@ texture = ExtResource("7_hwn6t")
 [connection signal="body_entered" from="alter" to="." method="_on_alter_body_entered"]
 [connection signal="body_entered" from="alter" to="alter" method="_on_body_entered"]
 [connection signal="body_entered" from="exit" to="." method="_on_exit_body_entered"]
-[connection signal="finished" from="music" to="." method="_on_music_finished"]

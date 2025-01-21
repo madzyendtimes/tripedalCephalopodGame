@@ -21,9 +21,11 @@ func _process(delta: float) -> void:
 			"dead":
 				exit(true)
 			"hit":
-				stat("-","health",ce.param.dmg)	
+				stat("-","health",ce.param.dmg)
+				Flags.play("hit")	
 			"gem":
 				stat("+","gem",ce.param.gems)
+				Flags.play("gemget")
 			"pickaxe":
 				var axe=axeScene.instantiate()
 

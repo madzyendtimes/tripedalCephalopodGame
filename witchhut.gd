@@ -118,7 +118,7 @@ func createrecipe():
 	var count=0
 	var possys=200
 	if floor(stage/3)>2:
-		possys-=(50*floor(stage/3))
+		possys-=(50*floor((stage-3)/3))
 	for i in range(0,stage):
 		var choice=Flags.rng.randi_range(0,8)
 		var reciperender=recipeScene.instantiate()
