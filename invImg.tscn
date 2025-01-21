@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://edw7cp3i3ijn"]
+[gd_scene load_steps=28 format=3 uid="uid://edw7cp3i3ijn"]
 
 [ext_resource type="Texture2D" uid="uid://5gxv1bhq48ip" path="res://items/icons/confused/confused1.PNG" id="1_6n1l6"]
 [ext_resource type="Texture2D" uid="uid://cqmlkdyl4s30c" path="res://items/icons/confused/confused2.PNG" id="2_cmu07"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://dl1jcqtkgjwh3" path="res://items/icons/speed.PNG" id="19_pc6rm"]
 [ext_resource type="Texture2D" uid="uid://b676airl7nrfy" path="res://items/icons/stanima.PNG" id="20_b1adm"]
 [ext_resource type="Texture2D" uid="uid://ctixitctvmitk" path="res://enemies/tv/tv1.PNG" id="21_rl6wy"]
+[ext_resource type="Texture2D" uid="uid://b2hmos80dwiv" path="res://items/fancy/fancy4.PNG" id="22_uoqh3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gqrl6"]
 animations = [{
@@ -196,6 +197,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("22_uoqh3")
+}],
+"loop": true,
+"name": &"p24",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("18_quyk6")
 }],
 "loop": true,
@@ -231,5 +240,5 @@ animations = [{
 position = Vector2(600, 208)
 scale = Vector2(0.446667, 0.34)
 sprite_frames = SubResource("SpriteFrames_gqrl6")
-animation = &"offer"
+animation = &"p24"
 autoplay = "confused"

@@ -10,8 +10,10 @@ func _ready():
 
 	$Title.animation=Flags.titlescreen
 	$ui/VBoxContainer.get_child(selected).grab_focus()
-	Flags.setvolumes()
-	Flags.play("titlemusic","music")	
+	var music="titlemusic"
+	if Flags.titlescreen=="gameover":
+		music="gameover"
+	Flags.play(music,"music")	
 	#$AudioStreamPlayer2D.volume_db=Flags.options.music
 	#$PopupPanel/VBoxContainer.get_child(selected)
 	

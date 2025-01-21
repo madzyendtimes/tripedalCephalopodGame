@@ -24,8 +24,9 @@ func _ready():
 	["bossmusic",$bossmusic,0,0],
 	["strangemusic",$strangemusic,0,0],
 	["jobmusic",$jobmusic,0,0],
-	["gemmusic",$gemmusic,0,0]
-	
+	["gemmusic",$gemmusic,0,0],
+	["gameover",$gameover,0,0],
+	["win",$winmusic,0,0]
 	],"music")
 	Flags.addSounds([
 		["warcry",$warcry,0,.05],

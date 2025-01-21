@@ -10,6 +10,7 @@ var submenus=false
 var subfocus=false
 var function=-1
 var afuncs=[]
+var oldmode="level"
 
 func _ready():
 	update()
@@ -114,8 +115,10 @@ func dotransmute():
 func douse():
 	if Flags.selectedItem<=Flags.playerInventory.size():
 		var pi=Flags.playerInventory[Flags.selectedItem-1]
-	#	print(pi)
-		Flags.tne.addEvent(pi.effect,"level")
+		var mode="level"
+		if pi.name=="pickaxe":
+			mode="cryptominos" #consider putting into item matrix
+		Flags.tne.addEvent(pi.effect,mode)
 		#Flags.effect=pi.effect
 		var inInv=Flags.megaStats.inventory.find(pi)
 		if inInv>-1:
@@ -166,13 +169,14 @@ func contract():
 	$PopupPanel.visible=false
 	$VBoxContainer/PopupPanel2.visible=false
 	Flags.paused=false
-	Flags.mode="level"
+	Flags.mode=oldmode
 	unmenu()
 
 func expand():
 #	print("expand")
 	$PopupPanel.visible=true
 #	$PopupPanel.size.y=100
+	oldmode=Flags.mode
 	Flags.mode="statsScreen"
 	$VBoxContainer/PopupPanel2.visible=true
 	Flags.paused=true

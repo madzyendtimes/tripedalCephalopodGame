@@ -24,6 +24,14 @@ func _process(delta: float) -> void:
 				stat("-","health",ce.param.dmg)	
 			"gem":
 				stat("+","gem",ce.param.gems)
+			"pickaxe":
+				var axe=axeScene.instantiate()
+
+				axe.position.x=$complayer.position.x
+				axe.position.y=$complayer.position.y-100
+				add_child(axe)
+				axe.name="pickaxe"
+				axe.start()
 				
 			
 func exit(isdead=false):

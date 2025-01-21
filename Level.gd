@@ -559,7 +559,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("reset"):
 		if Flags.mode=="statsScreen":
 			$stats.contract()
-		elif Flags.mode=="level":
+		#elif Flags.mode=="level":
+		else:
 			$stats.expand()
 			$stats.clear()
 			var count:=0

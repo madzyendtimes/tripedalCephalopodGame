@@ -111,6 +111,7 @@ var itemMap:=[
 		[{"name":"gold card","effect":"spendingspree","consumable":true,"swap":{}},
 		{"name":"gem","effect":"getgems","consumable":true,"swap":{}},
 		{"name":"weather machine","effect":"changeweather","consumable":true,"swap":{}},
+		{"name":"pickaxe","effect":"pickaxe","consumable":true,"swap":{}}
 	]},
 
 	{"type":"quest","varients":
@@ -165,7 +166,7 @@ var warploc=2950
 var hat=""
 var mesmerized=false
 var controlled=false
-var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap/scrap","num":6,"type":"scrap"},{"name":"items/fancy/fancy","num":3,"type":"fancy"},{"name":"items/quest/item","num":1,"type":"quest"},{"name":"items/collectable/collectable","num":7,"type":"collectable"}]
+var types=[{"name":"items/food/food","num":4,"type":"food"},{"name":"items/scrap/scrap","num":6,"type":"scrap"},{"name":"items/fancy/fancy","num":4,"type":"fancy"},{"name":"items/quest/item","num":1,"type":"quest"},{"name":"items/collectable/collectable","num":7,"type":"collectable"}]
 var conveniance={"oldloc":0}
 var horror:=false
 var radiation:=false
@@ -180,13 +181,13 @@ var		specialnpc=[
 		]
 var playerHits=1
 var percentageMap=[
-10, #trash
+1000, #trash
 10, #rock
 9, #groundling
 4, #tv
 9, #expander
 9, #tall monster (diapertooth)
-9, #minigame
+900, #minigame
 5, #weather effects
 5, #fair weather
 5, #flavor npcs
