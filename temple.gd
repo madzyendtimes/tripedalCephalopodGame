@@ -28,10 +28,15 @@ func start(called):
 	$templeplayer.start(called)
 	Flags.recordAcheivement("enteredtemple")
 
+func paused():
+	return Flags.mode!="temple"
+
+
 func devstart():
 	start(self)
 	
 func reset():
+	#check for infinite regression?
 	offtimers=true
 	Flags.tne.killTimer("startghost","temple")
 	Flags.tne.killTimer("starttrash","temple")
@@ -49,11 +54,13 @@ func createtrash():
 		
 		
 func starttrash():
+	if !paused():
 		createtrash()
-		Flags.tne.dotime(self,[starttrash],Flags.rng.randf_range(.2,2.5),"starttrash",true,"temple")
+	Flags.tne.dotime(self,[starttrash],Flags.rng.randf_range(.2,2.5),"starttrash",true,"temple")
 		
 func startghost():
-	createghost()
+	if !paused():	
+		createghost()
 	Flags.tne.dotime(self,[startghost],Flags.rng.randf_range(1.5,3.5),"startghost",true,"temple")
 	
 func createghost():

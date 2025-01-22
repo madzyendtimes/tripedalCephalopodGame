@@ -8,7 +8,7 @@ var enemytype=Flags.enemytypes.gemmonster.duplicate()
 
 func _process(delta: float) -> void:
 	if position.x<-200 && Flags.mode=="witchhut":
-			Flags.witchevents="gemcaught"
+			Flags.tne.addEvent("gemcaught","witchhut")
 			queue_free()
 			return
 

@@ -25,6 +25,11 @@ func addgems():
 	Flags.tne.dotime(self,[killstat],.5,"statspace",true,"level")
 
 
+
+
+
+
+
 func killstat():
 	$status.visible=false
 

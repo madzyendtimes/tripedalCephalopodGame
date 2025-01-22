@@ -64,4 +64,4 @@ func _on_button_body_entered(body: Node2D) -> void:
 	$AnimatedSprite2D.animation="look"
 	engaged=true
 	$AnimatedSprite2D.flip_h=false
-	Flags.witchevents="newrecipe"
+	Flags.tne.addEvent("newrecipe","witchhut")

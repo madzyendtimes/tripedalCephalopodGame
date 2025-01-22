@@ -19,6 +19,7 @@ frame_3/texture = ExtResource("5_wxfa8")
 frame_3/duration = 0.57
 
 [node name="stanimabar" type="TextureProgressBar"]
+z_index = 10
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 32.0

@@ -26,6 +26,13 @@ func start(pos):
 	active=true
 	Flags.play("spacemusic","music")
 	Flags.recordAcheivement("enteredspace")
+	Flags.mode="spacetime"
+
+
+func paused():
+	return Flags.mode!="spacetime"
+
+
 
 func _process(delta: float) -> void:
 	

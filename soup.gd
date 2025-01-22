@@ -14,7 +14,7 @@ func complete():
 
 
 func completecalm():
-	Flags.witchevents="gemmonster"
+	Flags.tne.addEvent("gemmonster","witchhut")
 	wait=false
 	calm()
 

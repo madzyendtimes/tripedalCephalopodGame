@@ -36,7 +36,16 @@ var q={
 		"timers":{}},
 	"jobboard":
 		{"events":[],
-		"timers":{}}			
+		"timers":{}},
+	"home":
+		{"events":[],
+		"timers":{}},
+	"spacetime":
+		{"events":[],
+		"timers":{}},
+	"trader":
+		{"events":[],
+		"timers":{}},							
 	}
 var guid=0	
 

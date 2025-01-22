@@ -115,10 +115,15 @@ func dotransmute():
 func douse():
 	if Flags.selectedItem<=Flags.playerInventory.size():
 		var pi=Flags.playerInventory[Flags.selectedItem-1]
-		var mode="level"
-		if pi.name=="pickaxe":
-			mode="cryptominos" #consider putting into item matrix
-		Flags.tne.addEvent(pi.effect,mode)
+		var canuse=false
+		for i in pi.applies:
+			if i=="any" || i==oldmode:
+				canuse=true
+		if !canuse:
+			Flags.play("invalid")
+			unmenu()
+			return			
+		Flags.tne.addEvent(pi.effect,oldmode)
 		#Flags.effect=pi.effect
 		var inInv=Flags.megaStats.inventory.find(pi)
 		if inInv>-1:
@@ -170,6 +175,7 @@ func contract():
 	$VBoxContainer/PopupPanel2.visible=false
 	Flags.paused=false
 	Flags.mode=oldmode
+	print(oldmode)
 	unmenu()
 
 func expand():

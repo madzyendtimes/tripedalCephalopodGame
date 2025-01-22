@@ -94,39 +94,40 @@ var inCrouch:=false
 var dir:=1
 var itemMap:=[
 	{"type":"food","varients":[
-		{"name":"old pizza","effect":"restorehp","consumable":true,"swap":{}},
-		{"name":"noodles... or worms!","effect":"puke|restorehp","consumable":true,"swap":{}},
-		{"name":"suspect sandwitch","effect":"puke","consumable":true,"swap":{}},
-		{"name":"full soda","effect":"stanima","consumable":true,"swap":{"type":1,"varient":2}}
+		{"name":"old pizza","effect":"restorehp","consumable":true,"swap":{},"applies":["any"]},
+		{"name":"noodles... or worms!","effect":"puke|restorehp","consumable":true,"swap":{},"applies":["level"]},
+		{"name":"suspect sandwitch","effect":"puke","consumable":true,"swap":{},"applies":["level"]},
+		{"name":"full soda","effect":"stanima","consumable":true,"swap":{"type":1,"varient":2},"applies":["level"]}
 	]},
 	{"type":"scrap","varients":
-		[{"name":"tin foil hat","effect":"that","consumable":true,"swap":{}},
-		{"name":"crushed soda","effect":"kick","consumable":true,"swap":{}},
-		{"name":"broken mirror","effect":"warp","consumable":true,"swap":{}},
-		{"name":"begging board","effect":"beg","consumable":true,"swap":{}},
-		{"name":"horror movie","effect":"horror","consumable":true,"swap":{}},
-		{"name":"plutonium","effect":"radiation","consumable":true,"swap":{}}
+		[{"name":"tin foil hat","effect":"that","consumable":true,"swap":{},"applies":["level"]},
+		{"name":"crushed soda","effect":"kick","consumable":true,"swap":{},"applies":["level"]},
+		{"name":"broken mirror","effect":"warp","consumable":true,"swap":{},"applies":["level"]},
+		{"name":"begging board","effect":"beg","consumable":true,"swap":{},"applies":["level"]},
+		{"name":"horror movie","effect":"horror","consumable":true,"swap":{},"applies":["level"]},
+		{"name":"plutonium","effect":"radiation","consumable":true,"swap":{},"applies":["level"]}
 	]},
 	{"type":"fancy","varients":
-		[{"name":"gold card","effect":"spendingspree","consumable":true,"swap":{}},
-		{"name":"gem","effect":"getgems","consumable":true,"swap":{}},
-		{"name":"weather machine","effect":"changeweather","consumable":true,"swap":{}},
-		{"name":"pickaxe","effect":"pickaxe","consumable":true,"swap":{}}
+		[{"name":"gold card","effect":"spendingspree","consumable":true,"swap":{},"applies":["level"]},
+		{"name":"gem","effect":"getgems","consumable":true,"swap":{},"applies":["any"]},
+		{"name":"weather machine","effect":"changeweather","consumable":true,"swap":{},"applies":["level"]},
+		{"name":"pickaxe","effect":"pickaxe","consumable":true,"swap":{},"applies":["cryptominos"]}
 	]},
 
 	{"type":"quest","varients":
-		[{"name":"legs","effect":"quest","consumable":false,"swap":{}},
-		{"name":"specimen","effect":"quest","consumable":false,"swap":{}},
-		{"name":"rejectionletter","effect":"quest","consumable":false,"swap":{}}
+		[{"name":"legs","effect":"quest","consumable":false,"swap":{},"applies":["level"]},
+		{"name":"specimen","effect":"quest","consumable":false,"swap":{},"applies":["level"]},
+		{"name":"rejectionletter","effect":"quest","consumable":false,"swap":{},"applies":["level"]}
 	]},
 		{"type":"collectable","varients":
-		[{"name":"the mime who cried","effect":"combustable","consumable":true,"swap":{}},
-		{"name":"the mime who cried","effect":"combustable","consumable":true,"swap":{}},
-		{"name":"40 devils","effect":"combustable","consumable":true,"swap":{}},
-		{"name":"cave of the nylon web","effect":"combustable","consumable":true,"swap":{}},
-		{"name":"megaponpopulos","effect":"combustable","consumable":true,"swap":{}},
-		{"name":"batman slaps dracula","effect":"combustable","consumable":true,"swap":{}},
-		{"name":"london during midnight","effect":"combustable","consumable":true,"swap":{}},
+		[{"name":"the mime who cried","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
+		{"name":"the mime who cried","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
+		{"name":"40 devils","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
+		{"name":"cave of the nylon web","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
+		{"name":"megaponpopulos","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
+		{"name":"batman slaps dracula","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
+		{"name":"london during midnight","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
+		{"name":"Jay Sun's Hockey Carnage","effect":"hockey","consumable":true,"swap":{},"applies":["home"]},
 	]}
 	]
 var flavornpc:={"npc":[{"name":"fanguymanly","deployed":false,"quest":{}},
@@ -335,26 +336,26 @@ func addEnv(scenes):
 func calchits(hp):
 	if paused:
 		return hp
-	print("playerhits:",playerHits)
+	#print("playerhits:",playerHits)
 	if special=="ufo":
 		return 0
 	var tmphit=hp
 	if playerHits>0:
 		hp-=playerHits
 		playerHits=max(0,playerHits-tmphit)
-	print("hp=",hp)
+	#print("hp=",hp)
 	return hp
 
 #subtracts enemy power by toughness with a max reduction of 1
 func calcdmg(pow):
 	if paused:
 		return 0
-	print("calc damage with power ",pow)
-	print("toughness ",Flags.megaStats.toughness)
+	#print("calc damage with power ",pow)
+#	print("toughness ",Flags.megaStats.toughness)
 	var tmp=playerStats.toughness
 	var dmg=tmp-pow
 	dmg=max(dmg,1)
-	print("resluting damage= ",dmg)
+	#print("resluting damage= ",dmg)
 	return dmg
 
 func beg(begchance):
@@ -398,7 +399,8 @@ func addToInventory(type,numvarient):
 		"consumable":itemMap[type].varients[max(0,treenum-1)].consumable,
 		"swap":itemMap[type].varients[max(0,treenum-1)].swap,
 		"name":itemMap[type].varients[max(0,treenum-1)].name,
-		"bequeathed":false
+		"bequeathed":false,
+		"applies":itemMap[type].varients[max(0,treenum-1)].applies
 		}
 
 	playerInventory.append(invitem)

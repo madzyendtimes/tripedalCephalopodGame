@@ -34,6 +34,7 @@ var ufoScene:PackedScene=load("res://ufo.tscn")
 var laserScene:PackedScene=load("res://laser.tscn")
 var starScene:PackedScene=load("res://stars.tscn")
 var liltripScene:PackedScene=load("res://liltrip.tscn")
+var grassScene:PackedScene=load("res://grass.tscn")
 
 var wrestplayercontrol=false
 var canJump:=true
@@ -83,10 +84,10 @@ func _ready():
 	baseSpeed=Flags.megaStats.speed
 	speed=baseSpeed
 	$"..".killStart() #this needs to change
-	$treeholder.position.y=-175
+	$treeholder.position.y=-100
 
 	treeholderResetY=$treeholder.position.y
-	$treeholder2.position.y=-150
+	$treeholder2.position.y=-250
 	treeholder2ResetY=$treeholder2.position.y
 	for i in range(0,600):
 		var ypos=0
@@ -101,25 +102,43 @@ func _ready():
 		star.z_index=-5
 		star.position.x=min(i+(i*.6189),i*3)*75+Flags.rng.randi_range(0,600)
 		$stars.add_child(star)
+		$ground.position.y=530
+		for j in range(0,10):
+			var yposy=Flags.rng.randf_range(.5,3.5)
+			var grass=grassScene.instantiate()
+			grass.position.x=min(i+(i*.6189),i*3)*75+Flags.rng.randi_range(0,600)
+			grass.position.y+=200-(200*yposy)
+			grass.flip_h=Flags.rng.randi_range(0,1)>0
+			grass.modulate=Color(Flags.rng.randf_range(0.0,1.0),Flags.rng.randf_range(0.0,1.0),Flags.rng.randf_range(0.0,1.0))
+			grass.scale=Vector2(Flags.rng.randf_range(.5,3.5),yposy)
+			if yposy<1.5:
+				$background.add_child(grass)
+				grass.z_index=$player.z_index-1
+			else:
+				$ground.add_child(grass)
+		$background.position.y=270
+			
 		ts.flip_h=Flags.rng.randi_range(0,1)>0
 		var yscale=randf_range(.3,1)
 		if nType==1:
 			yscale=.54
 			ypos=Flags.rng.randi_range(75,100)
-		ts.scale=Vector2(randf_range(.5,1),yscale)
+		ts.scale=Vector2(Flags.rng.randf_range(.5,1),yscale)
 		ts.modulate=Color(Flags.rng.randf_range(0.0,1.0),Flags.rng.randf_range(0.0,1.0),Flags.rng.randf_range(0.0,1.0))
 		applyshaders(ts)
+
 		if yscale<.55:
 			$treeholder.add_child(ts)
 			ts.position.y-=ypos
-			
+			ts.position.y+=-85-(85*yscale)			
 		else: 
 			if yscale<.85 && nType==0:
 				$treeholder2.add_child(ts)
-
+				ts.position.y+=-60-(-60*yscale)
 			else:
+				ts.position.y+=75-(75*yscale)
 				$treeholder3.add_child(ts)
-	
+	$treeholder3.position.y+=75
 	var welcome=welcomeScene.instantiate()
 	$locationfront.add_child(welcome)
 	welcome.position=Vector2(min(301+(301*.6189),301*3)*100,400)
@@ -136,7 +155,7 @@ func _ready():
 		Flags.save()
 	$player.position.y=basey
 	Flags.env=[]
-	Flags.addEnv([[$treeholder,.5],[$treeholder2,.7],[$treeholder3,1],[$stars,.1],[$locationback,1],[$interactive,1],[$npcs,1],[$locationfront,1],[$enemy,1],[$rocks,1],[$pets,1]])
+	Flags.addEnv([[$treeholder,.5],[$treeholder2,.7],[$background,.85],[$treeholder3,1.5],[$ground,1],[$stars,.1],[$locationback,1],[$interactive,1],[$npcs,1],[$locationfront,1],[$enemy,1],[$rocks,1],[$pets,1]])
 	phantomposition=$player.position.y
 	#if Flags.amode.size()>0:
 	$player.chooseweapon()
@@ -172,6 +191,7 @@ func dohorror():
 	#this timer is now defunct considering dotime, will test before uncomment
 	Flags.horror=true
 	$random.position.y=-1500
+	Flags.play("scary")
 	var tween=get_tree().create_tween()
 	tween.tween_property($random,"modulate",Color(1,1,1,0),.5)
 	tween.tween_callback(horrorflash)
@@ -180,7 +200,7 @@ func dohorror():
 
 
 func horrorflash():
-	Flags.play("scary")
+
 	$random.position.y=0
 	var tween=get_tree().create_tween()
 	tween.tween_property($random,"modulate",Color(1,1,1,1),.5)		
@@ -235,12 +255,6 @@ func doEffect(effect):
 		"spendingspree":
 			Flags.credit=true
 			Flags.play("purchase")
-		"getgems":
-			var g=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
-			Flags.megaStats.gems+=g
-			$player.stat("+","gem",g)
-			Flags.save()
-			Flags.play("gemget")
 		"radiation":
 			Flags.radiation=true;
 			randpuke()
@@ -258,6 +272,14 @@ func doEffect(effect):
 			exit()
 		"puke":
 			dopuke()
+		"getgems":
+			var g=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
+			Flags.megaStats.gems+=g
+			$player.stat("+","gem",g)
+			Flags.save()
+			Flags.play("gemget")
+
+
 		"restorehp":
 			var h=1
 			Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
@@ -848,7 +870,9 @@ func moveDir(base,flip,dir,offS,pos="x"):
 	Flags.l=$locationback.position[pos]
 	$stars.position[pos]+=dir*(base-.9)*gospeed
 	$treeholder.position[pos]+=dir*base*gospeed 
+	$background.position[pos]+=dir*(base+0.25)*gospeed
 	$treeholder2.position[pos]+=dir*(base+0.5)*gospeed 
+	$ground.position[pos]+=dir*(base+1)*gospeed
 	$treeholder3.position[pos]+=dir*(base+1.5)*gospeed
 	$rocks.position[pos]+=dir*(base+0.60)*gospeed
 	$npcs.position[pos]+=dir*(base+0.45)*gospeed
@@ -875,8 +899,10 @@ func warpto(base,sped=speed,axis="x"):
 		base*=-1
 		$treeholder.position[axis]=base 
 		$stars.position[axis]+=(base-.9)*speed
+		$background.position[axis]+=(base+0.25)*speed
 		$treeholder2.position[axis]=(base+0.5)*speed 
 		$treeholder3.position[axis]=(base+1.5)*speed
+		$ground.position[axis]+=(base+1)*speed
 		$rocks.position[axis]=(base+0.60)*speed
 		$npcs.position[axis]=(base+0.45)*speed
 		$interactive.position[axis]=(base+0.45)*speed
@@ -893,6 +919,8 @@ func resety(axis="y"):
 		$treeholder.position[axis]=treeholderResetY 
 		$stars.position[axis]=0
 		$treeholder2.position[axis]=treeholder2ResetY
+		$ground.position[axis]=0
+		$background.position[axis]=0
 		$treeholder3.position[axis]=0
 		$rocks.position[axis]=0
 		$npcs.position[axis]=0
@@ -1151,7 +1179,6 @@ func dospawns():
 		
 		createchoice($locationfront,bossScene,1400,false,1,300,false,false)
 		Flags.tne.killTimer("spawns","level")
-		Flags.stopthemusic()
 		return
 		
 		

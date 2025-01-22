@@ -21,24 +21,31 @@ var oldmod=modulate
 var inhit=false
 var home=self
 
+func paused():
+	return Flags.mode!="temple"
+
+
 func _process(delta: float) -> void:
 	
-	if Flags.mode!="temple":
+	if paused():
 		return
-	
-	if Input.is_action_just_pressed("reset"):
-		Flags.playerStats.health=10
-		dead=false
-		inhit=false
-		inoffer=false
-		bag=0
-		
-		walk()
-		
-		$"..".reset()
-		$"..".devstart()
 
-	if dead or inoffer or Flags.mode!="temple":
+	var ce=Flags.tne.consumeEvent("temple")
+	if ce!=null:
+		match ce.name:
+			"getgems":
+				var g=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
+				Flags.megaStats.gems+=g
+				stat("+","gem",g)
+				Flags.save()
+				Flags.play("gemget")
+			"restorehp":
+				var h=1
+				Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
+				stat("+","health",h)
+
+
+	if dead or inoffer or paused():
 		return
 
 
@@ -94,6 +101,8 @@ func offer():
 
 
 func hit(dmg=1):
+	if paused():
+		return
 	inhit=true
 	$AnimatedSprite2D.animation="hit"
 	Flags.play("hit")

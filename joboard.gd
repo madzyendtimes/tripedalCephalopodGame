@@ -70,6 +70,9 @@ func start(callee):
 func _process(delta: float) -> void:
 	if Flags.mode!="jobboard":
 		return
+		
+		
+		
 	if Input.is_action_just_pressed("enter"):
 		newselect=max(0,newselect-1)
 		selectjob()

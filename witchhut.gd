@@ -25,6 +25,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	#change to common event 
+	
 	if Flags.mode!="witchhut" or playerdead:
 		return
 	if Input.is_action_pressed("enter"):
@@ -33,30 +35,45 @@ func _process(delta: float) -> void:
 	for i in playerchoice:
 		if Input.is_action_just_pressed(i.button):
 			commit(i)
-	
-	
-	match Flags.witchevents:
-		"newrecipe":
-			createrecipe()
-			playerchoices()
-		"gemmonster":
-			var gm=gemScene.instantiate()
-			gm.position=Vector2(600,550)
-			$monsters.add_child(gm)
+	var ce=Flags.tne.consumeEvent("witchhut")
+	if ce!=null:
+		match ce.name:
+			"newrecipe":
+				createrecipe()
+				playerchoices()
+			"gemmonster":
+				var gm=gemScene.instantiate()
+				gm.position=Vector2(600,550)
+				$monsters.add_child(gm)
 
-		"gemcaught":
-			var tmpgem=stage+Flags.megaStats.rizz+Flags.rng.randi_range(1,5)
-			Flags.megaStats.gems+=tmpgem
-			stat("+","gem",tmpgem)	
-			Flags.save()
-			stage+=1
+			"gemcaught":
+				var tmpgem=stage+Flags.megaStats.rizz+Flags.rng.randi_range(1,5)
+				Flags.megaStats.gems+=tmpgem
+				stat("+","gem",tmpgem)	
+				Flags.save()
+				stage+=1
+				
+				createrecipe()
+			"getgems":
+				var g=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
+				Flags.megaStats.gems+=g
+				stat("+","gem",g)
+				Flags.save()
+				Flags.play("gemget")
+			"restorehp":
+				var h=1
+				Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
+				stat("+","health",h)
+	
 			
-			createrecipe()
-	Flags.witchevents=""
-
-
+	
+	#Flags.witchevents=""
+func paused():
+	return Flags.mode!="witchhut"
 
 func poorchoice(ingredient):
+	if paused():
+		return
 	var ing=ingScene.instantiate()
 	ing.position.x=650
 	ing.settype(ingredient)
@@ -66,6 +83,8 @@ func poorchoice(ingredient):
 	
 
 func goodchoice(pc):
+	if paused():
+		return
 	#print("congrats");
 	var ing=ingScene.instantiate()
 	ing.position.x=650
@@ -75,12 +94,16 @@ func goodchoice(pc):
 	#Flags.megaStats.gems+=1
 
 func commit(pc):
+	if paused():
+		return
 	if pc.buttonscene!=null:
 		pc.buttonscene.press()
 	var found=false
 	$witchplayer.press()
 	var count=0
 	for i in recipe:
+		if i==null:
+			return
 		if pc.ingredient==i.type:
 			goodchoice(pc)
 			i.queue_free()
@@ -151,6 +174,10 @@ func clearrecipe():
 
 
 func counter():
+	if paused():
+		if $witchplayer.engaged:
+			Flags.tne.dotime(self,[counter],1.0,"counter",true,"witchhut")
+		return
 	timetext-=1
 	$time/Label.text=str(timetext)
 	if timetext<1 && $time.visible==true:
@@ -203,7 +230,6 @@ func playerchoices():
 
 		
 func start(callee):
-	Flags.witchevents=""
 	Flags.mode="witchhut"
 	home=callee
 	#$music.play()

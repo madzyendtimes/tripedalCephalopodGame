@@ -17,6 +17,7 @@ frame_2/texture = ExtResource("3_0apb0")
 frame_2/duration = 0.14
 
 [node name="healthbar" type="TextureProgressBar"]
+z_index = 10
 texture_repeat = 2
 offset_left = 4.0
 offset_top = 4.0

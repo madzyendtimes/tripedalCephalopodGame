@@ -34,7 +34,16 @@ func _process(delta: float) -> void:
 				add_child(axe)
 				axe.name="pickaxe"
 				axe.start()
-				
+			"getgems":
+				var g=Flags.rng.randi_range(1,5)+Flags.playerStats.rizz
+				Flags.megaStats.gems+=g
+				stat("+","gem",g)
+				Flags.save()
+				Flags.play("gemget")
+			"restorehp":
+				var h=1
+				Flags.playerStats.health=min(Flags.playerStats.health+1,Flags.playerStats.maxHealth)
+				stat("+","health",h)
 			
 func exit(isdead=false):
 	home.exit(isdead)
