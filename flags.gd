@@ -92,42 +92,43 @@ var inSearch:=false
 var inJump:=false
 var inCrouch:=false
 var dir:=1
+var rarity={"trash":{"percentchance":50,"name":"trash"},"common":{"percentchance":25,"name":"common"},"uncommon":{"percentchance":15,"name":"uncommon"},"rare":{"percentchance":10,"name":"rare"},"collectable":{"percentchance":5,"name":"collectable"},"legendary":{"percentchance":1,"name":"legendary"}}
 var itemMap:=[
 	{"type":"food","varients":[
-		{"name":"old pizza","effect":"restorehp","consumable":true,"swap":{},"applies":["any"]},
-		{"name":"noodles... or worms!","effect":"puke|restorehp","consumable":true,"swap":{},"applies":["level"]},
-		{"name":"suspect sandwitch","effect":"puke","consumable":true,"swap":{},"applies":["level"]},
-		{"name":"full soda","effect":"stanima","consumable":true,"swap":{"type":1,"varient":2},"applies":["level"]}
+		{"name":"old pizza","effect":"restorehp","consumable":true,"swap":{},"applies":["any"],"rarity":rarity.common},
+		{"name":"noodles... or worms!","effect":"puke|restorehp","consumable":true,"swap":{},"applies":["level"],"rarity":rarity.trash},
+		{"name":"suspect sandwitch","effect":"puke","consumable":true,"swap":{},"applies":["level"],"rarity":rarity.trash},
+		{"name":"full soda","effect":"stanima","consumable":true,"swap":{"type":1,"varient":2},"applies":["level"],"rarity":rarity.uncommon}
 	]},
 	{"type":"scrap","varients":
-		[{"name":"tin foil hat","effect":"that","consumable":true,"swap":{},"applies":["level"]},
-		{"name":"crushed soda","effect":"kick","consumable":true,"swap":{},"applies":["level"]},
-		{"name":"broken mirror","effect":"warp","consumable":true,"swap":{},"applies":["level"]},
-		{"name":"begging board","effect":"beg","consumable":true,"swap":{},"applies":["level"]},
-		{"name":"horror movie","effect":"horror","consumable":true,"swap":{},"applies":["level"]},
-		{"name":"plutonium","effect":"radiation","consumable":true,"swap":{},"applies":["level"]}
+		[{"name":"tin foil hat","effect":"that","consumable":true,"swap":{},"applies":["level"],"rarity":rarity.common},
+		{"name":"crushed soda","effect":"kick","consumable":true,"swap":{},"applies":["level"],"rarity":rarity.trash},
+		{"name":"broken mirror","effect":"warp","consumable":true,"swap":{},"applies":["level"],"rarity":rarity.common},
+		{"name":"begging board","effect":"beg","consumable":true,"swap":{},"applies":["level"],"rarity":rarity.uncommon},
+		{"name":"horror movie","effect":"horror","consumable":true,"swap":{},"applies":["level"],"rarity":rarity.rare},
+		{"name":"plutonium","effect":"radiation","consumable":true,"swap":{},"applies":["level"],"rarity":rarity.legendary}
 	]},
 	{"type":"fancy","varients":
-		[{"name":"gold card","effect":"spendingspree","consumable":true,"swap":{},"applies":["level"]},
-		{"name":"gem","effect":"getgems","consumable":true,"swap":{},"applies":["any"]},
-		{"name":"weather machine","effect":"changeweather","consumable":true,"swap":{},"applies":["level"]},
-		{"name":"pickaxe","effect":"pickaxe","consumable":true,"swap":{},"applies":["cryptominos"]}
+		[{"name":"gold card","effect":"spendingspree","consumable":true,"swap":{},"applies":["level"],"rarity":rarity.legendary},
+		{"name":"gem","effect":"getgems","consumable":true,"swap":{},"applies":["any"],"rarity":rarity.rare},
+		{"name":"weather machine","effect":"changeweather","consumable":true,"swap":{},"applies":["level"],"rarity":rarity.rare},
+		{"name":"pickaxe","effect":"pickaxe","consumable":true,"swap":{},"applies":["cryptominos"],"rarity":rarity.uncommon}
 	]},
 
 	{"type":"quest","varients":
-		[{"name":"legs","effect":"quest","consumable":false,"swap":{},"applies":["level"]},
-		{"name":"specimen","effect":"quest","consumable":false,"swap":{},"applies":["level"]},
-		{"name":"rejectionletter","effect":"quest","consumable":false,"swap":{},"applies":["level"]}
+		[{"name":"legs","effect":"quest","consumable":false,"swap":{},"applies":["level"],"rarity":rarity.common},
+		{"name":"specimen","effect":"quest","consumable":false,"swap":{},"applies":["level"],"rarity":rarity.common},
+		{"name":"rejectionletter","effect":"quest","consumable":false,"swap":{},"applies":["level"],"rarity":rarity.common}
 	]},
 		{"type":"collectable","varients":
-		[{"name":"the mime who cried","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
-		{"name":"the mime who cried","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
-		{"name":"40 devils","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
-		{"name":"cave of the nylon web","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
-		{"name":"megaponpopulos","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
-		{"name":"batman slaps dracula","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
-		{"name":"london during midnight","effect":"combustable","consumable":true,"swap":{},"applies":["home"]},
-		{"name":"Jay Sun's Hockey Carnage","effect":"hockey","consumable":true,"swap":{},"applies":["home"]},
+		[{"name":"the mime who cried","effect":"combustable","consumable":true,"swap":{},"applies":["home"],"rarity":rarity.collectable},
+		{"name":"the mime who pretended to cry","effect":"combustable","consumable":true,"swap":{},"applies":["home"],"rarity":rarity.collectable},
+		{"name":"40 devils","effect":"combustable","consumable":true,"swap":{},"applies":["home"],"rarity":rarity.collectable},
+		{"name":"cave of the nylon web","effect":"combustable","consumable":true,"swap":{},"applies":["home"],"rarity":rarity.collectable},
+		{"name":"megaponpopulos","effect":"combustable","consumable":true,"swap":{},"applies":["home"],"rarity":rarity.collectable},
+		{"name":"batman slaps dracula","effect":"combustable","consumable":true,"swap":{},"applies":["home"],"rarity":rarity.collectable},
+		{"name":"london during midnight","effect":"combustable","consumable":true,"swap":{},"applies":["home"],"rarity":rarity.collectable},
+		{"name":"Jay Sun's Hockey Carnage","effect":"hockey","consumable":true,"swap":{},"applies":["home"],"rarity":rarity.collectable},
 	]}
 	]
 var flavornpc:={"npc":[{"name":"fanguymanly","deployed":false,"quest":{}},
@@ -232,7 +233,7 @@ var acheivements={
 	"enteredspace":{"criteria":func criteriamet(aobj): return true,"description":"Flew to outer space","points":10,"name":"Eve offline!"},
 	"playedaminigame":{"criteria":func criteriamet(aobj): return true,"description":"Played a minigame","points":10,"name":"Inquisitive"}
 	}
-
+var stateffects=[]
 
 func weatheroff():
 	$weather.position.y=0
@@ -332,7 +333,25 @@ func addEnv(scenes):
 	for i in scenes:
 		env.append({"scene":i[0],"y":i[0].position.y,"speed":i[1]})
 
-
+func getitem(allowance):
+	var aggrarity=0
+	for i in range(0,allowance):
+		for j in itemMap[i].varients:
+			aggrarity+=j.rarity.percentchance
+	var choice=rng.randi_range(0,aggrarity)
+#	print("agg:",aggrarity," choice:",choice)
+	var aggchoice=0
+	for i in range(0,allowance):
+		var count=0
+		for j in itemMap[i].varients:
+			count+=1
+			aggchoice+=j.rarity.percentchance
+			if choice<aggchoice:
+				return {"type":i,"varient":count}
+	return {"type":0,"varient":1}
+	
+	pass
+	
 func calchits(hp):
 	if paused:
 		return hp

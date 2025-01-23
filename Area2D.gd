@@ -53,8 +53,10 @@ func _on_body_exited(body):
 
 func show_prize():
 	type=Flags.rng.randi_range(0,2)
+	var typeallowance=2
 	if questItem==true:
 		type=3	
+		typeallowance=3
 	if type>types.size()-1:
 		type=0
 
@@ -63,10 +65,18 @@ func show_prize():
 	var name=types[type].name
 	var numvariant=types[type].num
 
+
+	
+
 	var ts=$Sprite2D
 	var treenum=Flags.rng.randi_range(1,numvariant)
 	if deterministic==true:
 		treenum=pvar
+	else:
+		var randomitem=Flags.getitem(typeallowance)
+		type=randomitem.type
+		treenum=randomitem.varient
+		
 	$prize.animation=types[type].type+str(treenum)
 	Flags.addToInventory(type,treenum)
 	
