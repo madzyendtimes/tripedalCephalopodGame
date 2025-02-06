@@ -337,6 +337,25 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 28
 text = "randomize distribution"
 
+[node name="VSeparator4" type="VSeparator" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "Randomization seed"
+
+[node name="LineEdit" type="LineEdit" parent="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "seed"
+
 [node name="backtogame" type="Button" parent="optionmenu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -353,4 +372,5 @@ text = "BACK TO GAME"
 [connection signal="pressed" from="optionmenu/VBoxContainer/VBoxContainer3/HBoxContainer/high" to="." method="_on_high_pressed"]
 [connection signal="toggled" from="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/VBoxContainer/HBoxContainer/freshstart" to="." method="_on_freshstart_toggled"]
 [connection signal="toggled" from="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/HBoxContainer/randomizeDistribution" to="." method="_on_randomize_distribution_toggled"]
+[connection signal="text_changed" from="optionmenu/VBoxContainer/VBoxContainer4/HBoxContainer/HBoxContainer2/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
 [connection signal="pressed" from="optionmenu/VBoxContainer/backtogame" to="." method="_on_backtogame_pressed"]

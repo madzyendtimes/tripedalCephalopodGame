@@ -66,6 +66,15 @@ var treeholder2ResetY=0
 var jumpheight=0
 var jumpups=0
 var phantomposition=0
+var injumpup=false
+
+var eplus=0
+var pplus=0
+var pposmax=300
+var eposmax=400
+var eposy=0
+
+
 
 
 func _ready():
@@ -413,11 +422,6 @@ func doEffect(effect):
 				Flags.tne.addEvent("flydown","level",false)
 			Flags.tne.addEvent("outspace","level",true)
 		
-		"upenv":
-			upenv()
-		"downenv":
-			
-			downenv()
 		"flyup":
 			flyup()
 		"flydown":
@@ -432,24 +436,8 @@ func doEffect(effect):
 		"killedby":
 			Flags.recordDeath(effect.param)
 
-func downenv():
-		height-=1
-		countheight-=1
-		if countheight>0:
-	#		moveDir(1,false,-1,false,"y")
-			return
-		else:
-			height=0
-			countheight=0
-			indescent=false
-		#	resety()
 
-func upenv():
 
-	height+=1
-	if height>15:
-		countheight+=1
-		#moveDir(1,false,1,false,"y")
 
 func outspace():
 		wrestplayercontrol=false
@@ -600,11 +588,7 @@ func _process(delta):
 	if Flags.paused==true:
 		return
 		
-	if inascent:
-		upenv()
-	if indescent:
-		downenv()
-		
+
 	if Flags.controlled==true && canrandom==true:
 		dorandaction()		
 	
@@ -782,9 +766,52 @@ func doenvdown():
 		Flags.tne.dotime(self,[doenvdown],.01,"doenvdown",true,"level")
 		
 		
+func newjumpstart():
+	pplus=-1
+	eplus=0
+	pposmax=basey-200
+	eposmax=100
+	eposy=0
+	newjumpup()
+	
+func envup():
+	return
+	
+func newjumpup():
+	$player.position.y+=pplus
+	if $player.position.y>pposmax:
+		pplus=0
+		eplus=1
+		eposy+=eplus
+		if eposy>eposmax:
+			eplus=-1
+			newjumpdown()
+			pplus=0
+			return
+	newjumpup()
+	
+func newjumpdown():
+	var ebasey
+	eposy+=eplus
+	if eposy<=ebasey:
+		eplus=0
+		pplus=-1
+		$player.position.y+=pplus
+		if $player.position.y<=basey:
+			pplus=0
+			newstopjump()		
+	newjumpdown()
+	
+func newstopjump():
+	return
 		
+func ensurebase():
+	var s=0
+	jumps=-1
+	
+	
 func jumpup():
-
+	injumpup=true
 	jumpups+=1
 	inascent=true
 	var jumpmax=100
@@ -792,29 +819,32 @@ func jumpup():
 		jumpmax=150
 	$player.position.y=max(jumpmax,$player.position.y-20)
 	phantomposition-=20
-	
+	print("jumpup ",phantomposition,"-",$player.position.y, " * ",jumpheight," = ", jumps)
 	if phantomposition<(jumpheight*jumps):
 		jumps-=1
 		if jumps<1:
 			jumpdown()
+			injumpup=false
 			doenvdown()
 			inascent=false
 			Flags.tne.killTimer("jumpup","level")
 			return
-	Flags.tne.dotime(self,[jumpup],.01,"jumpup",false,"level")
+	Flags.tne.dotime(self,[jumpup],.01,"jumpup",true,"level")
 
 func jumpdown():
+	injumpup=false
 	Flags.tne.killTimer("jumpup","level")
-	jumpups-=1
+	jumpups=max(jumpups-1,0)
 	indescent=true
 	phantomposition+=20
+	print("down -",phantomposition," -- " ,$player.position.y," * ", basey)
 	$player.position.y=min($player.position.y+20,basey)
 	if phantomposition>basey:
 		$player.position.y=basey
 		Flags.tne.killTimer("jumpdown","level")
 		stopjump()
 		return
-	Flags.tne.dotime(self,[jumpdown],.01,"jumpdown",false,"level")
+	Flags.tne.dotime(self,[jumpdown],.01,"jumpdown",true,"level")
 	
 	
 func finishenvdescent():
@@ -1293,3 +1323,48 @@ func _on_backtostart_body_entered(body: Node2D) -> void:
 	if body.name=="player":
 		backHome()
 	pass # Replace with function body.
+
+
+
+func _on_wall_body_entered(body: Node2D) -> void:
+	basey=240
+	#phantomposition=240
+	$interactive/wall.collide()
+	#$player.position.y=370
+	print("entered")
+	pass # Replace with function body.
+
+
+func _on_wall_body_exited(body: Node2D) -> void:
+	basey=420
+	if !injumpup:
+		
+#	print("exited")
+		jumpdown()
+		#doenvup()
+	pass # Replace with function body.
+
+
+func _on_out_body_entered(body: Node2D) -> void:
+	return
+	if basey==240:
+		var t=0
+		
+
+
+	#phantomposition=0
+	inascent=false
+
+	basey=420
+	jumps=0
+	jumpdown()
+	doenvup()
+#	Flags.tne.killTimer("jumpup","level")
+	#jumpdown()
+
+	#if !injumpup:
+		#jumpdown()
+	#	injumpup=false
+		#doenvdown()
+		#inascent=false
+		#Flags.tne.killTimer("jumpup","level")

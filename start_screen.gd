@@ -11,6 +11,8 @@ func _ready():
 	$Title.animation=Flags.titlescreen
 	$ui/VBoxContainer.get_child(selected).grab_focus()
 	var music="titlemusic"
+	if Flags.titlescreen=="win":
+		music="winmusic"
 	if Flags.titlescreen=="gameover":
 		music="gameover"
 	Flags.play(music,"music")	
@@ -123,3 +125,8 @@ func _on_audio_stream_player_2d_finished() -> void:
 func _on_menu_button_2_pressed() -> void:
 	loading()
 	home.playgame()
+
+
+func _on_line_edit_text_changed(new_text: String) -> void:
+	Flags.newseed(new_text)
+	pass # Replace with function body.

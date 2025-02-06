@@ -158,8 +158,8 @@ func hit(enemytype):
 			tween.tween_callback(outhit)
 
 func puke():
-	$AnimatedSprite2D.animation="puke"+Flags.hat	
 	Flags.play("puke")
+	$AnimatedSprite2D.animation="puke"+Flags.hat	
 	await get_tree().create_timer(1).timeout
 	outpuke()
 	

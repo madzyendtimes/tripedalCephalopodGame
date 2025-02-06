@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=3 uid="uid://cdj8g8hh6wurl"]
+[gd_scene load_steps=107 format=3 uid="uid://cdj8g8hh6wurl"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ohfo4"]
 [ext_resource type="Texture2D" uid="uid://gilk4h7ba2xp" path="res://player/dead.PNG" id="2_akx6h"]
@@ -527,6 +527,9 @@ height = 208.0
 radius = 40.1758
 height = 232.55
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_41dey"]
+size = Vector2(123.406, 79.5)
+
 [node name="player" type="CharacterBody2D"]
 position = Vector2(671, 423)
 scale = Vector2(2, 2)
@@ -555,9 +558,7 @@ material = SubResource("ShaderMaterial_2euv4")
 position = Vector2(-25.5, -7)
 scale = Vector2(0.826667, 0.715)
 sprite_frames = SubResource("SpriteFrames_qc2jh")
-animation = &"spin"
 autoplay = "default"
-frame_progress = 0.998027
 
 [node name="dead" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-335.5, -211.5)
@@ -606,3 +607,11 @@ disabled = true
 [node name="weaponchooser" parent="." instance=ExtResource("117_d7pic")]
 position = Vector2(-43.5, -143.5)
 scale = Vector2(0.25, 0.25)
+
+[node name="feet" type="CharacterBody2D" parent="."]
+collision_layer = 2097152
+collision_mask = 4194304
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="feet"]
+position = Vector2(-47.5, 88.5)
+shape = SubResource("RectangleShape2D_41dey")

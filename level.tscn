@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://bjlg8hhdf4x7l"]
+[gd_scene load_steps=99 format=3 uid="uid://bjlg8hhdf4x7l"]
 
 [ext_resource type="Script" path="res://Level.gd" id="1_68yp1"]
 [ext_resource type="Shader" path="res://level.gdshader" id="2_14n0n"]
@@ -19,8 +19,10 @@
 [ext_resource type="Texture2D" uid="uid://c66qs5crmy77l" path="res://decorations/tutorial/backtostart.PNG" id="10_h115f"]
 [ext_resource type="Texture2D" uid="uid://dmh5qsjnbchy2" path="res://npc/angrella/talk2.PNG" id="11_gs1jx"]
 [ext_resource type="Texture2D" uid="uid://b836df7xyh6y2" path="res://npc/angrella/jumptutorial.PNG" id="12_wcksl"]
+[ext_resource type="Script" path="res://wall.gd" id="13_1gpm6"]
 [ext_resource type="Script" path="res://sludgebutt.gd" id="13_ovjp5"]
 [ext_resource type="PackedScene" uid="uid://deofurri717ld" path="res://rock.tscn" id="13_tggde"]
+[ext_resource type="Texture2D" uid="uid://crigdxfb70ppm" path="res://platform/wall.PNG" id="13_thhue"]
 [ext_resource type="Texture2D" uid="uid://c5iulupedgkqn" path="res://npc/sludgebutt/sludgebutt1.PNG" id="13_y6jk6"]
 [ext_resource type="Texture2D" uid="uid://udigahkpj1ol" path="res://npc/sludgebutt/sludgebutt2.PNG" id="14_ns2el"]
 [ext_resource type="Texture2D" uid="uid://drebx1jb1mlts" path="res://npc/sludgebutt/questcompletetext.PNG" id="15_2taxa"]
@@ -84,6 +86,15 @@ radius = 272.47
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pfs00"]
 radius = 339.411
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3othf"]
+size = Vector2(594, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ng58e"]
+size = Vector2(138, 592)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_egkke"]
+size = Vector2(138, 576)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e2jih"]
 animations = [{
@@ -431,6 +442,32 @@ shape = SubResource("CircleShape2D_pfs00")
 
 [node name="interact" parent="interactive" instance=ExtResource("3_wwvka")]
 
+[node name="wall" type="Area2D" parent="interactive"]
+position = Vector2(4858, 4)
+collision_layer = 4194304
+collision_mask = 2097152
+script = ExtResource("13_1gpm6")
+
+[node name="Sprite2D" type="Sprite2D" parent="interactive/wall"]
+position = Vector2(280, 432)
+texture = ExtResource("13_thhue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactive/wall"]
+position = Vector2(280, 383)
+shape = SubResource("RectangleShape2D_3othf")
+
+[node name="out" type="Area2D" parent="interactive/wall"]
+collision_layer = 4194304
+collision_mask = 2097152
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactive/wall/out"]
+position = Vector2(736, 272)
+shape = SubResource("RectangleShape2D_ng58e")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="interactive/wall/out"]
+position = Vector2(-168, 280)
+shape = SubResource("RectangleShape2D_egkke")
+
 [node name="npcs" type="Node2D" parent="."]
 script = ExtResource("15_vuva8")
 
@@ -519,6 +556,8 @@ autoplay = "default"
 [node name="lilhypetext" type="Sprite2D" parent="npcs"]
 position = Vector2(-4350, 204)
 texture = ExtResource("33_87cpu")
+
+[node name="platforms" type="Node2D" parent="."]
 
 [node name="player" parent="." instance=ExtResource("46_sbt76")]
 
@@ -678,6 +717,9 @@ position = Vector2(-574, -5324)
 
 [connection signal="body_entered" from="locationback/backtostart" to="." method="_on_backtostart_body_entered"]
 [connection signal="body_entered" from="locationback/exit" to="." method="_on_exit_body_entered"]
+[connection signal="body_entered" from="interactive/wall" to="." method="_on_wall_body_entered"]
+[connection signal="body_exited" from="interactive/wall" to="." method="_on_wall_body_exited"]
+[connection signal="body_entered" from="interactive/wall/out" to="." method="_on_out_body_entered"]
 [connection signal="body_entered" from="npcs/npc" to="npcs/npc" method="_on_body_entered"]
 [connection signal="body_entered" from="npcs/sludgebutt" to="npcs/sludgebutt" method="_on_body_entered"]
 [connection signal="body_entered" from="npcs/pailface" to="." method="_on_pailface_body_entered"]

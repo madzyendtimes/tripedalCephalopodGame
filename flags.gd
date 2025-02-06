@@ -223,6 +223,7 @@ var env=[]
 var amode=[]
 var petmove=true
 var sounds={"music":{},"fx":{}}
+var seed=0
 
 var acheivements={
 	"firstkill":{"criteria":func criteriamet(aobj): return aobj.value>0,"description":"Kill 1 enemy total","points":10,"name":"You choose murder!"},
@@ -234,7 +235,7 @@ var acheivements={
 	"playedaminigame":{"criteria":func criteriamet(aobj): return true,"description":"Played a minigame","points":10,"name":"Inquisitive"}
 	}
 var stateffects=[]
-
+var rands={"level":RandomNumberGenerator.new(),"enemy":RandomNumberGenerator.new(),"item":RandomNumberGenerator.new()}
 func weatheroff():
 	$weather.position.y=0
 	Flags.weather=""
@@ -276,6 +277,13 @@ func vol(aud,atype="fx",added=0):
 func pitch(aud,pch=0):	
 	aud.pitch_scale=rng.randf_range(1-pch,1+pch)
 
+func newseed(s):
+	
+	rng.seed=s.hash()
+	for i in rands:
+		rands[i].seed=s.hash()
+		rands[i].randomize()
+	
 func reset():
 	amode=[]
 	wasufo=false
@@ -327,7 +335,19 @@ func reset():
 	interactablenpc=null
 	env=[]
 	petmove=true
+	if seed!=0:
+		newseed(seed)
 	#defaultuberstats()
+
+
+
+
+func getrandi(imin,imax,type="level"):
+	return rands[type].randi_range(imin,imax)
+
+func getrandf(imin,imax,type="level"):
+	return rands[type].randf_range(imin,imax)
+
 
 func addEnv(scenes):
 	for i in scenes:
@@ -338,7 +358,8 @@ func getitem(allowance):
 	for i in range(0,allowance):
 		for j in itemMap[i].varients:
 			aggrarity+=j.rarity.percentchance
-	var choice=rng.randi_range(0,aggrarity)
+	var choice=getrandi(0,aggrarity,"item")
+#		rng.randi_range(0,aggrarity)
 #	print("agg:",aggrarity," choice:",choice)
 	var aggchoice=0
 	for i in range(0,allowance):
