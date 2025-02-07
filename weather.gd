@@ -12,7 +12,7 @@ func changeweatherforce():
 	
 func changeweather():
 
-	var type=Flags.rng.randi_range(0,3)
+	var type=Flags.rng.randi_range(0,4)
 	match type:
 		0:
 			Flags.weather="rain"
@@ -22,6 +22,10 @@ func changeweather():
 			Flags.weather="night"
 		3:
 			Flags.weather="snow"
+		4:
+			Flags.weather=""
+			Flags.tne.addEvent("weatheroff","level",true)
+			return
 		_:
 			#use current weather
 			pass

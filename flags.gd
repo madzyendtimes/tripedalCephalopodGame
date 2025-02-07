@@ -183,16 +183,16 @@ var		specialnpc=[
 		]
 var playerHits=1
 var percentageMap=[
-1000, #trash
+10, #trash
 10, #rock
 9, #groundling
 4, #tv
 9, #expander
 9, #tall monster (diapertooth)
-900, #minigame
-5, #weather effects
+9, #minigame
+50, #weather effects
 5, #fair weather
-5, #flavor npcs
+50, #flavor npcs
 8,#8, #flying enemy
 7, #multistage enemy
 3, #gemmonster
@@ -204,6 +204,7 @@ var percentageMap=[
 10, #saw
 8, #knifulator
 5,#ufo
+5, #wall
 5 #quest
 ]
 #var percentageMap=[0,0,0,0,0,0,50,0,0,0,0,0,50,0,0] #enterable

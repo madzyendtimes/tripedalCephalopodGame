@@ -35,7 +35,7 @@ var laserScene:PackedScene=load("res://laser.tscn")
 var starScene:PackedScene=load("res://stars.tscn")
 var liltripScene:PackedScene=load("res://liltrip.tscn")
 var grassScene:PackedScene=load("res://grass.tscn")
-
+var wallScene:PackedScene=load("res://wall.tscn")
 var wrestplayercontrol=false
 var canJump:=true
 var baseSpeed=Flags.megaStats.speed
@@ -365,7 +365,8 @@ func doEffect(effect):
 			Flags.fightmode="gun"
 		"shot":
 			var bullet=bulletScene.instantiate()
-			bullet.position.y=Flags.rng.randi_range(450,500)
+			var bposy=Flags.rng.randi_range(-50,50)
+			bullet.position.y=$player.position.y+bposy
 			
 			$enemy.add_child(bullet)	
 			bullet.position.x=(($enemy.position.x)*-1)+300
@@ -435,7 +436,14 @@ func doEffect(effect):
 			Flags.recordKill(effect.param.type)
 		"killedby":
 			Flags.recordDeath(effect.param)
-
+		"wallon":
+			basey=240*effect.param.scale
+		"walloff":
+			basey=420
+			if !injumpup:
+				jumpdown()
+		"weatheroff":
+			weatheroff()
 
 
 
@@ -819,7 +827,6 @@ func jumpup():
 		jumpmax=150
 	$player.position.y=max(jumpmax,$player.position.y-20)
 	phantomposition-=20
-	print("jumpup ",phantomposition,"-",$player.position.y, " * ",jumpheight," = ", jumps)
 	if phantomposition<(jumpheight*jumps):
 		jumps-=1
 		if jumps<1:
@@ -837,7 +844,6 @@ func jumpdown():
 	jumpups=max(jumpups-1,0)
 	indescent=true
 	phantomposition+=20
-	print("down -",phantomposition," -- " ,$player.position.y," * ", basey)
 	$player.position.y=min($player.position.y+20,basey)
 	if phantomposition>basey:
 		$player.position.y=basey
@@ -1072,6 +1078,22 @@ var spawnulator:=[
 
 ]
 
+func fightweather():
+	
+	for i in $npcs.get_children():
+		print(i)
+		if "who" in i:
+			if i.who=="win3":
+				i.position.x=($npcs.position.x*-1)+1300
+				Flags.play("gunshot","fx")
+				$weather.changeweather()
+				if Flags.weather!="":
+					Flags.tne.dotime(self,[fightweather],1.0,"fightweather",true,"level")
+				break
+
+
+
+
 func randbool():
 	return Flags.rng.randi_range(0,1)==1
 
@@ -1109,6 +1131,7 @@ func dochances(val):
 		 #weather effects
 		$weather.changeweather()
 		$weather.position.y=-800
+		Flags.tne.dotime(self,[fightweather],.5,"fightweather",true,"level")
 		return	
 	if val<9:
 		#fair weather
@@ -1117,6 +1140,8 @@ func dochances(val):
 	if val<10:
 		#flavor npcs
 		createchoice($npcs,flavorScene,1400,false,3,0,true,false)
+		if Flags.weather!="":
+			Flags.tne.dotime(self,[fightweather],.5,"fightweather",true,"level")
 		return
 	if val<11:
 		#flying enemy
@@ -1163,8 +1188,14 @@ func dochances(val):
 		#ufo
 		createchoice($enemy,ufoScene,1400,false,1,20,false,false)
 		return
-		
 	if val<22:
+		#wall
+		createchoice($interactive,wallScene,1400,false,1,20,false,false)
+		return
+
+
+		
+	if val<23:
 		#quest
 		if questDistributed==false:
 			var trash=trashScene.instantiate()
@@ -1323,48 +1354,3 @@ func _on_backtostart_body_entered(body: Node2D) -> void:
 	if body.name=="player":
 		backHome()
 	pass # Replace with function body.
-
-
-
-func _on_wall_body_entered(body: Node2D) -> void:
-	basey=240
-	#phantomposition=240
-	$interactive/wall.collide()
-	#$player.position.y=370
-	print("entered")
-	pass # Replace with function body.
-
-
-func _on_wall_body_exited(body: Node2D) -> void:
-	basey=420
-	if !injumpup:
-		
-#	print("exited")
-		jumpdown()
-		#doenvup()
-	pass # Replace with function body.
-
-
-func _on_out_body_entered(body: Node2D) -> void:
-	return
-	if basey==240:
-		var t=0
-		
-
-
-	#phantomposition=0
-	inascent=false
-
-	basey=420
-	jumps=0
-	jumpdown()
-	doenvup()
-#	Flags.tne.killTimer("jumpup","level")
-	#jumpdown()
-
-	#if !injumpup:
-		#jumpdown()
-	#	injumpup=false
-		#doenvdown()
-		#inascent=false
-		#Flags.tne.killTimer("jumpup","level")
