@@ -42,6 +42,7 @@ func _on_body_entered(body):
 	
 func hit(dmg=1):
 	Flags.play("splode")
+	$CollisionShape2D.disabled=true
 	$AnimatedSprite2D.animation="explode"
 	Flags.tne.addEvent("deadEnemy","level",false,{"type":enemytype})
 	await get_tree().create_timer(1.0).timeout

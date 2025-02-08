@@ -6,7 +6,8 @@ var speed=Flags.rng.randi_range(1,4)
 var maxchange=3.0
 var active=false
 var home=self
-var enemytype={"name":"ghost","flying":false,"hp":5000,"begchance":0,"speed":speed,"pow":1}
+var enemytype=Flags.enemytypes.ghost.duplicate()
+
 
 func _ready() -> void:
 	var rnd=Flags.rng.randi_range(1,3)
@@ -19,6 +20,7 @@ func _ready() -> void:
 	if rnd==3:
 		$AnimatedSprite2D.animation="demon"
 		maxchange=2.0
+	enemytype.variety=$AnimatedSprite2D.animation
 	visible=false
 
 

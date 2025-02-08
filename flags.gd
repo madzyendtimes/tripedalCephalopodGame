@@ -156,7 +156,8 @@ var enemytypes:={
 	"eggmissle":{"type":"missle","weak":"","strong":"","immune":"all","name":"eggmissle","flying":false,"hp":1,"begchance":0,"speed":2,"pow":1,"variety":""},
 	"needle":{"type":"missle","weak":"","strong":"","immune":"all","name":"needle","flying":false,"hp":1,"begchance":0,"speed":1,"pow":1,"variety":""},
 	"laser":{"type":"missle","weak":"","strong":"","immune":"all","name":"laser","flying":false,"hp":1,"begchance":0,"speed":1,"pow":2,"variety":""},
-	"witchesbrew":{"type":"magic","weak":"","strong":"","immune":"all","name":"witch's brew","flying":false,"hp":1,"begchance":0,"speed":1,"pow":1,"variety":""}
+	"witchesbrew":{"type":"magic","weak":"","strong":"","immune":"all","name":"witch's brew","flying":false,"hp":1,"begchance":0,"speed":1,"pow":1,"variety":""},
+	"wallspikes":{"type":"rock","weak":"","strong":"","immune":"all","name":"wall spikes","flying":false,"hp":1,"begchance":0,"speed":1,"pow":1,"variety":""}
 }
 var varietymap:={"rock1":"stench jelly","rock2":"watcher's rock","rock3":"spite knocker"}
 var paused:=false
@@ -190,9 +191,9 @@ var percentageMap=[
 9, #expander
 9, #tall monster (diapertooth)
 9, #minigame
-50, #weather effects
+9, #weather effects
 5, #fair weather
-50, #flavor npcs
+9, #flavor npcs
 8,#8, #flying enemy
 7, #multistage enemy
 3, #gemmonster
